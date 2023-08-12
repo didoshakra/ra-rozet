@@ -1,9 +1,9 @@
-import Image from "next/image";
-import Link from "next/link";
+import Image from "next/image"
+import Link from "next/link"
 
 export default function Header() {
   return (
-    <header className="flex items-center px-4 md:px-12 py-2 justify-between fixed top-0 w-full bg-white z-50 shadow">
+    <header className="flex items-center px-4 md:px-12 py-2 justify-between fixed top-0 w-full bg-white z-50 shadow p-1">
       <Link href="/">
         {/* <Image
           src="https://i.ibb.co/McdzmYG/logo-removebg-preview-new.png"
@@ -22,6 +22,5 @@ export default function Header() {
         </button>
       </div>
     </header>
-  );
+  )
 }
-

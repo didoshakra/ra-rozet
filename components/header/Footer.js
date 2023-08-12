@@ -13,7 +13,7 @@ const Footer = () => {
   return (
     <section className=" relative w-full ">
       {/* <div className="footer-mouse"> */}
-      <div className="absolute flex items-center justify-center inset-x-0 top-[-30px]">
+      <div className="absolute flex items-center justify-center inset-x-0 top-[-30px] p-1">
         <a
           href="#"
           className=" flex items-center justify-center  w-[60px] h-[60px]  border-0 rounded-full border-current bg-headMenuText"

@@ -1,14 +1,18 @@
-import HeaderLogo from "./HeaderLogo"
-import HeaderMenu from "./HeaderMenu"
-import HeaderSeting from "./HeaderSeting"
-import MobileMenuIcon from "./MobileMenuIcon"
+import HeaderLogo from "./HeaderLogo";
+import HeaderMenu from "./HeaderMenu";
+import HeaderSeting from "./HeaderSeting";
+import MobileMenuIcon from "./MobileMenuIcon";
+import DrawerSwitche from "./DrawerSwitcher";
 
 export default function Header() {
   return (
-    // <header className="fixed z-50 top-16 px-2 md:top-6 h-16 w-full dark:bg-slate-800 flex justify-between items-center    bg-white  ">
-    // <header className="px-2 h-16 w-full  flex justify-between items-center bg-white dark:bg-slate-800  ">
-    <header className="px-2 h-16 w-full  flex justify-between items-center bg-bgHeadMenu dark:bg-slate-800  ">
-      <HeaderLogo />
+    <header className="flex h-16  w-full items-center justify-between bg-bgHeadMenu p-1 px-2 dark:bg-slate-800">
+      {/* <header className="flex h-16  w-full items-center justify-between bg-slate-800"> */}
+      {/* Ліве випадаюче меню */}
+      <div className='flex'>
+        {/* <DrawerSwitche /> */}
+        <HeaderLogo />
+      </div>
       <div className=" flex  items-center justify-end">
         {/*рядок меню */}
         <HeaderMenu />
@@ -18,5 +22,5 @@ export default function Header() {
         <HeaderSeting />
       </div>
     </header>
-  )
+  );
 }

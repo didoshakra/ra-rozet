@@ -12,13 +12,13 @@ const MobileMenuIcon = (props) => {
     // <div className="mx-1 flex justify-center aling-center  md:hidden">
     <div className="flex items-center  md:hidden">
       {/* іконка мобільного меню */}
-      <p
+      <button
         className="hover:bg-lime-300 flex z-0 items-center rounded-full"
         // onClick={() => props.mobileMenuToggle(props.mobileMenuOpen ? false : true)}
         title="меню"
       >
         <IconList width={iconSize} height={iconSize} colorFill={colorIcon} />
-      </p>
+      </button>
     </div>
   )
 }

@@ -1,28 +1,49 @@
-import IconSun from "../ui/icons/head/IconSun_border"
-import IconMoon from "../ui/icons/head/IconMoon_border"
+// Використання: своїх іконок з кольорами з tailwindcss.config//іконок з heroicons/react
+"use client";
+import { useEffect, useState } from "react";
+import { useTheme } from "next-themes";
+import resolveConfig from "tailwindcss/resolveConfig"; //отримання змінних з tailwind.config
+import tailwindConfig from "@/tailwind.config"; //отримання змінних з tailwind.config
+// import { SunIcon, MoonIcon } from "@heroicons/react/24/solid";
+import { SunIcon, MoonIcon } from "@heroicons/react/24/outline";
+import IconSun from "../ui/icons/head/IconSun_border";
+import IconMoon from "../ui/icons/head/IconMoon_border";
 
-const ThemeSwitche = () => {
-//   const themeType = "dark"
-  const themeType = "light"
-  const colorIcon = themeType === "light" ? "#82AE46" : "red"
-  const iconSize = "25"
+const ThemeSwitcher = () => {
+  const { resolvedTheme, setTheme } = useTheme();
+  //отримання змінних з tailwind.config
+  const { theme } = resolveConfig(tailwindConfig); //отримання змінних з tailwind.config
+  console.log("ThemeSwitche/theme=", theme);
+  console.log("ThemeSwitche/theme.colors=", theme.colors);
+  const colorIcon =
+    resolvedTheme === "dark"
+      ? theme.colors.darkHeadMenuText
+      : theme.colors.headMenuText;
+  const iconSize = "25";
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  if (!mounted) {
+    return null;
+  }
 
   return (
-    // <div className="themeSwitcher">
-    <div className="mx-1 flex justify-center aling-center ">
-      <p
-        className=" z-0  flex justify-center aling-center hover:bg-lime-300 rounded-full"
-        title="Теми"
-        // onClick={themeMenuToggle}
-      >
-        {themeType === "light" ? (
-          <IconMoon width={iconSize} height={iconSize} colorFill={colorIcon} />
-        ) : (
-          <IconSun width={iconSize} height={iconSize} colorFill={colorIcon} />
-        )}
-      </p>
-    </div>
-  )
-}
+    <button
+      label="Toggle Dark Mode"
+      type="button"
+      className="flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-500"
+      onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+    >
+      {resolvedTheme === "dark" ? (
+        <SunIcon className="h-5 w-5 text-darkHeadMenuText" />
+      ) : (
+        // <IconSun width={iconSize} height={iconSize} colorFill={colorIcon} />
+        <MoonIcon className="h-5 w-5 text-headMenuText" />
+        // <IconMoon width={iconSize} height={iconSize} colorFill={colorIcon} />
+      )}
+    </button>
+  );
+};
 
-export default ThemeSwitche
+export default ThemeSwitcher;
