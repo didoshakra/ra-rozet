@@ -20,22 +20,23 @@ const HeaderTape = () => {
             href="tel:+380508580704"
           >
             <IconPhone width={iconSize} height={iconSize} colorFill="white" />
-            +38(050-8580704)
+            +38(050-0000000)
           </a>
           <a
             className="flex items-center justify-between px-2 text-sm"
             href="tel:+380687832306"
           >
             <IconPhone width={iconSize} height={iconSize} colorFill="white" />
-            +38(068-7832306)
+            +38(068-0000000)
           </a>
+          <span>Tailwindcss/PostgreSQL/multiLevelMenu/RTable</span>
           {/* </span> */}
           {/* <span className="px-2 flex items-center justify-between text-sm">
             <IconPhone width={iconSize} height={iconSize} colorFill="white" /> +38(068-7832306)
           </span> */}
         </div>
       </div>
-      <span className="items-center px-2">СТИЛЬНИЙ ОДЯГ</span>
+      <span className="items-center px-2">ПРОБА Next.js 13-4</span>
       {/* ======================================================================== */}
     </div>
   );

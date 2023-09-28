@@ -18,7 +18,7 @@ const HeaderLogo = () => {
       </Link>
       <Link href="/">
         <div className="justify-begin flex items-center px-4 text-2xl font-bold italic text-headMenuText dark:text-headMenuTextDark md:text-2xl">
-          RAecom1
+          RAecom
         </div>
       </Link>
       {/* ========================================================================== */}
