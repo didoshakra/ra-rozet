@@ -43,11 +43,11 @@ export default function DProductTable({
     });
     const millis = Date.now() - start;
 
-    console.log(
-      "Flowbit eUI/installTableData/Час виконання initialTableData(): ",
-      millis + "ms",
-    );
-    console.log("Flowbit eUI/installTableData/temp=", temp);
+    // console.log(
+    //   "Flowbit eUI/installTableData/Час виконання initialTableData(): ",
+    //   millis + "ms",
+    // );
+    // console.log("Flowbit eUI/installTableData/temp=", temp);
     return temp;
   };
   const [rowsInitial, setRowsInitial] = useState(initialTableData); //Початкова таблиця після добавлення полів
@@ -145,23 +145,23 @@ export default function DProductTable({
     // }
   };
   const onChangeRowCheckbox = (e) => {
-    console.log("FlowbiteUI.js/e.target=", e.target);
-    console.log("FlowbiteUI.js/e.target.value=", e.target.value);
+    // console.log("FlowbiteUI.js/e.target=", e.target);
+    // console.log("FlowbiteUI.js/e.target.value=", e.target.value);
   };
   const onChangeHeadCheckbox = (e) => {
-    console.log("FlowbiteUI.js/e.target=", e.target);
-    console.log("FlowbiteUI.js/e.target.value=", e.target.value);
+    ("FlowbiteUI.js/e.target=", e.target);
+    // console.log("FlowbiteUI.js/e.target.value=", e.target.value);
   };
   const onClickRow = (e) => {
 
     objIndex = tableData.findIndex((obj => obj._nrow == e.target.id));
     // setTableData((state) => ({ ...state, name: resRow[0].name }))
 
-    console.log("FlowbiteUI.js/onClickRow/e.target.id=", e.target.id);
-    console.log(
-      "FlowbiteUI.js/onClickRow/tableData[e.target.id]=",
-      tableData["_nrow"=e.target.id],
-    );
+    // console.log("FlowbiteUI.js/onClickRow/e.target.id=", e.target.id);
+    // console.log(
+    //   "FlowbiteUI.js/onClickRow/tableData[e.target.id]=",
+    //   tableData["_nrow"=e.target.id],
+    // );
   };
 
   //

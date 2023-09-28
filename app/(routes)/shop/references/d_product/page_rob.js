@@ -23,7 +23,7 @@ export default async function DProducts() {
   // console.log("*****DProducts/resData=");
   //   const resData = await Promise.all([getDataAll()]);//працює //https://github.com/mfikricom/CRUD-Next.js-13-Prisma-PostgreSQL/blob/main/app/products/page.tsx//
   const resData = await getDataAll();
-  console.log("* DProducts/resData=", resData);
+//   console.log("* DProducts/resData=", resData);
 
   const columns = [
     { name: "Id", uid: "id" },

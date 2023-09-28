@@ -47,10 +47,10 @@ export default function DProductTable({
     });
     const millis = Date.now() - start;
 
-    console.log(
-      "Flowbit eUI/installTableData/Час виконання preparedTableData(): ",
-      millis + "ms",
-    );
+    // console.log(
+    //   "Flowbit eUI/installTableData/Час виконання preparedTableData(): ",
+    //   millis + "ms",
+    // );
     // console.log("Flowbit eUI/installTableData/temp=", temp);
     return temp;
   };
