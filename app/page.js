@@ -1,4 +1,4 @@
-import LayoutWithSidebar from "../components/rozet/LayoutWithSidebar"
+import LayoutWithSidebar from "@/components/rozet/LayoutWithSidebar"
 
 export default function Home() {
   return (

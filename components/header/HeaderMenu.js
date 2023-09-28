@@ -5,10 +5,6 @@ import Link from "next/link";
 const HeaderMenu = () => {
   const menu = [
     {
-      a: "Fahion",
-      link: "/Fahion",
-    },
-    {
       a: "Про нас",
       link: "/about",
     },
@@ -21,9 +17,9 @@ const HeaderMenu = () => {
     return menu.map((item, index) => {
       return (
         <li
-          //   className="hover:underline pr-1 whitespace-nowrap text-lg font-sans font-bold items-center text-headMenuText "
+          //   className="hover:underline pr-1 whitespace-nowrap text-lg font-sans font-bold items-center text-headMenuText dark:text-headMenuTextDark"
           //   className="hover:underline pr-1 whitespace-nowrap text-lg font-sans font-bold items-center text-lime-700 "
-          className="text- items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-headMenuText hover:underline dark:text-darkHeadMenuText"
+          className="text- items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-headMenuText hover:underline dark:text-headMenuTextDark"
           key={index}
         >
           <Link href={item.link}>{item.a}</Link>

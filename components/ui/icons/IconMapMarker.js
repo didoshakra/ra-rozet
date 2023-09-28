@@ -3,8 +3,8 @@
 export default function IconMapMarker(props) {
   const colorFill = props.colorFill || "rgba(12,135,53,1)";
   const colorStroke = props.colorStroke || "red";
-  const colorFill1 = props.colorFill1 || "rgba(12,135,53,1)";
-  const colorStroke1 = props.colorStroke1 || "red";
+  const colorFill1 = props.colorFill1 || colorFill;
+  const colorStroke1 = props.colorStroke1 || colorStroke;
   const width = props.width || "64";
   const height = props.height || "64";
 

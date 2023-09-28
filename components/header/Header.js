@@ -6,11 +6,11 @@ import DrawerSwitche from "./DrawerSwitcher";
 
 export default function Header() {
   return (
-    <header className="flex h-16  w-full items-center justify-between bg-bgHeadMenu p-1 px-2 dark:bg-slate-800">
+    <header className="flex h-16  w-full items-center justify-between bg-headMenuBg p-1 px-2 dark:bg-headMenuBgDark">
       {/* <header className="flex h-16  w-full items-center justify-between bg-slate-800"> */}
       {/* Ліве випадаюче меню */}
-      <div className='flex'>
-        {/* <DrawerSwitche /> */}
+      <div className="flex">
+        <DrawerSwitche />
         <HeaderLogo />
       </div>
       <div className=" flex  items-center justify-end">

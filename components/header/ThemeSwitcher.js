@@ -11,13 +11,11 @@ import IconMoon from "../ui/icons/head/IconMoon_border";
 
 const ThemeSwitcher = () => {
   const { resolvedTheme, setTheme } = useTheme();
-  //отримання змінних з tailwind.config
   const { theme } = resolveConfig(tailwindConfig); //отримання змінних з tailwind.config
-  console.log("ThemeSwitche/theme=", theme);
-  console.log("ThemeSwitche/theme.colors=", theme.colors);
+//   console.log("ThemeSwitche/theme.colors=", theme.colors);
   const colorIcon =
     resolvedTheme === "dark"
-      ? theme.colors.darkHeadMenuText
+      ? theme.colors.headMenuTextDark
       : theme.colors.headMenuText;
   const iconSize = "25";
 
@@ -32,14 +30,14 @@ const ThemeSwitcher = () => {
     <button
       label="Toggle Dark Mode"
       type="button"
-      className="flex items-center justify-center rounded-lg p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-500"
+      className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-500"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
     >
       {resolvedTheme === "dark" ? (
-        <SunIcon className="h-5 w-5 text-darkHeadMenuText" />
+        <SunIcon className="h-8 w-8 text-headMenuTextDark" />
       ) : (
         // <IconSun width={iconSize} height={iconSize} colorFill={colorIcon} />
-        <MoonIcon className="h-5 w-5 text-headMenuText" />
+        <MoonIcon className="h-8 w-8 text-headMenuText" />
         // <IconMoon width={iconSize} height={iconSize} colorFill={colorIcon} />
       )}
     </button>

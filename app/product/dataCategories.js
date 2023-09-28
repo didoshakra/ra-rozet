@@ -25,7 +25,7 @@ export const CATEGORIES = [
   {
     id: 1,
     title: "Всі товари",
-    image: "/images/images/products/Categories/dresses.jpg",
+    image: "/images/catalog/Smartfony-48.png",
     goods_quantity: 216020,
   },
 
