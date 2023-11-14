@@ -13,7 +13,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
 
   const styleColor = dropdown && " text-openLevel";
 
-  let ref = useRef();
+
   useEffect(() => {
     const handler = (event) => {
       //чи клацнули за межами спадного списку
@@ -26,7 +26,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
           setDropdown(false);
         }
       }
-    };
+    };;
 
     document.addEventListener("click", handler); //"click"- запускається після повного клацання
     // document.addEventListener("mousedown", handler); //"mousedown",(спрацює при натискатті і відпусканні кнопки)
@@ -37,7 +37,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
       //   document.removeEventListener("mousedown", handler);
       document.removeEventListener("touchstart", handler);
     };
-  }, [dropdown]);
+  }, [dropdown,currentID]);
 
   //   const onMouseEnter = () => {
   //     setDropdown(true)
