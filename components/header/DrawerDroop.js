@@ -133,7 +133,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
           />
           <p>Instagram</p>
         </a>
-      </li> 
+      </li>
     </ul>
   );
 
@@ -187,7 +187,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
       //     drawerOpen ? "translate-x-0" : "translate-x-full"
       //   } duration-300 ease-in-out `}
       //Зліва
-      className={`fixed -left-[35vw] top-0 z-20 flex h-full w-[35vw] flex-col overflow-y-scroll  bg-drawerDropMenuBg dark:bg-headMenuBgDark ${
+      className={`fixed -left-[85vw] top-0 z-20 flex h-full w-[85vw] flex-col overflow-y-scroll  bg-drawerDropMenuBg dark:bg-headMenuBgDark ${
         drawerOpen ? "translate-x-full" : "translate-x-0"
       } duration-500 ease-in-out `}
     >
