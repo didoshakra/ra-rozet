@@ -237,7 +237,7 @@ export default function DProductTable({
     if (selectIndex === -1) {
       copyArray.push(Number(nRow)); //Додаємо в масив
       //   console.log("FlowbiteUI.js/addSelecrToRbTable/nRow=", nRow);
-    } else copyArray.splice(selectIndex,1); //Якщо вже є в масиві то видаляємо
+    } else copyArray.splice(selectIndex, 1); //Якщо вже є в масиві то видаляємо
     console.log("FlowbiteUI.js/selectRows/copyArray=", copyArray);
     //
     setSelectedRows(copyArray); //Запмс в масив
@@ -454,7 +454,7 @@ export default function DProductTable({
                 // className="odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 className={`${
                   row._selected
-                    ? "dark:tabTrBgSelColD bg-tabTrBgSelCol"
+                    ? "bg-tabTrBgSelCol dark:bg-2"
                     : "odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 }`}
                 onClick={(e) => selectRows(e)}
