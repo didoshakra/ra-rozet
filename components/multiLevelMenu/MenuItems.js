@@ -9,10 +9,9 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
   const [dropdown, setDropdown] = useState(false);
   const [currentID, setCurrentID] = useState("");
   //   let domId = `${depthLevel}.${idKey}`;
-  let domId = `${depthLevel}.${idKey}`; 
-  //   console.log("MenuItems/domId=", domId);
+  let domId = `${depthLevel}.${idKey}`;
 
-  const colorStyle = dropdown && " text-openLevel";
+  const styleColor = dropdown && " text-openLevel";
 
   let ref = useRef();
   useEffect(() => {
@@ -108,7 +107,7 @@ const MenuItems = ({ idKey, items, depthLevel, setDrawerOpen }) => {
               id={domId}
               //   className="  hover:text-itemHover"
               //   className="menu-items-button  hover:text-itemHover"
-              className="${colorStyle}  hover:text-itemHover"
+              className={`${styleColor}  hover:text-itemHover`}
               type="button"
               aria-haspopup="menu" //тип інтерактивного спливаючого елемента
               aria-expanded={dropdown ? "true" : "false"} //елемент розгорнутий чи згорнутий

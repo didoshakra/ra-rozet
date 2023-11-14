@@ -133,7 +133,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
           />
           <p>Instagram</p>
         </a>
-      </li>
+      </li> 
     </ul>
   );
 

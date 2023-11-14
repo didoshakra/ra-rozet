@@ -24,12 +24,12 @@ const cols = [
         </h1>
         hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
       </div>
-      <div class="flex flex-col">
-        <div class="-m-1.5 overflow-x-auto">
-          <div class="inline-block min-w-full p-1.5 align-middle">
-            <div class="overflow-hidden rounded-lg border dark:border-gray-700">
-              <table class="min-w-full divide-y divide-stone-300 dark:divide-gray-700">
-                <thead class="bg-stone-300 dark:bg-gray-700">
+      <div className="flex flex-col">
+        <div className="-m-1.5 overflow-x-auto">
+          <div className="inline-block min-w-full p-1.5 align-middle">
+            <div className="overflow-hidden rounded-lg border dark:border-gray-700">
+              <table className="min-w-full divide-y divide-stone-300 dark:divide-gray-700">
+                <thead className="bg-stone-300 dark:bg-gray-700">
                   <tr>
                     {cols.map((item, index) => (
                       <th
@@ -42,7 +42,7 @@ const cols = [
                     ))}
                   </tr>
                 </thead>
-                <tbody class="divide-y divide-stone-200 dark:divide-gray-700">
+                <tbody className="divide-y divide-stone-200 dark:divide-gray-700">
 
                   {rows.map((item, index) => (
                     <tr

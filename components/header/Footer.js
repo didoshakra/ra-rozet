@@ -20,7 +20,8 @@ const Footer = () => {
       : theme.colors.headMenuText;
 
   return (
-    <section className=" relative w-full ">
+    // <section className=" relative block w-full">
+    <section className="mx-auto w-full">
       {/* <div className="footer-mouse"> */}
       <div className="absolute inset-x-0 top-[-5px] flex items-center justify-center p-1">
         <a

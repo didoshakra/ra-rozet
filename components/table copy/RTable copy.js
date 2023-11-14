@@ -18,6 +18,11 @@
 // Якщо accessor: "index", то іде нумерація рядків на основі index
 //сортування/
 //  Створення className для сортування(bg-color+bg-icon)
+//----------------------
+//Таблиця з фіксованим заголовком і прокручуваним тілом//https://www.w3docs.com/snippets/html/how-to-create-a-table-with-a-fixed-header-and-scrollable-body.html
+// tfoot/https://css.in.ua/html/tag/tfoot
+// <th colspan="2">-обєднання колонок в заголовку і tfoot
+//
 //--------------------------------------------------------------------
 
 "use client";
@@ -34,6 +39,7 @@ export default function DProductTable({
   const [selectedRows, setSelectedRows] = useState([2, 4]);
   const [sortField, setSortField] = useState("");
   const [order, setOrder] = useState("asc");
+  const maxHStyle = { height: "calc(100vh - 150px)}" };
 
   //Підготовка робочої структури tableData
   //https://habr.com/ru/companies/otus/articles/696610/
@@ -199,9 +205,10 @@ export default function DProductTable({
   //
 
   return (
-    <div className="p-4">
+    <>
+      {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="mb-2 rounded-3xl border border-neutral-500 bg-stone-300  text-center  text-headMenuText dark:bg-gray-800  dark:text-headMenuTextDark">
+        <div className="rounded-3xl border border-neutral-500 bg-stone-300  text-center  text-headMenuText dark:bg-gray-800  dark:text-headMenuTextDark">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           FlowbiteUI / Table pagination
         </h3> */}
@@ -210,57 +217,66 @@ export default function DProductTable({
           </h1>
         </div>
       )}
-      <div className="relative overflow-x-auto shadow-md sm:rounded-lg">
-        {/* <div className="bg-white pb-4 dark:bg-gray-900"> */}
-        <div className="mb flex p-1 dark:bg-gray-900">
-          {/* <label htmlFor="table-search" className="sr-only">
+
+      {/* Надбудова таблиці з елементами управління (пошук+...) */}
+      {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
+      <div className="mb flex  p-2 dark:bg-gray-900">
+        {/* <label htmlFor="table-search" className="sr-only">
             Search
           </label> */}
-          {/*Чи треба селект */}
-          {typeof p_filteredAllRows !== "undefined" && p_filteredAllRows && (
-            <div className="relative mt-1">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <svg
-                  className="h-4 w-4 text-gray-500 dark:text-gray-400"
-                  aria-hidden="true"
-                  xmlns="http://www.w3.org/2000/svg"
-                  fill="none"
-                  viewBox="0 0 20 20"
-                >
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="2"
-                    d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
-                  />
-                </svg>
-              </div>
-              <input
-                size="lg"
-                placeholder="Пощук..."
-                // value={searchTerm}
-                onChange={(e) => onChangeSearch(e)} //Для Enter
-                type="text"
-                className="block w-80 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-              />
+        {/*Чи треба селект */}
+        {typeof p_filteredAllRows !== "undefined" && p_filteredAllRows && (
+          <div className="relative mt-1">
+            <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
+              <svg
+                className="h-4 w-4 text-gray-500 dark:text-gray-400"
+                aria-hidden="true"
+                xmlns="http://www.w3.org/2000/svg"
+                fill="none"
+                viewBox="0 0 20 20"
+              >
+                <path
+                  stroke="currentColor"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"
+                />
+              </svg>
             </div>
-          )}
-          {typeof p_infoRows !== "undefined" && p_filteredAllRows && (
-            //   Вирівняти по  y
-            <div className="flex items-center p-1">
-              <p>
-                Записів: {initialData.length}/{tableData.length}
-              </p>
-            </div>
-          )}
-        </div>
-        <table className="w-full text-left text-sm text-gray-500 dark:text-gray-400">
-          <thead className="bg-gray-50 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+            <input
+              size="lg"
+              placeholder="Пощук..."
+              // value={searchTerm}
+              onChange={(e) => onChangeSearch(e)} //Для Enter
+              type="text"
+              className="block w-80 rounded-lg border border-gray-300 bg-gray-50 p-2 pl-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            />
+          </div>
+        )}
+        {typeof p_infoRows !== "undefined" && p_filteredAllRows && (
+          //   Вирівняти по  y
+          <div className="flex items-center p-2">
+            <p>
+              Записів: {initialData.length}/{tableData.length}
+            </p>
+          </div>
+        )}
+      </div>
+
+      {/* Обгортка(Wraper)таблиці (для проокрутки і...) */}
+      {/* <div className="max-h-[400px] w-full overflow-auto border-3 border-green-300 text-left text-sm text-gray-500 dark:text-gray-400"> */}
+      <div
+        className="h-[--sH]  w-full overflow-auto  text-left text-sm text-gray-500 dark:text-gray-400"
+        style={{ "--sH": "calc(100vh - 250px)" }} //Створення style для h-
+      >
+        <table className="  w-full table-auto border-collapse">
+          <thead>
             <tr>
               {/*Чи треба селект */}
               {typeof p_selected !== "undefined" && p_selected && (
-                <th className="w-4 p-2">
+                // uppercase- текст у верхній регістр
+                <th className="sticky top-0 bg-slate-300 p-2 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
                   <div className="flex items-center">
                     <input
                       id={"checkbox-all"}
@@ -268,48 +284,36 @@ export default function DProductTable({
                       value={true}
                       type="checkbox"
                       className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
-                      //   className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
                     />
                     {/* <label for="checkbox-all" class="sr-only">checkbox</label> */}
                   </div>
                 </th>
               )}
-              {/* {initialСolumns.map(({ label, accessor, sortable }) => { */}
               {initialСolumns.map(({ label, accessor, sortable }) => {
-                const cl = sortable
+                //  Створення className для сортування(bg-color+bg-url)
+                const clSort = sortable
                   ? sortField === accessor && order === "asc"
                     ? "up"
                     : sortField === accessor && order === "desc"
                     ? "down"
                     : "default"
                   : "";
-                //  Створення className для сортування(bg-color+bg-url)
-                //   const classUp = "bg-red-400 bg-[url('/images/table/up_arrow.png')]";
-                //   const classDown = "bg-green-400";
-                //   const classDefault = "bg-blue-300";
-                // const sortClass =
-                //   cl === "up"
-                //     ? classUp
-                //     : cl === "down"
-                //     ? classDown
-                //     : cl === "default"
-                //     ? classDefault
-                //     : "";
 
                 return (
                   <th
+                    //   className="sticky top-0 w-4  bg-slate-300 p-2 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400"
+                    className="sticky top-0  h-5 bg-slate-300 p-2 text-xs uppercase text-gray-800 dark:bg-gray-800 dark:text-gray-100"
                     key={accessor}
                     onClick={
                       sortable ? () => handleSortingChange(accessor) : null
                     }
-                    // className={` ${sortClass}`}
                   >
                     {label}
-                    {cl === "up" ? (
+                    {clSort === "up" ? (
                       <span> &#8593;</span>
-                    ) : cl === "down" ? (
+                    ) : clSort === "down" ? (
                       <span> &#8595;</span>
-                    ) : cl === "default" ? (
+                    ) : clSort === "default" ? (
                       <span> &#9830;</span>
                     ) : (
                       ""
@@ -321,7 +325,6 @@ export default function DProductTable({
           </thead>
           <tbody>
             {tableData.map((row, rowIndex) => (
-              // {filteredAllRows.map((row, rowIndex) => (
               <tr
                 id={row._nrow} //Початкова нумерація рядків/додано програмно
                 key={row._nrow} //Початкова нумерація рядків/додано програмно
@@ -349,7 +352,7 @@ export default function DProductTable({
                 {initialСolumns.map(({ accessor }) => {
                   const tData = accessor === "index" ? rowIndex : row[accessor];
                   return (
-                    <td id={row._nrow} key={accessor} className="w-4 p-2">
+                    <td id={row._nrow} key={accessor} className="p-2">
                       {tData}
                     </td>
                   );
@@ -357,83 +360,101 @@ export default function DProductTable({
               </tr>
             ))}
           </tbody>
+          <tfoot className="sticky bottom-0 bg-slate-300  p-2 text-xs uppercase text-gray-700 dark:bg-gray-700 dark:text-gray-400">
+            <tr>
+              <th colSpan="8" className="text-center">
+                Всього
+              </th>
+            </tr>
+            <tr>
+              <th className="p-2">40</th>
+              <th className="p-2">40</th>
+              <th className="p-2">40</th>
+              <th className="p-2">40</th>
+              <th className="p-2">40</th>
+              <th className="p-2">40</th>
+              <th className="p-2">40</th>
+              <th className="p-2">40</th>
+            </tr>
+          </tfoot>
         </table>
-        {/* pagination */}
-        <nav
-          className="flex items-center justify-between pt-4"
-          aria-label="Table navigation"
-        >
-          <span className="text-sm font-normal text-gray-500 dark:text-gray-400">
-            Showing{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              1-10
-            </span>{" "}
-            of{" "}
-            <span className="font-semibold text-gray-900 dark:text-white">
-              1000
-            </span>
-          </span>
-          <ul className="inline-flex h-8 -space-x-px text-sm">
-            <li>
-              <a
-                href="#"
-                className="ml-0 flex h-8 items-center justify-center rounded-l-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                Previous
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                1
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                2
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                aria-current="page"
-                className="flex h-8 items-center justify-center border border-gray-300 bg-blue-50 px-3 text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
-              >
-                3
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                4
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                5
-              </a>
-            </li>
-            <li>
-              <a
-                href="#"
-                className="flex h-8 items-center justify-center rounded-r-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
-              >
-                Next
-              </a>
-            </li>
-          </ul>
-        </nav>
       </div>
-    </div>
+      {/* pagination */}
+      <nav
+        className="flex flex-wrap  items-center justify-between p-2 align-middle"
+        aria-label="Table navigation"
+      >
+        <span className=" flex justify-start text-sm font-normal text-gray-500 dark:text-gray-400">
+          Showing{" "}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            1-10
+          </span>{" "}
+          of{" "}
+          <span className="font-semibold text-gray-900 dark:text-white">
+            1000
+          </span>
+        </span>
+        <ul className="inline-flex h-8 -space-x-px text-sm">
+          <li>
+            <a
+              href="#"
+              className="ml-0 flex h-8 items-center justify-center rounded-l-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              Previous
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              1
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              2
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              aria-current="page"
+              className="flex h-8 items-center justify-center border border-gray-300 bg-blue-50 px-3 text-blue-600 hover:bg-blue-100 hover:text-blue-700 dark:border-gray-700 dark:bg-gray-700 dark:text-white"
+            >
+              3
+            </a>
+          </li>
+
+          <li>
+            <a
+              href="#"
+              className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              4
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="flex h-8 items-center justify-center border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              5
+            </a>
+          </li>
+          <li>
+            <a
+              href="#"
+              className="flex h-8 items-center justify-center rounded-r-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
+            >
+              Next
+            </a>
+          </li>
+        </ul>
+      </nav>
+    </>
   );
 }

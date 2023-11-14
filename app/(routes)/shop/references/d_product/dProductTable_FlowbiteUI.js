@@ -270,7 +270,7 @@ export default function DProductTable({
                     onClick={
                       sortable ? () => handleSortingChange(accessor) : null
                     }
-                    // className={` ${sortClass}`}
+                    // className="w-[250p]"
                   >
                     {label}
                     {cl === "up" ? (

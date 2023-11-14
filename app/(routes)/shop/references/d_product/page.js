@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 // import DProductTable from "./dProductTable_PrelineUI";
 // import DProductTable from "./dProductTable_TailwindUI";
 // import DProductTable from "./dProductTable_FlowbiteUI";
-import RTable from "./RTable";
+import RTable from "../../../../../components/table/RTable";
 
 export default function Products() {
   const [resData, setResData] = useState([]);
@@ -27,18 +27,62 @@ export default function Products() {
   }, []);
 
   const columns = [
-    { label: "nRow", accessor: "_nrow", sortable: false, with: "15px" },
-    { label: "Idx", accessor: "index", sortable: false, with: "15px" },
-    { label: "Id", accessor: "id", sortable: true, with: "20px" },
-    { label: "Назва товару", accessor: "name", sortable: true, with: "200px" },
-    { label: "ШтрихКод", accessor: "skod", sortable: true, with: "200px" },
+    {
+      label: "nR",
+      accessor: "_nrow",
+      sortable: false,
+      minWith: "15px",
+      With: "20px",
+    },
+    // {
+    //   label: "Sel",
+    //   accessor: "_selected",
+    //   sortable: false,
+    //   minWith: "15px",
+    //   With: "20px",
+    // },
+    // {
+    //   label: "Idx",
+    //   accessor: "index",
+    //   sortable: false,
+    //   minWith: "15px",
+    //   With: "20px",
+    // },
+    {
+      label: "Id",
+      accessor: "id",
+      sortable: true,
+      minWith: "15px",
+      With: "100px",
+    },
+    {
+      label: "Назва товару",
+      accessor: "name",
+      sortable: true,
+      minWith: "150px",
+      With: "200px",
+    },
+    {
+      label: "ШтрихКод",
+      accessor: "skod",
+      sortable: true,
+      minWith: "100px",
+      With: "200px",
+    },
     {
       label: "Категорія",
       accessor: "category",
       sortable: true,
-      with: "200px",
+      minWith: "150px",
+      With: "200px",
     },
-    { label: "Ціна", accessor: "price", sortable: true, with: "200px" },
+    {
+      label: "Ціна",
+      accessor: "price",
+      sortable: true,
+      minWith: "100px",
+      With: "200px",
+    },
   ];
 
   //  const columns = [
@@ -89,23 +133,24 @@ export default function Products() {
 
   //   console.log("d_product/page/resData", resData);
   return (
-    <main className="h-screen items-center justify-center">
+    // <main className="h-screen items-center justify-center">
+    // <main className="max-h-full items-center justify-center">
+    // <main className="mx-auto px-0 xl:px-8">
+    <main className="mx-auto px-0 xl:px-2">
       {loading ? (
         <div>Отримання даних з бази даних...</div>
       ) : (
-        // <div className="flex w-fit flex-col items-center justify-center">
         <>
           <RTable
-            // rowsData={resData}
+            rowsData={resData}
             initialData={resData}
-            // columns={columns}
+            columns={columns}
             initialСolumns={columns}
             title={"DProducts"}
             p_selected={"true"}
             p_filteredAllRows={"true"}
             p_infoRows={"true"}
           />
-          {/* <DProductTable rows={rows} columns={columns} title={"DProducts"} /> */}
         </>
       )}
     </main>
