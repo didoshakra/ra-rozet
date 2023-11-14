@@ -156,7 +156,7 @@ const TableFooter = ({
             ""
           ),
         )} */}
-        <a
+        {/* <a
           className="flex items-center justify-center rounded-r-lg border border-gray-300 bg-white px-3 leading-tight text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white"
           onClick={() => {
             //   if (page < range.length) setPage(page + 1);
@@ -180,7 +180,7 @@ const TableFooter = ({
               d="M1 5h12m0 0L9 1m4 4L9 9"
             />
           </svg>
-        </a>
+        </a> */}
       </div>
     </nav>
   );
