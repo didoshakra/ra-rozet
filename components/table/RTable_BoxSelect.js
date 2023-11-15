@@ -25,7 +25,7 @@
 // - TableFooter.js,useTable.js://https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
 //  - інфа: які рядки зараз відображені на сторінці і рядків всього
 // 20221111 // вибір шрифтіф таблиці (T)
-// 20221114 // Видалив з таблиці select ( тепер видідення  цілим рядком)
+// 20221113 // Закоментував з таблиці select ( тепер видідення  цілим рядком)
 // //--------------------------------------------------------------------
 
 "use client";
@@ -390,6 +390,22 @@ export default function DProductTable({
             className={`${styleTableText} sticky  top-0  bg-tabThBgCol text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD`}
           >
             <tr>
+              {/* поле селекту */}
+              {/*Чи треба селект p_selected*/}
+              {/* {typeof p_selected !== "undefined" && p_selected && (
+                <th className={`${styleTableText}`}>
+                  <div className="flex items-center">
+                    <input
+                      id={"checkbox-all"}
+                      onChange={(e) => onChangeHeadCheckbox(e)} //Для Enter
+                      value={true}
+                      type="checkbox"
+                      className="h-4 w-4 rounded border-gray-300 bg-tabThBgCol text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-tabThBgColD dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
+                    />
+                    //<label for="checkbox-all" class="sr-only">checkbox</label>
+                  </div>
+                </th>
+              )} */}
               {initialСolumns.map(({ label, accessor, sortable }) => {
                 //  Створення className для сортування(bg-color+bg-url)
                 const clSort = sortable
@@ -446,6 +462,7 @@ export default function DProductTable({
           {/* рядки */}
           <tbody>
             {/* перебір рядків */}
+            {/* {tableData.map((row, rowIndex) => ( */}
             {/* slice-це кусок вибраного для рендерінгу масиву (сторінка/відфільтроване і...) */}
             {slice.map((row, rowIndex) => (
               <tr
@@ -460,6 +477,18 @@ export default function DProductTable({
                 }`}
                 onClick={(e) => selectRows(e)}
               >
+                {/* поле селекту */}
+                {/* {typeof p_selected !== "undefined" && p_selected && (
+                  <td id={row._nrow} className={`${styleTableText}`}>
+                    <input
+                      id={row._nrow}
+                      type="checkbox"
+                      className="h-4 w-4 rounded border-gray-300 bg-gray-100 text-blue-600 focus:ring-2 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:ring-offset-gray-800 dark:focus:ring-blue-600 dark:focus:ring-offset-gray-800"
+                      onChange={(e) => onChangeRowCheckbox(e)}
+                    />
+                  </td>
+                )} */}
+
                 {/* перебір полів */}
                 {initialСolumns.map(({ accessor }) => {
                   const tData = accessor === "index" ? rowIndex : row[accessor];

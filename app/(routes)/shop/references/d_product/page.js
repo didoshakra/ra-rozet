@@ -142,14 +142,12 @@ export default function Products() {
       ) : (
         <>
           <RTable
-            rowsData={resData}
             initialData={resData}
-            columns={columns}
             initialСolumns={columns}
             title={"DProducts"}
             p_selected={"true"}
+            p_searchAllRows={"true"}
             p_filteredAllRows={"true"}
-            p_infoRows={"true"}
           />
         </>
       )}
