@@ -103,7 +103,6 @@ export default function DProductTable({
 
   //**+++ Робоча таьлиця*/
   const [tableData, setTableData] = useState(preparedTableData); //РОбоча таьлиця
-  const [beforeSEachTableData, setTableData] = useState(preparedTableData); //РОбоча таьлиця
 
   //** Сторінки /*
   //***//https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
