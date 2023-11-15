@@ -16,7 +16,7 @@ const TableFooter = ({
   setRowsPerPage,
   maxRow,
 }) => {
-    console.log("TableFooter/range=", range);
+    // console.log("TableFooter/range=", range);
   useEffect(() => {
     if (slice.length < 1 && page !== 1) {
       setPage(page - 1);

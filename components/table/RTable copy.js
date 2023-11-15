@@ -46,8 +46,6 @@ export default function DProductTable({
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
-  const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення ряжка пошуку
-  const [beforSelectData, setBeforSelectData] = useState([]); //Зберігається перед селектом
 
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
@@ -83,8 +81,8 @@ export default function DProductTable({
 
   //Підготовка робочої структури tableData
   //https://habr.com/ru/companies/otus/articles/696610/
-  //   const preparedData = useMemo(() => funcResult, []);useMemo- це хук, який зберігає результат виклику функції (перший аргумент) і перераховує його лише за зміни залежностей (другий аргумент=initialData).
-  const preparedData = useMemo(() => {
+  //   const preparedTableData = useMemo(() => funcResult, []);useMemo- це хук, який зберігає результат виклику функції (перший аргумент) і перераховує його лише за зміни залежностей (другий аргумент=initialData).
+  const preparedTableData = useMemo(() => {
     const start = Date.now(); //Час початку
     const temp = initialData.map((data, idx) => {
       let tempData = { ...data }; // Copy object()
@@ -96,29 +94,30 @@ export default function DProductTable({
     const millis = Date.now() - start; //Час виконання
 
     console.log(
-      "FRtable.js/preparedData/Час виконання preparedData(): ",
+      "Flowbit eUI/installTableData/Час виконання preparedTableData(): ",
       millis + "ms",
     );
-    // console.log("Flowbit eUI/preparedData/temp=", temp);
+    // console.log("Flowbit eUI/installTableData/temp=", temp);
     return temp;
   }, [initialData]); //Змінюється тільки при зміні 2-го аргумента
 
   //**+++ Робоча таьлиця*/
-  const [workData, setWorkData] = useState(preparedData); //РОбоча таьлиця
+  const [tableData, setTableData] = useState(preparedTableData); //РОбоча таьлиця
+  const [beforeSEachTableData, setTableData] = useState(preparedTableData); //РОбоча таьлиця
 
   //** Сторінки /*
   //***//https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
   const [page, setPage] = useState(1); //Номер текучої сторінки
-  //   const { slice, range } = useTable(preparedData, page, rowsPerPage); //
-  const { slice, range } = useTable(workData, page, rowsPerPage); //
-  //   console.log("RTable/preparedData)=", preparedData);
+  //   const { slice, range } = useTable(preparedTableData, page, rowsPerPage); //
+  const { slice, range } = useTable(tableData, page, rowsPerPage); //
+  //   console.log("RTable/preparedTableData)=", preparedTableData);
   //   console.log("RTable/slice=", slice);
 
   //*** Сортування
   //--- Sorting
   const handleSorting = (sortField, sortOrder) => {
     if (sortField) {
-      const sorted = [...workData].sort((a, b) => {
+      const sorted = [...tableData].sort((a, b) => {
         if (a[sortField] === null) return 1;
         if (b[sortField] === null) return -1;
         if (a[sortField] === null && b[sortField] === null) return 0;
@@ -128,7 +127,7 @@ export default function DProductTable({
           }) * (sortOrder === "asc" ? 1 : -1)
         );
       });
-      setWorkData(sorted);
+      setTableData(sorted);
     }
   };
 
@@ -143,19 +142,19 @@ export default function DProductTable({
   };
 
   //** Фільтр(filter)/пошук(search) */
-  const seachAllRows = (e) => {
-    const searchValue = e.target.value;
-    if (lengthSearhValue === 0) {
-      setBeforSelectData(workData);
-    }
-    const rows = beforSelectData;
-
-    console.log("seachAllRows/searchValue=", searchValue + "/ rows", rows);
-    if (rows.length > 0) {
+  //--- Ф-ція  фільтрування
+  const seachAllRows = (searchTerm) => {
+    const oldTableData = [...tableData]; //Копія робочого масиву обєктів
+    // if (!searchTerm) return tableData;
+    if (tableData.length > 0) {
+      const rows = tableData; //
       const attributes = Object.keys(rows[0]); //Це рядок заголовку
+      // console.log("seachAllRows/rows=", rows);
+      //   console.log("seachAllRows/attributes=", attributes);
 
       const list = [];
-      //*** Цикл по рядках
+
+      //Цикл по рядках
       for (const current of rows) {
         //Цикл по колонках
         for (const attribute of attributes) {
@@ -169,19 +168,43 @@ export default function DProductTable({
           }
           //   const value = current[attribute];
           const value = String(current[attribute]).toLowerCase(); //переводимо значення поля у нижній регістр
+          //   console.log("seachAllRows/value=", value + "/attributes=", attribute);
           //порівнюємо значення поля із пошуком, переводеним у нижній регістр
-          if (value.includes(searchValue.toLowerCase())) {
+          if (value.includes(searchTerm.toLowerCase())) {
             list.push(current);
+            // console.log(
+            //   "seachAllRows/on-if/searchTerm=",
+            //   searchTerm + "/value=",
+            //   value,
+            // );
             break; //вихід з внутрішнього циклу
           }
         }
       }
-      setLengthSearhValue(searchValue.length);
-      setWorkData(list);
+      return list;
     }
   };
 
-  //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
+  //--- Запуск фільтру/пошуку(search) з insert
+  const onChangeSearch = (e) => {
+    // console.log("FlowbiteUI.js/onChangeSearch/e.key = ", e.key);
+    // if (e.key === "Enter") {
+    // alert("onCesh/Enter");
+    //   console.log("FlowbiteUI.js/onChangeSearch/e.target.value = ", e.target.value);
+    // if (e.target.value && tableData.length > 0) {
+    //   alert("seachAllRows()");
+    const start = Date.now(); //Час початок
+    const setSearchTerm = e.target.value;
+    const seachData = seachAllRows(setSearchTerm); //
+    setTableData(seachData);
+    const millis = Date.now() - start; //Час виконання
+    console.log(
+      "FlowbiteUI/onChangeSearch/Час виконання onChangeSearch()-Пошук: ",
+      millis + "ms",
+    );
+  };
+
+  //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(tableData)
   const selectRows = (e) => {
     // console.log("RTable.js/selectRows");
     const nRow = e.target.id;
@@ -196,9 +219,9 @@ export default function DProductTable({
     console.log("FlowbiteUI.js/selectRows/copyArray=", copyArray);
     //
     setSelectedRows(copyArray); //Запмс в масив
-    //--- Записємо селект(true/false) в _selected роточого масиву(workData) --------
+    //--- Записємо селект(true/false) в _selected роточого масиву(tableData) --------
     // console.log(
-    //   "RTable.js/workData[nRow]._selected=",
+    //   "RTable.js/tableData[nRow]._selected=",
     //   tableData[nRow]._selected + "/nRow=",
     //   nRow,
     // );
@@ -208,9 +231,9 @@ export default function DProductTable({
     //   newSelect + "/nRow=",
     //   nRow,
     // );
-    let selectData = [...tableData]; //Копія робочого масиву обєктів
-    selectData[nRow] = { ...selectData[nRow], ...{ _selected: newSelect } }; //Якщо міняєм не всі поля в об'єкті
-    setWorkData(selectData);
+    let selTableData = [...tableData]; //Копія робочого масиву обєктів
+    selTableData[nRow] = { ...selTableData[nRow], ...{ _selected: newSelect } }; //Якщо міняєм не всі поля в об'єкті
+    setTableData(selTableData);
     //--------------------------------------------------------------
   };
 
@@ -260,9 +283,8 @@ export default function DProductTable({
             <input
               size="lg"
               placeholder="Пошук..."
-              // value={searchValue}
-              //   onChange={(e) => onChangeSearch(e)} //Для Enter
-              onChange={(e) => seachAllRows(e)} //Пошук
+              // value={searchTerm}
+              onChange={(e) => onChangeSearch(e)} //Для Enter
               type="text"
               className="block w-80 items-center rounded-lg border border-gray-300 bg-gray-50 p-1 pl-10 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             />
