@@ -1,7 +1,7 @@
 import React from "react";
 export const PlusIcon = ({size = 24, width, height, ...props}) => (
   <svg
-    ariaHidden="true"
+    aria-hidden="true"
     fill="none"
     focusable="false"
     height={size || height}

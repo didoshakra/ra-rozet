@@ -113,7 +113,7 @@ const TableFooter = ({
         >
           <svg
             className="mr-2 h-3.5 w-3.5"
-            ariaHidden="true"
+            aria_hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 14 10"
@@ -167,7 +167,7 @@ const TableFooter = ({
           {/* Next */}
           <svg
             className="ml-2 h-3.5 w-3.5"
-            ariaHidden="true"
+            aria-hidden="true"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 14 10"
