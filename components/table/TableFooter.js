@@ -8,15 +8,15 @@ import { useEffect } from "react";
 // range- //Масив сторінок [1,2,3...]
 // slice- //Рядки текучої сторінки (.slice-кусок масиву БД)
 const TableFooter = ({
-  range,
-  setPage,
-  page,
-  slice,
-  rowsPerPage,
-  setRowsPerPage,
-  maxRow,
+  range, //Масив сторінок [1,2...]
+  setPage, //ф-ція призначення поточної сторінки
+  page, //поточнf сторінка
+  slice, //кусок робочої БД(workTable), що виводиться на поточній сторінці
+  rowsPerPage, //к-сть рядків на сторінці
+  setRowsPerPage, //ф-ція призначення к-сть рядків на сторінці
+  maxRow, //максимальна к-сть рядків у робочої БД(workTable) з урахуванням всіх фільтрів(це не прчаткова БД)
 }) => {
-    // console.log("TableFooter/range=", range);
+  // console.log("TableFooter/range=", range);
   useEffect(() => {
     if (slice.length < 1 && page !== 1) {
       setPage(page - 1);

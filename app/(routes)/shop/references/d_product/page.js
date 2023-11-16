@@ -34,7 +34,7 @@ export default function Products() {
       minWith: "15px",
       With: "20px",
     },
-    
+
     {
       label: "Id",
       accessor: "id",
@@ -136,9 +136,9 @@ export default function Products() {
             initialData={resData}
             initialСolumns={columns}
             title={"DProducts"}
-            p_selected={"true"}
-            p_searchAllRows={"true"}
-            p_filteredAllRows={"true"}
+            // p_selected={true}//Завжди
+            p_searchAllRows={true}
+            p_filtered={true}
           />
         </>
       )}

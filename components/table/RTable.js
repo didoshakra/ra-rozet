@@ -41,9 +41,10 @@ export default function DProductTable({
   //   p_StripedRows, //Смугасті ряди
   //   p_selected, //???Завжди(true/false)вибір рядків-не обов'язково
   p_searchAllRows, //(true/false)пошук по всіх полях-не обов'язково
+  p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
 }) {
   const [selectedRows, setSelectedRows] = useState([]);
-  const [filteredRows, setFilteredRows] = useState(0);
+  //   const [filteredRows, setFilteredRows] = useState(0);
   const [sortField, setSortField] = useState(""); //Поле(колонка) по якій сортується
   const [filterFields, setFilterFields] = useState([]); //Поля(колонки) по якій сортується
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
@@ -101,7 +102,6 @@ export default function DProductTable({
       "FRtable.js/preparedData/Час виконання preparedData(): ",
       millis + "ms",
     );
-    // console.log("Flowbit eUI/preparedData/temp=", temp);
     return temp;
   }, [initialData]); //Змінюється тільки при зміні 2-го аргумента
 
@@ -111,13 +111,18 @@ export default function DProductTable({
   //=========================================================================
   //--- Сторінки /*//***//https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
   const [page, setPage] = useState(1); //Номер текучої сторінки
-  //   const { slice, range } = useTable(preparedData, page, rowsPerPage); //
   const { slice, range } = useTable(workData, page, rowsPerPage); //
-  //   console.log("RTable/preparedData)=", preparedData);
   //   console.log("RTable/slice=", slice);
 
   //--- Сортування
   const handleSorting = (sortField, sortOrder) => {
+    //Для встановлення початкового сортування
+    if (sortOrder === "default") {
+      sortOrder = "asc";
+      sortField = "_nrow";
+    }
+
+    //Сортування
     if (sortField) {
       const sorted = [...workData].sort((a, b) => {
         if (a[sortField] === null) return 1;
@@ -137,9 +142,15 @@ export default function DProductTable({
   const handleSortingChange = (accessor) => {
     console.log("RTable.js/handleSortingChange/accessor=", accessor);
     const sortOrder =
-      accessor === sortField && order === "asc" ? "desc" : "asc";
+      //   accessor === sortField && order === "asc" ? "desc" : "asc";
+      accessor === sortField && order === "asc"
+        ? "desc"
+        : order === "desc"
+        ? "default"
+        : "asc";
     setSortField(accessor);
     setOrder(sortOrder);
+    // console.log("RTable.js/handleSortingChange/sortOrder=", sortOrder);
     handleSorting(accessor, sortOrder);
   };
   //--- Задає фільтрування handleFilteringChange
@@ -150,7 +161,7 @@ export default function DProductTable({
     if (findIndex === -1) {
       copyArray.push(accessor); //Додаємо в масив
     } else copyArray.splice(findIndex, 1); //Якщо вже є в масиві то видаляємо
-    console.log("RTable.js/handleFiltringChange/tempArray=", copyArray);
+    // console.log("RTable.js/handleFiltringChange/tempArray=", copyArray);
     setFilterFields(copyArray);
   };
 
@@ -189,7 +200,7 @@ export default function DProductTable({
         }
       }
       setLengthSearhValue(searchValue.length);
-      setFilteredRows(list.length);
+      //   setFilteredRows(list.length);
       //   console.log("seachAllRows/list=", list);
 
       setWorkData(list);
@@ -200,10 +211,8 @@ export default function DProductTable({
   const selectRows = (e) => {
     // console.log("RTable.js/selectRows/e.target=", e.target);
     const nRow = Number(e.target.id); //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
-    // const index = e.target.id;
 
     //--- Формуємо масив з індексами відмічених записів (setSelectedRow) --------------------
-    // let copyArray = [...selectedRows]; //Копія робочого масиву обєктів
     let copyArray = [...selectedRows]; //Копія робочого масиву обєктів
     const selectIndex = copyArray.findIndex((item) => item === nRow); //id-це id HTML DOM елемента (в нашому випадку:id={_nrow})
     // console.log("RTable.js.js/selectRows/selectIndex=", selectIndex);
@@ -217,6 +226,7 @@ export default function DProductTable({
 
     //--- Записємо селект(true/false) в _selected роточого масиву(workData) --------
     let selectData = [...workData]; //Копія робочого масиву обєктів
+    //https://www.geeksforgeeks.org/how-to-modify-an-objects-property-in-an-array-of-objects-in-javascript/
     const targetObj = selectData.find((obj) => obj._nrow === nRow); //Шукажмо запис по _nrow=nRow
     // console.log("RTable.js.js/selectRows/targetObj=", targetObj);
     if (targetObj) {
@@ -247,10 +257,8 @@ export default function DProductTable({
       {/* Надбудова таблиці з елементами управління (пошук+...) */}
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
       <div className="my-1 flex flex-wrap items-center justify-start">
-        {/* <label htmlFor="table-search" className="sr-only">
-            Search
-          </label> */}
-        {/*Чи треба пошук */}
+        {/*  */}
+        {/*Пошук/фільтр (рядок пощуку по всіх полях) */}
         {typeof p_searchAllRows !== "undefined" && p_searchAllRows && (
           <div className="relative ml-1 items-center ">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
@@ -274,32 +282,39 @@ export default function DProductTable({
               size="lg"
               placeholder="Пошук..."
               // value={searchValue}
-              //   onChange={(e) => onChangeSearch(e)} //Для Enter
+              //   onChange={(e) =>p_filterededp_searchAllRows onChangeSearch(e)} //Для Enter
               onChange={(e) => seachAllRows(e)} //Пошук
               type="text"
               className="block w-80 items-center rounded-lg border border-gray-300 bg-gray-50 p-1 pl-10 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             />
           </div>
         )}
-        {/*Інформація про відфільировані рядки  */}
-        {/* {typeof p_filtereded !== "undefined" && p_selected && ( */}
-        <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700">
-          <svg
-            //   class="h-4 w-4 text-red-500"
-            className="h-4 w-4 "
-            viewBox="0 0 24 24"
-            fill="none"
-            // fill="currentColor"
-            stroke="currentColor"
-            strokeWidth="1"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-          </svg>
 
-          <p title="Відфільтровано">: {filteredRows}</p>
-        </div>
+        {/*Фільтр/Інфа про відфільтровані р і всю БД  */}
+        {/* {typeof p_searchAllRows !== "undefined" && p_searchAllRows && ( */}
+        {typeof (p_filtered !== "undefined") && p_filtered && (
+          <button
+            className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+            onClick={() => handleFilteringChange}
+          >
+            <svg
+              //   class="h-4 w-4 text-red-500"
+              className="h-4 w-4 "
+              viewBox="0 0 24 24"
+              fill="none"
+              // fill="currentColor"
+              stroke="currentColor"
+              strokeWidth="1"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+            </svg>
+
+            <p title="Відфільтровано">: {workData.length}</p>
+            <p title="Вся БД">/ {initialData.length}</p>
+          </button>
+        )}
 
         {/*Інформація про вибрані рядки  */}
         {/* {typeof p_selected !== "undefined" && p_selected && ( */}
@@ -319,13 +334,7 @@ export default function DProductTable({
             />
           </svg>
 
-          {/* <p>
-              Вибрано
-            </p> */}
-          <p title="Вибрано">
-            : {selectedRows.length}
-            {/* з {initialData.length} */}
-          </p>
+          <p title="Відмічено">: {selectedRows.length}</p>
         </div>
         {/* )} */}
 
@@ -369,11 +378,9 @@ export default function DProductTable({
 
       {/* Обгортка(Wraper)таблиці (для проокрутки і...) */}
       <div
-        // rr-text
         className=" max-h-[--sH] w-full overflow-auto  border-3 border-green-300  text-left text-gray-500 dark:text-gray-400"
         style={{ "--sH": "calc(100vh - 250px)" }} //Створення style для h-
       >
-        {/* <table className="  h-10 w-full table-auto border-collapse "> */}
         <table className=" w-full table-auto border-collapse ">
           <thead
             className={`${styleTableText} sticky  top-0  bg-tabThBgCol text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD`}
@@ -395,9 +402,9 @@ export default function DProductTable({
                 //  Створення className для сортування(bg-color+bg-url)
                 const clFiltr = filtered
                   ? filterFields === accessor
-                    ? "down"
-                    : "true"
-                  : "fal";
+                    ? "true"
+                    : "false"
+                  : "default";
 
                 return (
                   <th
@@ -420,17 +427,15 @@ export default function DProductTable({
                             <span> &#8593;</span>
                           ) : clSort === "down" ? (
                             <span> &#8595;</span>
-                          ) : clSort === "default" ? (
-                            <span> &#9830;</span>
                           ) : (
-                            ""
+                            clSort === "default" && ""
                           )}
                         </button>
                       </div>
 
                       {/* filter */}
                       {typeof filtered !== "undefined" && filtered && (
-                        <button
+                        <div
                           className="flex text-center align-middle"
                           onClick={
                             filtered
@@ -451,7 +456,7 @@ export default function DProductTable({
                           >
                             <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
                           </svg>
-                        </button>
+                        </div>
                       )}
                     </div>
 
