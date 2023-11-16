@@ -52,6 +52,7 @@ export default function DProductTable({
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
   const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення ряжка пошуку
   const [beforSelectData, setBeforSelectData] = useState([]); //Зберігається перед селектом
+  const [isDropdownFilterMenu, setIsDropdownFilterMenu] = useState(false); //Зберігається перед селектом
 
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
@@ -293,27 +294,32 @@ export default function DProductTable({
         {/*Фільтр/Інфа про відфільтровані р і всю БД  */}
         {/* {typeof p_searchAllRows !== "undefined" && p_searchAllRows && ( */}
         {typeof (p_filtered !== "undefined") && p_filtered && (
-          <button
-            className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-            onClick={() => handleFilteringChange}
-          >
-            <svg
-              //   class="h-4 w-4 text-red-500"
-              className="h-4 w-4 "
-              viewBox="0 0 24 24"
-              fill="none"
-              // fill="currentColor"
-              stroke="currentColor"
-              strokeWidth="1"
-              strokeLinecap="round"
-              strokeLinejoin="round"
+          <div>
+            <button
+              className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+              onClick={() => setIsDropdownFilterMenu(!isDropdownFilterMenu)}
             >
-              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-            </svg>
+              <svg
+                //   class="h-4 w-4 text-red-500"
+                className="h-4 w-4 "
+                viewBox="0 0 24 24"
+                fill="none"
+                // fill="currentColor"
+                stroke="currentColor"
+                strokeWidth="1"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              >
+                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+              </svg>
 
-            <p title="Відфільтровано">: {workData.length}</p>
-            <p title="Вся БД">/ {initialData.length}</p>
-          </button>
+              <p title="Відфільтровано">: {workData.length}</p>
+              <p title="Вся БД">/ {initialData.length}</p>
+            </button>
+
+            {/* Dropdown menu */}
+            {isDropdownFilterMenu && <DropdownFilterMenu />}
+          </div>
         )}
 
         {/*Інформація про вибрані рядки  */}
