@@ -162,7 +162,7 @@ export default function DProductTable({
     }
     const rows = beforSelectData;
 
-    console.log("seachAllRows/searchValue=", searchValue + "/ rows", rows);
+    // console.log("seachAllRows/searchValue=", searchValue + "/ rows", rows);
     if (rows.length > 0) {
       const attributes = Object.keys(rows[0]); //Це рядок заголовку
 
