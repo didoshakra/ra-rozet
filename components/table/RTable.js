@@ -1,6 +1,6 @@
 //RTable.js-таблиця:пошук(фільтр) по всіх полях/сортування/select.
 //Select: selectedRows- масив індексів(_nrow) вибраних рядків  )
-//==== на базі FlowbiteUI==========================================================
+//==== на базі RTable.js==========================================================
 //https://flowbite.com/docs/components/tables/#striped-rows\\Table pagination
 //Creating a React sortable table //https://blog.logrocket.com/creating-react-sortable-table/
 //---
@@ -32,6 +32,7 @@
 import { useState, useMemo, useEffect } from "react";
 import TableFooter from "./TableFooter";
 import useTable from "./useTable";
+import DropdownFilterMenu from "./DropdownFilterMenu";
 
 export default function DProductTable({
   initialData, //початкові дані (з БД) - обов'язково
@@ -42,7 +43,9 @@ export default function DProductTable({
   p_searchAllRows, //(true/false)пошук по всіх полях-не обов'язково
 }) {
   const [selectedRows, setSelectedRows] = useState([]);
+  const [filteredRows, setFilteredRows] = useState(0);
   const [sortField, setSortField] = useState(""); //Поле(колонка) по якій сортується
+  const [filterFields, setFilterFields] = useState([]); //Поля(колонки) по якій сортується
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
@@ -81,9 +84,8 @@ export default function DProductTable({
   // className =
   //   "odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD";
 
-  //Підготовка робочої структури tableData
-  //https://habr.com/ru/companies/otus/articles/696610/
-  //   const preparedData = useMemo(() => funcResult, []);useMemo- це хук, який зберігає результат виклику функції (перший аргумент) і перераховує його лише за зміни залежностей (другий аргумент=initialData).
+  //Підготовка робочої структури workData //https://habr.com/ru/companies/otus/articles/696610/
+  //  useMemo- це хук, який зберігає результат виклику функції (перший аргумент) і перераховує його лише за зміни залежностей (другий аргумент=initialData).
   const preparedData = useMemo(() => {
     const start = Date.now(); //Час початку
     const temp = initialData.map((data, idx) => {
@@ -103,19 +105,18 @@ export default function DProductTable({
     return temp;
   }, [initialData]); //Змінюється тільки при зміні 2-го аргумента
 
-  //**+++ Робоча таьлиця*/
+  //** */ Робоча таьлиця*/
   const [workData, setWorkData] = useState(preparedData); //РОбоча таьлиця
 
-  //** Сторінки /*
-  //***//https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
+  //=========================================================================
+  //--- Сторінки /*//***//https://dev.to/franciscomendes10866/how-to-create-a-table-with-pagination-in-react-4lpd
   const [page, setPage] = useState(1); //Номер текучої сторінки
   //   const { slice, range } = useTable(preparedData, page, rowsPerPage); //
   const { slice, range } = useTable(workData, page, rowsPerPage); //
   //   console.log("RTable/preparedData)=", preparedData);
   //   console.log("RTable/slice=", slice);
 
-  //*** Сортування
-  //--- Sorting
+  //--- Сортування
   const handleSorting = (sortField, sortOrder) => {
     if (sortField) {
       const sorted = [...workData].sort((a, b) => {
@@ -134,15 +135,26 @@ export default function DProductTable({
 
   //--- Задає режим сортування
   const handleSortingChange = (accessor) => {
-    console.log("FlowbiteUI/handleSortingChange/accessor=", accessor);
+    console.log("RTable.js/handleSortingChange/accessor=", accessor);
     const sortOrder =
       accessor === sortField && order === "asc" ? "desc" : "asc";
     setSortField(accessor);
     setOrder(sortOrder);
     handleSorting(accessor, sortOrder);
   };
+  //--- Задає фільтрування handleFilteringChange
+  const handleFilteringChange = (accessor) => {
+    console.log("RTable.js/handleFiltringChange/accessor=", accessor);
+    let copyArray = [...filterFields]; // Copy object()
+    const findIndex = copyArray.findIndex((item) => item === accessor);
+    if (findIndex === -1) {
+      copyArray.push(accessor); //Додаємо в масив
+    } else copyArray.splice(findIndex, 1); //Якщо вже є в масиві то видаляємо
+    console.log("RTable.js/handleFiltringChange/tempArray=", copyArray);
+    setFilterFields(copyArray);
+  };
 
-  //** Фільтр(filter)/пошук(search) */
+  //-- /пошук(search)/фільтер */
   const seachAllRows = (e) => {
     const searchValue = e.target.value;
     if (lengthSearhValue === 0) {
@@ -177,40 +189,41 @@ export default function DProductTable({
         }
       }
       setLengthSearhValue(searchValue.length);
+      setFilteredRows(list.length);
+      //   console.log("seachAllRows/list=", list);
+
       setWorkData(list);
     }
   };
 
   //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
   const selectRows = (e) => {
-    // console.log("RTable.js/selectRows");
-    const nRow = e.target.id;
-    //--- Формуємо масив з індексами відмічених записів ???--------------------
+    // console.log("RTable.js/selectRows/e.target=", e.target);
+    const nRow = Number(e.target.id); //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
+    // const index = e.target.id;
+
+    //--- Формуємо масив з індексами відмічених записів (setSelectedRow) --------------------
+    // let copyArray = [...selectedRows]; //Копія робочого масиву обєктів
     let copyArray = [...selectedRows]; //Копія робочого масиву обєктів
-    const selectIndex = copyArray.findIndex((item) => item === Number(nRow)); //id-це id HTML DOM елемента (в нашому випадку:id={_nrow})
-    // console.log("FlowbiteUI.js/selectRows/selectIndex=", selectIndex);
+    const selectIndex = copyArray.findIndex((item) => item === nRow); //id-це id HTML DOM елемента (в нашому випадку:id={_nrow})
+    // console.log("RTable.js.js/selectRows/selectIndex=", selectIndex);
     if (selectIndex === -1) {
-      copyArray.push(Number(nRow)); //Додаємо в масив
-      //   console.log("FlowbiteUI.js/addSelecrToRbTable/nRow=", nRow);
+      copyArray.push(nRow); //Додаємо в масив
+      //   console.log("RTable.js.js/addSelecrToRbTable/nRow=", nRow);
     } else copyArray.splice(selectIndex, 1); //Якщо вже є в масиві то видаляємо
-    console.log("FlowbiteUI.js/selectRows/copyArray=", copyArray);
+    // console.log("RTable.js.js/selectRows/copyArray=", copyArray);
     //
     setSelectedRows(copyArray); //Запмс в масив
+
     //--- Записємо селект(true/false) в _selected роточого масиву(workData) --------
-    // console.log(
-    //   "RTable.js/workData[nRow]._selected=",
-    //   tableData[nRow]._selected + "/nRow=",
-    //   nRow,
-    // );
-    const newSelect = !tableData[nRow]._selected;
-    // console.log(
-    //   "FlowbiteUI.js/selectRows/newSelect=",
-    //   newSelect + "/nRow=",
-    //   nRow,
-    // );
-    let selectData = [...tableData]; //Копія робочого масиву обєктів
-    selectData[nRow] = { ...selectData[nRow], ...{ _selected: newSelect } }; //Якщо міняєм не всі поля в об'єкті
-    setWorkData(selectData);
+    let selectData = [...workData]; //Копія робочого масиву обєктів
+    const targetObj = selectData.find((obj) => obj._nrow === nRow); //Шукажмо запис по _nrow=nRow
+    // console.log("RTable.js.js/selectRows/targetObj=", targetObj);
+    if (targetObj) {
+      const newSelect = !targetObj._selected;
+      targetObj._selected = newSelect;
+      setWorkData(selectData);
+    }
     //--------------------------------------------------------------
   };
 
@@ -221,7 +234,7 @@ export default function DProductTable({
       {typeof title !== "undefined" && (
         <div className="rounded-3xl border border-neutral-500 bg-tabThBgCol  text-center  text-headMenuText dark:bg-tabThBgColD  dark:text-headMenuTextDark">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
-          FlowbiteUI / Table pagination
+          RTable.js / Table pagination
         </h3> */}
           <h1
             className={`${styleTitleText}text-text-center font-bold text-headMenuText dark:text-headMenuTextDark`}
@@ -243,7 +256,7 @@ export default function DProductTable({
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
               <svg
                 className="h-4 w-4 text-gray-500 dark:text-gray-400"
-                aria-hidden="true"
+                ariaHidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
                 viewBox="0 0 20 20"
@@ -268,6 +281,25 @@ export default function DProductTable({
             />
           </div>
         )}
+        {/*Інформація про відфільировані рядки  */}
+        {/* {typeof p_filtereded !== "undefined" && p_selected && ( */}
+        <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700">
+          <svg
+            //   class="h-4 w-4 text-red-500"
+            className="h-4 w-4 "
+            viewBox="0 0 24 24"
+            fill="none"
+            // fill="currentColor"
+            stroke="currentColor"
+            strokeWidth="1"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+          </svg>
+
+          <p title="Відфільтровано">: {filteredRows}</p>
+        </div>
 
         {/*Інформація про вибрані рядки  */}
         {/* {typeof p_selected !== "undefined" && p_selected && ( */}
@@ -347,7 +379,11 @@ export default function DProductTable({
             className={`${styleTableText} sticky  top-0  bg-tabThBgCol text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD`}
           >
             <tr>
-              {initialСolumns.map(({ label, accessor, sortable }) => {
+              {/*
+              label - назва поля в шапці
+              accessor-справжня назва поля */}
+
+              {initialСolumns.map(({ label, accessor, sortable, filtered }) => {
                 //  Створення className для сортування(bg-color+bg-url)
                 const clSort = sortable
                   ? sortField === accessor && order === "asc"
@@ -356,46 +392,73 @@ export default function DProductTable({
                     ? "down"
                     : "default"
                   : "";
+                //  Створення className для сортування(bg-color+bg-url)
+                const clFiltr = filtered
+                  ? filterFields === accessor
+                    ? "down"
+                    : "true"
+                  : "fal";
 
                 return (
                   <th
                     // uppercase- текст у верхній регістр
                     className={`${styleTableText} uppercase`}
                     key={accessor}
-                    onClick={
-                      sortable ? () => handleSortingChange(accessor) : null
-                    }
                   >
                     <div className="flex">
-                      <div
-                        className="flex text-center align-middle"
-                        onAuxClick={(e) => tar}
-                      >
-                        <svg
-                          //   class="h-4 w-4 text-red-500"
-                          className="h-4 w-4 "
-                          viewBox="0 0 24 24"
-                          fill="none"
-                          // fill="currentColor"
-                          stroke="currentColor"
-                          strokeWidth="1"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
+                      <div className="flex text-center align-middle">
+                        <button
+                          className="flex"
+                          onClick={
+                            sortable
+                              ? () => handleSortingChange(accessor)
+                              : null
+                          }
                         >
-                          <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                        </svg>
+                          <p className="px-1"> {label}</p>
+                          {clSort === "up" ? (
+                            <span> &#8593;</span>
+                          ) : clSort === "down" ? (
+                            <span> &#8595;</span>
+                          ) : clSort === "default" ? (
+                            <span> &#9830;</span>
+                          ) : (
+                            ""
+                          )}
+                        </button>
                       </div>
-                      <p className="px-1"> {label}</p>
-                      {clSort === "up" ? (
-                        <span> &#8593;</span>
-                      ) : clSort === "down" ? (
-                        <span> &#8595;</span>
-                      ) : clSort === "default" ? (
-                        <span> &#9830;</span>
-                      ) : (
-                        ""
+
+                      {/* filter */}
+                      {typeof filtered !== "undefined" && filtered && (
+                        <button
+                          className="flex text-center align-middle"
+                          onClick={
+                            filtered
+                              ? () => handleFilteringChange(accessor)
+                              : null
+                          }
+                        >
+                          <svg
+                            //   class="h-4 w-4 text-red-500"
+                            className="h-4 w-4 "
+                            viewBox="0 0 24 24"
+                            fill="none"
+                            // fill="currentColor"
+                            stroke="currentColor"
+                            strokeWidth="1"
+                            strokeLinecap="round"
+                            strokeLinejoin="round"
+                          >
+                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                          </svg>
+                        </button>
                       )}
                     </div>
+
+                    {/*Dropdown menu  */}
+                    {/* {typeof filtered !== "undefined" && filtered && (
+                      <DropdownFilterMenu />
+                    )} */}
                   </th>
                 );
               })}
@@ -462,7 +525,7 @@ export default function DProductTable({
         page={page}
         rowsPerPage={rowsPerPage}
         setRowsPerPage={setRowsPerPage}
-        maxRow={initialData.length}
+        maxRow={workData.length}
       />
     </div>
   );
