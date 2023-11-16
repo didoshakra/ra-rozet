@@ -43,17 +43,48 @@ export default function DProductTable({
   p_searchAllRows, //(true/false)пошук по всіх полях-не обов'язково
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
 }) {
+  const filter0 = [
+    {
+      accessor: "name",
+      filter: "Горілка",
+    },
+    {
+      accessor: "skod",
+      filter: "12345",
+    },
+    {
+      accessor: "category",
+      filter: "Сигарети",
+    },
+  ];
   const [selectedRows, setSelectedRows] = useState([]);
   //   const [filteredRows, setFilteredRows] = useState(0);
   const [sortField, setSortField] = useState(""); //Поле(колонка) по якій сортується
-  const [filterFields, setFilterFields] = useState([]); //Поля(колонки) по якій сортується
+  //   const [filterFields, setFilterFields] = useState(["name", "skod"]); //Поля(колонки) по якій сортується
+  const [filterFields, setFilterFields] = useState(["skod"]); //Поля(колонки) по якій сортується
+  const [filter, setFilter] = useState(filter0); //Фільтер для всіх полів
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
-  const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення ряжка пошуку
-  const [beforSelectData, setBeforSelectData] = useState([]); //Зберігається перед селектом
+  const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення рядка пошуку(Для відкату пошуку)
+  const [beforSelectData, setBeforSelectData] = useState([]); //Зберігається БД перед пошуком (Для відкату пошуку)
   const [isDropdownFilterMenu, setIsDropdownFilterMenu] = useState(false); //Зберігається перед селектом
 
+  console.log("FRtable.js/filter= ", filter);
+  //  const columns = [
+  //   {
+  //     key: "name",
+  //     label: "NAME",
+  //   },
+  //   {
+  //     key: "role",
+  //     label: "ROLE",
+  //   },
+  //   {
+  //     key: "age",
+  //     label: "AGE",
+  //   },
+  // ];
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
   //em-Відносно розміру шрифту даного елемента(=em*text-xs)
@@ -154,17 +185,18 @@ export default function DProductTable({
     // console.log("RTable.js/handleSortingChange/sortOrder=", sortOrder);
     handleSorting(accessor, sortOrder);
   };
-  //--- Задає фільтрування handleFilteringChange
-  const handleFilteringChange = (accessor) => {
-    console.log("RTable.js/handleFiltringChange/accessor=", accessor);
-    let copyArray = [...filterFields]; // Copy object()
-    const findIndex = copyArray.findIndex((item) => item === accessor);
-    if (findIndex === -1) {
-      copyArray.push(accessor); //Додаємо в масив
-    } else copyArray.splice(findIndex, 1); //Якщо вже є в масиві то видаляємо
-    // console.log("RTable.js/handleFiltringChange/tempArray=", copyArray);
-    setFilterFields(copyArray);
-  };
+
+  //   //--- Задає фільтрування handleFilteringChange
+  //   const handleFilteringChange = (accessor) => {
+  //     console.log("RTable.js/handleFiltringChange/accessor=", accessor);
+  //     let copyArray = [...filterFields]; // Copy object()
+  //     const findIndex = copyArray.findIndex((item) => item === accessor);
+  //     if (findIndex === -1) {
+  //       copyArray.push(accessor); //Додаємо в масив
+  //     } else copyArray.splice(findIndex, 1); //Якщо вже є в масиві то видаляємо
+  //     // console.log("RTable.js/handleFiltringChange/tempArray=", copyArray);
+  //     setFilterFields(copyArray);
+  //   };
 
   //-- /пошук(search)/фільтер */
   const seachAllRows = (e) => {
@@ -236,6 +268,13 @@ export default function DProductTable({
       setWorkData(selectData);
     }
     //--------------------------------------------------------------
+  };
+
+  const inFilterFields = (accessor) => {
+    const findIndex = filterFields.findIndex((item) => item === accessor);
+    console.log("RTable.js.js/inFilterFields/findIndex=", findIndex);
+    if (findIndex === -1) return false;
+    else return true;
   };
 
   return (
@@ -406,11 +445,12 @@ export default function DProductTable({
                     : "default"
                   : "";
                 //  Створення className для сортування(bg-color+bg-url)
-                const clFiltr = filtered
-                  ? filterFields === accessor
-                    ? "true"
-                    : "false"
-                  : "default";
+                // const clFiltr = filtered
+                //   ? filterFields === accessor
+                //     ? "true"
+                //     : "false"
+                //   : "default";
+                const clFiltr = inFilterFields(accessor);
 
                 return (
                   <th
@@ -441,27 +481,22 @@ export default function DProductTable({
 
                       {/* filter */}
                       {typeof filtered !== "undefined" && filtered && (
-                        <div
-                          className="flex text-center align-middle"
-                          onClick={
-                            filtered
-                              ? () => handleFilteringChange(accessor)
-                              : null
-                          }
-                        >
-                          <svg
-                            //   class="h-4 w-4 text-red-500"
-                            className="h-4 w-4 "
-                            viewBox="0 0 24 24"
-                            fill="none"
-                            // fill="currentColor"
-                            stroke="currentColor"
-                            strokeWidth="1"
-                            strokeLinecap="round"
-                            strokeLinejoin="round"
-                          >
-                            <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-                          </svg>
+                        <div className="flex text-center align-middle">
+                          {clFiltr && (
+                            <svg
+                              //   class="h-4 w-4 text-red-500"
+                              className="h-4 w-4 "
+                              viewBox="0 0 24 24"
+                              fill="none"
+                              // fill="currentColor"
+                              stroke="currentColor"
+                              strokeWidth="1"
+                              strokeLinecap="round"
+                              strokeLinejoin="round"
+                            >
+                              <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                            </svg>
+                          )}
                         </div>
                       )}
                     </div>
