@@ -481,7 +481,7 @@ export default function DProductTable({
                 // className="odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 className={`${
                   row._selected
-                    ? "bg-tabTrBgSelCol dark:bg-2"
+                    ? "bg-tabTrBgSelCol hover:bg-tabTrBgHovCol  dark:bg-tabTrBgSelColD dark:hover:bg-tabTrBgHovColD"
                     : "odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 }`}
                 onClick={(e) => selectRows(e)}

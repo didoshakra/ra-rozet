@@ -25,8 +25,10 @@ module.exports = {
         mainColor: "red",
         tapeMenuBg: "#82AE46",
         tapeMenuBgDark: "#000",
-        headMenuText: "#828C46",
-        headMenuTextDark: "#82FF46",
+        // headMenuText: "#828C46",
+        headMenuText: "#82AE46",
+        // headMenuTextDark: "#82FF46",
+        headMenuTextDark: "#6B8E23",
         headMenuTextBgHover: "#DFE6D4",
         // headMenuBg: "#C9DFA7",
         // headMenuBg: "#E8EFD3",
@@ -57,8 +59,10 @@ module.exports = {
         tabTrBgHovColD: "rgb(107 114 128)", //(bg-gray-500)
         tabTrBgEveCol: "rgb(245 245 244)", //Парні(bg-stone-100)
         tabTrBgEveColD: "rgb(75 85 99)", //(bg-gray-600)
-        tabTrBgSelCol: "#93ff8b", //Вибрані рядки
-        tabTrBgSelColD: "#14ff0e", //
+        // tabTrBgSelCol: "#C9DFA7", //Вибрані рядки
+        tabTrBgSelCol: "#E8EFD3", //Вибрані рядки
+        // tabTrBgSelCol: "#F1F4E2", //Вибрані рядки
+        tabTrBgSelColD: "#6B8E23", //
       },
       width: {
         128: "32rem",
