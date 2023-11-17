@@ -368,7 +368,7 @@ export default function DProductTable({
             {isDropdownFilterMenu && (
               <DropdownFilterMenu
                 filter={filter}
-                setFilter={setFilter}
+                setIsDropdownFilterMenu={setIsDropdownFilterMenu}
                 styleTableText={styleTableText}
               />
             )}

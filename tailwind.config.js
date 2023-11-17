@@ -47,12 +47,16 @@ module.exports = {
         // *** table
         //Заголовок/шапка/нижній підсумок
         tabThTexCol: "rgb(31 41 55)", //-Заголовок(text-gray-800)
+        tabThTexColD: "#d3d3d3", //-Заголовок(text-gray-400)
+        // tabThTexColD: "rgb(156 163 175)", //-Заголовок(text-gray-400)
         tabThBgCol: "rgb(214 211 209)", //(bg-stone-300)
-        tabThTexColD: "rgb(156 163 175)", //-Заголовок(text-gray-400)
+        // tabThTexColD: "rgb(156 163 175)", //-Заголовок(text-gray-400)
         tabThBgColD: "rgb(31 41 55)", //(bg-gray-800)
         //Рядки
-        tabTrTexCol: "rgb(38 38 38)", //<td-ячейки(text-neutral-800)
-        tabTrTexColD: "rgb(226 232 240)", //(text-slate-200)
+        // tabTrTexCol: "rgb(38 38 38)", //<td-ячейки(text-neutral-800)
+        tabTrTexCol: "#000", //<td-ячейки(text-neutral-800)
+        // tabTrTexColD: "rgb(226 232 240)", //(text-slate-200)
+        tabTrTexColD: "#FFF", //(text-slate-200)
         tabTrBgCol: "rgb(255 255 255)", //Непарні (bg-white)
         tabTrBgColD: "rgb(55 65 81)", //(bg-gray-700)
         tabTrBgHovCol: "rgb(231 229 228)", //При наведенні(bg-stone-200)
@@ -64,6 +68,8 @@ module.exports = {
         tabTrBgSelColD: "#6B8E23", //
         tabTrBgSelHovCol: "#C9DFA7", //
         tabTrBgSelHovColD: "#82AE46", //
+        tabIconHovBgCol: "#82AE46", //Іконки
+        tabIconHovBgColD: "#fff", //
       },
       width: {
         128: "32rem",
