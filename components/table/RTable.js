@@ -402,8 +402,6 @@ export default function DProductTable({
           {/* <p>Шрифт:</p> */}
           <p>:</p>
           <select
-            //   className="agrid_head-nav-button"
-            // className="mx-1 block items-center align-middle "
             className="mx-1 block  w-full items-center border-gray-300 bg-gray-50  align-middle text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             defaultValue={tableFontSize}
             onChange={(e) => setTableFontSize(e.target.value)}
@@ -522,7 +520,7 @@ export default function DProductTable({
                 // className="odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 className={`${
                   row._selected
-                    ? "bg-tabTrBgSelCol hover:bg-tabTrBgHovCol  dark:bg-tabTrBgSelColD dark:hover:bg-tabTrBgHovColD"
+                    ? "bg-tabTrBgSelCol lg:hover:bg-tabTrBgHovCol  dark:bg-tabTrBgSelColD lg:dark:hover:bg-tabTrBgHovColD"
                     : "odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 }`}
                 onClick={(e) => selectRows(e)}
