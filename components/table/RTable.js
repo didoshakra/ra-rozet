@@ -520,7 +520,8 @@ export default function DProductTable({
                 // className="odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 className={`${
                   row._selected
-                    ? "bg-tabTrBgSelCol lg:hover:bg-tabTrBgHovCol  dark:bg-tabTrBgSelColD lg:dark:hover:bg-tabTrBgHovColD"
+                    ? // ? "bg-tabTrBgSelCol lg:hover:bg-tabTrBgHovCol  dark:bg-tabTrBgSelColD lg:dark:hover:bg-tabTrBgHovColD"
+                      "bg-tabTrBgSelCol   dark:bg-tabTrBgSelColD "
                     : "odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 }`}
                 onClick={(e) => selectRows(e)}
