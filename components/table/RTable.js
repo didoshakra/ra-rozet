@@ -45,16 +45,24 @@ export default function DProductTable({
 }) {
   const filter0 = [
     {
+      name: "Назва товару",
       accessor: "name",
-      filter: "Горілка",
+      filter: "=Горілка",
     },
     {
+      name: "ШтрихКод",
       accessor: "skod",
-      filter: "12345",
+      filter: ">4820192681995||<4820192681995",
     },
     {
+      name: "Категорія",
       accessor: "category",
       filter: "Сигарети",
+    },
+    {
+      name: "Ціна",
+      accessor: "price",
+      filter: ">50&&<90",
     },
   ];
   const [selectedRows, setSelectedRows] = useState([]);
@@ -357,7 +365,13 @@ export default function DProductTable({
             </button>
 
             {/* Dropdown menu */}
-            {isDropdownFilterMenu && <DropdownFilterMenu />}
+            {isDropdownFilterMenu && (
+              <DropdownFilterMenu
+                filter={filter}
+                setFilter={setFilter}
+                styleTableText={styleTableText}
+              />
+            )}
           </div>
         )}
 
@@ -411,10 +425,14 @@ export default function DProductTable({
             <option value={tableFontSize} disabled>
               {tableFontSize}
             </option>
-            <option value="xs">xs</option>
+            {/* <option value="xs">xs</option>
             <option value="sm">sm</option>
             <option value="base">base</option>
-            <option value="lg">lg</option>
+            <option value="lg">lg</option> */}
+            <option value="xs">дрібний</option>
+            <option value="sm">середній</option>
+            <option value="base">базовий</option>
+            <option value="lg">великий</option>
           </select>
         </div>
       </div>
@@ -520,8 +538,8 @@ export default function DProductTable({
                 // className="odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 className={`${
                   row._selected
-                    ? // ? "bg-tabTrBgSelCol lg:hover:bg-tabTrBgHovCol  dark:bg-tabTrBgSelColD lg:dark:hover:bg-tabTrBgHovColD"
-                      "bg-tabTrBgSelCol   dark:bg-tabTrBgSelColD "
+                    ? // ? "bg-tabTrBgSelCol lg:hover:bg-tabTrBgHovCol  dark:bg-tabTrBgSelColD lg:dark:hover:bg-tabTrBgHovColD "
+                      "bg-tabTrBgSelCol hover:bg-tabTrBgSelHovCol dark:bg-tabTrBgSelColD   dark:hover:bg-tabTrBgSelHovColD"
                     : "odd:bg-tabTrBgCol even:bg-tabTrBgEveCol hover:bg-tabTrBgHovCol dark:odd:bg-tabTrBgColD dark:even:bg-tabTrBgEveColD dark:hover:bg-tabTrBgHovColD"
                 }`}
                 onClick={(e) => selectRows(e)}

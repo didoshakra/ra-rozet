@@ -61,8 +61,9 @@ module.exports = {
         tabTrBgEveColD: "rgb(75 85 99)", //(bg-gray-600)
         // tabTrBgSelCol: "#C9DFA7", //Вибрані рядки
         tabTrBgSelCol: "#E8EFD3", //Вибрані рядки
-        // tabTrBgSelCol: "#F1F4E2", //Вибрані рядки
         tabTrBgSelColD: "#6B8E23", //
+        tabTrBgSelHovCol: "#C9DFA7", //
+        tabTrBgSelHovColD: "#82AE46", //
       },
       width: {
         128: "32rem",

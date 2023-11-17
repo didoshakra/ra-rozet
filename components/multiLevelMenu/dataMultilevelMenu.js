@@ -142,7 +142,12 @@ export const menuAdmin = [
             title: "Товари",
             url: "/shop/references/d_product",
           },
-          
+
+          {
+            id: 4,
+            title: "Бренди",
+            url: "/shop/references/d_brand",
+          },
           {
             id: 5,
             title: "Категорії товарів",
