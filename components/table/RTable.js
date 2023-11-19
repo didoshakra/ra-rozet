@@ -32,7 +32,7 @@
 import { useState, useMemo, useEffect } from "react";
 import TableFooter from "./TableFooter";
 import useTable from "./useTable";
-import DropdownFilterMenu from "./DropdownFilterMenu";
+import DropdownFilterMenu from "./DropdownFilter";
 
 export default function DProductTable({
   initialData, //початкові дані (з БД) - обов'язково
@@ -471,7 +471,7 @@ export default function DProductTable({
                 return (
                   <th
                     // uppercase- текст у верхній регістр
-                    className={`${styleTableText} uppercase`}
+                    className={`${styleTableText} divide divide-x divide-lime-500 uppercase`}
                     key={accessor}
                   >
                     <div className="flex">
