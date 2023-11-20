@@ -8,7 +8,7 @@ export default function DropdownFilterMenu({
   styleTableText,
 }) {
   const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false); //Зберігається перед селектом
-  const [filterFormHead, setFilterFormHead] = useStat("") //Зберігається перед селектом
+  const [filterFormHead, setFilterFormHead] = useState("") //Зберігається перед селектом
   const handleAdd = () => {
     setIsDropdownFilterForm(true);
     console.log("DropdownFilterMenu.js/handleAdd");
