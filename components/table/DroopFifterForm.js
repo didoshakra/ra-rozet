@@ -4,7 +4,11 @@
 
 import { useState } from "react"; //Vers 7.0.X:<input {...register('test', { required: true })} />
 
-export default function DroopFifterForm({ name = "Назва товару", accessor = "name",}) {
+export default function DroopFifterForm({
+  name = "Назва товару",
+  accessor = "name",
+  setIsDropdownFilterForm,
+}) {
   const [state, setState] = useState({
     firstFilter: "",
     lastFilter: "",
@@ -30,6 +34,7 @@ export default function DroopFifterForm({ name = "Назва товару", acce
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           onClick={() => handleAdd()}
+          title='Введіть'
         >
           <svg
             class="h-6 w-6 text-red-500"
@@ -41,15 +46,28 @@ export default function DroopFifterForm({ name = "Назва товару", acce
             stroke-linejoin="round"
           >
             {" "}
+            <polyline points="9 10 4 15 9 20" />{" "}
+            <path d="M20 4v7a4 4 0 0 1-4 4H4" />
+          </svg>
+          {/* <svg
+            class="h-6 w-6 text-red-500"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {" "}
             <line x1="12" y1="5" x2="12" y2="19" />{" "}
             <line x1="5" y1="12" x2="19" y2="12" />
-          </svg>
+          </svg> */}
         </button>
         <label>{name}</label>
         <label>{accessor}</label>
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          onClick={(e) => setIsDropdownFilterMenu(false)}
+          onClick={(e) => setIsDropdownFilterForm(false)}
         >
           <svg
             class="h-6 w-6 text-red-500"
@@ -67,13 +85,13 @@ export default function DroopFifterForm({ name = "Назва товару", acce
         </button>
       </div>{" "}
       <form className="flex space-x-1">
-        <input
+        {/* <input
           type="radio"
-          name="and"
-          value="and"
-          checked={state.level === "and"}
+          name="sel"
+          value="sel"
+          checked={state.level === "sel"}
           onChange={handleChange}
-        />
+        /> */}
 
         <select
           // appearance-none-не показувати стрілку селе

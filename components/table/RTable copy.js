@@ -43,33 +43,30 @@ export default function DProductTable({
   p_searchAllRows, //(true/false)пошук по всіх полях-не обов'язково
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
 }) {
-  const filter0 = [
-    {
-      name: "Назва товару",
-      accessor: "name",
-      filter: "=Горілка",
-    },
-    {
-      name: "ШтрихКод",
-      accessor: "skod",
-      filter: ">4820192681995||<4820192681995",
-    },
-    {
-      name: "Категорія",
-      accessor: "category",
-      filter: "Сигарети",
-    },
-    {
-      name: "Ціна",
-      accessor: "price",
-      filter: ">50&&<90",
-    },
-  ];
+  //   const filter0 = [
+  //     {
+  //       name: "Назва товару",
+  //       accessor: "name",
+  //       filter: "=Горілка",
+  //     },
+  //     {
+  //       name: "ШтрихКод",
+  //       accessor: "skod",
+  //       filter: ">4820192681995||<4820192681995",
+  //     },
+  //     {
+  //       name: "Категорія",
+  //       accessor: "category",
+  //       filter: "Сигарети",
+  //     },
+  //     {
+  //       name: "Ціна",
+  //       accessor: "price",
+  //       filter: ">50&&<90",
+  //     },
+  //   ];
+
   const [selectedRows, setSelectedRows] = useState([]);
-  //   const [filteredRows, setFilteredRows] = useState(0);
-  //   const [filterFields, setFilterFields] = useState(["name", "skod"]); //Поля(колонки) по якій сортується
-  //   const [filter, setFilter] = useState([]); //Фільтер для всіх полів
-  //   const [filterFields, setFilterFields] = useState(["skod"]); //Поля(колонки) по якій сортується
   const [sortField, setSortField] = useState(""); //Поле(колонка) по якій сортується
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
@@ -130,7 +127,7 @@ export default function DProductTable({
   const preparedData = useMemo(() => {
     // const start = Date.now(); //Час початку
     const temp = initialData.map((data, idx) => {
-      let tempData = { ...data }; // Copy object()
+      let tempData = { ...data }; // Текучий рядок
       tempData._nrow = idx; // Set new field/Встановити нове поле
       // if (typeof p_selected !== "undefined") tempData._selected = false; // Set new field
       tempData._selected = false; // Set new field/Встановити нове поле
@@ -140,15 +137,13 @@ export default function DProductTable({
     // console.log("FRtable.js/preparedData/Час виконання : ", millis + "ms");
     return temp;
   }, [initialData]); //Змінюється тільки при зміні 2-го аргумента
-
   //** */ Робоча таблиця*/
   const [workData, setWorkData] = useState(preparedData); //РОбоча таьлиця
 
-  //--------------------------------------------------------------------
   //--- Підготовка масиву фільтрів по полях ilter
   const preparedFilterData = useMemo(() => {
     let resData = [];
-    let nR = -1;
+    let nR=0
     const temp = initialСolumns.map((data, idx) => {
       let tempData = [];
       if (data.filtered != undefined && data.filtered) {
@@ -163,7 +158,7 @@ export default function DProductTable({
     return resData;
   }, [initialСolumns]); //Змінюється тільки при зміні 2-го аргумента
   const [filterData, setFilterData] = useState(preparedFilterData); //Фільтер для всіх полів
-  console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
+    console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
 
   const [filterFields, setFilterFields] = useState(["skod"]); //Поля(колонки) по якій сортується
 
@@ -199,7 +194,7 @@ export default function DProductTable({
 
   //--- Задає режим сортування
   const handleSortingChange = (accessor) => {
-    console.log("RTable.js/handleSortingChange/accessor=", accessor);
+    // console.log("RTable.js/handleSortingChange/accessor=", accessor);
     const sortOrder =
       //   accessor === sortField && order === "asc" ? "desc" : "asc";
       accessor === sortField && order === "asc"
@@ -260,13 +255,16 @@ export default function DProductTable({
         }
       }
       setLengthSearhValue(searchValue.length);
+      //   setFilteredRows(list.length);
+      //   console.log("seachAllRows/list=", list);
+
       setWorkData(list);
     }
   };
 
   //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
   const selectRows = (e) => {
-    // console.log("RTable.js/selectRows/e.target=", e.target);
+    console.log("RTable.js/selectRows/e.target=", e.target);
     const nRow = Number(e.target.id); //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
 
     //--- Формуємо масив з індексами відмічених записів (setSelectedRow) --------------------
@@ -296,7 +294,7 @@ export default function DProductTable({
 
   const inFilterFields = (accessor) => {
     const findIndex = filterFields.findIndex((item) => item === accessor);
-    console.log("RTable.js.js/inFilterFields/findIndex=", findIndex);
+    // console.log("RTable.js.js/inFilterFields/findIndex=", findIndex);
     if (findIndex === -1) return false;
     else return true;
   };
@@ -386,7 +384,6 @@ export default function DProductTable({
                 filterData={filterData}
                 setIsDropdownFilterMenu={setIsDropdownFilterMenu}
                 styleTableText={styleTableText}
-                initialСolumns={initialСolumns}
               />
             )}
           </div>
@@ -566,7 +563,7 @@ export default function DProductTable({
                   const tData = accessor === "index" ? rowIndex : row[accessor];
                   return (
                     <td
-                      id={row._nrow}
+                    //   id={row._nrow}
                       key={accessor}
                       className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
                     >

@@ -43,33 +43,30 @@ export default function DProductTable({
   p_searchAllRows, //(true/false)пошук по всіх полях-не обов'язково
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
 }) {
-  const filter0 = [
-    {
-      name: "Назва товару",
-      accessor: "name",
-      filter: "=Горілка",
-    },
-    {
-      name: "ШтрихКод",
-      accessor: "skod",
-      filter: ">4820192681995||<4820192681995",
-    },
-    {
-      name: "Категорія",
-      accessor: "category",
-      filter: "Сигарети",
-    },
-    {
-      name: "Ціна",
-      accessor: "price",
-      filter: ">50&&<90",
-    },
-  ];
+//   const filter0 = [
+//     {
+//       name: "Назва товару",
+//       accessor: "name",
+//       filter: "=Горілка",
+//     },
+//     {
+//       name: "ШтрихКод",
+//       accessor: "skod",
+//       filter: ">4820192681995||<4820192681995",
+//     },
+//     {
+//       name: "Категорія",
+//       accessor: "category",
+//       filter: "Сигарети",
+//     },
+//     {
+//       name: "Ціна",
+//       accessor: "price",
+//       filter: ">50&&<90",
+//     },
+//   ];
+
   const [selectedRows, setSelectedRows] = useState([]);
-  //   const [filteredRows, setFilteredRows] = useState(0);
-  //   const [filterFields, setFilterFields] = useState(["name", "skod"]); //Поля(колонки) по якій сортується
-  //   const [filter, setFilter] = useState([]); //Фільтер для всіх полів
-  //   const [filterFields, setFilterFields] = useState(["skod"]); //Поля(колонки) по якій сортується
   const [sortField, setSortField] = useState(""); //Поле(колонка) по якій сортується
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
@@ -140,15 +137,13 @@ export default function DProductTable({
     // console.log("FRtable.js/preparedData/Час виконання : ", millis + "ms");
     return temp;
   }, [initialData]); //Змінюється тільки при зміні 2-го аргумента
-
   //** */ Робоча таблиця*/
   const [workData, setWorkData] = useState(preparedData); //РОбоча таьлиця
 
-  //--------------------------------------------------------------------
   //--- Підготовка масиву фільтрів по полях ilter
   const preparedFilterData = useMemo(() => {
     let resData = [];
-    let nR = -1;
+    let nR = 0;
     const temp = initialСolumns.map((data, idx) => {
       let tempData = [];
       if (data.filtered != undefined && data.filtered) {
@@ -260,6 +255,9 @@ export default function DProductTable({
         }
       }
       setLengthSearhValue(searchValue.length);
+      //   setFilteredRows(list.length);
+      //   console.log("seachAllRows/list=", list);
+
       setWorkData(list);
     }
   };
