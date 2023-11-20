@@ -1,10 +1,13 @@
+import { useState } from "react";
 import DroopFifterForm from "./DroopFifterForm";
 export default function DropdownFilterMenu({
   filter,
   setIsDropdownFilterMenu,
   styleTableText,
 }) {
+  const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false); //Зберігається перед селектом
   const handleAdd = () => {
+    setIsDropdownFilterForm(true)
     console.log("DropdownFilterMenu.js/handleAdd");
   };
   return (
@@ -55,7 +58,7 @@ export default function DropdownFilterMenu({
       </div>
       <table className=" w-full table-auto border-collapse">
         <thead
-          className={`bg-tabThBgCol  p-[0.5em]  text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD`}
+          className={`bg-gray-400  p-[0.5em]  text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD`}
         >
           <tr>
             <th className={` uppercase`}>Назва поля</th>
@@ -68,7 +71,7 @@ export default function DropdownFilterMenu({
           {filter.map((row, index) => (
             <tr
               key={index}
-              className="bg- bg-gray-200 hover:bg-tabTrBgHovCol dark:bg-gray-500 dark:hover:bg-tabTrBgHovColD"
+              className=" bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-400"
 
               //   onClick={(e) => selectRows(e)}
             >
@@ -91,7 +94,10 @@ export default function DropdownFilterMenu({
           ))}
         </tbody>
       </table>
-      <DroopFifterForm />
+      {/* Dropdown menu */}
+      {isDropdownFilterForm && (
+        <DroopFifterForm setIsDropdownFilterForm={setIsDropdownFilterForm} />
+      )}
     </div>
   );
 }
