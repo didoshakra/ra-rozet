@@ -5,18 +5,35 @@
 import { useState } from "react"; //Vers 7.0.X:<input {...register('test', { required: true })} />
 
 export default function DroopFifterForm({
-  name = "Назва товару",
-  accessor = "name",
+  filterDataRow,
   setIsDropdownFilterForm,
+  setFilterData,
+  filterData,
 }) {
   const [state, setState] = useState({
-    firstFilter: "",
-    lastFilter: "",
-    comparison: "=",
-    comparison2: "=", // bio: "",
-    // hooks: true,
-    // level: "master",
+    filterFirst: "",
+    filterLast: "",
+    logical: "and",
+    comparisonFirst: "=",
+    comparisonLast: "=",
   });
+
+  const handleAdd = () => {
+    const nRow = filterDataRow._nrow;
+    //--- Записємо filter в filtered масиву(filterDataRow) --------
+    let tempData = [...filterData]; //Копія робочого масиву обєктів
+    //https://www.geeksforgeeks.org/how-to-modify-an-objects-property-in-an-array-of-objects-in-javascript/
+    const targetObj = tempData.find((obj) => obj._nrow === nRow); //Шукажм рядок по _nrow=nRow
+    if (targetObj) {
+      const newData = `${state.comparisonFirst}:${state.filterFirst}:${state.logical}:
+           ${state.comparisonLast}:${state.filterLast}`;
+      console.log("DroopFifterForm.js/handleAdd/newData=", newData);
+      targetObj.filter = newData; // Записує безпосередньо в масив ????
+    //   console.log("DroopFifterForm.js/handleAdd/filterData=", filterData);
+    }
+
+    setIsDropdownFilterForm(false);
+  };
 
   function handleChange(evt) {
     const value =
@@ -25,16 +42,17 @@ export default function DroopFifterForm({
       ...state,
       [evt.target.name]: value,
     });
+    console.log("DroopFifterForm.js/handleChange/state=", state);
   }
 
   return (
-    <div className="absolute z-10  max-w-full  rounded-lg border  border-gray-400  bg-gray-300 p-1   shadow transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-200">
+    <div className="absolute z-10   rounded-lg border  border-gray-400  bg-gray-300 p-1   shadow transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-200">
       <div className=" mb-2 flex justify-between space-x-3 text-center font-semibold uppercase">
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           onClick={() => handleAdd()}
-          title='Введіть'
+          title="Добавте значення"
         >
           <svg
             class="h-6 w-6 text-red-500"
@@ -63,8 +81,10 @@ export default function DroopFifterForm({
             <line x1="5" y1="12" x2="19" y2="12" />
           </svg> */}
         </button>
-        <label>{name}</label>
-        <label>{accessor}</label>
+        <header className="flex text-red-700 ">
+          <label className="px-1">{filterDataRow.name}</label>
+          <label className="px-1">({filterDataRow.accessor})</label>
+        </header>
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           onClick={(e) => setIsDropdownFilterForm(false)}
@@ -97,9 +117,9 @@ export default function DroopFifterForm({
           // appearance-none-не показувати стрілку селе
           className="mx-1 block appearance-none items-center rounded border border-gray-400 bg-gray-50 px-2  align-middle text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
           //   className="mx-1 block w-full appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-          name="comparison"
+          name="comparisonFirst"
           onChange={handleChange}
-          value={state.comparison}
+          value={state.comparisonFirst}
         >
           <option value=">">&gt;</option>
           <option value="=">=</option>
@@ -113,20 +133,25 @@ export default function DroopFifterForm({
         <input
           className="w-full appearance-none rounded border border-gray-400 p-1 leading-tight text-gray-700 focus:border-indigo-500 focus:outline-none dark:bg-gray-400"
           type="text"
-          name="firstFilter"
-          value={state.firstFilter}
+          name="filterFirst"
+          value={state.filterFirst}
           onChange={handleChange}
         />
-        {/* </label> */}
-        {/* <label className="font-semibold uppercase text-gray-700">
-          <div className="mb-2 min-w-unit-3 bg-gray-400 font-semibold uppercase dark:bg-gray-100">
-            &gt;=&lt;
-          </div> */}
+
         <select
           className="mx-1 block appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 px-2 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-          name="comparison2"
+          name="logical"
           onChange={handleChange}
-          value={state.comparison2}
+          value={state.logical}
+        >
+          <option value="&&">and</option>
+          <option value="||">or</option>
+        </select>
+        <select
+          className="mx-1 block appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 px-2 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+          name="comparisonLast"
+          onChange={handleChange}
+          value={state.comparisonLast}
         >
           <option value=">">&gt;</option>
           <option value="=">=</option>
@@ -138,15 +163,15 @@ export default function DroopFifterForm({
         <input
           className="w-full appearance-none rounded border border-gray-400 p-1 leading-tight text-gray-700 focus:border-indigo-500 focus:outline-none dark:bg-gray-400"
           type="text"
-          name="lastFilter"
-          value={state.lastFilter}
+          name="filterLast"
+          value={state.filterLast}
           onChange={handleChange}
         />
         {/* </label> */}
       </form>
-      <div className="flex px-6 text-red-500 dark:text-red-500">
-        {state.comparison} {state.firstFilter} {state.comparison2}{" "}
-        {state.lastFilter}
+      <div className="flex px-2 text-red-500 dark:text-red-500">
+        {state.comparisonFirst} {state.filterFirst} {state.logical}
+        {state.comparisonLast} {state.filterLast}
       </div>
     </div>
   );

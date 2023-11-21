@@ -163,7 +163,7 @@ export default function DProductTable({
     return resData;
   }, [initialСolumns]); //Змінюється тільки при зміні 2-го аргумента
   const [filterData, setFilterData] = useState(preparedFilterData); //Фільтер для всіх полів
-  console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
+//   console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
 
   const [filterFields, setFilterFields] = useState(["skod"]); //Поля(колонки) по якій сортується
 
@@ -296,7 +296,7 @@ export default function DProductTable({
 
   const inFilterFields = (accessor) => {
     const findIndex = filterFields.findIndex((item) => item === accessor);
-    console.log("RTable.js.js/inFilterFields/findIndex=", findIndex);
+    // console.log("RTable.js.js/inFilterFields/findIndex=", findIndex);
     if (findIndex === -1) return false;
     else return true;
   };

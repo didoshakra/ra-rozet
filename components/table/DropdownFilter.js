@@ -8,10 +8,11 @@ export default function DropdownFilterMenu({
   styleTableText,
 }) {
   const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false); //Зберігається перед селектом
-  const [filterFormHead, setFilterFormHead] = useState("") //Зберігається перед селектом
+  const [filterDataRow, setFilterDataRow] = useState([]); //Зберігається перед селектом
+
   const handleAdd = () => {
     setIsDropdownFilterForm(true);
-    console.log("DropdownFilterMenu.js/handleAdd");
+    console.log("DropdownFilter.js/handleAdd");
   };
 
   //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
@@ -33,10 +34,11 @@ export default function DropdownFilterMenu({
     let tempData = [...filterData]; //Копія робочого масиву обєктів
     //  //https://www.geeksforgeeks.org/how-to-modify-an-objects-property-in-an-array-of-objects-in-javascript/
     const row = tempData.find((obj) => obj._nrow === nRow); //Шукажмо запис по _nrow=nRow
-    // console.log("RTable.js.js/editRows/row=", row);
-      if (row) {
-        setIsDropdownFilterForm(true);
-      }
+    console.log("RTable.js.js/editRows/row=", row);
+    if (row) {
+      setIsDropdownFilterForm(true);
+      setFilterDataRow(row);
+    }
     //--------------------------------------------------------------
   };
 
@@ -46,9 +48,10 @@ export default function DropdownFilterMenu({
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          onClick={() => handleAdd()}
+          //   onClick={() => handleAdd()}
+          title="Включити фільтр"
         >
-          <svg
+          {/* <svg
             class="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
             fill="none"
@@ -60,6 +63,19 @@ export default function DropdownFilterMenu({
             {" "}
             <line x1="12" y1="5" x2="12" y2="19" />{" "}
             <line x1="5" y1="12" x2="19" y2="12" />
+          </svg> */}
+          <svg
+            class="h-6 w-6 text-red-500"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {" "}
+            <polyline points="9 10 4 15 9 20" />{" "}
+            <path d="M20 4v7a4 4 0 0 1-4 4H4" />
           </svg>
         </button>
         <h1
@@ -129,7 +145,12 @@ export default function DropdownFilterMenu({
       </table>
       {/* Dropdown menu */}
       {isDropdownFilterForm && (
-        <DroopFifterForm setIsDropdownFilterForm={setIsDropdownFilterForm} />
+        <DroopFifterForm
+          setIsDropdownFilterForm={setIsDropdownFilterForm}
+          filterDataRow={filterDataRow}
+          setFilterData={setFilterData}
+          filterData={filterData}
+        />
       )}
     </div>
   );
