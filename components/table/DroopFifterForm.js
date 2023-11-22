@@ -8,26 +8,38 @@ export default function DroopFifterForm({
   filterDataRow,
   setIsDropdownFilterForm,
   filterData,
+  setFilterData,
 }) {
   const [state, setState] = useState({
-    filterFirst: "",
-    filterLast: "",
-    logical: " ",
-    comparisonFirst: " ",
-    comparisonLast: " ",
+    filterFirst: filterDataRow.filterFirst,
+    filterLast: filterDataRow.filterLast,
+    logical: filterDataRow.logical,
+    comparisonFirst: filterDataRow.comparisonFirst,
+    comparisonLast: filterDataRow.comparisonLast,
+    // filterFirst: "",
+    // filterLast: "",
+    // logical: "",
+    // comparisonFirst: "",
+    // comparisonLast: "",
   });
 
-  const handleAdd = () => {
+  const handleEdit = () => {
     const nRow = filterDataRow._nrow;
-    //--- Записємо filter в filtered масиву(filterDataRow) --------
-    let tempData = [...filterData]; //Копія робочого масиву обєктів
-    //https://www.geeksforgeeks.org/how-to-modify-an-objects-property-in-an-array-of-objects-in-javascript/
+    //--- Записуємо filter в filtered масиву(filterData) --------
+    let tempData = [...filterData]; //Копія робочого масиву обєктів щоб рендерило зміни
+    // const targetObj = filterData.find((obj) => obj._nrow === nRow); //не ререндерить зміни
     const targetObj = tempData.find((obj) => obj._nrow === nRow); //Шукажм рядок по _nrow=nRow
     if (targetObj) {
-      const newData = `${state.comparisonFirst}${state.filterFirst}${state.logical}${state.comparisonLast}${state.filterLast}`;
-      console.log("DroopFifterForm.js/handleAdd/newData=", newData);
-      targetObj.filter = newData; // Записує безпосередньо в масив ????
-        // console.log("DroopFifterForm.js/handleAdd/filterData=", filterData);
+      // Записує безпосередньо в масив ????//Треба змінювати через setFilterData бо не ререндерить зміни
+      //   targetObj.filter1 = `${state.comparisonFirst}${state.filterFirst}`;
+
+      targetObj.comparisonFirst = state.comparisonFirst;
+      targetObj.filterFirst = state.filterFirst;
+      targetObj.logical = state.logical;
+      targetObj.comparisonLast = state.comparisonLast;
+      targetObj.filterLast = state.filterLast;
+      console.log("DroopFifterForm.js/handleEdit/filterData=", filterData);
+      setFilterData(tempData); //ререндерить зміни
     }
 
     setIsDropdownFilterForm(false);
@@ -40,7 +52,7 @@ export default function DroopFifterForm({
       ...state,
       [evt.target.name]: value,
     });
-    console.log("DroopFifterForm.js/handleChange/state=", state);
+    // console.log("DroopFifterForm.js/handleChange/state=", state);
   }
 
   return (
@@ -49,7 +61,7 @@ export default function DroopFifterForm({
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          onClick={() => handleAdd()}
+          onClick={() => handleEdit()}
           title="Добавте значення"
         >
           <svg
@@ -65,7 +77,6 @@ export default function DroopFifterForm({
             <polyline points="9 10 4 15 9 20" />{" "}
             <path d="M20 4v7a4 4 0 0 1-4 4H4" />
           </svg>
-          
         </button>
         <header className="flex text-red-700 ">
           <label className="px-1">{filterDataRow.name}</label>
@@ -74,6 +85,7 @@ export default function DroopFifterForm({
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           onClick={(e) => setIsDropdownFilterForm(false)}
+          title="Вийти без збереження"
         >
           <svg
             className="h-6 w-6 text-red-500"
@@ -109,7 +121,8 @@ export default function DroopFifterForm({
           >
             <option value=" "> </option>
             <option value=">">&gt;</option>
-            <option value="=">=</option>
+            <option value="===">=</option>
+            <option value="!==">!=</option>
             <option value="<"> &lt;</option>
           </select>
         </label>
@@ -118,7 +131,9 @@ export default function DroopFifterForm({
           <div className=" text-center">фільтр1</div>
 
           <input
-            className="w-full appearance-none rounded border border-gray-400 p-1 leading-tight text-gray-700 focus:border-indigo-500 focus:outline-none dark:bg-gray-400"
+
+            //leading-tight=line-height: 1.25-(висотою лінії) елемента.
+            className="block items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
             type="text"
             name="filterFirst"
             value={state.filterFirst}
@@ -150,14 +165,17 @@ export default function DroopFifterForm({
           >
             <option value=" "> </option>
             <option value=">">&gt;</option>
-            <option value="=">=</option>
+            <option value="===">=</option>
+            <option value="!==">!=</option>
             <option value="<"> &lt;</option>
           </select>
         </label>
         <label className="font-semibold text-gray-700">
           <div className=" text-center">фільтр2 </div>
           <input
-            className="w-full appearance-none rounded border border-gray-400 p-1 leading-tight text-gray-700 focus:border-indigo-500 focus:outline-none dark:bg-gray-400"
+           //leading-tight=line-height: 1.25-(висотою лінії) елемента.
+            className="block items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+
             type="text"
             name="filterLast"
             value={state.filterLast}

@@ -3,6 +3,7 @@ import DroopFifterForm from "./DroopFifterForm";
 
 export default function DropdownFilterMenu({
   filterData,
+  setFilterData,
   handleApplyFilters,
   setIsDropdownFilterMenu,
   styleTableText,
@@ -17,24 +18,13 @@ export default function DropdownFilterMenu({
 
   //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
   const editRows = (e) => {
-    // console.log("DropdownFilterMenu.js/editRows/e.target=", e.target);
+    // console.log("DropdownFilter.js/editRows/e.target=", e.target);
     const nRow = Number(e.target.id); //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
-    // console.log("DropdownFilterMenu.js/editRows/nRow=", nRow);
-
-    //  //  //--- Формуємо масив з індексами відмічених записів (setSelectedRow) --------------------
-    //   let copyArray = [...filterData]; //Копія робочого масиву обєктів
-    //   const selectIndex = copyArray.findIndex((item) => item === nRow); //id-це id HTML DOM елемента (в нашому випадку:id={_nrow})
-    //   if (selectIndex !==-1) {
-    //     console.log("DropdownFilterMenu.js/editRows/e.target=", e.target);
-    //     copyArray.push(nRow); //Додаємо в масив
-    //   } else copyArray.splice(selectIndex, 1); //Якщо вже є в масиві то видаляємо
-    //   setSelectedRows(copyArray); //Запмс в масив
 
     //Щукаємо рядок _nrow === nRow
     let tempData = [...filterData]; //Копія робочого масиву обєктів
     //  //https://www.geeksforgeeks.org/how-to-modify-an-objects-property-in-an-array-of-objects-in-javascript/
     const row = tempData.find((obj) => obj._nrow === nRow); //Шукажмо запис по _nrow=nRow
-    console.log("RTable.js.js/editRows/row=", row);
     if (row) {
       setIsDropdownFilterForm(true);
       setFilterDataRow(row);
@@ -42,16 +32,47 @@ export default function DropdownFilterMenu({
     //--------------------------------------------------------------
   };
 
+  const deleteAll = () => {
+    console.log("DropdownFilter.js/deleteAll/");
+    let tempData = [...filterData];
+    const temp = tempData.map((data, idx) => {
+      data.comparisonFirst = "";
+      data.filterFirst = "";
+      data.logical = "";
+      data.comparisonLast = "";
+      data.filterLast = "";
+    });
+    setFilterData(tempData);
+  };
+
   return (
     <div className="absolute z-10  max-w-full  rounded-lg border  border-gray-300  bg-gray-200 p-1   shadow transition-transform duration-200 ease-out dark:border-gray-400 dark:bg-gray-500">
       <div className="mb-1 flex justify-between">
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          //   onClick={() => handleAdd()}
+          onClick={() => deleteAll()}
           title="Очистити всі"
         >
           <svg
+            class="h-6 w-6 text-red-500"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            stroke-width="2"
+            stroke="currentColor"
+            fill="none"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" />{" "}
+            <line x1="4" y1="7" x2="20" y2="7" />{" "}
+            <line x1="10" y1="11" x2="10" y2="17" />{" "}
+            <line x1="14" y1="11" x2="14" y2="17" />{" "}
+            <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />{" "}
+            <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
+          </svg>
+          {/* <svg
             className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
             strokeWidth="2"
@@ -65,15 +86,14 @@ export default function DropdownFilterMenu({
             <path d="M14 3v4a1 1 0 0 0 1 1h4" />{" "}
             <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />{" "}
             <path d="M10 12l4 4m0 -4l-4 4" />
-          </svg>
+          </svg> */}
         </button>
         <button
-          className=" mx-2 inline-block flex rounded-lg border border-gray-400 px-1 text-center align-middle hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+          className="mx-2  flex  items-center rounded-lg border border-gray-400 px-1 text-center hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           onClick={() => handleApplyFilters()}
-          title="Включити фільтр"
+          title="Застосувати фільтр"
         >
-
           <svg
             className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
@@ -87,9 +107,7 @@ export default function DropdownFilterMenu({
             <polyline points="9 10 4 15 9 20" />{" "}
             <path d="M20 4v7a4 4 0 0 1-4 4H4" />
           </svg>
-          <h1
-            className={`{styleTableText} inline-block text-center align-middle font-bold uppercase text-headMenuText dark:text-headMenuTextDark`}
-          >
+          <h1 className={`{styleTableText} font-bold uppercase text-red-500 `}>
             Застосувати фільтри
           </h1>
         </button>
@@ -97,6 +115,7 @@ export default function DropdownFilterMenu({
         <button
           className="  rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           onClick={(e) => setIsDropdownFilterMenu(false)}
+          title="Вийти без збереження"
         >
           <svg
             className="h-6 w-6 text-red-500"
@@ -114,14 +133,13 @@ export default function DropdownFilterMenu({
         </button>
       </div>
       <table className=" w-full table-auto border-collapse">
-        <thead
-          className={`bg-gray-400  p-[0.5em] uppercase  text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD`}
-        >
+        <thead className="bg-gray-400  text-left uppercase  text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD">
           <tr>
-            <th>Назва поля</th>
-            {/* <th className={`${styleTableText} uppercase`}>Ключ</th> */}
-            <th>Ключ</th>
-            <th>Фільтр</th>
+            <th className={`${styleTableText}`}>Назва поля</th>
+            {/* <th>Ключ</th> */}
+            <th className={`${styleTableText}`}>Фільтр1</th>
+            <th className={`${styleTableText}`}>Логіка</th>
+            <th className={`${styleTableText}`}>Фільтр2</th>
           </tr>
         </thead>
         <tbody>
@@ -138,17 +156,31 @@ export default function DropdownFilterMenu({
               >
                 {row.name}
               </td>
-              <td
+              {/* <td
                 id={row._nrow}
                 className={`${styleTableText} font-semibold text-tabTrTexCol dark:text-tabTrTexColD`}
               >
                 {row.accessor}
+              </td> */}
+              <td
+                id={row._nrow}
+                className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+              >
+                {row.comparisonFirst}
+                {row.filterFirst}
               </td>
               <td
                 id={row._nrow}
                 className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
               >
-                {row.filter}
+                {row.logical}
+              </td>
+              <td
+                id={row._nrow}
+                className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+              >
+                {row.comparisonLast}
+                {row.filterLast}
               </td>
             </tr>
           ))}
@@ -160,6 +192,7 @@ export default function DropdownFilterMenu({
           setIsDropdownFilterForm={setIsDropdownFilterForm}
           filterDataRow={filterDataRow}
           filterData={filterData}
+          setFilterData={setFilterData}
         />
       )}
     </div>
