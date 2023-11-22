@@ -84,12 +84,15 @@ const TableFooter = ({
 
           {/* <p>На сторінці:</p> */}
           <select
-            className="mx-1 flex items-center align-middle "
+            className="mx-1 w-12 flex items-center align-middle"
             defaultValue={rowsPerPage}
             onChange={(e) => setRowsPerPage(e.target.value)}
             title="К-сть рядків на сторінку"
           >
-            <option value={rowsPerPage} disabled>
+            <option
+              value={rowsPerPage}
+              disabled
+            >
               {rowsPerPage}
             </option>
             <option value="5">5</option>
@@ -97,7 +100,7 @@ const TableFooter = ({
             <option value="20">20</option>
             <option value="50">50</option>
             <option value="100">100</option>
-            <option value="0">всі</option>
+            <option value="1000000000">всі</option>
           </select>
         </div>
       </div>
@@ -137,7 +140,7 @@ const TableFooter = ({
           el === page + 1 ||
           el === page - 1 ? (
             <li
-              key={el}
+              key={index}
               className={`flex items-center justify-center border border-gray-300 px-2 leading-tight dark:border-gray-700 ${
                 page === el
                   ? "bg-headMenuText text-white   "
@@ -148,11 +151,13 @@ const TableFooter = ({
               {el}
             </li>
           ) : el === page - 2 || el === page + 2 ? (
-            <p className="flex  items-center justify-center border border-gray-300 bg-white px-2 leading-tight text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 ">
+            <li
+              key={index}
+              className="flex  items-center justify-center border border-gray-300 bg-white px-2 leading-tight text-gray-500 dark:border-gray-700 dark:bg-gray-800 dark:text-gray-400 "
+            >
               ...
-            </p>
+            </li>
           ) : (
-            //   "..."
             ""
           ),
         )}

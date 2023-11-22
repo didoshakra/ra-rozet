@@ -3,7 +3,7 @@ import DroopFifterForm from "./DroopFifterForm";
 
 export default function DropdownFilterMenu({
   filterData,
-  setFilterData,
+  handleApplyFilters,
   setIsDropdownFilterMenu,
   styleTableText,
 }) {
@@ -44,57 +44,68 @@ export default function DropdownFilterMenu({
 
   return (
     <div className="absolute z-10  max-w-full  rounded-lg border  border-gray-300  bg-gray-200 p-1   shadow transition-transform duration-200 ease-out dark:border-gray-400 dark:bg-gray-500">
-      <div className="flex justify-between">
+      <div className="mb-1 flex justify-between">
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           //   onClick={() => handleAdd()}
-          title="Включити фільтр"
+          title="Очистити всі"
         >
-          {/* <svg
-            class="h-6 w-6 text-red-500"
+          <svg
+            className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
-            fill="none"
+            strokeWidth="2"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             {" "}
-            <line x1="12" y1="5" x2="12" y2="19" />{" "}
-            <line x1="5" y1="12" x2="19" y2="12" />
-          </svg> */}
+            <path stroke="none" d="M0 0h24v24H0z" />{" "}
+            <path d="M14 3v4a1 1 0 0 0 1 1h4" />{" "}
+            <path d="M17 21h-10a2 2 0 0 1 -2 -2v-14a2 2 0 0 1 2 -2h7l5 5v11a2 2 0 0 1 -2 2z" />{" "}
+            <path d="M10 12l4 4m0 -4l-4 4" />
+          </svg>
+        </button>
+        <button
+          className=" mx-2 inline-block flex rounded-lg border border-gray-400 px-1 text-center align-middle hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+          //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+          onClick={() => handleApplyFilters()}
+          title="Включити фільтр"
+        >
+
           <svg
-            class="h-6 w-6 text-red-500"
+            className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             {" "}
             <polyline points="9 10 4 15 9 20" />{" "}
             <path d="M20 4v7a4 4 0 0 1-4 4H4" />
           </svg>
+          <h1
+            className={`{styleTableText} inline-block text-center align-middle font-bold uppercase text-headMenuText dark:text-headMenuTextDark`}
+          >
+            Застосувати фільтри
+          </h1>
         </button>
-        <h1
-          className={`{styleTableText} text-center font-bold uppercase text-headMenuText dark:text-headMenuTextDark`}
-        >
-          Фільтр
-        </h1>
+
         <button
-          className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+          className="  rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
           onClick={(e) => setIsDropdownFilterMenu(false)}
         >
           <svg
-            class="h-6 w-6 text-red-500"
+            className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokewinejoin="round"
           >
             {" "}
             <line x1="18" y1="6" x2="6" y2="18" />{" "}
@@ -148,7 +159,6 @@ export default function DropdownFilterMenu({
         <DroopFifterForm
           setIsDropdownFilterForm={setIsDropdownFilterForm}
           filterDataRow={filterDataRow}
-          setFilterData={setFilterData}
           filterData={filterData}
         />
       )}
