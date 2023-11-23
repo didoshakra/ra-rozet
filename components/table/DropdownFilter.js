@@ -46,7 +46,7 @@ export default function DropdownFilterMenu({
   };
 
   return (
-    <div className="absolute z-10  max-w-full  rounded-lg border  border-gray-300  bg-gray-200 p-1   shadow transition-transform duration-200 ease-out dark:border-gray-400 dark:bg-gray-500">
+    <div className=" absolute z-10  rounded-lg border  border-gray-300  bg-gray-200 p-1   shadow transition-transform duration-200 ease-out dark:border-gray-400 dark:bg-gray-500">
       <div className="mb-1 flex justify-between">
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
@@ -132,60 +132,62 @@ export default function DropdownFilterMenu({
           </svg>
         </button>
       </div>
-      <table className=" w-full table-auto border-collapse">
-        <thead className="bg-gray-400  text-left uppercase  text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD">
-          <tr>
-            <th className={`${styleTableText}`}>Назва поля</th>
-            {/* <th>Ключ</th> */}
-            <th className={`${styleTableText}`}>Фільтр1</th>
-            <th className={`${styleTableText}`}>Логіка</th>
-            <th className={`${styleTableText}`}>Фільтр2</th>
-          </tr>
-        </thead>
-        <tbody>
-          {filterData.map((row, index) => (
-            <tr
-              id={row._nrow}
-              key={index}
-              className=" bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-400"
-              onClick={(e) => editRows(e)}
-            >
-              <td
+      <div className='max-w-xs overflow-auto md:max-w-md'>
+        <table className=" w-full table-auto border-collapse">
+          <thead className="bg-gray-400  text-left uppercase  text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD">
+            <tr>
+              <th className={`${styleTableText}`}>Назва поля</th>
+              {/* <th>Ключ</th> */}
+              <th className={`${styleTableText}`}>Фільтр1</th>
+              <th className={`${styleTableText}`}>Лог</th>
+              <th className={`${styleTableText}`}>Фільтр2</th>
+            </tr>
+          </thead>
+          <tbody>
+            {filterData.map((row, index) => (
+              <tr
                 id={row._nrow}
-                className={`${styleTableText} font-semibold text-tabTrTexCol dark:text-tabTrTexColD`}
+                key={index}
+                className=" bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-400"
+                onClick={(e) => editRows(e)}
               >
-                {row.name}
-              </td>
-              {/* <td
+                <td
+                  id={row._nrow}
+                  className={`${styleTableText} font-semibold text-tabTrTexCol dark:text-tabTrTexColD`}
+                >
+                  {row.name}
+                </td>
+                {/* <td
                 id={row._nrow}
                 className={`${styleTableText} font-semibold text-tabTrTexCol dark:text-tabTrTexColD`}
               >
                 {row.accessor}
               </td> */}
-              <td
-                id={row._nrow}
-                className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
-              >
-                {row.comparisonFirst}
-                {row.filterFirst}
-              </td>
-              <td
-                id={row._nrow}
-                className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
-              >
-                {row.logical}
-              </td>
-              <td
-                id={row._nrow}
-                className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
-              >
-                {row.comparisonLast}
-                {row.filterLast}
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table>
+                <td
+                  id={row._nrow}
+                  className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+                >
+                  {row.comparisonFirst}
+                  {row.filterFirst}
+                </td>
+                <td
+                  id={row._nrow}
+                  className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+                >
+                  {row.logical}
+                </td>
+                <td
+                  id={row._nrow}
+                  className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+                >
+                  {row.comparisonLast}
+                  {row.filterLast}
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
       {/* Dropdown menu */}
       {isDropdownFilterForm && (
         <DroopFifterForm
