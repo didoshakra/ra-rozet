@@ -4,16 +4,17 @@ import DroopFifterForm from "./DroopFifterForm";
 export default function DropdownFilterMenu({
   filterData,
   setFilterData,
-  handleApplyFilters,
+  applyFilters,
   setIsDropdownFilterMenu,
   styleTableText,
+  deleteFilterAll,
 }) {
   const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false); //Зберігається перед селектом
   const [filterDataRow, setFilterDataRow] = useState([]); //Зберігається перед селектом
 
   const handleAdd = () => {
     setIsDropdownFilterForm(true);
-    console.log("DropdownFilter.js/handleAdd");
+    // console.log("DropdownFilter.js/handleAdd");
   };
 
   //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
@@ -29,40 +30,43 @@ export default function DropdownFilterMenu({
       setIsDropdownFilterForm(true);
       setFilterDataRow(row);
     }
+    //
     //--------------------------------------------------------------
   };
 
-  const deleteAll = () => {
-    console.log("DropdownFilter.js/deleteAll/");
-    let tempData = [...filterData];
-    const temp = tempData.map((data, idx) => {
-      data.comparisonFirst = "";
-      data.filterFirst = "";
-      data.logical = "";
-      data.comparisonLast = "";
-      data.filterLast = "";
-    });
-    setFilterData(tempData);
-  };
+  //   const deleteFilterAll = () => {
+  //     console.log("DropdownFilter.js/deleteFilterAll/");
+  //     let tempData = [...filterData];
+  //     const temp = tempData.map((data, idx) => {
+  //       data.comparisonFirst = "";
+  //       data.filterFirst = "";
+  //       data.logical = "";
+  //       data.comparisonLast = "";
+  //       data.filterLast = "";
+  //     });
+  //     setFilterData(tempData);
+  //   };
 
   return (
-    <div className=" absolute z-10  rounded-lg border  border-gray-300  bg-gray-200 p-1   shadow transition-transform duration-200 ease-out dark:border-gray-400 dark:bg-gray-500">
+    <div className="absolute z-10 rounded-lg  border border-gray-300  bg-gray-200  p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-400">
       <div className="mb-1 flex justify-between">
         <button
-          className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          onClick={() => deleteAll()}
+          className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
+          onClick={() => deleteFilterAll()}
           title="Очистити всі"
         >
+          {/* кошик */}
           <svg
-            class="h-6 w-6 text-red-500"
+            // className="h-6 w-6 text-red-500"
+            className="h-6 w-6 text-blue-600 "
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             {" "}
             <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -72,6 +76,7 @@ export default function DropdownFilterMenu({
             <path d="M5 7l1 12a2 2 0 0 0 2 2h8a2 2 0 0 0 2 -2l1 -12" />{" "}
             <path d="M9 7v-3a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v3" />
           </svg>
+          {/* плюс */}
           {/* <svg
             className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
@@ -89,11 +94,11 @@ export default function DropdownFilterMenu({
           </svg> */}
         </button>
         <button
-          className="mx-2  flex  items-center rounded-lg border border-gray-400 px-1 text-center hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-          onClick={() => handleApplyFilters()}
+          className="mx-2  flex  items-center rounded-lg border border-gray-400 px-1 text-center hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
+          onClick={() => applyFilters()}
           title="Застосувати фільтр"
         >
+          {/* Enter */}
           <svg
             className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
@@ -113,10 +118,11 @@ export default function DropdownFilterMenu({
         </button>
 
         <button
-          className="  rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+          className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
           onClick={(e) => setIsDropdownFilterMenu(false)}
           title="Вийти без збереження"
         >
+          {/* скасувати */}
           <svg
             className="h-6 w-6 text-red-500"
             viewBox="0 0 24 24"
@@ -132,14 +138,18 @@ export default function DropdownFilterMenu({
           </svg>
         </button>
       </div>
-      <div className='max-w-xs overflow-auto md:max-w-md'>
+      <div className="max-w-xs overflow-auto md:max-w-md">
         <table className=" w-full table-auto border-collapse">
-          <thead className="bg-gray-400  text-left uppercase  text-tabThTexCol dark:bg-tabThBgColD dark:text-tabThTexColD">
+          {/* <thead className="bg-gray-300  text-left uppercase  text-tabThTexCol dark:bg-gray-500 dark:text-white"> */}
+          <thead className="bg-gray-200  text-left uppercase text-tabThTexCol dark:bg-gray-400  dark:text-black">
             <tr>
-              <th className={`${styleTableText}`}>Назва поля</th>
+              <th className={`${styleTableText} w-[40%]`}>Поле</th>
               {/* <th>Ключ</th> */}
+              {/* <th className={`${styleTableText} w-24`}>&gt;=&lt;</th> */}
+              <th className={`${styleTableText}`}>=</th>
               <th className={`${styleTableText}`}>Фільтр1</th>
               <th className={`${styleTableText}`}>Лог</th>
+              <th className={`${styleTableText}`}>=</th>
               <th className={`${styleTableText}`}>Фільтр2</th>
             </tr>
           </thead>
@@ -148,12 +158,12 @@ export default function DropdownFilterMenu({
               <tr
                 id={row._nrow}
                 key={index}
-                className=" bg-gray-200 hover:bg-gray-300 dark:bg-gray-500 dark:hover:bg-gray-400"
+                className={`${styleTableText} -medium bg-gray-200 font-sans text-tabTrTexCol hover:bg-gray-300 dark:bg-gray-400 dark:text-white dark:hover:bg-gray-400`}
                 onClick={(e) => editRows(e)}
               >
                 <td
                   id={row._nrow}
-                  className={`${styleTableText} font-semibold text-tabTrTexCol dark:text-tabTrTexColD`}
+                  //   className={`${styleTableText} font-semibold`}
                 >
                   {row.name}
                 </td>
@@ -165,22 +175,29 @@ export default function DropdownFilterMenu({
               </td> */}
                 <td
                   id={row._nrow}
-                  className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+                  //   className={`${styleTableText} `}
                 >
                   {row.comparisonFirst}
-                  {row.filterFirst}
                 </td>
                 <td
                   id={row._nrow}
-                  className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+                  //   className={`${styleTableText} `}
                 >
+                  {row.filterFirst}
+                </td>
+                <td id={row._nrow} className={`${styleTableText} `}>
                   {row.logical}
                 </td>
                 <td
                   id={row._nrow}
-                  className={`${styleTableText} text-tabTrTexCol dark:text-tabTrTexColD`}
+                  //   className={`${styleTableText} `}
                 >
                   {row.comparisonLast}
+                </td>
+                <td
+                  id={row._nrow}
+                  //   className={`${styleTableText} `}
+                >
                   {row.filterLast}
                 </td>
               </tr>

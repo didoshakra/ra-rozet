@@ -50,8 +50,9 @@ export default function DProductTable({
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
   const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення рядка пошуку(Для відкату пошуку)
-  const [beforSelectData, setBeforSelectData] = useState([]); //Зберігається БД перед пошуком (Для відкату пошуку)
+  const [beforSeachData, setBeforSeachData] = useState([]); //Зберігається БД перед пошуком (Для відкату пошуку)
   const [isDropdownFilterMenu, setIsDropdownFilterMenu] = useState(false); //Зберігається перед селектом
+  const [filteredIcon, setFilteredIcon] = useState("none"); //Заповнення іконки фільтру(лійки)("none- не фільтрувалось/"carentColor- фільтрувалось )
 
   // Стилі таблиці
   //Величина щрифта основних компонентів таблиці(надбудова(пошук+ітфо)/шапка/чаклунки/footer(підсумки)/нижній інфорядок з вибором сторінок (МОЖЛИВИЙ ВИБІР)
@@ -175,18 +176,18 @@ export default function DProductTable({
   //***к Сортування */
 
   //** Пошук(search)/фільтер-по всіх полях зразу */
-  const seachAllRows = (e) => {
+  const seachAllFilds = (e) => {
     const searchValue = e.target.value;
     if (lengthSearhValue === 0) {
-      setBeforSelectData(workData);
+      setBeforSeachData(workData);
     }
-    const rows = beforSelectData;
+    const rows = beforSeachData;
 
-    // console.log("seachAllRows/searchValue=", searchValue + "/ rows", rows);
+    // console.log("seachAllFilds/searchValue=", searchValue + "/ rows", rows);
     if (rows.length > 0) {
       const attributes = Object.keys(rows[0]); //Це рядок заголовку
 
-      const list = [];
+      const nowData = [];
       //*** Цикл по рядках
       for (const current of rows) {
         //Цикл по колонках
@@ -203,17 +204,17 @@ export default function DProductTable({
           const value = String(current[attribute]).toLowerCase(); //переводимо значення поля у нижній регістр
           //порівнюємо значення поля із пошуком, переводеним у нижній регістр
           if (value.includes(searchValue.toLowerCase())) {
-            list.push(current);
+            nowData.push(current);
             break; //вихід з внутрішнього циклу
           }
         }
       }
       setLengthSearhValue(searchValue.length);
-      setWorkData(list);
+      setWorkData(nowData);
     }
   };
 
-  //** Вмбір/Selected / Записуємо селект(true/false) в _selected роточого масиву(workData) */
+  //** Вибір/Selected / Записуємо селект(true/false) в _selected роточого масиву(workData) */
   const selectRows = (e) => {
     // console.log("RTable.js/selectRows/e.target=", e.target);
     const nRow = Number(e.target.id); //id-Це DOM(<td id="1"> Я йому присвоюю значення БД=_nrow)
@@ -244,23 +245,79 @@ export default function DProductTable({
   };
 
   //** Фільтр множинний */
-  //--- Формує значення для визначення стилю className для фільтрування(іконка біля назви в шапці)
+  //--- Формує (true/false) для стилю шоб показувати іконку біля назви в шапці, якщо є заданий фільтр по цьому полю
   const clasThFilter = (accessor) => {
     let tempData = [...filterData]; //Копія робочого масиву обєктів
-    // console.log("RTable.js/clasThFilter/accessor=", accessor);
-    const targetObj = tempData.find((obj) => obj.accessor === accessor); //Шукажмо запис по _nrow=nRow
-    // console.log("RTable.js/clasThFilter/filterData=", tempData);
-    // console.log("RTable.js/clasThFilter/targetObj=", targetObj);
-    if (targetObj) {
-      if (targetObj.filterFirst.length > 0 || targetObj.filterLast.length > 0) {
-        return true;
-      } else return false;
-    }
+    const targetObj = tempData.find((obj) => obj.accessor === accessor); //Шукажмо запис
+    //
+    if (targetObj && targetObj.filterFirst.length > 0) {
+      return true;
+    } else return false;
   };
 
-  const handleApplyFilters = () => {
-    console.log("RTable.js.js/handleApplyFilters/filterData=", filterData);
+  //--- Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
+  const applyFilters = () => {
+    setIsDropdownFilterMenu(false); //Закриваєм випадаюче вікно фільтрів
+    console.log("RTable.js.js/applyFilters/filterData=", filterData);
+    setBeforSeachData(workData); //Для відкату
+    //
+    const rows = [...workData];
+    console.log("RTable.js.js/applyFilters/rows=", rows);
+    const nowData = [];
+    //*** Цикл по рядках
+    const attributes = Object.keys(rows[0]); //Це рядок заголовку
+    console.log("RTable.js.js/ApplyFilters/for1/attributes=", attributes);
+    let tempData = [...filterData]; //Копія робочого масиву обєктів
+    for (const current of rows) {
+      //   console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
+      //Цикл по колонках
+      for (const attribute of attributes) {
+        // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
+        // Чи задане поле в
+        const targetObj = tempData.find((obj) => obj.accessor === attribute); //Шукажмо запис по _nrow=nRow
+        // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
+        if (targetObj && targetObj.filterFirst.length > 0) {
+          //   console.log(
+          //     "RTable.js.js/ApplyFilters/for2/attribute=",
+          //     attribute + "/targetObj=",
+          //     targetObj,
+          //   );
+          const value = String(current[attribute]).toLowerCase(); //переводимо значення поля у нижній регістр
+          //   const filterValua = `${targetObj.comparisonFirst} ${targetObj.filterFirst} ${targetObj.logical} ${targetObj.comparisonLast} ${targetObj.filterLast}`;
+          const filterValua = `${targetObj.filterFirst}`;
+          console.log(
+            "RTable.js.js/ApplyFilters/value=",
+            value + "/filterValua=",
+            filterValua,
+          );
+          //   console.log("RTable.js.js/applyFilters/filterValua=", filterValua);
+
+          //порівнюємо значення поля із пошуком, переводеним у нижній регістр
+          // Добавляємо текучий рядок в новий масив
+          if (value.includes(filterValua.toLowerCase())) {
+            nowData.push(current);
+            break; //вихід з внутрішнього циклу
+          }
+        }
+      }
+      setWorkData(nowData);
+      setFilteredIcon("currentColor");
+    }
   };
+  const deleteFilterAll = () => {
+    console.log("RTable.js/deleteFilterAll/");
+    let tempData = [...filterData];
+    const temp = tempData.map((data, idx) => {
+      data.comparisonFirst = "";
+      data.filterFirst = "";
+      data.logical = "";
+      data.comparisonLast = "";
+      data.filterLast = "";
+    });
+    setFilterData(tempData);
+    setWorkData(beforSeachData)
+  };
+//----------------------------------------------------
 
   return (
     //align-middle-текст по вертикалі посередині
@@ -287,8 +344,10 @@ export default function DProductTable({
         {typeof p_searchAllRows !== "undefined" && p_searchAllRows && (
           <div className="relative ml-1 items-center ">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
+              {/* Лупа */}
               <svg
                 className="h-4 w-4 text-gray-500 dark:text-gray-400"
+                // className="h-4 w-4 text-gray-500 dark:text-red-500"
                 aria-hidden="true"
                 xmlns="http://www.w3.org/2000/svg"
                 fill="none"
@@ -308,7 +367,7 @@ export default function DProductTable({
               placeholder="Пошук..."
               // value={searchValue}
               //   onChange={(e) =>p_filterededp_searchAllRows onChangeSearch(e)} //Для Enter
-              onChange={(e) => seachAllRows(e)} //Пошук
+              onChange={(e) => seachAllFilds(e)} //Пошук
               type="text"
               className="block w-80 items-center rounded-lg border border-gray-300 bg-gray-50 p-1 pl-10 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             />
@@ -320,17 +379,21 @@ export default function DProductTable({
         {typeof (p_filtered !== "undefined") && p_filtered && (
           <div>
             <button
+              //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
               className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
               onClick={() => setIsDropdownFilterMenu(!isDropdownFilterMenu)}
             >
+              {/* Лійка */}
               <svg
-                //   class="h-4 w-4 text-red-500"
-                className="h-4 w-4 "
+                // className="h-4 w-4 text-gray-500 dark:text-red-500"
+                className="h-4 w-4 text-red-500"
                 viewBox="0 0 24 24"
-                fill="none"
+                fill={filteredIcon}
+                // fill="none"
                 // fill="currentColor"
                 stroke="currentColor"
-                strokeWidth="1"
+                // stroke="red"
+                strokeWidth="2"
                 strokeLinecap="round"
                 strokeLinejoin="round"
               >
@@ -349,7 +412,8 @@ export default function DProductTable({
                 setIsDropdownFilterMenu={setIsDropdownFilterMenu}
                 styleTableText={styleTableText}
                 initialСolumns={initialСolumns}
-                handleApplyFilters={handleApplyFilters}
+                applyFilters={applyFilters}
+                deleteFilterAll={deleteFilterAll}
               />
             )}
           </div>
@@ -417,9 +481,9 @@ export default function DProductTable({
         </div>
       </div>
 
-      {/* Обгортка(Wraper)таблиці (для проокрутки і...) */}
+      {/* *******  border-3 border-green-300  Обгортка(Wraper)таблиці (для проокрутки і...) */}
       <div
-        className=" max-h-[--sH] w-full overflow-auto  border-3 border-green-300  text-left text-gray-500 dark:text-gray-400"
+        className=" max-h-[--sH] w-full overflow-auto border border-neutral-500  text-left text-gray-500 dark:text-gray-400"
         style={{ "--sH": "calc(100vh - 250px)" }} //Створення style для h-
       >
         <table className=" w-full table-auto border-collapse ">

@@ -70,7 +70,8 @@ import tailwindConfig from "@/tailwind.config"; //отримання змінн�
 20230910/Доступ до БД з paje.js: wait fetch("/api/shop/references/d_product")
     Getting started with Vercel Postgres and Next.js 13 //https://blog.coffeeinc.in/getting-started-with-vercel-postgres-and-next-js-13-bcb4715f3899
 
------------------------------------------------------------
+======================================================================
+Створення своєї таблиці (RTable)
 20230915/Створенння таблиць за допомогою FlowbiteUI/PrelineUI/TailwindUI
     //https://flowbite.com/docs/components/tables/#striped-rows\\Table pagination
     //https://preline.co/docs/tables.html
@@ -115,7 +116,7 @@ import tailwindConfig from "@/tailwind.config"; //отримання змінн�
             - сортування повертається в початковий стан
             - вибідення+сортування+пошук/фільтр працюють разом
             - добавив інформацію: відфільтровао і всього рядків
-            
+
 20231114 // Видалив з таблиці select ( тепер видідення  цілим рядком)
 20231120 // Добавив фільтри по заданих полях:DropdownFilter.js+DroopFifterForm.js
 
