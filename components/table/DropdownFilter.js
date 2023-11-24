@@ -5,7 +5,7 @@ export default function DropdownFilterMenu({
   filterData,
   setFilterData,
   applyFilters,
-  setIsDropdownFilterMenu,
+  setIsDropdownFilter,
   styleTableText,
   deleteFilterAll,
 }) {
@@ -119,7 +119,7 @@ export default function DropdownFilterMenu({
 
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
-          onClick={(e) => setIsDropdownFilterMenu(false)}
+          onClick={(e) => setIsDropdownFilter(false)}
           title="Вийти без збереження"
         >
           {/* скасувати */}

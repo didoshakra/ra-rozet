@@ -51,7 +51,7 @@ export default function DProductTable({
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
   const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення рядка пошуку(Для відкату пошуку)
   const [beforSeachData, setBeforSeachData] = useState([]); //Зберігається БД перед пошуком (Для відкату пошуку)
-  const [isDropdownFilterMenu, setIsDropdownFilterMenu] = useState(false); //Зберігається перед селектом
+  const [isDropdownFilter, setIsDropdownFilter] = useState(false); //Зберігається перед селектом
   const [filteredIcon, setFilteredIcon] = useState("none"); //Заповнення іконки фільтру(лійки)("none- не фільтрувалось/"carentColor- фільтрувалось )
 
   // Стилі таблиці
@@ -257,7 +257,7 @@ export default function DProductTable({
 
   //--- Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
   const applyFilters = () => {
-    setIsDropdownFilterMenu(false); //Закриваєм випадаюче вікно фільтрів
+    setIsDropdownFilter(false); //Закриваєм випадаюче вікно фільтрів
     console.log("RTable.js.js/applyFilters/filterData=", filterData);
     setBeforSeachData(workData); //Для відкату
     //
@@ -314,8 +314,11 @@ export default function DProductTable({
       data.comparisonLast = "";
       data.filterLast = "";
     });
+    setIsDropdownFilter(false);
+    setFilteredIcon("none");
     setFilterData(tempData);
     setWorkData(beforSeachData)
+
   };
 //----------------------------------------------------
 
@@ -381,7 +384,7 @@ export default function DProductTable({
             <button
               //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
               className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-              onClick={() => setIsDropdownFilterMenu(!isDropdownFilterMenu)}
+              onClick={() => setIsDropdownFilter(!isDropdownFilter)}
             >
               {/* Лійка */}
               <svg
@@ -405,11 +408,11 @@ export default function DProductTable({
             </button>
 
             {/* Dropdown menu */}
-            {isDropdownFilterMenu && (
+            {isDropdownFilter && (
               <DropdownFilterMenu
                 filterData={filterData}
                 setFilterData={setFilterData}
-                setIsDropdownFilterMenu={setIsDropdownFilterMenu}
+                setIsDropdownFilter={setIsDropdownFilter}
                 styleTableText={styleTableText}
                 initialСolumns={initialСolumns}
                 applyFilters={applyFilters}
