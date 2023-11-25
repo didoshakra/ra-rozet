@@ -26,6 +26,7 @@ export default function Products() {
     getData();
   }, []);
 
+  // Колонки, що показуються
   const columns = [
     {
       label: "nR",
@@ -38,6 +39,7 @@ export default function Products() {
     {
       label: "Id",
       accessor: "id",
+      type: "number",
       sortable: true,
       minWith: "15px",
       With: "100px",
@@ -69,6 +71,7 @@ export default function Products() {
     {
       label: "Ціна",
       accessor: "price",
+      type: "number",
       sortable: true,
       filtered: true,
       minWith: "100px",

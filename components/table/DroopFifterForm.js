@@ -116,30 +116,32 @@ export default function DroopFifterForm({
             </svg>
           </button>
         </div>{" "}
-        <div className=" flex max-w-xs space-x-1 overflow-auto md:max-w-md">
-          <select
+        {/* <div className=" flex max-w-xs space-x-1 overflow-auto md:max-w-md"> */}
+        <div className=" flex space-x-1 overflow-auto ">
+         <label className="font-semibold text-gray-700">
+          <div className=" text-center"> &gt;&lt;</div> <select
             // appearance-none-не показувати стрілку селе
-            className="block w-1/12 appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             name="comparisonFirst"
             onChange={handleChange}
             value={state.comparisonFirst}
             required
           >
-            {/* <option value=" "> </option> */}
+            <option value=" "> </option>
             <option value=">">&gt;</option>
             <option value=">=">&gt;=</option>
-            <option value="===">=</option>
-            <option value="!==">!=</option>
+            <option value="==">=</option>
+            <option value="!=">!=</option>
             <option value="<="> &lt;=</option>
             <option value="<"> &lt;</option>
           </select>
-          {/* </label> */}
+          </label>
           {/*  */}
-          {/* <label className="flex font-semibold text-gray-700">
-          <div className=" text-center">фільтр1</div> */}
+          <label className="font-semibold text-gray-700">
+          <div className=" text-center">фільтр1</div>
           <input
             //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-            className=" block w-5/12 items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+            className=" block  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
             id="filterFirst"
             required
             type="text"
@@ -147,51 +149,51 @@ export default function DroopFifterForm({
             value={state.filterFirst}
             onChange={handleChange}
           />
-          {/* </label> */}
+          </label>
           {/*  */}
-          {/* <label className="flex font-semibold text-gray-700">
-          <div className=" text-center">and/or</div> */}
+          <label className=" font-semibold text-gray-700">
+          <div className=" text-center">and</div>
           <select
-            className=" block w-1/12 appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            className=" block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             name="logical"
             onChange={handleChange}
             value={state.logical}
           >
-            {/* <option value=" "> </option> */}
+            <option value=" "> </option>
             <option value="||">or</option>
             <option value="&&">and</option>
           </select>
-          {/* </label> */}
+          </label>
           {/*  */}
-          {/* <label className="flex font-semibold text-gray-700">
-          <div className=" text-center"> &gt;&lt;</div> */}
+          <label className="font-semibold text-gray-700">
+          <div className=" text-center"> &gt;&lt;</div>
           <select
-            className=" block w-1/12 appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             name="comparisonLast"
             onChange={handleChange}
             value={state.comparisonLast}
           >
-            {/* <option value=" "> </option> */}
+            <option value=" "> </option>
             <option value=">">&gt;</option>
             <option value=">=">&gt;=</option>
-            <option value="===">=</option>
-            <option value="!==">!=</option>
+            <option value="==">=</option>
+            <option value="!=">!=</option>
             <option value="<="> &lt;=</option>
             <option value="<"> &lt;</option>
           </select>
-          {/* </label> */}
-          {/* <label className="flex font-semibold text-gray-700">
-          <div className=" text-center">фільтр2 </div> */}
+          </label>
+          <label className="font-semibold text-gray-700">
+          <div className=" text-center">фільтр2 </div>
           <input
             //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-            className="  block w-5/12 items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+            className="  block  w-6items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
             type="text"
             name="filterLast"
             value={state.filterLast}
             onChange={handleChange}
           />
-          
-          {/* </label> */}
+
+          </label>
           {inputError && <div style={{ color: "red" }}>{inputError}</div>}
         </div>
       </form>
