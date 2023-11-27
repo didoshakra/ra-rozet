@@ -309,12 +309,17 @@ export default function DProductTable({
     let tempFilterData = [...filterData]; //Копія робочого масиву обєктів
     // console.log("RTable.js.js/ApplyFilters/tempFilterData=", tempFilterData);
     for (const current of tempWorkData) {
-      //   console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
+      console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
       //++++ Принцип виходу з атрибуту(for2) при невідповідностях
       //Цикл по колонках
       let rowFilterted = false;
-      for (const attribute of attributes) {
+      //   for (const attribute of attributes) {
+      //   let compareFirst = false;
+      //   let compareLast = false;
+      for (const rowColumn of tempFilterData) {
+        const attribute = rowColumn.accessor;
         // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
+        // break;
         // Чи задане поле в
         const targetObj = tempFilterData.find(
           (obj) => obj.accessor === attribute,
@@ -323,12 +328,12 @@ export default function DProductTable({
 
         //===============================
         if (targetObj && targetObj.filterFirst.length > 0) {
+          console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
           const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`;
           //   console.log("RTable.js.js/ApplyFilters/for2/targetObj: ", targetObj);
           //   console.log("RTable.js.js/ApplyFilters/for2/filterRow: ", filterRow);
           //
-          let compareFirst = false;
-          let compareLast = false;
+
           const valueData = valToType(current[attribute], targetObj.type);
           const filterFirst = valToType(targetObj.filterFirst, targetObj.type);
           //   console.log(
@@ -345,41 +350,39 @@ export default function DProductTable({
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
           //filterFirst
-          const compare1 = doCompare(
+          //   doStuff(4, 2, ">")=true
+          const compareFirst = doCompare(
             valueData,
-            // targetObj.filterFirst,
             filterFirst,
             targetObj.comparisonFirst,
           );
-        //   console.log("RTable.js.js/applyFilters/compare1: ", compare1);
-          if (compare1) {
-            compareFirst = true;
-            rowFilterted = true;
-            // console.log("RTable.js.js/applyFilters/if(compare1)/");
-          } else {
-            // rowFilterted = false;
-            break;
-          }
+          //--- Якщо є filterАшкіе.length
+          if (compareFirst) rowFilterted = true;
+          //   else rowFilterted = true;
+          //   console.log(
+          //     "RTable.js.js/applyFilters/attribute=",
+          //     attribute + "/compareFirst=",
+          //     compareFirst,
+          //   );
 
-          // Якщо є filterLast.length
+          //--- Якщо є filterLast.length
           if (targetObj.filterLast.length > 0) {
             console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
 
             const filterLast = valToType(targetObj.filterLast, targetObj.type);
 
             //--- comparisonLast
-            const compare2 = doCompare(
+            const compareLast = doCompare(
               valueData,
               filterLast,
               targetObj.comparisonLast,
             );
 
-            if (compare2) {
-              compareLast = true;
+            if (compareLast) {
+              //   compareLast = true;
               console.log(
-                "RTable.js.js/applyFilters/IfCompareLast/CompareFirst: ",
-                compareFirst + " /CompareLast:",
-                compareLast,
+                "RTable.js.js/applyFilters/if(compareLast)/attribute=",
+                attribute,
               );
 
               //Варіанти: (&&-> First &&Last)1-додаєм якщо обидва== true -> решта НІ
@@ -391,6 +394,7 @@ export default function DProductTable({
                 if (compareFirst) {
                   rowFilterted = true;
                 } else {
+                  console.log("RTable.js.js/ApplyFilters/break1=");
                   break;
                 }
               } else rowFilterted = true; // Якщо не && то При || додаєм всі бо compareLast = true
@@ -401,9 +405,10 @@ export default function DProductTable({
               //          (First = true  && Last = false)-ні
               //          (First = false && Last = false)-ні
             } else {
+              console.log("RTable.js.js/ApplyFilters/break2=");
               break;
             }
-          }
+          } else if (!compareFirst) rowFilterted = false;
         }
         //-- fEndor2
         // console.log(
