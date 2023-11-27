@@ -316,9 +316,7 @@ export default function DProductTable({
       for (const attribute of attributes) {
         // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
         // Чи задане поле в
-        const targetObj = tempFilterData.find(
-          (obj) => obj.accessor === attribute,
-        ); //Шукажмо запис по _nrow=nRow
+        const targetObj = tempFilterData.find((obj) => obj.accessor === attribute); //Шукажмо запис по _nrow=nRow
         // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
 
         //===============================
@@ -345,66 +343,129 @@ export default function DProductTable({
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
           //filterFirst
-          const compare1 = doCompare(
+          const compare = doCompare(
             valueData,
             // targetObj.filterFirst,
             filterFirst,
             targetObj.comparisonFirst,
           );
-        //   console.log("RTable.js.js/applyFilters/compare1: ", compare1);
-          if (compare1) {
+          console.log("RTable.js.js/applyFilters/compare: ", compare);
+          if (compare) {
             compareFirst = true;
             rowFilterted = true;
-            // console.log("RTable.js.js/applyFilters/if(compare1)/");
+            console.log("RTable.js.js/applyFilters/if(compare1)/");
           } else {
             // rowFilterted = false;
             break;
           }
 
-          // Якщо є filterLast.length
-          if (targetObj.filterLast.length > 0) {
-            console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
+          //   //--- Якщо нема filterLast і compareFirst = true
+          //   if (!compareFirst || targetObj.filterLast.length == 0) {
+          //     console.log(
+          //       "RTable.js/applyFilters/compareFirst/current._nrow=",
+          //       current._nrow,
+          //     );
+          //     // nowData.push(current); // Добавляємо текучий рядок в новий масив
+          //     console.log(
+          //       "RTable.js.js/applyFilters/compareFirst/(!compareFirst || targetObj.filterLast.length == 0)",
+          //     );
+          //     rowFilterted = false;
+          //     //   break; //вихід з внутрішнього циклу
+          //   }
 
-            const filterLast = valToType(targetObj.filterLast, targetObj.type);
+          //   // Якщо є filterLast.length
+          //   if (targetObj.filterLast.length > 0) {
+          //     console.log(
+          //       "RTable.js.js/applyFilters/Last/current.skod=",
+          //       current.skod,
+          //     );
+          //     console.log(
+          //       "RTable.js.js/ApplyFilters/Last/targetObj.comparisonFirst: ",
+          //       targetObj.comparisonFirst + " /targetObj.filterFirst: ",
+          //       targetObj.filterFirst + " /targetObj.logical: ",
+          //       targetObj.logical + " /targetObj.comparisonLast:",
+          //       targetObj.comparisonLast + " /targetObj.filterLast=",
+          //       targetObj.filterLast,
+          //     );
 
-            //--- comparisonLast
-            const compare2 = doCompare(
-              valueData,
-              filterLast,
-              targetObj.comparisonLast,
-            );
+          //     const filterLast = valToType(targetObj.filterLast, targetObj.type);
+          //     //comparisonLast
+          //     const compare = doCompare(
+          //       valueData,
+          //       //   targetObj.filterLast,
+          //       filterLast,
+          //       targetObj.comparisonLast,
+          //     );
+          //     if (compare) {
+          //       compareLast = true;
 
-            if (compare2) {
-              compareLast = true;
-              console.log(
-                "RTable.js.js/applyFilters/IfCompareLast/CompareFirst: ",
-                compareFirst + " /CompareLast:",
-                compareLast,
-              );
-
-              //Варіанти: (&&-> First &&Last)1-додаєм якщо обидва== true -> решта НІ
-              //          (||-> First|| Last)-додаєм, якщо хоч один = true -> а так як compareLast = true, то додаєм всі
-              //          (First = false || Last = true) 4-додаєм всі
-
-              if (targetObj.logical === "&&") {
-                // порівнюємо тільки compareFirst, бо compareLast = true
-                if (compareFirst) {
-                  rowFilterted = true;
-                } else {
-                  break;
-                }
-              } else rowFilterted = true; // Якщо не && то При || додаєм всі бо compareLast = true
-            } else if (compareFirst && targetObj.logical === "||") {
-              rowFilterted = true;
-              // Варіанти:(First = true  || Last = false)-додаєм
-              //          (First = false || Last = false)-ні
-              //          (First = true  && Last = false)-ні
-              //          (First = false && Last = false)-ні
-            } else {
-              break;
-            }
-          }
+          //       console.log(
+          //         "RTable.js.js/applyFilters/IfCompareLast/CompareFirst: ",
+          //         compareFirst + " /CompareLast:",
+          //         compareLast,
+          //       );
+          //       //Варіанти: (First = true  && Last = true)1-додаєм
+          //       //          (First = false && Last = true)2-ні
+          //       //          (First = true  || Last = true)3-додаєм
+          //       //          (First = false || Last = true)4-додаєм
+          //       if (targetObj.logical === "&&") {
+          //         //
+          //         if (compareFirst && compareLast) {
+          //           //   nowData.push(current); // Добавляємо текучий рядок в новий масив
+          //           rowFilterted = false;
+          //           //   break; //вихід з внутрішнього циклу
+          //         } else {
+          //           console.log(
+          //             "RTable.js.js/applyFilters/IfCompareLast/(compareFirst && compareLast) ",
+          //           );
+          //           rowFilterted = false;
+          //           // break; //вихід з внутрішнього циклу
+          //         }
+          //       } else if (targetObj.logical === "||") {
+          //         // nowData.push(current); // Добавляємо текучий рядок в новий масив
+          //         // break; //вихід з внутрішнього циклу
+          //       } else {
+          //         console.log(
+          //           "RTable.js.js/applyFilters/IfCompareLast/else if (targetObj.logical === " ||
+          //             ") ",
+          //         );
+          //         rowFilterted = false;
+          //         //   break; //вихід з внутрішнього циклу
+          //       }
+          //     } else if (compareFirst) {
+          //       console.log(
+          //         "RTable.js.js/applyFilters/ElseCompareLast/CompareFirst: ",
+          //         compareFirst + " /CompareLast:",
+          //         compareLast,
+          //       );
+          //       //Варіанти: (First = true  && Last = false)1-ні
+          //       //          (First = false && Last = false)2-ні
+          //       //          (First = true  || Last = false)3-додаєм
+          //       //          (First = false || Last = false)4-ні
+          //       if (targetObj.logical === "||") {
+          //         if (compareFirst || compareLast) {
+          //           //   nowData.push(current); // Добавляємо текучий рядок в новий масив
+          //           //   break; //вихід з внутрішнього циклу
+          //         } else {
+          //           console.log(
+          //             "RTable.js.js/applyFilters/IfCompareLast/if (compareFirst || compareLast)",
+          //           );
+          //           rowFilterted = false;
+          //           break; //вихід з внутрішнього циклу
+          //         }
+          //       }
+          //     }
+          //   } else {
+          //     if (!compareFirst) {
+          //       console.log(
+          //         "RTable.js.js/applyFilters/IfCompareLast/else(targetObj.filterLast.length > 0)",
+          //       );
+          //       rowFilterted = false;
+          //       break; //вихід з внутрішнього циклу
+          //     }
+          //   }
         }
+
         //-- fEndor2
         // console.log(
         //   "RTable.js.js/applyFilters/if(targetObj && targetObj.filterFirst.length > 0)",
@@ -428,7 +489,7 @@ export default function DProductTable({
     }
     console.log("RTable.js.js/ApplyFilters/Endfor1/");
     setWorkData(nowData);
-    setFilteredIcon("currentColor"); //Колір хаповнення іконки фільтру
+    setFilteredIcon("currentColor");//Колір хаповнення іконки фільтру
   };
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
@@ -446,7 +507,7 @@ export default function DProductTable({
     setWorkData(beforSeachData); //Відкат даних до фільтру
     setIsDropdownFilter(false); //Закриваємо випадаюче вікно
     setFilteredIcon("none"); //Іконка
-    setWorkData(beforFilterData); //Відновлюємо робочу БД до фільтрування
+    setWorkData(beforFilterData);//Відновлюємо робочу БД до фільтрування
   };
   //----------------------------------------------------
 

@@ -9,8 +9,8 @@ const HeaderTape = () => {
 
   return (
     // <div className="flex h-16 w-full flex-col justify-start bg-tapeMenuBg px-2     text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
-    <div className="flex h-16 w-full flex-col justify-start bg-tapeMenuBg px-2     text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
-      <div className="     relative flex items-center justify-between ">
+    <div className="flex h-16 w-full flex-col justify-start bg-tapeMenuBg px-2 text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
+      <div className="relative flex items-center justify-between ">
         <div className="relative flex flex-col items-center justify-between md:flex-row ">
           {/* <span className="px-2 flex items-center justify-between text-sm"> */}
           <a
@@ -34,7 +34,7 @@ const HeaderTape = () => {
           </span> */}
         </div>
       </div>
-      <span className="items-center px-2">ПРОБА Next.js 13-4/18-10-2023</span>
+      <span className="items-center px-2">ПРОБА Next.js 13-4/27-11-2023</span>
       {/* ======================================================================== */}
     </div>
   );

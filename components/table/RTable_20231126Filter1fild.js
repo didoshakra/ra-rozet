@@ -26,8 +26,7 @@
 //  - інфа: які рядки зараз відображені на сторінці і рядків всього
 // 20231111 // вибір шрифтіф таблиці (T)
 // 20231114 // Видалив з таблиці select ( тепер видідення  цілим рядком)
-// 20231120 // Добавив вікна фільтрів по заданих полях:DropdownFilter.js+DroopFifterForm.js
-// 20231127 // Фільтрування/Відновлення БД до фільтрування
+// 20231120 // Добавив фільтри по заданих полях:DropdownFilter.js+DroopFifterForm.js
 //--------------------------------------------------------------------
 
 //*** Типи даних ******* */(string,number,boolean,date-це об'єкт,але треба вказувати)
@@ -56,7 +55,6 @@ export default function DProductTable({
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
   const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення рядка пошуку(Для відкату пошуку)
   const [beforSeachData, setBeforSeachData] = useState([]); //Зберігається БД перед пошуком (Для відкату пошуку)
-  const [beforFilterData, setBeforFilterData] = useState([]); //Зберігається БД перед фільтруванням (Для відкату фільтрування)
   const [isDropdownFilter, setIsDropdownFilter] = useState(false); //Зберігається перед селектом
   const [filteredIcon, setFilteredIcon] = useState("none"); //Заповнення іконки фільтру(лійки)("none- не фільтрувалось/"carentColor- фільтрувалось )
 
@@ -254,8 +252,8 @@ export default function DProductTable({
   //== Фільтр множинний */
   //--- Формує (true/false) для стилю шоб показувати іконку фільтру біля назви в шапці, якщо є заданий фільтр по цьому полю
   const clasThFilter = (accessor) => {
-    let tempFilterData = [...filterData]; //Копія робочого масиву обєктів
-    const targetObj = tempFilterData.find((obj) => obj.accessor === accessor); //Шукажмо запис
+    let tempData = [...filterData]; //Копія робочого масиву обєктів
+    const targetObj = tempData.find((obj) => obj.accessor === accessor); //Шукажмо запис
     //
     if (targetObj && targetObj.filterFirst.length > 0) {
       return true;
@@ -264,7 +262,6 @@ export default function DProductTable({
 
   //--- Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
   const applyFilters = () => {
-    //--- Додаткові ф-ції
     //Як реалізувати оператор змінної в JavaScript? // https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
     //--- Об'єкт(набір змінних), що імітує оператори
     const operators = {
@@ -292,161 +289,173 @@ export default function DProductTable({
       if (type == "date") return Date.parse(value);
       return String(value).toLowerCase(); //переводимо значення поля у нижній регістр
     };
-
-    //--- Початок фільтруівання
+    //---------------------------------------------------------
     setIsDropdownFilter(false); //Закриваєм випадаюче вікно фільтрів
     console.log("RTable.js.js/applyFilters/filterData=", filterData);
-    if (filteredIcon === "none") {
-      setBeforFilterData(workData); //Для відкату
-    }
+    setBeforSeachData(workData); //Для відкату
     //
-    const tempWorkData = [...workData];
-    // console.log("RTable.js.js/applyFilters/workData=", workData);
+    const rows = [...workData];
+    console.log("RTable.js.js/applyFilters/rows=", rows);
     const nowData = [];
     //*** Цикл по рядках
-    const attributes = Object.keys(tempWorkData[0]); //Це рядок заголовку(масив)
-    // console.log("RTable.js.js/ApplyFilters/attributes=", attributes);
-    let tempFilterData = [...filterData]; //Копія робочого масиву обєктів
-    // console.log("RTable.js.js/ApplyFilters/tempFilterData=", tempFilterData);
-    for (const current of tempWorkData) {
+    const attributes = Object.keys(rows[0]); //Це рядок заголовку(масив)
+    console.log("RTable.js.js/ApplyFilters/for1/attributes=", attributes);
+    let tempData = [...filterData]; //Копія робочого масиву обєктів
+    for (const current of rows) {
       //   console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
-      //++++ Принцип виходу з атрибуту(for2) при невідповідностях
       //Цикл по колонках
-      let rowFilterted = false;
       for (const attribute of attributes) {
         // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
         // Чи задане поле в
-        const targetObj = tempFilterData.find(
-          (obj) => obj.accessor === attribute,
-        ); //Шукажмо запис по _nrow=nRow
+        const targetObj = tempData.find((obj) => obj.accessor === attribute); //Шукажмо запис по _nrow=nRow
         // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
-
-        //===============================
         if (targetObj && targetObj.filterFirst.length > 0) {
-          const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`;
-          //   console.log("RTable.js.js/ApplyFilters/for2/targetObj: ", targetObj);
-          //   console.log("RTable.js.js/ApplyFilters/for2/filterRow: ", filterRow);
+          //   console.log(
+          //     "RTable.js.js/ApplyFilters/for2/targetObj.comparisonFirst: ",
+          //     targetObj.comparisonFirst + " /targetObj.filterFirst: ",
+          //     targetObj.filterFirst + " /targetObj.logical: ",
+          //     targetObj.logical + " /targetObj.comparisonLast:",
+          //     targetObj.comparisonLast + " /targetObj.filterLast=",
+          //     targetObj.filterLast,
+          //   );
+
           //
           let compareFirst = false;
           let compareLast = false;
+          //   console.log(
+          //     "RTable.js.js/ApplyFilters/typeof/current[attribute]=",
+          //     typeof current[attribute],
+          //   );
           const valueData = valToType(current[attribute], targetObj.type);
           const filterFirst = valToType(targetObj.filterFirst, targetObj.type);
           //   console.log(
-          //     "RTable.js.js/ApplyFilters/filterFirst=",
-          //     filterFirst + " /valueData=",
-          //     valueData,
+          //     "RTable.js.js/ApplyFilters/for2/filterFirst=",
+          //     filterFirst,
           //   );
           //   console.log(
           //     "RTable.js.js/ApplyFilters/typeof/type_filterFirst=",
-          //     typeof filterFirst + "/type-valueData=",
+          //     typeof filterFirst,
+          //   );
+          //   console.log(
+          //     "RTable.js.js/ApplyFilters/typeof/valueData=",
           //     typeof valueData,
           //   );
-
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
+
           //filterFirst
-          const compare1 = doCompare(
+          const compare = doCompare(
             valueData,
             // targetObj.filterFirst,
             filterFirst,
             targetObj.comparisonFirst,
           );
-        //   console.log("RTable.js.js/applyFilters/compare1: ", compare1);
-          if (compare1) {
+          if (compare) {
             compareFirst = true;
-            rowFilterted = true;
-            // console.log("RTable.js.js/applyFilters/if(compare1)/");
-          } else {
-            // rowFilterted = false;
-            break;
+            // console.log(
+            //   "RTable.js.js/applyFilters/targetObj.filterLast.length=",
+            //   targetObj.filterLast.length + "/targetObj.filterLast",
+            //   targetObj.filterLast,
+            // );
+          }
+
+          // Якщо нема filterLast і compareFirst = true
+          if (compareFirst && targetObj.filterLast.length == 0) {
+            console.log(
+              "RTable.js.js/applyFilters/compareFirst/current._nrow=",
+              current._nrow,
+            );
+            nowData.push(current); // Добавляємо текучий рядок в новий масив
+            break; //вихід з внутрішнього циклу
           }
 
           // Якщо є filterLast.length
           if (targetObj.filterLast.length > 0) {
-            console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
+            console.log(
+              "RTable.js.js/applyFilters/Last/current.skod=",
+              current.skod,
+            );
+            console.log(
+              "RTable.js.js/ApplyFilters/Last/targetObj.comparisonFirst: ",
+              targetObj.comparisonFirst + " /targetObj.filterFirst: ",
+              targetObj.filterFirst + " /targetObj.logical: ",
+              targetObj.logical + " /targetObj.comparisonLast:",
+              targetObj.comparisonLast + " /targetObj.filterLast=",
+              targetObj.filterLast,
+            );
 
             const filterLast = valToType(targetObj.filterLast, targetObj.type);
-
-            //--- comparisonLast
-            const compare2 = doCompare(
+            //comparisonLast
+            const compare = doCompare(
               valueData,
+              //   targetObj.filterLast,
               filterLast,
               targetObj.comparisonLast,
             );
-
-            if (compare2) {
+            if (compare) {
               compareLast = true;
+
               console.log(
                 "RTable.js.js/applyFilters/IfCompareLast/CompareFirst: ",
                 compareFirst + " /CompareLast:",
                 compareLast,
               );
-
-              //Варіанти: (&&-> First &&Last)1-додаєм якщо обидва== true -> решта НІ
-              //          (||-> First|| Last)-додаєм, якщо хоч один = true -> а так як compareLast = true, то додаєм всі
-              //          (First = false || Last = true) 4-додаєм всі
-
+              //Варіанти: (First = true  && Last = true)1-додаєм
+              //          (First = false && Last = true)2-ні
+              //          (First = true  || Last = true)3-додаєм
+              //          (First = false || Last = true)4-додаєм
               if (targetObj.logical === "&&") {
-                // порівнюємо тільки compareFirst, бо compareLast = true
-                if (compareFirst) {
-                  rowFilterted = true;
-                } else {
-                  break;
+                //
+                if (compareFirst && compareLast) {
+                  nowData.push(current); // Добавляємо текучий рядок в новий масив
+                  break; //вихід з внутрішнього циклу
                 }
-              } else rowFilterted = true; // Якщо не && то При || додаєм всі бо compareLast = true
-            } else if (compareFirst && targetObj.logical === "||") {
-              rowFilterted = true;
-              // Варіанти:(First = true  || Last = false)-додаєм
-              //          (First = false || Last = false)-ні
-              //          (First = true  && Last = false)-ні
-              //          (First = false && Last = false)-ні
-            } else {
-              break;
+              } else if (targetObj.logical === "||") {
+                nowData.push(current); // Добавляємо текучий рядок в новий масив
+                break; //вихід з внутрішнього циклу
+              }
+            } else if (compareFirst) {
+              console.log(
+                "RTable.js.js/applyFilters/ElseCompareLast/CompareFirst: ",
+                compareFirst + " /CompareLast:",
+                compareLast,
+              );
+              //Варіанти: (First = true  && Last = false)1-ні
+              //          (First = false && Last = false)2-ні
+              //          (First = true  || Last = false)3-додаєм
+              //          (First = false || Last = false)4-ні
+              if (targetObj.logical === "||") {
+                if (compareFirst || compareLast) {
+                  nowData.push(current); // Добавляємо текучий рядок в новий масив
+                  break; //вихід з внутрішнього циклу
+                }
+              }
             }
           }
         }
-        //-- fEndor2
-        // console.log(
-        //   "RTable.js.js/applyFilters/if(targetObj && targetObj.filterFirst.length > 0)",
-        // );
-        console.log(
-          "RTable.js.js/ApplyFilters/Endfor2/_nRow: ",
-          current._nrow + " /attribute:",
-          attribute,
-        );
+        //-- for2
       }
-      //--- Endfor1
-      console.log("RTable.js.js/ApplyFilters/Endfor1*/_nRow: ", current._nrow);
-      if (rowFilterted) {
-        // rowFilterted = false;
-        nowData.push(current); // Добавляємо текучий рядок в новий масив
-        console.log(
-          "RTable.js.js/ApplyFilters/Endfor1/if(rowFilterted)***/_nRow: ",
-          current._nrow,
-        );
-      }
+      //--- for1
+      setWorkData(nowData);
+      setFilteredIcon("currentColor");
     }
-    console.log("RTable.js.js/ApplyFilters/Endfor1/");
-    setWorkData(nowData);
-    setFilteredIcon("currentColor"); //Колір хаповнення іконки фільтру
   };
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
   const deleteFilterAll = () => {
     console.log("RTable.js/deleteFilterAll/");
-    let tempFilterData = [...filterData];
-    const temp = tempFilterData.map((data, idx) => {
+    let tempData = [...filterData];
+    const temp = tempData.map((data, idx) => {
       data.comparisonFirst = "";
       data.filterFirst = "";
       data.logical = "";
       data.comparisonLast = "";
       data.filterLast = "";
     });
-    setFilterData(tempFilterData); //Перезаписуєм масив фільтрів
+    setFilterData(tempData); //Перезаписуєм масив фільтрів
     setWorkData(beforSeachData); //Відкат даних до фільтру
     setIsDropdownFilter(false); //Закриваємо випадаюче вікно
     setFilteredIcon("none"); //Іконка
-    setWorkData(beforFilterData); //Відновлюємо робочу БД до фільтрування
   };
   //----------------------------------------------------
 
