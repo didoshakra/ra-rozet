@@ -1,7 +1,7 @@
 import { useState } from "react";
 import DroopFifterForm from "./DroopFifterForm";
 
-export default function DropdownFilterMenu({
+export default function DropdownFilter({
   filterData,
   setFilterData,
   applyFilters,

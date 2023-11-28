@@ -41,7 +41,7 @@
 import { useState, useMemo, useEffect } from "react";
 import TableFooter from "./TableFooter";
 import useTable from "./useTable";
-import DropdownFilterMenu from "./DropdownFilter";
+import DropdownFilter from "./DropdownFilter";
 
 export default function DProductTable({
   initialData, //початкові дані (з БД) - обов'язково
@@ -369,15 +369,10 @@ export default function DProductTable({
           //     typeof valueData,
           //   );
 
-          //   //--- якщо взодить в
-          //   if (value.includes(searchValue.toLowerCase())) {
-          //     nowData.push(current);
-          //     break; //вихід з внутрішнього циклу
-          //   }
-
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
           //filterFirst
+
           //   doStuff(4, 2, ">")=true
           let compareFirst = false;
           if (valueType === "numeric" || valueType === "date") {
@@ -387,42 +382,12 @@ export default function DProductTable({
               targetObj.comparisonFirst,
             );
           } else compareFirst = valueData.includes(filterFirst.toLowerCase());
-
-          //   console.log(
-          //     "RTable.js.js/applyFilters/compareFirst=",
-          //     compareFirst + " /valueType=",
-          //     valueType,
-          //     +" /valueData=",
-          //     valueData,
-          //     +" /filterFirst=",
-          //     filterFirst,
-          //   );
-
-          //    const compareFirst = doCompare(
-          //      valueData,
-          //      filterFirst,
-          //      targetObj.comparisonFirst,
-          //    );
-
-          //--- Якщо є filterFirst.length
           if (compareFirst) rowFilterted = true;
-          //   else rowFilterted = true;
-          //   console.log(
-          //     "RTable.js.js/applyFilters/attribute=",
-          //     attribute + "/compareFirst=",
-          //     compareFirst,
-          //   );
 
           //--- Якщо є filterLast.length
           if (filterLast.length > 0) {
             // console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
 
-            //--- comparisonLast
-            // const compareLast = doCompare(
-            //   valueData,
-            //   filterLast,
-            //   targetObj.comparisonLast,
-            // );
             let compareLast = false;
             if (valueType === "numeric" || valueType === "date") {
               compareLast = doCompare(
@@ -441,7 +406,6 @@ export default function DProductTable({
               filterLast,
             );
             if (compareLast) {
-              //   compareLast = true;
               //   console.log(
               //     "RTable.js.js/applyFilters/if(compareLast)/attribute=",
               //     attribute,
@@ -498,7 +462,7 @@ export default function DProductTable({
   const deleteFilterAll = () => {
     console.log("RTable.js/deleteFilterAll/");
     let tempFilterData = [...filterData];
-    const temp = tempFilterData.map((data, idx) => {
+    const temp = tempFilterData.map((data) => {
       data.comparisonFirst = "";
       data.filterFirst = "";
       data.logical = "";
@@ -534,9 +498,124 @@ export default function DProductTable({
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
       <div className="my-1 flex flex-wrap items-center justify-start">
         {/*  */}
+
+        {/* Блок:селект/фільтер/шрифт */}
+        <div className="flex flex-wrap items-center justify-start">
+          {/*Інформація про вибрані рядки  */}
+          {/* {typeof p_selected !== "undefined" && p_selected && ( */}
+          <button
+            className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+            onClick={onSelectAll}
+            title="Вибрати всі"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="h-5 w-5 text-red-500"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12.75l6 6 9-13.5"
+              />
+            </svg>
+
+            <p title="Відмічено">
+              : {selectedAllRows ? workData.length : selectedRows.length}
+            </p>
+          </button>
+
+          {/* Фільтр: Інфа відфільтровані/ вся БД  */}
+          {/* {typeof p_searchAllRows !== "undefined" && p_searchAllRows && ( */}
+          {typeof (p_filtered !== "undefined") && p_filtered && (
+            <div>
+              <button
+                //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+                className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+                onClick={() => setIsDropdownFilter(!isDropdownFilter)}
+              >
+                {/* Лійка */}
+                <svg
+                  // className="h-4 w-4 text-gray-500 dark:text-red-500"
+                  className="h-4 w-4 text-red-500"
+                  viewBox="0 0 24 24"
+                  fill={filteredIcon}
+                  // fill="none"
+                  // fill="currentColor"
+                  stroke="currentColor"
+                  // stroke="red"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+
+                <p title="Відфільтровано">: {workData.length}</p>
+                <p title="Вся БД">/ {initialData.length}</p>
+              </button>
+
+              {/* Dropdown menu */}
+              {isDropdownFilter && (
+                <DropdownFilter
+                  filterData={filterData}
+                  setFilterData={setFilterData}
+                  setIsDropdownFilter={setIsDropdownFilter}
+                  styleTableText={styleTableText}
+                  initialСolumns={initialСolumns}
+                  applyFilters={applyFilters}
+                  deleteFilterAll={deleteFilterAll}
+                />
+              )}
+            </div>
+          )}
+
+          {/* Вибір шрифта */}
+          <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50  p-1  dark:bg-gray-700">
+            <svg
+              className="h-5 w-5 text-red-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <polyline points="4 7 4 4 20 4 20 7" />{" "}
+              <line x1="9" y1="20" x2="15" y2="20" />{" "}
+              <line x1="12" y1="4" x2="12" y2="20" />
+            </svg>
+            {/* <p>Шрифт:</p> */}
+            <p>:</p>
+            <select
+              className="mx-1 block w-full  items-center border-gray-300 bg-gray-50 align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              defaultValue={tableFontSize}
+              onChange={(e) => setTableFontSize(e.target.value)}
+              //   id="page-size"
+              title="Величина шрифту"
+            >
+              <option value={tableFontSize} disabled>
+                {tableFontSize}
+              </option>
+              <option value="xs">xs</option>
+              <option value="sm">sm</option>
+              <option value="base">base</option>
+              <option value="lg">lg</option>
+              {/* <option value="xs">дрібний</option>
+              <option value="sm">середній</option>
+              <option value="base">базовий</option>
+              <option value="lg">великий</option> */}
+            </select>
+          </div>
+        </div>
+
         {/*Пошук швидкий/фільтр (рядок пощуку по всіх полях) */}
         {typeof p_searchAllRows !== "undefined" && p_searchAllRows && (
-          <div className="relative ml-1 items-center ">
+          <div className="relative ml-1 w-full items-center md:w-80">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
               {/* Лупа */}
               <svg
@@ -563,126 +642,15 @@ export default function DProductTable({
               //   onChange={(e) =>p_filterededp_searchAllRows onChangeSearch(e)} //Для Enter
               onChange={(e) => seachAllFilds(e)} //Пошук
               type="text"
-              className="block w-80 items-center rounded-lg border border-gray-300 bg-gray-50 p-1 pl-10 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full items-center rounded-lg border border-gray-300 bg-gray-50 p-1 pl-10 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             />
           </div>
         )}
-
-        {/*Інформація про вибрані рядки  */}
-        {/* {typeof p_selected !== "undefined" && p_selected && ( */}
-        <button
-          className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-          onClick={onSelectAll}
-          title="Вибрати всі"
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="h-5 w-5 text-red-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.5 12.75l6 6 9-13.5"
-            />
-          </svg>
-
-          <p title="Відмічено">
-            : {selectedAllRows ? workData.length : selectedRows.length}
-          </p>
-        </button>
-
-        {/*Фільтр/Інфа про відфільтровані р і всю БД  */}
-        {/* {typeof p_searchAllRows !== "undefined" && p_searchAllRows && ( */}
-        {typeof (p_filtered !== "undefined") && p_filtered && (
-          <div>
-            <button
-              //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-              className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-              onClick={() => setIsDropdownFilter(!isDropdownFilter)}
-            >
-              {/* Лійка */}
-              <svg
-                // className="h-4 w-4 text-gray-500 dark:text-red-500"
-                className="h-4 w-4 text-red-500"
-                viewBox="0 0 24 24"
-                fill={filteredIcon}
-                // fill="none"
-                // fill="currentColor"
-                stroke="currentColor"
-                // stroke="red"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-              </svg>
-
-              <p title="Відфільтровано">: {workData.length}</p>
-              <p title="Вся БД">/ {initialData.length}</p>
-            </button>
-
-            {/* Dropdown menu */}
-            {isDropdownFilter && (
-              <DropdownFilterMenu
-                filterData={filterData}
-                setFilterData={setFilterData}
-                setIsDropdownFilter={setIsDropdownFilter}
-                styleTableText={styleTableText}
-                initialСolumns={initialСolumns}
-                applyFilters={applyFilters}
-                deleteFilterAll={deleteFilterAll}
-              />
-            )}
-          </div>
-        )}
-
-        {/* Вибір шрифта */}
-        <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50  p-1  dark:bg-gray-700">
-          <svg
-            className="h-5 w-5 text-red-500"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <polyline points="4 7 4 4 20 4 20 7" />{" "}
-            <line x1="9" y1="20" x2="15" y2="20" />{" "}
-            <line x1="12" y1="4" x2="12" y2="20" />
-          </svg>
-          {/* <p>Шрифт:</p> */}
-          <p>:</p>
-          <select
-            className="mx-1 block w-full  items-center border-gray-300 bg-gray-50 align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            defaultValue={tableFontSize}
-            onChange={(e) => setTableFontSize(e.target.value)}
-            //   id="page-size"
-            title="Величина шрифту"
-          >
-            <option value={tableFontSize} disabled>
-              {tableFontSize}
-            </option>
-            {/* <option value="xs">xs</option>
-            <option value="sm">sm</option>
-            <option value="base">base</option>
-            <option value="lg">lg</option> */}
-            <option value="xs">дрібний</option>
-            <option value="sm">середній</option>
-            <option value="base">базовий</option>
-            <option value="lg">великий</option>
-          </select>
-        </div>
       </div>
 
-      {/* *******  border-3 border-green-300  Обгортка(Wraper)таблиці (для проокрутки і...) */}
+      {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
-        className=" max-h-[--sH] w-full overflow-auto border border-neutral-500  text-center text-gray-500 dark:text-gray-400"
+        className=" max-h-[--sH] w-full overflow-auto border border-neutral-500 text-center  text-gray-500 dark:text-gray-400 "
         style={{ "--sH": "calc(100vh - 250px)" }} //Створення style для h-
       >
         {/*border-collapse- обєднання границь ячейок "> */}
