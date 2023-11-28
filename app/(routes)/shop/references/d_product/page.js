@@ -39,7 +39,6 @@ export default function Products() {
     {
       label: "Id",
       accessor: "id",
-      type: "number",
       sortable: true,
       minWith: "15px",
       With: "100px",
@@ -57,6 +56,7 @@ export default function Products() {
       accessor: "skod",
       sortable: true,
       filtered: true,
+      align: "center",
       minWith: "100px",
       With: "200px",
     },

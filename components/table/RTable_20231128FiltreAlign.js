@@ -30,7 +30,6 @@
 // 20231120 // Добавив вікна фільтрів по заданих полях:DropdownFilter.js+DroopFifterForm.js
 // 20231127 // Фільтрування по багатьох полях/Відновлення БД до фільтрування/ При фівльтруванні для порівняння дані перетворюються у ті типи, які задані в initialСolumns.type
 // 20231128 // Вирівнювання даних в стовбцях згідно даних (initialСolumns.align)/по замовчуванню згідно типів даних (initialСolumns.type: numeric+boll=right/ date=center/ решта=left)/Якщо не заданий тип, то =left
-//          // ВІдмітити(зняти) всі/
 //--------------------------------------------------------------------------------------------------------------------
 
 //*** Типи даних ******* */(string,number,boolean,date-це об'єкт,але треба вказувати)
@@ -53,7 +52,6 @@ export default function DProductTable({
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
 }) {
   const [selectedRows, setSelectedRows] = useState([]);
-  const [selectedAllRows, setSelectedAllRows] = useState(false);
   const [sortField, setSortField] = useState(""); //Поле(колонка) по якій сортується
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
@@ -138,7 +136,6 @@ export default function DProductTable({
     });
     return resData;
   }, [initialСolumns]); //Змінюється тільки при зміні 2-го аргумента
-
   const [filterData, setFilterData] = useState(preparedFilterData); //Фільтер для всіх полів
   //   console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
 
@@ -254,19 +251,6 @@ export default function DProductTable({
       targetObj._selected = newSelect;
       setWorkData(selectData);
     }
-  };
-
-  //--- Вибір/Selected (всі)
-  const onSelectAll = () => {
-    let selectData = [...workData]; //Копія робочого масиву обєктів
-    const temp = selectData.map((data, idx) => {
-      if (selectedAllRows) data._selected = false;
-      else data._selected = true;
-      setWorkData(selectData);
-    });
-    //
-    setSelectedAllRows(!selectedAllRows);
-    setSelectedRows([]);
   };
 
   //== Фільтр множинний */
@@ -490,7 +474,7 @@ export default function DProductTable({
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
       <div className="my-1 flex flex-wrap items-center justify-start">
         {/*  */}
-        {/*Пошук швидкий/фільтр (рядок пощуку по всіх полях) */}
+        {/*Пошук/фільтр (рядок пощуку по всіх полях) */}
         {typeof p_searchAllRows !== "undefined" && p_searchAllRows && (
           <div className="relative ml-1 items-center ">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
@@ -523,32 +507,6 @@ export default function DProductTable({
             />
           </div>
         )}
-
-        {/*Інформація про вибрані рядки  */}
-        {/* {typeof p_selected !== "undefined" && p_selected && ( */}
-        <button
-          className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-          onClick={onSelectAll}
-        >
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="h-5 w-5 text-red-500"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.5 12.75l6 6 9-13.5"
-            />
-          </svg>
-
-          <p title="Відмічено">
-            : {selectedAllRows ? workData.length : selectedRows.length}
-          </p>
-        </button>
 
         {/*Фільтр/Інфа про відфільтровані р і всю БД  */}
         {/* {typeof p_searchAllRows !== "undefined" && p_searchAllRows && ( */}
@@ -595,10 +553,32 @@ export default function DProductTable({
           </div>
         )}
 
+        {/*Інформація про вибрані рядки  */}
+        {/* {typeof p_selected !== "undefined" && p_selected && ( */}
+        <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700">
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            strokeWidth="1.5"
+            stroke="currentColor"
+            className="h-5 w-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              d="M4.5 12.75l6 6 9-13.5"
+            />
+          </svg>
+
+          <p title="Відмічено">: {selectedRows.length}</p>
+        </div>
+        {/* )} */}
+
         {/* Вибір шрифта */}
         <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50  p-1  dark:bg-gray-700">
           <svg
-            className="h-5 w-5 text-red-500"
+            className="h-5 w-5"
             viewBox="0 0 24 24"
             fill="none"
             stroke="currentColor"
@@ -614,7 +594,7 @@ export default function DProductTable({
           {/* <p>Шрифт:</p> */}
           <p>:</p>
           <select
-            className="mx-1 block w-full  items-center border-gray-300 bg-gray-50 align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+            className="mx-1 block  w-full items-center border-gray-300 bg-gray-50  align-middle text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             defaultValue={tableFontSize}
             onChange={(e) => setTableFontSize(e.target.value)}
             //   id="page-size"
@@ -741,7 +721,7 @@ export default function DProductTable({
                 onClick={(e) => selectRows(e)}
               >
                 {/* перебір полів */}
-                {initialСolumns.map(({ accessor, type = "", align = "" }) => {
+                {initialСolumns.map(({ accessor, type = "", align="" }) => {
                   const tData = accessor === "index" ? rowIndex : row[accessor];
                   //   console.log("RTable.js/tbody/Сolumns.map/type=", type);
 
