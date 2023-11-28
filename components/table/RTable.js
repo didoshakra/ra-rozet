@@ -127,7 +127,8 @@ export default function DProductTable({
         tempData._nrow = nR;
         tempData.name = data.label;
         tempData.accessor = data.accessor;
-        tempData.type = data.type;
+        if (data.type != undefined) tempData.type = data.type;
+        else tempData.type = "string";
         tempData.comparisonFirst = "";
         tempData.filterFirst = "";
         tempData.logical = "";
@@ -300,12 +301,11 @@ export default function DProductTable({
       if (check(x, y)) {
         return true;
       } else {
-        console.log("ignore");
         return false;
       }
     }
-    //--- Ф-ція перетворення типів у відповідності до заданих типиві таблиці
-    const valToType = (value, type) => {
+    //--- Ф-ція перетворення типів у відповідності до заданих типиві таблиці і у нижній регістр
+    const valToType = (value, type = "string") => {
       if (type == "number") return parseFloat(value);
       if (type == "date") return Date.parse(value);
       return String(value).toLowerCase(); //переводимо значення поля у нижній регістр
@@ -313,7 +313,7 @@ export default function DProductTable({
 
     //--- Початок фільтруівання
     setIsDropdownFilter(false); //Закриваєм випадаюче вікно фільтрів
-    console.log("RTable.js.js/applyFilters/filterData=", filterData);
+    // console.log("RTable.js.js/applyFilters/filterData=", filterData);
     if (filteredIcon === "none") {
       setBeforFilterData(workData); //Для відкату
     }
@@ -327,7 +327,7 @@ export default function DProductTable({
     let tempFilterData = [...filterData]; //Копія робочого масиву обєктів
     // console.log("RTable.js.js/ApplyFilters/tempFilterData=", tempFilterData);
     for (const current of tempWorkData) {
-      console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
+      //   console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
       //++++ Принцип виходу з атрибуту(for2) при невідповідностях
       //Цикл по колонках
       let rowFilterted = false;
@@ -346,14 +346,18 @@ export default function DProductTable({
 
         //===============================
         if (targetObj && targetObj.filterFirst.length > 0) {
-          console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
-          const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`;
+          //   console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
+          //   const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`;
           //   console.log("RTable.js.js/ApplyFilters/for2/targetObj: ", targetObj);
           //   console.log("RTable.js.js/ApplyFilters/for2/filterRow: ", filterRow);
-          //
 
-          const valueData = valToType(current[attribute], targetObj.type);
-          const filterFirst = valToType(targetObj.filterFirst, targetObj.type);
+          //--- Змінна, що задає тип
+          const valueType =
+            targetObj.type === undefined ? "string" : targetObj.type; //Тип змінної, якщо не заданий то "string"
+          //Перетворюємо у вказаний тип і у нижній регістр
+          const valueData = valToType(current[attribute], valueType);
+          const filterFirst = valToType(targetObj.filterFirst, valueType);
+          const filterLast = valToType(targetObj.filterLast, valueType);
           //   console.log(
           //     "RTable.js.js/ApplyFilters/filterFirst=",
           //     filterFirst + " /valueData=",
@@ -365,16 +369,42 @@ export default function DProductTable({
           //     typeof valueData,
           //   );
 
+          //   //--- якщо взодить в
+          //   if (value.includes(searchValue.toLowerCase())) {
+          //     nowData.push(current);
+          //     break; //вихід з внутрішнього циклу
+          //   }
+
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
           //filterFirst
           //   doStuff(4, 2, ">")=true
-          const compareFirst = doCompare(
-            valueData,
-            filterFirst,
-            targetObj.comparisonFirst,
-          );
-          //--- Якщо є filterАшкіе.length
+          let compareFirst = false;
+          if (valueType === "numeric" || valueType === "date") {
+            compareFirst = doCompare(
+              valueData,
+              filterFirst,
+              targetObj.comparisonFirst,
+            );
+          } else compareFirst = valueData.includes(filterFirst.toLowerCase());
+
+          //   console.log(
+          //     "RTable.js.js/applyFilters/compareFirst=",
+          //     compareFirst + " /valueType=",
+          //     valueType,
+          //     +" /valueData=",
+          //     valueData,
+          //     +" /filterFirst=",
+          //     filterFirst,
+          //   );
+
+          //    const compareFirst = doCompare(
+          //      valueData,
+          //      filterFirst,
+          //      targetObj.comparisonFirst,
+          //    );
+
+          //--- Якщо є filterFirst.length
           if (compareFirst) rowFilterted = true;
           //   else rowFilterted = true;
           //   console.log(
@@ -384,24 +414,38 @@ export default function DProductTable({
           //   );
 
           //--- Якщо є filterLast.length
-          if (targetObj.filterLast.length > 0) {
-            console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
-
-            const filterLast = valToType(targetObj.filterLast, targetObj.type);
+          if (filterLast.length > 0) {
+            // console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
 
             //--- comparisonLast
-            const compareLast = doCompare(
+            // const compareLast = doCompare(
+            //   valueData,
+            //   filterLast,
+            //   targetObj.comparisonLast,
+            // );
+            let compareLast = false;
+            if (valueType === "numeric" || valueType === "date") {
+              compareLast = doCompare(
+                valueData,
+                filterLast,
+                targetObj.comparisonLast,
+              );
+            } else compareLast = valueData.includes(filterLast.toLowerCase());
+            console.log(
+              "RTable.js.js/applyFilters/compareLast=",
+              compareLast + " /valueType=",
+              valueType,
+              +" /valueData=",
               valueData,
+              +" /filterLast=",
               filterLast,
-              targetObj.comparisonLast,
             );
-
             if (compareLast) {
               //   compareLast = true;
-              console.log(
-                "RTable.js.js/applyFilters/if(compareLast)/attribute=",
-                attribute,
-              );
+              //   console.log(
+              //     "RTable.js.js/applyFilters/if(compareLast)/attribute=",
+              //     attribute,
+              //   );
 
               //Варіанти: (&&-> First &&Last)1-додаєм якщо обидва== true -> решта НІ
               //          (||-> First|| Last)-додаєм, якщо хоч один = true -> а так як compareLast = true, то додаєм всі
@@ -412,7 +456,7 @@ export default function DProductTable({
                 if (compareFirst) {
                   rowFilterted = true;
                 } else {
-                  console.log("RTable.js.js/ApplyFilters/break1=");
+                  //   console.log("RTable.js.js/ApplyFilters/break1=");
                   break;
                 }
               } else rowFilterted = true; // Якщо не && то При || додаєм всі бо compareLast = true
@@ -423,17 +467,17 @@ export default function DProductTable({
               //          (First = true  && Last = false)-ні
               //          (First = false && Last = false)-ні
             } else {
-              console.log("RTable.js.js/ApplyFilters/break2=");
+              //   console.log("RTable.js.js/ApplyFilters/break2=");
               break;
             }
           } else if (!compareFirst) rowFilterted = false;
         }
         //-- fEndor2
-        console.log(
-          "RTable.js.js/ApplyFilters/Endfor2/_nRow: ",
-          current._nrow + " /attribute:",
-          attribute,
-        );
+        // console.log(
+        //   "RTable.js.js/ApplyFilters/Endfor2/_nRow: ",
+        //   current._nrow + " /attribute:",
+        //   attribute,
+        // );
       }
       //--- Endfor1
       console.log("RTable.js.js/ApplyFilters/Endfor1*/_nRow: ", current._nrow);
@@ -529,6 +573,7 @@ export default function DProductTable({
         <button
           className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
           onClick={onSelectAll}
+          title="Вибрати всі"
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
