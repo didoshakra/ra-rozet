@@ -411,9 +411,6 @@ export default function DProductTable({
           } else if (!compareFirst) rowFilterted = false;
         }
         //-- fEndor2
-        // console.log(
-        //   "RTable.js.js/applyFilters/if(targetObj && targetObj.filterFirst.length > 0)",
-        // );
         console.log(
           "RTable.js.js/ApplyFilters/Endfor2/_nRow: ",
           current._nrow + " /attribute:",
@@ -423,7 +420,6 @@ export default function DProductTable({
       //--- Endfor1
       console.log("RTable.js.js/ApplyFilters/Endfor1*/_nRow: ", current._nrow);
       if (rowFilterted) {
-        // rowFilterted = false;
         nowData.push(current); // Добавляємо текучий рядок в новий масив
         console.log(
           "RTable.js.js/ApplyFilters/Endfor1/if(rowFilterted)***/_nRow: ",
