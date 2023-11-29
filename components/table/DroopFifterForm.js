@@ -133,13 +133,16 @@ export default function DroopFifterForm({
                 onChange={handleChange}
                 value={state.comparisonFirst}
                 required
+                // defaultValue="=="
               >
                 <option value=""></option>
                 {valueType === "number" || valueType === "date" ? (
                   <>
-                    <option value=">">&gt;</option>
                     <option value=">=">&gt;=</option>
-                    <option value="==">=</option>
+                    <option value=">">&gt;</option>
+                    <option selected="true" value="==">
+                      ==
+                    </option>
                     <option value="!=">!=</option>
                     <option value="<="> &lt;=</option>
                     <option value="<"> &lt;</option>
@@ -151,7 +154,7 @@ export default function DroopFifterForm({
                   </>
                 ) : (
                   <>
-                    <option value="include">inc</option>
+                    <option value="include">=in</option>
                   </>
                 )}
               </select>
@@ -182,7 +185,7 @@ export default function DroopFifterForm({
                 onChange={handleChange}
                 value={state.logical}
               >
-                <option value=" "> </option>
+                {/* <option value=" "> </option> */}
                 <option value="||">or</option>
                 <option value="&&">and</option>
               </select>
@@ -198,13 +201,28 @@ export default function DroopFifterForm({
                 onChange={handleChange}
                 value={state.comparisonLast}
               >
-                <option value=" "> </option>
-                <option value=">">&gt;</option>
-                <option value=">=">&gt;=</option>
-                <option value="==">=</option>
-                <option value="!=">!=</option>
-                <option value="<="> &lt;=</option>
-                <option value="<"> &lt;</option>
+                <option value=""></option>
+                {valueType === "number" || valueType === "date" ? (
+                  <>
+                    <option selected="true" value="==">
+                      ==
+                    </option>
+                    <option value=">">&gt;</option>
+                    <option value=">=">&gt;=</option>
+                    <option value="!=">!=</option>
+                    <option value="<="> &lt;=</option>
+                    <option value="<"> &lt;</option>
+                  </>
+                ) : valueType === "boolean" ? (
+                  <>
+                    <option value="true">true</option>
+                    <option value="false">false</option>
+                  </>
+                ) : (
+                  <>
+                    <option value="include">=in</option>
+                  </>
+                )}
               </select>
             </label>
             <label className="font-semibold text-gray-700">

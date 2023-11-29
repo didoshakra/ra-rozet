@@ -322,7 +322,7 @@ export default function DProductTable({
     // console.log("RTable.js.js/applyFilters/workData=", workData);
     const nowData = [];
     //*** Цикл по рядках
-    const attributes = Object.keys(tempWorkData[0]); //Це рядок заголовку(масив)
+    // const attributes = Object.keys(tempWorkData[0]); //Це рядок заголовку(масив)
     // console.log("RTable.js.js/ApplyFilters/attributes=", attributes);
     let tempFilterData = [...filterData]; //Копія робочого масиву обєктів
     // console.log("RTable.js.js/ApplyFilters/tempFilterData=", tempFilterData);
@@ -331,30 +331,27 @@ export default function DProductTable({
       //++++ Принцип виходу з атрибуту(for2) при невідповідностях
       //Цикл по колонках
       let rowFilterted = false;
-      //   for (const attribute of attributes) {
-      //   let compareFirst = false;
-      //   let compareLast = false;
       for (const rowColumn of tempFilterData) {
         const attribute = rowColumn.accessor;
         // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
         // break;
-        // Чи задане поле в
+
+        // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
         const targetObj = tempFilterData.find(
           (obj) => obj.accessor === attribute,
-        ); //Шукажмо запис по _nrow=nRow
-        // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
+        );
 
         //===============================
         if (targetObj && targetObj.filterFirst.length > 0) {
           //   console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
-          //   const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`;
+          const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`;
           //   console.log("RTable.js.js/ApplyFilters/for2/targetObj: ", targetObj);
           //   console.log("RTable.js.js/ApplyFilters/for2/filterRow: ", filterRow);
 
-          //--- Змінна, що задає тип
+          //--- Задаєм змінну типу поля
           const valueType =
             targetObj.type === undefined ? "string" : targetObj.type; //Тип змінної, якщо не заданий то "string"
-          //Перетворюємо у вказаний тип і у нижній регістр
+          //--- Перетворюємо у робочі змінні у вказаний тип і у нижній регістр
           const valueData = valToType(current[attribute], valueType);
           const filterFirst = valToType(targetObj.filterFirst, valueType);
           const filterLast = valToType(targetObj.filterLast, valueType);
@@ -382,7 +379,14 @@ export default function DProductTable({
               targetObj.comparisonFirst,
             );
           } else compareFirst = valueData.includes(filterFirst.toLowerCase());
-          if (compareFirst) rowFilterted = true;
+          if (compareFirst) {
+            rowFilterted = true;
+            console.log(
+              "RTable.js.js/applyFilters/iFcompareFirst/filterRow: ",
+              filterRow + " /current._nRow:",
+              current._nRow,
+            );
+          }
 
           //--- Якщо є filterLast.length
           if (filterLast.length > 0) {
@@ -396,45 +400,59 @@ export default function DProductTable({
                 targetObj.comparisonLast,
               );
             } else compareLast = valueData.includes(filterLast.toLowerCase());
-            console.log(
-              "RTable.js.js/applyFilters/compareLast=",
-              compareLast + " /valueType=",
-              valueType,
-              +" /valueData=",
-              valueData,
-              +" /filterLast=",
-              filterLast,
-            );
+            // console.log(
+            //   "RTable.js.js/applyFilters/compareLast=",
+            //   compareLast + " /valueType=",
+            //   valueType,
+            //   +" /valueData=",
+            //   valueData,
+            //   +" /filterLast=",
+            //   filterLast,
+            // );
             if (compareLast) {
-              //   console.log(
-              //     "RTable.js.js/applyFilters/if(compareLast)/attribute=",
-              //     attribute,
-              //   );
+              console.log(
+                "RTable.js.js/applyFilters/(compareLast)/current._nRow:",
+                current._nRow,
+              );
 
               //Варіанти: (&&-> First &&Last)1-додаєм якщо обидва== true -> решта НІ
               //          (||-> First|| Last)-додаєм, якщо хоч один = true -> а так як compareLast = true, то додаєм всі
               //          (First = false || Last = true) 4-додаєм всі
 
+              // порівнюємо тільки compareFirst, бо compareLast = true
               if (targetObj.logical === "&&") {
-                // порівнюємо тільки compareFirst, бо compareLast = true
-                if (compareFirst) {
-                  rowFilterted = true;
-                } else {
-                  //   console.log("RTable.js.js/ApplyFilters/break1=");
-                  break;
+                if (compareFirst) rowFilterted = true;
+                else {
+                  rowFilterted = false;//Має бути бо за For при rowFilterted = true; зробиться Push 
+                  break; //(filterFirct=false && filterLast==true) Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
                 }
               } else rowFilterted = true; // Якщо не && то При || додаєм всі бо compareLast = true
-            } else if (compareFirst && targetObj.logical === "||") {
+            }
+            // !(compareLast)
+            else if (compareFirst && targetObj.logical === "||") {
+              console
+                .log
+                // "* RTable.js.js/ApplyFilters/!(compareLast)ElseiF(compareFirst &&/_nRow: ",
+                // current._nrow + "/ targetObj.logical",
+                // targetObj.logical,
+                ();
               rowFilterted = true;
               // Варіанти:(First = true  || Last = false)-додаєм
               //          (First = false || Last = false)-ні
               //          (First = true  && Last = false)-ні
               //          (First = false && Last = false)-ні
             } else {
-              //   console.log("RTable.js.js/ApplyFilters/break2=");
-              break;
+              //   console.log(
+              //     "* RTable.js.js/ApplyFilters/!(compareLast)elseIfElse(compareFirst &&/_nRow: ",
+              //     current._nrow,
+              //   );
+              rowFilterted = false;//Має бути бо за For при rowFilterted = true; зробиться Push
+              break; //Бо filterFirct=false && filterLast=false, отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
             }
-          } else if (!compareFirst) rowFilterted = false;
+          } else if (!compareFirst) {
+            rowFilterted = false;//Має бути бо за For при rowFilterted = true; зробиться Push
+            break; //filterFirct=false, а filterLast нема. Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
+          }
         }
         //-- fEndor2
         // console.log(
@@ -444,7 +462,7 @@ export default function DProductTable({
         // );
       }
       //--- Endfor1
-      console.log("RTable.js.js/ApplyFilters/Endfor1*/_nRow: ", current._nrow);
+      //   console.log("RTable.js.js/ApplyFilters/Endfor1*/_nRow: ", current._nrow);
       if (rowFilterted) {
         nowData.push(current); // Добавляємо текучий рядок в новий масив
         console.log(
@@ -479,7 +497,7 @@ export default function DProductTable({
 
   return (
     //align-middle-текст по вертикалі посередині
-    <div className={`${styleTableText} align-middle px-1 `}>
+    <div className={`${styleTableText} px-1 align-middle `}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
         <div className="rounded-3xl border border-neutral-500 bg-tabThBgCol text-headMenuText dark:bg-tabThBgColD  dark:text-headMenuTextDark">
