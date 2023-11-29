@@ -143,6 +143,7 @@ export default function DropdownFilter({
       </div>
       {/* <div className="max-w-ful overflow-auto"> */}
       <div className="w-ful">
+        {/* <table className="table-fixed"> */}
         <table className="table-auto">
           {/* <thead className="bg-gray-300  text-left uppercase  text-tabThTexCol dark:bg-gray-500 dark:text-white"> */}
           <thead className="bg-gray-200  text-left uppercase text-tabThTexCol dark:bg-gray-400  dark:text-black">
