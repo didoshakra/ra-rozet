@@ -238,11 +238,11 @@ export default function DroopFifterForm({
                 )}
               </select>
             </label>
-            <label className="font-semibold text-gray-700">
+            <label className="w-full font-semibold text-gray-700">
               <div className=" text-center">фільтр2 </div>
               <input
                 //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-                className="  w-6items-center  block rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+                className="w-full items-center  block rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
                 type="text"
                 name="filterLast"
                 value={state.filterLast}
