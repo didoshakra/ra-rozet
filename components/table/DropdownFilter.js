@@ -46,7 +46,8 @@ export default function DropdownFilter({
     // <div className="absolute left-0 z-10 mx-2 rounded-lg border border-gray-300  bg-gray-200  p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-400 md:left-auto">
     <div
       style={{ "--sW": "calc(100vw - 20px)" }}//
-      className="absolute left-0 z-10 mx-2 max-w-[--sW] max-w-full rounded-lg border border-gray-300  bg-gray-200  p-1  dark:border-gray-300 dark:bg-gray-400 md:left-auto"
+      className="absolute left-0 z-10 mx-2 max-w-[--sW] rounded-lg border border-gray-300  bg-gray-200  p-1  dark:border-gray-300 dark:bg-gray-400 md:left-auto"
+    //   className="absolute left-0 z-10 mx-2 max-w-[100px] rounded-lg border border-gray-300  bg-gray-200  p-1  dark:border-gray-300 dark:bg-gray-400 md:left-auto"
     >
       <div className="mb-1 flex justify-between">
         <button
@@ -140,8 +141,9 @@ export default function DropdownFilter({
           </svg>
         </button>
       </div>
-      <div className="max-w-xs overflow-auto md:max-w-md">
-        <table className=" w-full table-auto border-collapse">
+      {/* <div className="max-w-ful overflow-auto"> */}
+      <div className="w-ful">
+        <table className="table-auto">
           {/* <thead className="bg-gray-300  text-left uppercase  text-tabThTexCol dark:bg-gray-500 dark:text-white"> */}
           <thead className="bg-gray-200  text-left uppercase text-tabThTexCol dark:bg-gray-400  dark:text-black">
             <tr>
