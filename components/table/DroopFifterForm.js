@@ -27,8 +27,16 @@ export default function DroopFifterForm({
         : valueType === "boolean"
         ? "true"
         : "include",
+    comparisonLast:
+      filterDataRow.comparisonLast.length != 0
+        ? filterDataRow.comparisonLast
+        : valueType === "number" || valueType === "date"
+        ? "=="
+        : valueType === "boolean"
+        ? "true"
+        : "include",
     //
-    comparisonLast: filterDataRow.comparisonLast,
+    // comparisonLast: filterDataRow.comparisonLast,
     // filterFirst: "",
     // filterLast: "",
     // logical: "",
@@ -167,11 +175,11 @@ export default function DroopFifterForm({
               </select>
             </label>
             {/*  */}
-            <label className="font-semibold text-gray-700">
+            <label className="w-full font-semibold text-gray-700">
               <div className=" text-center">фільтр1</div>
               <input
                 //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-                className=" block  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+                className=" w-full block  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
                 id="filterFirst"
                 required
                 type="text"
