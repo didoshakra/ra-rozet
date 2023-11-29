@@ -12,11 +12,22 @@ export default function DroopFifterForm({
   filterData,
   setFilterData,
 }) {
+  const valueType = filterDataRow.type; //Тип поля, що фільтрується
   const [state, setState] = useState({
     filterFirst: filterDataRow.filterFirst,
     filterLast: filterDataRow.filterLast,
-    logical: filterDataRow.logical,
-    comparisonFirst: filterDataRow.comparisonFirst,
+    // logical: filterDataRow.logical,
+    logical: filterDataRow.logical.length != 0 ? filterDataRow.logical : "or",
+    // comparisonFirst: filterDataRow.comparisonFirst,
+    comparisonFirst:
+      filterDataRow.comparisonFirst.length != 0
+        ? filterDataRow.comparisonFirst
+        : valueType === "number" || valueType === "date"
+        ? "=="
+        : valueType === "boolean"
+        ? "true"
+        : "include",
+    //
     comparisonLast: filterDataRow.comparisonLast,
     // filterFirst: "",
     // filterLast: "",
@@ -25,7 +36,6 @@ export default function DroopFifterForm({
     // comparisonLast: "",
   });
 
-  const valueType = filterDataRow.type; //Тип поля, що фільтрується
   console.log("DroopFifterForm.js/valueType=", valueType);
   const [inputError, setInputError] = useState(null);
 
@@ -133,16 +143,13 @@ export default function DroopFifterForm({
                 onChange={handleChange}
                 value={state.comparisonFirst}
                 required
-                // defaultValue="=="
               >
-                <option value=""></option>
+                {/* <option value=""></option> */}
                 {valueType === "number" || valueType === "date" ? (
                   <>
                     <option value=">=">&gt;=</option>
                     <option value=">">&gt;</option>
-                    <option selected="true" value="==">
-                      ==
-                    </option>
+                    <option value="==">==</option>
                     <option value="!=">!=</option>
                     <option value="<="> &lt;=</option>
                     <option value="<"> &lt;</option>
@@ -178,7 +185,7 @@ export default function DroopFifterForm({
           {/* filterLast */}
           <div className="flex space-x-1 ">
             <label className=" font-semibold text-gray-700">
-              <div className=" text-center">and</div>
+              <div className=" text-center">or/and</div>
               <select
                 className=" block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
                 name="logical"
@@ -201,12 +208,10 @@ export default function DroopFifterForm({
                 onChange={handleChange}
                 value={state.comparisonLast}
               >
-                <option value=""></option>
+                {/* <option value=""></option> */}
                 {valueType === "number" || valueType === "date" ? (
                   <>
-                    <option selected="true" value="==">
-                      ==
-                    </option>
+                    <option value="==">==</option>
                     <option value=">">&gt;</option>
                     <option value=">=">&gt;=</option>
                     <option value="!=">!=</option>
