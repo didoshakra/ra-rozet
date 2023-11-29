@@ -375,7 +375,7 @@ export default function DProductTable({
 
           //   doStuff(4, 2, ">")=true
           let compareFirst = false;
-          if (valueType === "numeric" || valueType === "date") {
+          if (valueType === "number" || valueType === "date") {
             compareFirst = doCompare(
               valueData,
               filterFirst,
@@ -479,7 +479,7 @@ export default function DProductTable({
 
   return (
     //align-middle-текст по вертикалі посередині
-    <div className={`${styleTableText} align-middle `}>
+    <div className={`${styleTableText} align-middle px-1 `}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
         <div className="rounded-3xl border border-neutral-500 bg-tabThBgCol text-headMenuText dark:bg-tabThBgColD  dark:text-headMenuTextDark">
@@ -496,6 +496,7 @@ export default function DProductTable({
 
       {/* Надбудова таблиці з елементами управління (пошук+...) */}
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
+      {/* <div className="my-1 flex flex-wrap items-center justify-start"> */}
       <div className="my-1 flex flex-wrap items-center justify-start">
         {/*  */}
 

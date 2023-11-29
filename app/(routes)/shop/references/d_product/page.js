@@ -54,6 +54,7 @@ export default function Products() {
     {
       label: "ШтрихКод",
       accessor: "skod",
+      type: "date",
       sortable: true,
       filtered: true,
       align: "center",
@@ -65,6 +66,7 @@ export default function Products() {
       accessor: "category",
       sortable: true,
       filtered: true,
+      type: "boolean",
       minWith: "150px",
       With: "200px",
     },

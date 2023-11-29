@@ -9,13 +9,8 @@ export default function DropdownFilter({
   styleTableText,
   deleteFilterAll,
 }) {
-  const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false); //Зберігається перед селектом
-  const [filterDataRow, setFilterDataRow] = useState([]); //Зберігається перед селектом
-
-  const handleAdd = () => {
-    setIsDropdownFilterForm(true);
-    // console.log("DropdownFilter.js/handleAdd");
-  };
+  const [isDropdownFilterForm, setIsDropdownFilterForm] = useState(false);
+  const [filterDataRow, setFilterDataRow] = useState([]); //Рядок, що коригується(в DropdownFilterForm)
 
   //--- Selected / Записуємо селект(true/false) в _selected роточого масиву(workData)
   const editRows = (e) => {
@@ -48,7 +43,7 @@ export default function DropdownFilter({
   //   };
 
   return (
-    <div className="absolute z-10 rounded-lg  border border-gray-300  bg-gray-200  p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-400">
+    <div className="absolute left-0 z-10 mx-2 rounded-lg border border-gray-300  bg-gray-200  p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-400 md:left-auto">
       <div className="mb-1 flex justify-between">
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
@@ -210,7 +205,7 @@ export default function DropdownFilter({
         <DroopFifterForm
           setIsDropdownFilterForm={setIsDropdownFilterForm}
           filterDataRow={filterDataRow}
-          filterData={filterData}
+          filterData={filterData} //масив фільтрів
           setFilterData={setFilterData}
         />
       )}
