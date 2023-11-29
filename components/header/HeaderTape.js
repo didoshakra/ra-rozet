@@ -14,8 +14,8 @@ const HeaderTape = () => {
     <div className="h-18 mx-auto my-auto flex w-full flex-col justify-start bg-tapeMenuBg px-2 text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
       {/* <div className="relative flex flex-col justify-start md:flex-row md:justify-between "> */}
       {/* <div className="flex flex-col justify-start md:flex-row md:justify-between "> */}
-      <div className="w-full">
-        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
+      <div className="mx-auto w-full">
+        GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
         {/* <a
           className="flex items-center justify-start px-1 text-sm"
           href="tel:+380508580704"
