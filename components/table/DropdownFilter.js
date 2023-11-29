@@ -43,7 +43,8 @@ export default function DropdownFilter({
   //   };
 
   return (
-    <div className="absolute left-0 z-10 mx-2 rounded-lg border border-gray-300  bg-gray-200  p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-400 md:left-auto">
+    // <div className="absolute left-0 z-10 mx-2 rounded-lg border border-gray-300  bg-gray-200  p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-400 md:left-auto">
+    <div className="absolute left-0 z-10 mx-2 max-w-full rounded-lg border border-gray-300  bg-gray-200  p-1  dark:border-gray-300 dark:bg-gray-400 md:left-auto">
       <div className="mb-1 flex justify-between">
         <button
           className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
