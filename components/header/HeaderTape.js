@@ -14,7 +14,8 @@ const HeaderTape = () => {
     <div className="h-18 mx-auto my-auto flex w-full flex-col justify-start bg-tapeMenuBg px-2 text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
       {/* <div className="relative flex flex-col justify-start md:flex-row md:justify-between "> */}
       {/* <div className="flex flex-col justify-start md:flex-row md:justify-between "> */}
-      <div className="w-full ">
+      <div className="w-full">
+        FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF
         {/* <a
           className="flex items-center justify-start px-1 text-sm"
           href="tel:+380508580704"
@@ -29,9 +30,9 @@ const HeaderTape = () => {
           <IconPhone width={iconSize} height={iconSize} colorFill="white" />
           +38(068-0000000)
         </a> */}
-        <span className="px-1 text-sm ">
+        {/* <span className="px-1 text-sm ">
           Tailwindcss/PostgreSQL/multiLevelMenu/RTable
-        </span>
+        </span> */}
       </div>
       {/* <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span> */}
       {/* ======================================================================== */}
