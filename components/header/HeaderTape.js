@@ -12,8 +12,8 @@ const HeaderTape = () => {
     // <header className="flex h-16  w-full items-center justify-between bg-headMenuBg p-1 px-2 dark:bg-headMenuBgDark">
 
     <div className="h-18 mx-auto my-auto flex w-full flex-col justify-start bg-tapeMenuBg px-2 text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
-      <div className="relative flex flex-col justify-start md:flex-row md:justify-between ">
-        {/* <div className="relative flex flex-col items-center justify-between md:flex-row "> */}
+        ddddddddddddddddddddddddd
+      {/* <div className="relative flex flex-col justify-start md:flex-row md:justify-between ">
         <a
           className="flex items-center justify-start px-1 text-sm"
           href="tel:+380508580704"
@@ -31,9 +31,8 @@ const HeaderTape = () => {
         <span className="px-1 text-sm ">
           Tailwindcss/PostgreSQL/multiLevelMenu/RTable
         </span>
-        {/* </div> */}
       </div>
-      <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span>
+      <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span> */}
       {/* ======================================================================== */}
     </div>
   );
