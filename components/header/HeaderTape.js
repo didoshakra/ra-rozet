@@ -30,9 +30,9 @@ const HeaderTape = () => {
           <IconPhone width={iconSize} height={iconSize} colorFill="white" />
           +38(068-0000000)
         </a>
-        <span className="px-1 text-sm ">
+        {/* <span className="px-1 text-sm ">
           Tailwindcss/PostgreSQL/multiLevelMenu/RTable
-        </span>
+        </span> */}
       </div>
       {/* <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span> */}
       {/* ======================================================================== */}
