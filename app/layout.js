@@ -20,12 +20,12 @@ export default function RootLayout({ children }) {
       {/* suppressHydrationWarning={true}//https://www.slingacademy.com/article/next-js-warning-extra-attributes-from-the-server/ */}
       <body suppressHydrationWarning={true} className={inter.className}>
         <Providers>
-          <HeaderTape />
-          {/* <Header /> */}
+          {/* <HeaderTape /> */}
+          <Header />
           {/* <main className="min-h-screen max-w-7xl mx-auto ">{children}</main> */}
           {/* <main className="mx-auto max-h-1.5 min-h-screen max-w-7xl border-3 border-red-600"> */}
-          {/* <main className=" my-auto mx-auto  border-3 border-red-600"> */}
-          <main className=" my-auto mx-auto">
+          <main className=" mx-auto my-auto  border-3 border-red-600">
+            {/* <main className=" my-auto mx-auto"> */}
             {children}
           </main>
           {/* <Footer /> */}
