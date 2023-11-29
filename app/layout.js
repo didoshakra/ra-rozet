@@ -7,7 +7,7 @@ import HeaderTape from "../components/header/HeaderTape";
 import Footer from "../components/header/Footer";
 
 const inter = Inter({ subsets: ["latin"] });
- 
+
 export const metadata = {
   title: "Прод-пром товари",
   description: "Продуктові і промислові товари",
@@ -21,7 +21,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning={true} className={inter.className}>
         <Providers>
           <HeaderTape />
-          <Header />
+          {/* <Header /> */}
           {/* <main className="min-h-screen max-w-7xl mx-auto ">{children}</main> */}
           {/* <main className="mx-auto max-h-1.5 min-h-screen max-w-7xl border-3 border-red-600"> */}
           <main className=" my-auto mx-auto  border-3 border-red-600">
