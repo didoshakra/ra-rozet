@@ -25,7 +25,7 @@ export default function RootLayout({ children }) {
           {/* <main className="mx-auto max-h-1.5 min-h-screen max-w-7xl border-3 border-red-600"> */}
           {/* <main className=" mx-auto my-auto  border-3 border-red-600"> */}
           <main className=" mx-auto my-auto">{children}</main>
-          {/* <Footer /> */}
+          <Footer />
         </Providers>
       </body>
     </html>
