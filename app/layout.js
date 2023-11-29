@@ -21,8 +21,7 @@ export default function RootLayout({ children }) {
       <body suppressHydrationWarning={true} className={inter.className}>
         <Providers>
           <HeaderTape />
-          {/* <Header /> */}
-          {/* <main className="min-h-screen max-w-7xl mx-auto ">{children}</main> */}
+          <Header />
           {/* <main className="mx-auto max-h-1.5 min-h-screen max-w-7xl border-3 border-red-600"> */}
           {/* <main className=" mx-auto my-auto  border-3 border-red-600"> */}
           <main className=" mx-auto my-auto">{children}</main>
