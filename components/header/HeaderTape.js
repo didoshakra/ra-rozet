@@ -11,7 +11,9 @@ const HeaderTape = () => {
     // <div className="flex h-16 w-full flex-col justify-start bg-tapeMenuBg px-2     text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
     // <header className="flex h-16  w-full items-center justify-between bg-headMenuBg p-1 px-2 dark:bg-headMenuBgDark">
 
-    <div className="h-18 mx-auto my-auto flex w-full flex-col justify-start bg-tapeMenuBg px-2 text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between ">
+    <div className="flex h-16  w-full items-center justify-between bg-headMenuBg p-1 px-2 dark:bg-headMenuBgDark">
+
+    {/* <div className="h-18 mx-auto my-auto flex w-full flex-col justify-start bg-tapeMenuBg px-2 text-sm text-white dark:bg-tapeMenuBgDark md:h-6 md:flex-row md:justify-between "> */}
       GGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG
       {/* <div className="relative flex flex-col justify-start md:flex-row md:justify-between "> */}
       {/* <div className="flex flex-col justify-start md:flex-row md:justify-between "> */}
