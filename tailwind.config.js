@@ -23,19 +23,22 @@ module.exports = {
         4: "#ac00ca",
         itemHover: "#f64532",
         mainColor: "red",
+
         tapeMenuBg: "#82AE46",
         tapeMenuBgDark: "#000",
         // headMenuText: "#828C46",
         headMenuText: "#82AE46",
         // headMenuTextDark: "#82FF46",
         headMenuTextDark: "#6B8E23",
+        headMenuTextHover: "#fff",
         headMenuTextBgHover: "#DFE6D4",
-        // headMenuBg: "#C9DFA7",
+        headMenuBg: "#C9DFA7",
         // headMenuBg: "#E8EFD3",
         headMenuBg: "#F1F4E2",
         headMenuBgDark: "rgb(30 41 59)",
         // headMenuBgDark: "rgb(15 23 42)",
         // headMenuBgDark:"#696969",
+        headMenuBackgroundHover: "#82AE46",
 
         // *** drawer
         drawerHeadBg: "#3b6a3d", //

@@ -21,9 +21,10 @@ const Footer = () => {
 
   return (
     // <section className=" relative block w-full">
-    <section className="mx-auto w-full">
+    <section className="mx-auto max-w-full">
       {/* <div className="footer-mouse"> */}
-      <div className="absolute inset-x-0 top-[-5px] flex items-center justify-center p-1">
+      {/* <div className="absolute inset-x-0 top-[-5px] flex items-center justify-center p-1"> */}
+      <div className="flex items-center justify-center p-1">
         <a
           href="#"
           className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-headMenuText dark:bg-headMenuTextDark"
@@ -41,7 +42,7 @@ const Footer = () => {
         {/* <div className="footer-context-item-col"> */}
         <div className="relative flex flex-col items-start justify-start text-left">
           <h2 className="flex flex-row items-center justify-center px-4 text-lg font-bold text-headMenuText dark:text-headMenuTextDark">
-            DBogdan
+            RAtest
           </h2>
           <ul className="flex items-center justify-between">
             <li className="flex  flex-row items-center justify-start px-4">
@@ -69,20 +70,19 @@ const Footer = () => {
                 colorFill={colorIcon}
                 colorStroke={colorIcon}
               />
-              <span className="px-2"> вул. Гулака 7, Калуш, Україна</span>
+              <span className="px-2"> вул. Гулака , Калуш, Україна</span>
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <IconPhone width="15" height="15" colorFill={colorIcon} />
               {/* <span className="px-2">+ 38(050-8580704)</span> */}
-              <a className="px-2" href="tel:+380508580704">
-                + 38(050-8580704)
+              <a className="px-2" href="tel:+380500000000">
+                + 38(050-0000000)
               </a>
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <IconPhone width="15" height="15" colorFill={colorIcon} />
-              {/* <span className="px-2">+ 38(068-7832306)</span> */}
-              <a className="px-2" href="tel:+380687832306">
-                + 38(068-7832306)
+              <a className="px-2" href="tel:+380680000000">
+                + 38(068-0000000)
               </a>
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
@@ -93,7 +93,7 @@ const Footer = () => {
                 colorFill={colorIcon}
                 colorFill1={colorIcon}
               />
-              <span className="px-2">bogdandrogomirezkiy@gmail.com</span>
+              <span className="px-2">ra@gmail.com</span>
             </li>
           </ul>
         </div>
