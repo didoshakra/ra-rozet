@@ -1,0 +1,94 @@
+//HeaderSetingDroop.js
+//Мобіле-Шестерня(іконка)
+//*********************************************************************************** */
+//Щоб відключити всі *Open=(false), треба відключити при клацанні поза обєктом function useOutsideAlerter(ref)
+// і відключення у всіх onClick(*togle) в самомк об'єкті.
+//********************************************************************************** */
+
+"use client";
+import { useState, useRef, useEffect } from "react";
+import Link from "next/link";
+import { headMenu } from "./dataMenu";
+
+const HeaderMobileDroopMenu = () => {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
+  //*************Для клацання поза обєктом
+  const wRef_HeaderMobileDroopMenu = useRef(null); //Для клацання поза обєктом
+  useEffect(() => {
+    const onClick = (e) =>
+      wRef_HeaderMobileDroopMenu.current.contains(e.target) ||
+    //   ,console.log("HeaderMobileDroopMenu: клік поза компонентом")
+    // || console.log("клик вне компонента")
+    document.addEventListener("click", onClick, true);
+    document.addEventListener("scroll", onClick, true);
+    // document.addEventListener("mousedown", onClick) // віджали кнопку миші на елементі.
+    return () => {
+      document.removeEventListener("click", onClick, true);
+      document.removeEventListener("scroll", onClick, true), true;
+    };
+  }, []);
+
+  //випадаюче меню Налаштувань
+  const renderMenu = () => {
+    return headMenu.map((item, index) => {
+      return (
+        // <li className="mobileMenuDroop__dropdown__item" key={index}>
+        <li
+          className="flex list-none flex-nowrap  items-center p-1 text-sm font-normal text-hMenuText  hover:bg-hMenuBgHov  hover:text-hMenuTextHov dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
+          key={index}
+        >
+          <Link href={`${item.link}`}>{item.a}</Link>
+        </li>
+      );
+    });
+  };
+
+  return (
+    <div
+    //   ref={wRef_HeaderMobileDroopMenu}
+      className="relative m-0 items-center p-0  md:hidden"
+    >
+      <button
+        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+        title="меню"
+      >
+        {/* іконка мобільного меню */}
+        <svg
+          className="h-8 w-8 text-hIcon dark:text-hIconD"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          strokeWidth="2"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {" "}
+          <line x1="8" y1="6" x2="21" y2="6" />{" "}
+          <line x1="8" y1="12" x2="21" y2="12" />{" "}
+          <line x1="8" y1="18" x2="21" y2="18" />{" "}
+          <line x1="3" y1="6" x2="3.01" y2="6" />{" "}
+          <line x1="3" y1="12" x2="3.01" y2="12" />{" "}
+          <line x1="3" y1="18" x2="3.01" y2="18" />
+        </svg>
+      </button>
+
+      {/* список головного меню */}
+      <div
+        className={`${
+          mobileMenuOpen ? "absolute" : "hidden"
+        } right-0 z-10 m-0 p-0`}
+      >
+        <ul
+        //   ref={wRef_MobileMenuDroop}
+          className=" rounded-lg border border-hMenuBorder  bg-hMenuBg p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD"
+        >
+          {renderMenu()}
+        </ul>
+      </div>
+    </div>
+  );
+};
+
+export default HeaderMobileDroopMenu;

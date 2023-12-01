@@ -1,8 +1,10 @@
 //MobileMenuIcon.js ////Іконка(своя) яка викликає MobileMenuDroop-випадаюче меню
 "use client";
 import { useState } from "react";
+import MobileMenuDroop from "./MobileMenuDroop";
+import { headMenu } from "../header/dataMenu";
 
-const MobileMenuIcon = (props) => {
+const MobileMenuIcon = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const mobileMenuToggle = (arg) => {
     setMobileMenuOpen(arg);
@@ -15,7 +17,7 @@ const MobileMenuIcon = (props) => {
       {/* іконка мобільного меню */}
       <button
         className="z-0 flex items-center rounded-full hover:bg-hIconBgHov dark:bg-hIconBgHovD"
-        // onClick={() => props.mobileMenuToggle(props.mobileMenuOpen ? false : true)}
+        onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         title="меню"
       >
         <svg
@@ -37,13 +39,13 @@ const MobileMenuIcon = (props) => {
         </svg>
       </button>
       {/* Список мобильного меню */}
-      {mobileMenuOpen && (
-        <MobileMenuDroop
-          menu={menu}
-          mobileMenuOpen={mobileMenuOpen}
-          mobileMenuToggle={mobileMenuToggle}
-        />
-      )}
+      {/* {mobileMenuOpen && ( */}
+      <MobileMenuDroop
+        menu={headMenu}
+        mobileMenuOpen={mobileMenuOpen}
+        mobileMenuToggle={mobileMenuToggle}
+      />
+      {/* )} */}
     </div>
   );
 };

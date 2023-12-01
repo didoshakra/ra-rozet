@@ -2,23 +2,15 @@
 "use client";
 
 import Link from "next/link";
+import {headMenu} from "./dataMenu"
 
 const HeaderMenu = () => {
-  const menu = [
-    {
-      a: "Про нас",
-      link: "/about",
-    },
-    {
-      a: "Examples",
-      link: "/examples",
-    },
-  ];
+    // console.log("HeaderMenu/headMenu= ", headMenu);
   const renderMenu = () => {
-    return menu.map((item, index) => {
+    return headMenu.map((item, index) => {
       return (
         <li
-          className="dark:text-hMenuTextD items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-hMenuText hover:underline"
+          className="items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-hMenuText hover:underline dark:text-hMenuTextD"
           key={index}
         >
           <Link href={item.link}>{item.a}</Link>

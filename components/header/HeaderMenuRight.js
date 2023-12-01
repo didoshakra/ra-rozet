@@ -1,4 +1,4 @@
-//HeaderSeting  /Верхнє меню
+//HeaderMenuRight  /Верхнє меню
 //Викликає меню(з іконоками) :UserSwitcher/ThemeSwitcher/LocaleSwitcher
 
 import ThemeSwitcher from "./ThemeSwitcher"
@@ -6,7 +6,7 @@ import UserSwitcher from "./UserSwitcher";
 import HeaderSetingDroopMenu from "./HeaderSetingDroopMenu";
 
 
-const HeaderSeting = () => {
+const HeaderMenuRight = () => {
 
   return (
     <div className=" flex h-16 items-center justify-between">
@@ -18,11 +18,11 @@ const HeaderSeting = () => {
         <ThemeSwitcher />
       </div>
       {/* Випадаюче меню Seting(мобільне) */}
-      <div className="headerSeting__mobile">
+      <div className="headerMenuRight__mobile">
         <HeaderSetingDroopMenu />
       </div>
     </div>
   );
 }
 
-export default HeaderSeting
+export default HeaderMenuRight

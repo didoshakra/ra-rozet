@@ -44,13 +44,6 @@ const UserSwitcher = () => {
             className="rounded-full border"
           />
         ) : (
-          //   <Image
-          //     // className="h-8 w-8 rounded-full border bg-[url(/avatar/2.jpg)] bg-cover"
-          //     scr="/public/avatar/2.jpg"
-          //     width={40}
-          //     height={40}
-          //     alt={"avatar"}
-          //   />
           <svg
             className="h-8 w-8 text-hIcon dark:text-hIconD"
             fill="none"

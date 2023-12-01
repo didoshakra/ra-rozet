@@ -1,11 +1,11 @@
 import HeaderLogo from "./HeaderLogo";
 import HeaderMenu from "./HeaderMenu";
-import HeaderSeting from "./HeaderSeting";
-import MobileMenuIcon from "./MobileMenuIcon";
+import HeaderMenuRight from "./HeaderMenuRight";
+// import MobileMenuIcon from "../1old/MobileMenuIcon";
+import HeaderMobileDroopMenu from "./HeaderMobileDroopMenu";
 import DrawerSwitche from "./DrawerSwitcher";
 
 export default function Header() {
-
   return (
     <header className="flex h-16  w-full items-center justify-between bg-hMenuBg p-1 px-2 dark:bg-hMenuBgD">
       {/* Ліве випадаюче меню */}
@@ -16,10 +16,10 @@ export default function Header() {
       <div className=" flex  items-center justify-end">
         {/*рядок меню */}
         <HeaderMenu />
-        {/* іконка мобільного меню/ Показує по style{md:hidden}*/}
-        <MobileMenuIcon />
+        {/* мобільне меню/ Показує по style{md:hidden}*/}
+        <HeaderMobileDroopMenu />
         {/* Налаштування(Теми,Мови) / Показує по style{hidden md:flex}*/}
-        <HeaderSeting />
+        <HeaderMenuRight />
       </div>
     </header>
   );
