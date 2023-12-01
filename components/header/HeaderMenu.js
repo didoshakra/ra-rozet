@@ -1,5 +1,5 @@
 //HeaderMenu.js
-"use client"
+"use client";
 
 import Link from "next/link";
 
@@ -18,9 +18,7 @@ const HeaderMenu = () => {
     return menu.map((item, index) => {
       return (
         <li
-          //   className="hover:underline pr-1 whitespace-nowrap text-lg font-sans font-bold items-center text-headMenuText dark:text-headMenuTextDark"
-          //   className="hover:underline pr-1 whitespace-nowrap text-lg font-sans font-bold items-center text-lime-700 "
-          className="text- items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-headMenuText hover:underline dark:text-headMenuTextDark"
+          className="dark:text-hMenuTextD items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-hMenuText hover:underline"
           key={index}
         >
           <Link href={item.link}>{item.a}</Link>

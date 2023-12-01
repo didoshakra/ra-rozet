@@ -6,7 +6,7 @@ export default function Navbar({ multilevelMenu, title = "", setDrawerOpen }) {
     <nav>
       <div
         onClick={(e) => setDrawerOpen(false)}
-        className="pl-2 text-sm  font-bold italic  text-headMenuText dark:text-headMenuTextDark"
+        className="dark:text-hMenuTextDark pl-2  text-sm font-bold  italic text-hMenuText"
       >
         {title}
       </div>

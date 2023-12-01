@@ -6,7 +6,7 @@
 export default function About() {
   return (
     <main className="mx-auto mb-10 ">
-      <h1 className=" text-center text-4xl font-bold text-headMenuText dark:text-headMenuTextDark">
+      <h1 className=" dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
         About
       </h1>
     </main>

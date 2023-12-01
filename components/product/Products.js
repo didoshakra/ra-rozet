@@ -1,32 +1,34 @@
-import { getAllProducts } from "../../app/product/dataProducts"
-import Link from "next/link"
-import ProductImage from "./ProductImage"
+import { getAllProducts } from "../../app/product/dataProducts";
+import Link from "next/link";
+import ProductImage from "./ProductImage";
 
 function Product({ item }) {
   // console.log("************Product.js/P/roduct=", Product)
   return (
     <Link
       href={`/product/${item.id}`}
-      className="h-96 flex flex-col p-5 rounded border-2 group hover:scale-105 transition-transform ease-out duration-200"
+      className="group flex h-96 flex-col rounded border-2 p-5 transition-transform duration-200 ease-out hover:scale-105"
     >
       <div className="relative max-h-72 flex-1">
         <ProductImage item={item} fill />
       </div>
 
-      <div className="font-semibold flex items-center justify-center mt-4 mb-1">
+      <div className="mb-1 mt-4 flex items-center justify-center font-semibold">
         <p className="w-44 truncate">{item.title}</p>
       </div>
-      <p className="italic text-xs w-64 line-clamp-2 text-gray-600">{item.description}</p>
+      <p className="line-clamp-2 w-64 text-xs italic text-gray-600">
+        {item.description}
+      </p>
     </Link>
-  )
+  );
 }
 
 export default async function Products() {
-  const products = await getAllProducts()
+  const products = await getAllProducts();
   //   console.log("Products.js/products=", products)
   return (
     <section className="relative flex flex-col space-y-12 py-14 pb-5">
-      <h1 className="text-center text-4xl font-bold  text-headMenuText dark:text-headMenuTextDark">
+      <h1 className="dark:text-hMenuTextDark text-center text-4xl  font-bold text-hMenuText">
         Наші вироби - стандартні і художні
       </h1>
       <h2 className="text-center text-2xl italic text-red-500">

@@ -30,7 +30,7 @@ import tailwindConfig from "@/tailwind.config"; //отримання змінн�
         console.log("ThemeSwitche/theme.colors=", theme.colors);
     - зміні теми з допомогою import { useTheme } from "next-themes";
         const { resolvedTheme, setTheme } = useTheme();
-        сonst colorIcon =resolvedTheme === "dark"? theme.colors.darkHeadMenuText: theme.colors.headMenuText;
+        сonst colorIcon =resolvedTheme === "dark"? theme.colors.darkhMenuText: theme.colors.hMenuText;
     -отримання внутрішніх змінних tailwindcss/кольорів
         const requireColors = require("tailwindcss/colors");
         console.log("ThemeSwitche/requireColors=", requireColors);

@@ -30,7 +30,7 @@ const UserSwitcher = () => {
     <div className="relative list-none">
       {/* іконка зміни користувача */}
       <button
-        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-500"
+        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
         title="профіль"
         onClick={userMenuOpenToggle}
       >
@@ -43,8 +43,7 @@ const UserSwitcher = () => {
           />
         ) : (
           <svg
-            // class="h-8 w-8 text-red-500"
-            class="h-8 w-8 text-headMenuText"
+            class="h-8 w-8 text-hIcon dark:text-hIconD"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -59,9 +58,7 @@ const UserSwitcher = () => {
         )}
       </button>
       {/* Випадаюче меню */}
-      {userMenuOpen && (
-      <UserSwitcherDroop setUserMenuOpen={setUserMenuOpen} />
-       )}
+      {userMenuOpen && <UserSwitcherDroop setUserMenuOpen={setUserMenuOpen} />}
     </div>
   );
 };

@@ -423,7 +423,7 @@ export default function DProductTable({
               if (targetObj.logical === "&&") {
                 if (compareFirst) rowFilterted = true;
                 else {
-                  rowFilterted = false;//Має бути бо за For при rowFilterted = true; зробиться Push 
+                  rowFilterted = false; //Має бути бо за For при rowFilterted = true; зробиться Push
                   break; //(filterFirct=false && filterLast==true) Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
                 }
               } else rowFilterted = true; // Якщо не && то При || додаєм всі бо compareLast = true
@@ -446,11 +446,11 @@ export default function DProductTable({
               //     "* RTable.js.js/ApplyFilters/!(compareLast)elseIfElse(compareFirst &&/_nRow: ",
               //     current._nrow,
               //   );
-              rowFilterted = false;//Має бути бо за For при rowFilterted = true; зробиться Push
+              rowFilterted = false; //Має бути бо за For при rowFilterted = true; зробиться Push
               break; //Бо filterFirct=false && filterLast=false, отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
             }
           } else if (!compareFirst) {
-            rowFilterted = false;//Має бути бо за For при rowFilterted = true; зробиться Push
+            rowFilterted = false; //Має бути бо за For при rowFilterted = true; зробиться Push
             break; //filterFirct=false, а filterLast нема. Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
           }
         }
@@ -500,12 +500,12 @@ export default function DProductTable({
     <div className={`${styleTableText} px-1 align-middle `}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="rounded-3xl border border-neutral-500 bg-tabThBgCol text-headMenuText dark:bg-tabThBgColD  dark:text-headMenuTextDark">
+        <div className="dark:text-hMenuTextDark rounded-3xl border border-neutral-500 bg-tabThBgCol text-hMenuText  dark:bg-tabThBgColD">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           RTable.js / Table pagination
         </h3> */}
           <h1
-            className={`${styleTitleText} text-center font-bold text-headMenuText dark:text-headMenuTextDark`}
+            className={`${styleTitleText} dark:text-hMenuTextDark text-center font-bold text-hMenuText`}
           >
             {title}
           </h1>

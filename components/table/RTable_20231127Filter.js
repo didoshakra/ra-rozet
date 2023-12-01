@@ -316,7 +316,9 @@ export default function DProductTable({
       for (const attribute of attributes) {
         // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
         // Чи задане поле в
-        const targetObj = tempFilterData.find((obj) => obj.accessor === attribute); //Шукажмо запис по _nrow=nRow
+        const targetObj = tempFilterData.find(
+          (obj) => obj.accessor === attribute,
+        ); //Шукажмо запис по _nrow=nRow
         // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
 
         //===============================
@@ -489,7 +491,7 @@ export default function DProductTable({
     }
     console.log("RTable.js.js/ApplyFilters/Endfor1/");
     setWorkData(nowData);
-    setFilteredIcon("currentColor");//Колір хаповнення іконки фільтру
+    setFilteredIcon("currentColor"); //Колір хаповнення іконки фільтру
   };
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
@@ -507,7 +509,7 @@ export default function DProductTable({
     setWorkData(beforSeachData); //Відкат даних до фільтру
     setIsDropdownFilter(false); //Закриваємо випадаюче вікно
     setFilteredIcon("none"); //Іконка
-    setWorkData(beforFilterData);//Відновлюємо робочу БД до фільтрування
+    setWorkData(beforFilterData); //Відновлюємо робочу БД до фільтрування
   };
   //----------------------------------------------------
 
@@ -516,12 +518,12 @@ export default function DProductTable({
     <div className={`${styleTableText} align-middle `}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="rounded-3xl border border-neutral-500 bg-tabThBgCol text-headMenuText dark:bg-tabThBgColD  dark:text-headMenuTextDark">
+        <div className="dark:text-hMenuTextDark rounded-3xl border border-neutral-500 bg-tabThBgCol text-hMenuText  dark:bg-tabThBgColD">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           RTable.js / Table pagination
         </h3> */}
           <h1
-            className={`${styleTitleText} text-center font-bold text-headMenuText dark:text-headMenuTextDark`}
+            className={`${styleTitleText} dark:text-hMenuTextDark text-center font-bold text-hMenuText`}
           >
             {title}
           </h1>

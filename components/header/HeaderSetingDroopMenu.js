@@ -4,18 +4,15 @@
 //Щоб відключити всі *Open=(false), треба відключити при клацанні поза обєктом function useOutsideAlerter(ref)
 // і відключення у всіх onClick(*togle) в самомк об'єкті.
 //********************************************************************************** */
+
 "use client";
-import { useState, useContext, useRef, useEffect } from "react";
+import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
-import resolveConfig from "tailwindcss/resolveConfig"; //отримання змінних з tailwind.config
 import { useTheme } from "next-themes";
-// import { ComponentContext } from "../../context/ComponentContext"
 import UserSwitcherDroop from "./UserSwitcherDroop";
 
-const HeaderSetingDroop = () => {
+const HeaderSetingDroopMenu = () => {
   const { resolvedTheme, setTheme } = useTheme();
-  //   const { state, dispatch } = useContext(ComponentContext);
-  //   const { theme, themeTypeLight, profile } = state;
   const [profile, setprofile] = useState("admin");
 
   const [setingMenuOpen, setSetingMenuOpen] = useState(false);
@@ -35,12 +32,12 @@ const HeaderSetingDroop = () => {
   };
 
   //*************Для клацання поза обєктом
-  const wRef_HeaderSetingDroop = useRef(null); //Для клацання поза обєктом
+  const wRef_HeaderSetingDroopMenu = useRef(null); //Для клацання поза обєктом
   useEffect(() => {
     const onClick = (e) =>
-      wRef_HeaderSetingDroop.current.contains(e.target) ||
+      wRef_HeaderSetingDroopMenu.current.contains(e.target) ||
       (setSetingMenuOpen(false), setUserMenuOpen(false));
-    //   ,console.log("HeaderSetingDroop: клік поза компонентом")
+    //   ,console.log("HeaderSetingDroopMenu: клік поза компонентом")
     // || console.log("клик вне компонента")
     document.addEventListener("click", onClick, true);
     document.addEventListener("scroll", onClick, true);
@@ -87,17 +84,22 @@ const HeaderSetingDroop = () => {
   };
   //Зміна в newTheme Context
   const themeMenuToggle = () => {
+    setTheme(resolvedTheme === "dark" ? "light" : "dark");
     setUserMenuOpen(false);
   };
 
   return (
-    // <div ref={wRef_HeaderSetingDroop} className="headerSetingDroop">
-    <div ref={wRef_HeaderSetingDroop} className="relative m-0 p-0">
+    // <div ref={wRef_HeaderSetingDroopMenu} className="headerSetingDroopMenu">
+    // <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
+    <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
       {/* іконка seting*/}
-      {/* <div className="headerSetingDroop__icon" onClick={setingMenuToggle}> */}
-      <div className="mr-1 flex items-center justify-center bg- " onClick={setingMenuToggle}>
+      {/* <div className="headerSetingDroopMenu__icon" onClick={setingMenuToggle}> */}
+      <button
+        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
+        onClick={setingMenuToggle}
+      >
         <svg
-          class="h-8 w-8 text-red-500"
+          class="text-hIcon h-8 w-8 dark:text-hIconD"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -112,23 +114,27 @@ const HeaderSetingDroop = () => {
           <path d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 0 0 2.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 0 0 1.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 0 0 -1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 0 0 -2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 0 0 -2.573 -1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 0 0 -1.065 -2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 0 0 1.066 -2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />{" "}
           <circle cx="12" cy="12" r="3" />
         </svg>
-      </div>
+      </button>
       {/* список головного меню */}
-      <ul className="headerSetingDroop__dropdown">
+      {/* <ul className="headerSetingDroopMenu__dropdown"> */}
+      <ul className={`${setingMenuOpen ? "absolute":"hidden"}  left-[-110px] top-12 float-left m-0 w-[150px] rounded-sm border p-0 shadow-md "}`}
+      >
         <li
-          className="headerSetingDroop__dropdown__item"
+          //   className="headerSetingDroopMenu__dropdown__item"
+          className="flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
           onClick={themeMenuToggle}
+          //   onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         >
           {/* <FontAwesomeIcon icon={themeTypeLight ? faSun : faMoon} /> */}
           <p
             title="Тема"
-            onClick={() =>
-              setTheme(resolvedTheme === "dark" ? "light" : "dark")
-            }
+            // onClick={() =>
+            //   setTheme(resolvedTheme === "dark" ? "light" : "dark")
+            // }
           >
             {resolvedTheme === "dark" ? (
               <svg
-                class="h-8 w-8 text-red-500"
+                class="h-8 w-8 text-hIconD dark:text-hIcon"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -144,7 +150,7 @@ const HeaderSetingDroop = () => {
               </svg>
             ) : (
               <svg
-                class="h-8 w-8 text-red-500"
+                class="h-8 w-8 text-hIconD dark:text-hIcon"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -171,7 +177,8 @@ const HeaderSetingDroop = () => {
           <p>Теми</p>
         </li>
         <li
-          className="headerSetingDroop__dropdown__item"
+          //   className="headerSetingDroopMenu__dropdown__item"
+          className="relative flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
           onClick={() => setUserMenuOpen(!userMenuOpen)}
         >
           {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
@@ -185,8 +192,7 @@ const HeaderSetingDroop = () => {
               />
             ) : (
               <svg
-                // class="h-8 w-8 text-red-500"
-                class="h-8 w-8 text-headMenuText"
+                class="h-8 w-8 text-hIconD dark:text-hIcon"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -201,19 +207,17 @@ const HeaderSetingDroop = () => {
             )}
           </p>
           <p>Профіль</p>
-          {/* Випадаюче меню User */}
-          {userMenuOpen ? (
-            <UserSwitcherDroop
-              userMenuOpen={userMenuOpen}
-              setUserMenuOpen={setUserMenuOpen}
-            />
-          ) : (
-            ""
-          )}
         </li>
+        {/* Випадаюче меню User */}
+        {userMenuOpen && (
+          <UserSwitcherDroop
+            userMenuOpen={userMenuOpen}
+            setUserMenuOpen={setUserMenuOpen}
+          />
+        )}
       </ul>
     </div>
   );
 };
 
-export default HeaderSetingDroop;
+export default HeaderSetingDroopMenu;

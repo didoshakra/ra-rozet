@@ -1,6 +1,6 @@
 //https://www.simplenextjs.com/posts/next-postgresql
 
-import {conn} from "@/config/dbConfig";
+import { conn } from "@/config/dbConfig";
 import DBrandTable from "./dBrandTable";
 
 async function getDataAll(req, res) {
@@ -44,7 +44,7 @@ export default async function DBrands() {
   // console.log("*****DBrands/resData=");
   //   const resData = await Promise.all([getDataAll()]);//працює //https://github.com/mfikricom/CRUD-Next.js-13-Prisma-PostgreSQL/blob/main/app/products/page.tsx//
   const resData = await getDataAll();
-//   console.log("* DBrands/resData=", resData);
+  //   console.log("* DBrands/resData=", resData);
 
   const columns = [
     { name: "Id", uid: "id" },
@@ -53,7 +53,7 @@ export default async function DBrands() {
   ];
   return (
     <>
-      <h1 className="text-center text-4xl font-bold text-headMenuText dark:text-headMenuTextDark">
+      <h1 className="dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
         DBrands
       </h1>
       {/* <ul>

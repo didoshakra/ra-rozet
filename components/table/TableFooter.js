@@ -84,15 +84,12 @@ const TableFooter = ({
 
           {/* <p>На сторінці:</p> */}
           <select
-            className="mx-1 w-12 flex items-center align-middle"
+            className="mx-1 flex w-12 items-center align-middle"
             defaultValue={rowsPerPage}
             onChange={(e) => setRowsPerPage(e.target.value)}
             title="К-сть рядків на сторінку"
           >
-            <option
-              value={rowsPerPage}
-              disabled
-            >
+            <option value={rowsPerPage} disabled>
               {rowsPerPage}
             </option>
             <option value="5">5</option>
@@ -143,7 +140,7 @@ const TableFooter = ({
               key={index}
               className={`flex items-center justify-center border border-gray-300 px-2 leading-tight dark:border-gray-700 ${
                 page === el
-                  ? "bg-headMenuText text-white   "
+                  ? "bg-hMenuText text-white   "
                   : "bg-white  text-gray-500 hover:bg-gray-100 hover:text-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white "
               }  `}
               onClick={() => setPage(el)}

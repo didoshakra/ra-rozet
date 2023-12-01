@@ -149,12 +149,11 @@ export default function DProductTable({
     // console.log("FlowbiteUI.js/e.target.value=", e.target.value);
   };
   const onChangeHeadCheckbox = (e) => {
-    ("FlowbiteUI.js/e.target=", e.target);
+    "FlowbiteUI.js/e.target=", e.target;
     // console.log("FlowbiteUI.js/e.target.value=", e.target.value);
   };
   const onClickRow = (e) => {
-
-    objIndex = tableData.findIndex((obj => obj._nrow == e.target.id));
+    objIndex = tableData.findIndex((obj) => obj._nrow == e.target.id);
     // setTableData((state) => ({ ...state, name: resRow[0].name }))
 
     // console.log("FlowbiteUI.js/onClickRow/e.target.id=", e.target.id);
@@ -169,11 +168,11 @@ export default function DProductTable({
   return (
     <div className="p-4">
       {typeof title !== "undefined" && (
-        <div className="mb-2 rounded-3xl border border-neutral-500 bg-stone-300  text-center  text-headMenuText dark:bg-gray-800  dark:text-headMenuTextDark">
+        <div className="dark:text-hMenuTextDark mb-2 rounded-3xl border border-neutral-500  bg-stone-300  text-center text-hMenuText  dark:bg-gray-800">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           FlowbiteUI / Table pagination
         </h3> */}
-          <h1 className=" text-center text-4xl font-bold text-headMenuText dark:text-headMenuTextDark">
+          <h1 className=" dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
             {title}
           </h1>
         </div>
@@ -317,8 +316,7 @@ export default function DProductTable({
                   </td>
                 )}
                 {columns.map(({ accessor }) => {
-                    const tData =
-                      accessor === "index" ? rowIndex : row[accessor];
+                  const tData = accessor === "index" ? rowIndex : row[accessor];
                   return (
                     <td id={row._nrow} key={accessor} className="w-4 p-2">
                       {tData}

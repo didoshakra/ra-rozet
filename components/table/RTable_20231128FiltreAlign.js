@@ -458,12 +458,12 @@ export default function DProductTable({
     <div className={`${styleTableText} align-middle `}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="rounded-3xl border border-neutral-500 bg-tabThBgCol text-headMenuText dark:bg-tabThBgColD  dark:text-headMenuTextDark">
+        <div className="dark:text-hMenuTextDark rounded-3xl border border-neutral-500 bg-tabThBgCol text-hMenuText  dark:bg-tabThBgColD">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           RTable.js / Table pagination
         </h3> */}
           <h1
-            className={`${styleTitleText} text-center font-bold text-headMenuText dark:text-headMenuTextDark`}
+            className={`${styleTitleText} dark:text-hMenuTextDark text-center font-bold text-hMenuText`}
           >
             {title}
           </h1>
@@ -721,7 +721,7 @@ export default function DProductTable({
                 onClick={(e) => selectRows(e)}
               >
                 {/* перебір полів */}
-                {initialСolumns.map(({ accessor, type = "", align="" }) => {
+                {initialСolumns.map(({ accessor, type = "", align = "" }) => {
                   const tData = accessor === "index" ? rowIndex : row[accessor];
                   //   console.log("RTable.js/tbody/Сolumns.map/type=", type);
 

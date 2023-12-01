@@ -2,14 +2,12 @@
 "use client";
 import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
-// import resolveConfig from "tailwindcss/resolveConfig"; //отримання змінних з tailwind.config
-import tailwindConfig from "@/tailwind.config"; //отримання змінних з tailwind.config
-
+// import resolveCofig from "tailwindcss/resolveConfig"; //отримання змінних з tailwind.config
 
 const ThemeSwitcher = () => {
   const { resolvedTheme, setTheme } = useTheme();
-//   const { theme } = resolveConfig(tailwindConfig); //отримання змінних з tailwind.config
-//   console.log("ThemeSwitche/theme.colors=", theme.colors);
+  //   const { theme } = resolveConfig(tailwindConfig); //отримання змінних з tailwind.config
+  //   console.log("ThemeSwitche/theme.colors=", theme.colors);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -21,15 +19,51 @@ const ThemeSwitcher = () => {
   return (
     <button
       type="button"
-      className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-zinc-200 dark:hover:bg-zinc-500"
+      className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       title="тема"
     >
       {resolvedTheme === "dark" ? (
-        <svg class="h-8 w-8 text-red-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <circle cx="12" cy="12" r="3" />  <line x1="12" y1="5" x2="12" y2="3" />  <line x1="17" y1="7" x2="18.4" y2="5.6" />  <line x1="19" y1="12" x2="21" y2="12" />  <line x1="17" y1="17" x2="18.4" y2="18.4" />  <line x1="12" y1="19" x2="12" y2="21" />  <line x1="7" y1="17" x2="5.6" y2="18.4" />  <line x1="6" y1="12" x2="4" y2="12" />  <line x1="7" y1="7" x2="5.6" y2="5.6" /></svg>
-        // <SunIcon className="h-8 w-8 text-headMenuTextDark" />
+        <svg
+          class="h-8 w-8 text-hIcon dark:text-hIconD "
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          {" "}
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <circle cx="12" cy="12" r="3" />{" "}
+          <line x1="12" y1="5" x2="12" y2="3" />{" "}
+          <line x1="17" y1="7" x2="18.4" y2="5.6" />{" "}
+          <line x1="19" y1="12" x2="21" y2="12" />{" "}
+          <line x1="17" y1="17" x2="18.4" y2="18.4" />{" "}
+          <line x1="12" y1="19" x2="12" y2="21" />{" "}
+          <line x1="7" y1="17" x2="5.6" y2="18.4" />{" "}
+          <line x1="6" y1="12" x2="4" y2="12" />{" "}
+          <line x1="7" y1="7" x2="5.6" y2="5.6" />
+        </svg>
       ) : (
-        <svg class="h-8 w-8 text-red-500"  width="24" height="24" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" fill="none" stroke-linecap="round" stroke-linejoin="round">  <path stroke="none" d="M0 0h24v24H0z"/>  <path d="M16.2 4a9.03 9.03 0 1 0 3.9 12a6.5 6.5 0 1 1 -3.9 -12" /></svg>
+        // <SunIcon className="h-8 w-8 text-hMenuTextDark" />
+        <svg
+          class="h-8 w-8 text-hIcon dark:text-hIconD "
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          stroke-width="2"
+          stroke="currentColor"
+          fill="none"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+        >
+          {" "}
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M16.2 4a9.03 9.03 0 1 0 3.9 12a6.5 6.5 0 1 1 -3.9 -12" />
+        </svg>
       )}
     </button>
   );

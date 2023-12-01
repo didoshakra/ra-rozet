@@ -30,7 +30,7 @@ const UserSwitcherDroop = (props) => {
     <div className="absolute right-0 z-10 m-0 p-0">
       {/* <ul className="userSwitcherDroop__menu"> */}
       <ul className=" mx-2 inline-block rounded-lg border border-gray-300  bg-gray-200  p-1  drop-shadow-md dark:border-gray-300 dark:bg-gray-400 md:left-auto">
-        <li className="flex list-none items-center bg-headMenuBg p-1 text-sm font-normal text-headMenuText hover:bg-headMenuBackgroundHover hover:text-headMenuTextHover">
+        <li className="hover:text-hMenuTextHov flex list-none items-center bg-hMenuBg p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov">
           {/* {session && (
             <a href="#" onClick={loginToggle} className="btn-signin">
               Sign out/Вийти
@@ -51,11 +51,11 @@ const UserSwitcherDroop = (props) => {
         </li>
         <li
           //   className="userSwitcherDroop__dropdown__item"
-          className="flex list-none items-center bg-headMenuBg p-1 text-sm font-normal text-headMenuText hover:bg-headMenuBackgroundHover hover:text-headMenuTextHover"
+          className="hover:text-hMenuTextHover flex list-none items-center bg-hMenuBg p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov "
           onClick={registrationToggle}
         >
           {/* <a className="userSwitcherDroop__dropdown__item-p">Registration</a> */}
-          <a className="ml-2 flex items-center bg-headMenuBg p-0 text-headMenuText hover:bg-headMenuBackgroundHover hover:text-headMenuTextHover">
+          <a className="hover:text-hMenuTextHover ml-2 flex items-center bg-hMenuBg p-0 text-hMenuText hover:bg-hMenuBgHov">
             Registration
           </a>
         </li>

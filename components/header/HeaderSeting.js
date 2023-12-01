@@ -3,7 +3,7 @@
 
 import ThemeSwitcher from "./ThemeSwitcher"
 import UserSwitcher from "./UserSwitcher";
-import HeaderSetingDroop from "./HeaderSetingDroop";
+import HeaderSetingDroopMenu from "./HeaderSetingDroopMenu";
 
 
 const HeaderSeting = () => {
@@ -19,7 +19,7 @@ const HeaderSeting = () => {
       </div>
       {/* Випадаюче меню Seting(мобільне) */}
       <div className="headerSeting__mobile">
-        <HeaderSetingDroop />
+        <HeaderSetingDroopMenu />
       </div>
     </div>
   );

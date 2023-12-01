@@ -4,22 +4,22 @@
 export default function DProductTable({ rows }) {
   // console.log(" DProductTable.js/rows=", rows);
 
-const cols = [
-  { name: "#", with: "15px" },
-  { name: "Id", with: "20px" },
-  { name: "Назва товару", with: "200px" },
-  { name: "ШтрихКод", with: "200px" },
-  { name: "Категорія", with: "200px" },
-  { name: "Ціна", with: "200px" },
-  // { name: "Дія", with: "200px" },
-];
+  const cols = [
+    { name: "#", with: "15px" },
+    { name: "Id", with: "20px" },
+    { name: "Назва товару", with: "200px" },
+    { name: "ШтрихКод", with: "200px" },
+    { name: "Категорія", with: "200px" },
+    { name: "Ціна", with: "200px" },
+    // { name: "Дія", with: "200px" },
+  ];
   return (
     <div className="p-4">
-      <div className="rounded-3xl border border-neutral-500 bg-stone-300 text-center  text-headMenuText dark:bg-gray-800  dark:text-headMenuTextDark">
-        <h3 className=" text-center text-lg font-bold text-headMenuText dark:text-headMenuTextDark">
+      <div className="dark:text-hMenuTextDark rounded-3xl border border-neutral-500 bg-stone-300  text-center text-hMenuText  dark:bg-gray-800">
+        <h3 className=" dark:text-hMenuTextDark text-center text-lg font-bold text-hMenuText">
           PrelineUI
         </h3>
-        <h1 className=" text-center text-4xl font-bold text-headMenuText dark:text-headMenuTextDark">
+        <h1 className=" dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
           DProducts
         </h1>
         hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh
@@ -43,7 +43,6 @@ const cols = [
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-stone-200 dark:divide-gray-700">
-
                   {rows.map((item, index) => (
                     <tr
                       key={item.id}
