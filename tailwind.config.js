@@ -40,7 +40,7 @@ module.exports = {
 
         //-- headTape --------------------------------------------
         hTapeText: "#fff",
-        hTapeTextD: "#6B8E23", //1"#82AE46",
+        hTapeTextD: "#9de160", //"#6B8E23", //1"#82AE46",
         hTapeBg: "#82AE46", //1 "#82AE46",
         hTapeBgD: "#000", //"rgba(65,69,69,1)",
         hTapeTextHov: "red",
@@ -66,7 +66,7 @@ module.exports = {
 
         //--  headIcon --------------------------------------------
         hIcon: "#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
-        hIconD: "#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
+        hIconD: "#9de160", //"#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
         hIconHov: "red",
         hIconHovD: "red",
         hIconBg: "rgba(65,69,69,1)",
@@ -86,11 +86,13 @@ module.exports = {
         hMobileIcon: "red",
         hMobileIconD: "red",
 
-        //-- headMenu /??? Всі випадаючі з head меню
+        //-- headMenu / + Всі випадаючі з head меню ???
         hMenuBorder: "#DCDCDC", //1  "#82AE46",
-        hMenuBorderD: "#F4F4EB", //1  "#82AE46",
+        // hMenuBorderD: "#F4F4EB", //1  "#82AE46",
+        hMenuBorderD: "#6B8E23", //1  "#82AE46",
         hMenuText: "#6B8E23", //1  "#82AE46",
-        hMenuTextD: "#6B8E23", //1  "#82AE46",
+        hMenuTextD: "#9de160", //"#95dd77","#9dd360", // //"#32cd32", //"#C9DFA7", //"#A5E189", //1  "#82AE46",
+        // hMenuTextD: "#fff", //1  "#82AE46",
         hMenuTextHov: "#fff",
         hMenuTextHovD: "#fff",
         hMenuBg: "#E7F4E0",
@@ -104,7 +106,7 @@ module.exports = {
         hMenuGorizBgHov: "#f64532",
         hMenuGorizBgHovD: "#f64532",
 
-        //-- menuDroop --------------------------------------------
+        //-- menuDroop /випадаючі меню (ше не викор)
         menuDropBorder: "#DCDCDC",
         menuDropBorderD: "#F4F4EB",
         menuDropText: "#82AE46",

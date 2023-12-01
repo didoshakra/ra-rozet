@@ -99,7 +99,7 @@ const HeaderSetingDroopMenu = () => {
         onClick={setingMenuToggle}
       >
         <svg
-          class="text-hIcon h-8 w-8 dark:text-hIconD"
+          class="h-8 w-8 text-hIcon dark:text-hIconD"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -117,11 +117,15 @@ const HeaderSetingDroopMenu = () => {
       </button>
       {/* список головного меню */}
       {/* <ul className="headerSetingDroopMenu__dropdown"> */}
-      <ul className={`${setingMenuOpen ? "absolute":"hidden"}  left-[-110px] top-12 float-left m-0 w-[150px] rounded-sm border p-0 shadow-md "}`}
+      <ul
+        className={`${
+          setingMenuOpen ? "absolute" : "hidden"
+        } left-[-110px] top-12 float-left m-0 inline-block w-[150px] rounded-lg  border border-hMenuBorder bg-hMenuBg p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD`}
       >
         <li
           //   className="headerSetingDroopMenu__dropdown__item"
-          className="flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
+          //   className="flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
+          className="flex list-none items-center  p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov  dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
           onClick={themeMenuToggle}
           //   onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
         >
@@ -178,7 +182,8 @@ const HeaderSetingDroopMenu = () => {
         </li>
         <li
           //   className="headerSetingDroopMenu__dropdown__item"
-          className="relative flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
+          //   className="relative flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
+          className="flex list-none items-center  p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov  dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
           onClick={() => setUserMenuOpen(!userMenuOpen)}
         >
           {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
