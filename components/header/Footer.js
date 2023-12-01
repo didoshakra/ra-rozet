@@ -12,15 +12,15 @@ const Footer = () => {
           <div className="m-1 flex h-[30px] w-[30px] items-center justify-center rounded-full text-xl text-orange-600">
             <span className="flex items-center justify-center">
               <svg
-                class="h-10 w-10 text-hIcon dark:text-hIconD"
+                className="h-10 w-10 text-hIcon dark:text-hIconD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 {" "}
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -40,13 +40,13 @@ const Footer = () => {
               <a href="https://www.facebook.com/profile.php?id=100017742340573">
                 {/* Facebook */}
                 <svg
-                  class="h-6 w-6 text-hIcon dark:text-hIconD"
+                  className="h-6 w-6 text-hIcon dark:text-hIconD"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
                 >
                   {" "}
                   <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z" />
@@ -63,21 +63,21 @@ const Footer = () => {
           <ul>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                class="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-hIcon dark:text-hIconD"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"
                 />
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
                 />
               </svg>
@@ -85,15 +85,15 @@ const Footer = () => {
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                class="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-hIcon dark:text-hIconD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 {" "}
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -105,15 +105,15 @@ const Footer = () => {
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                class="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-hIcon dark:text-hIconD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 {" "}
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -125,15 +125,15 @@ const Footer = () => {
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                class="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-hIcon dark:text-hIconD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 {" "}
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -149,15 +149,15 @@ const Footer = () => {
         <div className="flex flex-row items-center justify-center">
           Copyright © {new Date().getFullYear()}
           <svg
-            class="h-6 w-6 text-errorMsg dark:text-errorMsgD"
+            className="h-6 w-6 text-errorMsg dark:text-errorMsgD"
             width="24"
             height="24"
             viewBox="0 0 24 24"
-            stroke-width="2"
+            strokeWidth="2"
             stroke="currentColor"
             fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
             {" "}
             <path stroke="none" d="M0 0h24v24H0z" />{" "}

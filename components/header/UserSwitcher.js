@@ -6,6 +6,7 @@ import { useState, useContext, useRef, useEffect } from "react";
 import Image from "next/image";
 // import { ComponentContext } from "../../context/ComponentContext"
 import UserSwitcherDroop from "./UserSwitcherDroop";
+import avatar from "@/public/avatar/2.jpg";
 
 const UserSwitcher = () => {
   //   const { state, dispatch, profile } = useContext(ComponentContext)
@@ -36,22 +37,30 @@ const UserSwitcher = () => {
       >
         {profile === "admin" ? (
           <Image
-            className="h-8 w-8 rounded-full border bg-[url(/avatar/2.jpg)] bg-cover"
-            width={40}
-            height={40}
-            alt="avatar"
+            src={avatar}
+            alt={"avatar"}
+            width={32}
+            height={32}
+            className="rounded-full border"
           />
         ) : (
+          //   <Image
+          //     // className="h-8 w-8 rounded-full border bg-[url(/avatar/2.jpg)] bg-cover"
+          //     scr="/public/avatar/2.jpg"
+          //     width={40}
+          //     height={40}
+          //     alt={"avatar"}
+          //   />
           <svg
-            class="h-8 w-8 text-hIcon dark:text-hIconD"
+            className="h-8 w-8 text-hIcon dark:text-hIconD"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
             <path
-              stroke-linecap="round"
-              stroke-linejoin="round"
-              stroke-width="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
               d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
             />
           </svg>

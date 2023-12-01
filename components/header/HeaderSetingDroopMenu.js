@@ -10,6 +10,8 @@ import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
 import UserSwitcherDroop from "./UserSwitcherDroop";
+import avatar from "@/public/avatar/2.jpg";
+
 
 const HeaderSetingDroopMenu = () => {
   const { resolvedTheme, setTheme } = useTheme();
@@ -99,15 +101,15 @@ const HeaderSetingDroopMenu = () => {
         onClick={setingMenuToggle}
       >
         <svg
-          class="h-8 w-8 text-hIcon dark:text-hIconD"
+          className="h-8 w-8 text-hIcon dark:text-hIconD"
           width="24"
           height="24"
           viewBox="0 0 24 24"
-          stroke-width="2"
+          strokeWidth="2"
           stroke="currentColor"
           fill="none"
-          stroke-linecap="round"
-          stroke-linejoin="round"
+          strokeLinecap="round"
+          strokeLinejoin="round"
         >
           {" "}
           <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -138,15 +140,15 @@ const HeaderSetingDroopMenu = () => {
           >
             {resolvedTheme === "dark" ? (
               <svg
-                class="h-8 w-8 text-hIconD dark:text-hIcon"
+                className="h-8 w-8 text-hIconD dark:text-hIcon"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 {" "}
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -154,15 +156,15 @@ const HeaderSetingDroopMenu = () => {
               </svg>
             ) : (
               <svg
-                class="h-8 w-8 text-hIconD dark:text-hIcon"
+                className="h-8 w-8 text-hIconD dark:text-hIcon"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
-                stroke-width="2"
+                strokeWidth="2"
                 stroke="currentColor"
                 fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
+                strokeLinecap="round"
+                strokeLinejoin="round"
               >
                 {" "}
                 <path stroke="none" d="M0 0h24v24H0z" />{" "}
@@ -189,23 +191,30 @@ const HeaderSetingDroopMenu = () => {
           {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
           <p>
             {profile === "admin" ? (
-              <Image
-                className="h-8 w-8 rounded-full border bg-[url(/avatar/2.jpg)] bg-cover"
-                width={40}
-                height={40}
-                alt="avatar"
-              />
+                <Image
+            src={avatar}
+            alt={"avatar"}
+            width={32}
+            height={32}
+            className="rounded-full border"
+          />
+            //   <Image
+            //     className="h-8 w-8 rounded-full border bg-[url(/avatar/2.jpg)] bg-cover"
+            //     width={40}
+            //     height={40}
+            //     alt="avatar"
+            //   />
             ) : (
               <svg
-                class="h-8 w-8 text-hIconD dark:text-hIcon"
+                className="h-8 w-8 text-hIconD dark:text-hIcon"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
               >
                 <path
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  stroke-width="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
                   d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"
                 />
               </svg>
