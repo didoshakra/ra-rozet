@@ -14,19 +14,22 @@ const HeaderMobileDroopMenu = () => {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   //*************Для клацання поза обєктом
-  const wRef_HeaderMobileDroopMenu = useRef(null); //Для клацання поза обєктом
+  const ref_HeaderMobileDroopMenu = useRef(null);
   useEffect(() => {
-    const onClick = (e) =>
-      wRef_HeaderMobileDroopMenu.current.contains(e.target);
-    document.addEventListener("click", onClick, true);
-    document.addEventListener("scroll", onClick, true);
-    // document.addEventListener("mousedown", onClick) // віджали кнопку миші на елементі.
-    return () => {
-      document.removeEventListener("click", onClick, true);
-      document.removeEventListener("scroll", onClick, true), true;
+    const handleOutSideClick = (event) => {
+      if (!ref_HeaderMobileDroopMenu.current?.contains(event.target)) {
+        // alert("Outside Clicked.");
+        console.log("Outside Clicked. ");
+        setMobileMenuOpen(false);
+      }
     };
-  }, [wRef_HeaderMobileDroopMenu]);
 
+    window.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
+  }, [ref_HeaderMobileDroopMenu]);
   //випадаюче меню Налаштувань
   const renderMenu = () => {
     return headMenu.map((item, index) => {
@@ -43,7 +46,7 @@ const HeaderMobileDroopMenu = () => {
 
   return (
     <div
-      ref={wRef_HeaderMobileDroopMenu}
+      ref={ref_HeaderMobileDroopMenu}
       className="relative m-0 items-center p-0  md:hidden"
     >
       <button
@@ -73,13 +76,13 @@ const HeaderMobileDroopMenu = () => {
 
       {/* список головного меню */}
       <div
-        ref={wRef_HeaderMobileDroopMenu}
+        // ref={ref_HeaderMobileDroopMenu}
         className={`${
           mobileMenuOpen ? "absolute" : "hidden"
         } right-0 z-10 m-0 p-0`}
       >
         <ul
-          //   ref={wRef_HeaderMobileDroopMenu}
+          //   ref={ref_HeaderMobileDroopMenu}
           className=" rounded-lg border border-hMenuBorder  bg-hMenuBg p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD"
         >
           {renderMenu()}

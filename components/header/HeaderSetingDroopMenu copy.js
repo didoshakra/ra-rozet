@@ -33,25 +33,19 @@ const HeaderSetingDroopMenu = () => {
   };
 
   //*************Для клацання поза обєктом
-  const ref_HeaderSetingDroopMenu = useRef(null);
-
+  const wRef_HeaderSetingDroopMenu = useRef(null); //Для клацання поза обєктом
   useEffect(() => {
-    const handleOutSideClick = (event) => {
-      if (!ref_HeaderSetingDroopMenu.current?.contains(event.target)) {
-        // alert("Outside Clicked.");
-        console.log("Outside Clicked. ");
-        setSetingMenuOpen(false)
-        setUserMenuOpen(false)
-
-      }
-    };
-
-    window.addEventListener("mousedown", handleOutSideClick);
-
+    const onClick = (e) =>
+      wRef_HeaderSetingDroopMenu.current.contains(e.target) ||
+      (setSetingMenuOpen(false), setUserMenuOpen(false));
+    document.addEventListener("click", onClick, true);
+    document.addEventListener("scroll", onClick, true);
+    // document.addEventListener("mousedown", onClick) // віджали кнопку миші на елементі.
     return () => {
-      window.removeEventListener("mousedown", handleOutSideClick);
+      document.removeEventListener("click", onClick, true);
+      document.removeEventListener("scroll", onClick, true), true;
     };
-  }, [ref_HeaderSetingDroopMenu]);
+  }, [wRef_HeaderSetingDroopMenu]);
 
   //випадаюче меню Налаштувань
   const setingMenuToggle = () => {
@@ -66,8 +60,7 @@ const HeaderSetingDroopMenu = () => {
   };
 
   return (
-    // <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
-    <div ref={ref_HeaderSetingDroopMenu} className="relative m-0 p-0">
+    <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
       {/* іконка seting*/}
       {/* <div className="headerSetingDroopMenu__icon" onClick={setingMenuToggle}> */}
       <button

@@ -13,15 +13,15 @@ const UserSwitcher = () => {
   //   const [profile, setprofile] = useState("user");
   const [profile, setprofile] = useState("admin");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-const ref_UserSwitcher = useRef(null);
 
-
+  //*************Для клацання поза обєктом
+  const ref_UserSwitcher = useRef(null);
   useEffect(() => {
     const handleOutSideClick = (event) => {
       if (!ref_UserSwitcher.current?.contains(event.target)) {
         // alert("Outside Clicked.");
         console.log("Outside Clicked. ");
-        setUserMenuOpen(false)
+        setUserMenuOpen(false);
       }
     };
 
@@ -31,7 +31,6 @@ const ref_UserSwitcher = useRef(null);
       window.removeEventListener("mousedown", handleOutSideClick);
     };
   }, [ref_UserSwitcher]);
-
 
   //   console.log("profile=", profile);
   const userMenuOpenToggle = () => {
