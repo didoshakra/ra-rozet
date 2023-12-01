@@ -13,6 +13,25 @@ const UserSwitcher = () => {
   //   const [profile, setprofile] = useState("user");
   const [profile, setprofile] = useState("admin");
   const [userMenuOpen, setUserMenuOpen] = useState(false);
+const ref_UserSwitcher = useRef(null);
+
+
+  useEffect(() => {
+    const handleOutSideClick = (event) => {
+      if (!ref_UserSwitcher.current?.contains(event.target)) {
+        // alert("Outside Clicked.");
+        console.log("Outside Clicked. ");
+        setUserMenuOpen(false)
+      }
+    };
+
+    window.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
+  }, [ref_UserSwitcher]);
+
 
   //   console.log("profile=", profile);
   const userMenuOpenToggle = () => {
@@ -28,7 +47,7 @@ const UserSwitcher = () => {
   };
 
   return (
-    <div className="relative list-none">
+    <div ref={ref_UserSwitcher} className="relative list-none">
       {/* іконка зміни користувача */}
       <button
         className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"

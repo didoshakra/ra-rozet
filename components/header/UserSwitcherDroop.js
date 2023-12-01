@@ -8,7 +8,6 @@
 
 const UserSwitcherDroop = (props) => {
   //   const { state } = useContext(ComponentContext)
-  //   const { theme } = state
   //    const [session] = useSession()
 
   const loginToggle = (e) => {

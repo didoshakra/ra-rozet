@@ -38,8 +38,6 @@ const HeaderSetingDroopMenu = () => {
     const onClick = (e) =>
       wRef_HeaderSetingDroopMenu.current.contains(e.target) ||
       (setSetingMenuOpen(false), setUserMenuOpen(false));
-    //   ,console.log("HeaderSetingDroopMenu: клік поза компонентом")
-    // || console.log("клик вне компонента")
     document.addEventListener("click", onClick, true);
     document.addEventListener("scroll", onClick, true);
     // document.addEventListener("mousedown", onClick) // віджали кнопку миші на елементі.
@@ -47,35 +45,7 @@ const HeaderSetingDroopMenu = () => {
       document.removeEventListener("click", onClick, true);
       document.removeEventListener("scroll", onClick, true), true;
     };
-  }, []);
-
-  //   useOutsideAlerter(wRef) //Для клацання поза обєктом
-
-  //   //Щоб відключити всі *Open=(false), треба відключити при клацанні поза обєктом function useOutsideAlerter(ref)
-  //   // і відключення у всіх onClick(*togle) в самомк об'єкті.
-  //   function useOutsideAlerter(ref) {
-  //     //*** Для клацання поза елементом Решение с React ^ 16.8 с использованием хуков
-  //     function handleClickOutside(event) {
-  //       if (ref.current && !ref.current.contains(event.target)) {
-  //         //Якщо клацнув поза елементом
-  //         // alert("Ти клацнув поза мною!");
-  //         setSetingMenuOpen(false) //Закриваєм меню Seting
-  //         setUserMenuOpen(false) //Закриваєм меню
-  //       }
-  //     }
-  //     useEffect(() => {
-  //       // Прив’яжіть прослуховувач події
-  //       // document.addEventListener("mousedown", handleClickOutside);//натиснули / віджали кнопку миші на елементі.
-  //       document.addEventListener("scroll", handleClickOutside) //Для скролу
-  //       document.addEventListener("click", handleClickOutside, false) //Кликнули на елемент лівою кнопкою миші (на пристроях з сенсорними екранами воно відбувається при торканні).
-  //       return () => {
-  //         // Від’єднайте слухача події під час очищення
-  //         // document.removeEventListener("mousedown", handleClickOutside);
-  //         document.removeEventListener("scroll", handleClickOutside)
-  //         document.removeEventListener("click", handleClickOutside, false)
-  //       }
-  //     })
-  //   }
+  }, [wRef_HeaderSetingDroopMenu]);
 
   //випадаюче меню Налаштувань
   const setingMenuToggle = () => {
@@ -90,9 +60,6 @@ const HeaderSetingDroopMenu = () => {
   };
 
   return (
-    // <div ref={wRef_HeaderSetingDroopMenu} className="headerSetingDroopMenu">
-    // <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
-    // <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
     <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
       {/* іконка seting*/}
       {/* <div className="headerSetingDroopMenu__icon" onClick={setingMenuToggle}> */}
