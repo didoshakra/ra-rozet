@@ -1,22 +1,23 @@
-import Link from "next/link"
-import Image from "next/image"
-import outschool from "../../public/outschool.svg"
-import facebook from "../../public/Social/facebook.svg"
-import twitter from "../../public/Social/twitter.svg"
-import instagram from "../../public/Social/instagram.svg"
-import youtube from "../../public/Social/youtube.svg"
+import Link from "next/link";
+import Image from "next/image";
+import outschool from "../../public/outschool.svg";
+import facebook from "../../public/Social/facebook.svg";
+import twitter from "../../public/Social/twitter.svg";
+import instagram from "../../public/Social/instagram.svg";
+import youtube from "../../public/Social/youtube.svg";
 
 export default function Footer() {
   return (
     <section className=" bg-[#1B1B1B] px-2 pb-[50px] pt-[25px]">
       <div className="mx-auto max-w-[1160px]">
         <div className="flex flex-col justify-between md:flex-row">
-          <div className="mt-4 p-1 max-x-[232px]">
+          <div className="max-x-[232px] mt-4 p-1">
             <Link href="/">
               <Image src={outschool} alt={"outschool"} />
             </Link>
             <p className="mt-4 text-xs text-white">
-              Lorem ipsum dolor sit amet consectetur. Magna integer enim vitae vulputate eu vitae tristique.
+              Lorem ipsum dolor sit amet consectetur. Magna integer enim vitae
+              vulputate eu vitae tristique.
             </p>
           </div>
 
@@ -25,22 +26,34 @@ export default function Footer() {
               <p className="text-xl font-medium text-white ">General</p>
               <ul>
                 <li>
-                  <Link className="p-1 text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet p-1 text-sm text-white transition-colors"
+                    href="/"
+                  >
                     About Us
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
                     Pricing
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
                     Contact Us
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
                     Courses
                   </Link>
                 </li>
@@ -50,22 +63,34 @@ export default function Footer() {
               <p className="text-xl font-medium text-white ">Policies</p>
               <ul>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
                     Security safeguards
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
                     Terms of service
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
                     Privacy
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
                     Accessibility
                   </Link>
                 </li>
@@ -75,34 +100,64 @@ export default function Footer() {
             <div className="col-span-2 mt-4 md:col-span-1">
               <p className="text-xl font-medium text-white ">Get in touch</p>
               <p className="mt-2 text-xs text-white">
-                Follow us on social media and stay updated with the latest information about our services
+                Follow us on social media and stay updated with the latest
+                information about our services
               </p>
               <ul className=" mt-2 flex items-center gap-3">
                 <li>
                   <Link href="/">
-                    <p className="flex h-7 w-7 items-center justify-center rounded-full bg-white transition-colors  hover:bg-bluviolet">
-                      <Image src={facebook} width={24} height={24} alt={"icon"} />
+                    <p className="hover:bg-bluviolet flex h-7 w-7 items-center justify-center rounded-full bg-white  transition-colors">
+                      <Image
+                        src={facebook}
+                        width={24}
+                        height={24}
+                        alt={"icon"}
+                      />
                     </p>
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
-                    <p className="flex h-7 w-7 items-center justify-center rounded-full bg-white transition-colors  hover:bg-bluviolet">
-                      <Image src={twitter} width={24} height={24} alt={"icon"} />
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
+                    <p className="hover:bg-bluviolet flex h-7 w-7 items-center justify-center rounded-full bg-white  transition-colors">
+                      <Image
+                        src={twitter}
+                        width={24}
+                        height={24}
+                        alt={"icon"}
+                      />
                     </p>
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors hover:text-bluviolet" href="/">
-                    <p className="flex h-7 w-7 items-center justify-center rounded-full bg-white transition-colors  hover:bg-bluviolet">
-                      <Image src={instagram} width={24} height={24} alt={"icon"} />
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white transition-colors"
+                    href="/"
+                  >
+                    <p className="hover:bg-bluviolet flex h-7 w-7 items-center justify-center rounded-full bg-white  transition-colors">
+                      <Image
+                        src={instagram}
+                        width={24}
+                        height={24}
+                        alt={"icon"}
+                      />
                     </p>{" "}
                   </Link>
                 </li>
                 <li>
-                  <Link className="text-sm text-white transition-colors  hover:text-bluviolet" href="/">
-                    <p className="flex h-7 w-7 items-center justify-center rounded-full bg-white transition-colors  hover:bg-bluviolet">
-                      <Image src={youtube} width={24} height={24} alt={"icon"} />
+                  <Link
+                    className="hover:text-bluviolet text-sm text-white  transition-colors"
+                    href="/"
+                  >
+                    <p className="hover:bg-bluviolet flex h-7 w-7 items-center justify-center rounded-full bg-white  transition-colors">
+                      <Image
+                        src={youtube}
+                        width={24}
+                        height={24}
+                        alt={"icon"}
+                      />
                     </p>
                   </Link>
                 </li>
@@ -110,10 +165,7 @@ export default function Footer() {
             </div>
           </div>
         </div>
-        <p className=" font-normaltext- mt-10 text-center text-xs  tracking-[-0.24px] text-[#BDB9B9]">
-          2022 - @OUTSCHOOL all right deserved
-        </p>
       </div>
     </section>
-  )
+  );
 }

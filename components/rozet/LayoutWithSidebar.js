@@ -165,9 +165,6 @@ export default function LayoutWithSidebar() {
             </div>
           </div>
         </div>
-        <p className=" font-normaltext- mt-10 text-center text-xs  tracking-[-0.24px] text-[#BDB9B9]">
-          2022 - @OUTSCHOOL all right deserved
-        </p>
       </div>
     </section>
   );
