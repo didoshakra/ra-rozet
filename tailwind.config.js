@@ -91,7 +91,7 @@ module.exports = {
         // hMenuBorderD: "#F4F4EB", //1  "#82AE46",
         hMenuBorderD: "#6B8E23", //1  "#82AE46",
         hMenuText: "#6B8E23", // "#82AE46",
-        hMenuTextD: "#6B8E23", //"#9de160", //"#95dd77","#9dd360", // //"#32cd32", //"#C9DFA7", //"#A5E189", 
+        hMenuTextD: "#6B8E23", //"#9de160", //"#95dd77","#9dd360", // //"#32cd32", //"#C9DFA7", //"#A5E189",
         // hMenuTextD: "#fff", //1  "#82AE46",
         hMenuTextHov: "#fff",
         hMenuTextHovD: "#fff",
@@ -313,30 +313,32 @@ module.exports = {
       slideHome: {
         "0%": {
           opacity: 100,
-          // transform: "translateY(0)",
         },
+        "45%": {
+          opacity: 100,
+        },
+        "55%": {
+          opacity: 0,
+        },
+
         "100%": {
           opacity: 0,
-          // transform: "translateY(20px)",
         },
       },
       slideHome1: {
         "0%": {
           opacity: 100,
-          // transform: "translateY(0)",
         },
         "100%": {
           opacity: 0,
-          // transform: "translateY(20px)",
         },
       },
+
       drawerDroop: {
         "0%": {
-          //   opacity: 100,
           transform: "translateХ(0)",
         },
         "100%": {
-          //   opacity: 0,
           transform: "translateY(200px)",
         },
       },
@@ -344,14 +346,14 @@ module.exports = {
     //   animation-name: slideHome; //ім'я секції анімації
     //   animation-duration: 5s; //протяжність анімації
     //   animation-delay: 5s; //Затримка анімації після протяжність анімації
-    //   animation-timing-function: linear; //рівномірна зміна
+    //   animation-timing-function: linear; //рівномірна зміна//??ease-in-out
     //   animation-iteration-count: infinite; //к-сть повторів/rinfinite нескінченно
     //   animation-direction: alternate; //Анімація змінює напрямок в кожному циклі
-    animation: {
-      slideHome: "slideHome 5s ease-in-out infinite alternate",
-      slideHome1: "slideHome1 5s 5s ease-in-out  infinite alternate",
-      drawerDroop: "drawerDroop ease-in-out",
-    },
+    // animation: {
+    //   slideHome: "slideHome linear infinite 5s  alternate",
+    //   slideHome1: "slideHome1 5s 5s ease-in-out  infinite alternate",
+    //   drawerDroop: "drawerDroop ease-in-out",
+    // },
     // backgroundImage: {
     //   "sort-up": "url('/public/images/table/up_arrow.png')",
     //   "sort-down": "url('/public/images/table/down_arrow.png')",
