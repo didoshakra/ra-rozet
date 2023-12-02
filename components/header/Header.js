@@ -7,7 +7,7 @@ import DrawerSwitche from "./DrawerSwitcher";
 
 export default function Header() {
   return (
-    <header className="flex h-16  w-full items-center justify-between bg-hMenuBg p-1 px-2 dark:bg-hMenuBgD">
+    <header className="mx-auto my-auto flex h-16 w-full items-center justify-between bg-hMenuBg  dark:bg-hMenuBgD">
       {/* Ліве випадаюче меню */}
       <div className="flex">
         <DrawerSwitche />
