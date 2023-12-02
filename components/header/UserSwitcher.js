@@ -5,7 +5,7 @@
 import { useState, useContext, useRef, useEffect } from "react";
 import Image from "next/image";
 // import { ComponentContext } from "../../context/ComponentContext"
-import UserSwitcherDroop from "./UserSwitcherDroop";
+import UserMenuDroop from "./UserMenuDroop";
 import avatar from "@/public/avatar/2.jpg";
 
 const UserSwitcher = () => {
@@ -78,7 +78,7 @@ const UserSwitcher = () => {
         )}
       </button>
       {/* Випадаюче меню */}
-      {userMenuOpen && <UserSwitcherDroop setUserMenuOpen={setUserMenuOpen} />}
+      {userMenuOpen && <UserMenuDroop setUserMenuOpen={setUserMenuOpen} />}
     </div>
   );
 };

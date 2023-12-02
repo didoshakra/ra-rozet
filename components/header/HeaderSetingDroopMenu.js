@@ -9,7 +9,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import UserSwitcherDroop from "./UserSwitcherDroop";
+import UserSwitcherDroop from "./UserMenuDroop";
 import avatar from "@/public/avatar/2.jpg";
 
 const HeaderSetingDroopMenu = () => {
@@ -40,9 +40,8 @@ const HeaderSetingDroopMenu = () => {
       if (!ref_HeaderSetingDroopMenu.current?.contains(event.target)) {
         // alert("Outside Clicked.");
         console.log("Outside Clicked. ");
-        setSetingMenuOpen(false)
-        setUserMenuOpen(false)
-
+        setSetingMenuOpen(false);
+        setUserMenuOpen(false);
       }
     };
 
@@ -63,6 +62,7 @@ const HeaderSetingDroopMenu = () => {
   const themeMenuToggle = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
     setUserMenuOpen(false);
+    setSetingMenuOpen(false);
   };
 
   return (

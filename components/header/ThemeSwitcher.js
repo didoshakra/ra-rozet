@@ -1,20 +1,20 @@
 // Використання: своїх іконок з кольорами з tailwindcss.config//іконок з heroicons/react
 "use client";
-import { useEffect, useState } from "react";
+// import { useEffect, useState } from "react";
 import { useTheme } from "next-themes";
 // import resolveCofig from "tailwindcss/resolveConfig"; //отримання змінних з tailwind.config
 
 const ThemeSwitcher = () => {
-  const { resolvedTheme, setTheme } = useTheme();
+    const { resolvedTheme, setTheme } = useTheme();
   //   const { theme } = resolveConfig(tailwindConfig); //отримання змінних з tailwind.config
   //   console.log("ThemeSwitche/theme.colors=", theme.colors);
 
-  const [mounted, setMounted] = useState(false);
-  useEffect(() => setMounted(true), []);
+  //   const [mounted, setMounted] = useState(false);
+  //   useEffect(() => setMounted(true), []);
 
-  if (!mounted) {
-    return null;
-  }
+  //   if (!mounted) {
+  //     return null;
+  //   }
 
   return (
     <button

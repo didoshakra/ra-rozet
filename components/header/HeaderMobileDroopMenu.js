@@ -37,6 +37,7 @@ const HeaderMobileDroopMenu = () => {
         <li
           className="flex list-none flex-nowrap  items-center p-1 text-sm font-normal text-hMenuText  hover:bg-hMenuBgHov  hover:text-hMenuTextHov dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
           key={index}
+          onClick={()=>setMobileMenuOpen(false)}
         >
           <Link href={`${item.link}`}>{item.a}</Link>
         </li>
