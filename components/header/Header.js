@@ -17,7 +17,7 @@ export default function Header() {
         {/*рядок меню */}
         <HeaderMenu />
         {/* мобільне меню/ Показує по style{md:hidden}*/}
-        {/* <HeaderMobileDroopMenu /> */}
+        <HeaderMobileDroopMenu />
         {/* Налаштування(Теми,Мови) / Показує по style{hidden md:flex}*/}
         <HeaderMenuRight />
       </div>
