@@ -50,7 +50,7 @@ const HeaderMobileDroopMenu = () => {
       className="relative m-0 items-center p-0  md:hidden"
     >
       <button
-        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
+        className="flex items-center justify-center rounded-full pl-1 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         title="меню"
       >

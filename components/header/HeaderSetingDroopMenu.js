@@ -74,7 +74,7 @@ const HeaderSetingDroopMenu = () => {
       {/* іконка seting*/}
       {/* <div className="headerSetingDroopMenu__icon" onClick={setingMenuToggle}> */}
       <button
-        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
+        className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
         onClick={setingMenuToggle}
       >
         <svg

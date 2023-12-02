@@ -10,7 +10,7 @@ const HeaderMenuRight = () => {
 
   return (
     // <div className=" flex h-16 items-center justify-between">
-    <div className=" flex items-center justify-between">
+    <div className=" flex items-center justify-end">
       {/* Іконки головного меню Seting */}
       <div className="hidden md:flex">
         {/* User */}
