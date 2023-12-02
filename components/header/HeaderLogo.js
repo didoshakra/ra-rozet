@@ -5,7 +5,9 @@ import Image from "next/image";
 
 const HeaderLogo = () => {
   return (
-    <div className=" justify-begin flex min-w-[200px]  items-center px-0 md:px-2  ">
+    // <div className="flex min-w-[200px] items-center  justify-start px-0 md:px-2  ">
+    <div className="flex items-center  justify-start">
+      {/* <Link href="/" className=" w-[70px], h-[50px] "> */}
       <Link href="/" className=" w-[70px], h-[50px] ">
         <Image
           src="/images/home/sun_man_hands-oval-ra-red.png"
@@ -17,7 +19,7 @@ const HeaderLogo = () => {
         />
       </Link>
       <Link href="/">
-        <div className="justify-begin dark:text-hMenuTextD flex items-center px-4 text-2xl font-bold italic text-hMenuText md:text-2xl">
+        <div className="justify-begin flex items-center px-4 text-2xl font-bold italic text-hMenuText dark:text-hMenuTextD md:text-2xl">
           RAecom
         </div>
       </Link>
