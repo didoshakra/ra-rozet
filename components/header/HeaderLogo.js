@@ -22,7 +22,7 @@ const HeaderLogo = () => {
       </Link>
       <Link href="/">
         <div className="justify-begin flex items-center px-1 text-xl font-bold italic text-hMenuText dark:text-hMenuTextD md:text-2xl md:px-2">
-          RAecom
+          RAtest
         </div>
       </Link>
       {/* ========================================================================== */}

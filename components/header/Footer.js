@@ -84,6 +84,7 @@ const Footer = () => {
               <span className="px-2"> вул. Гулака , Калуш, Україна</span>
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
+              {/* phone */}
               <svg
                 className="h-6 w-6 text-hIcon dark:text-hIconD"
                 width="24"
@@ -104,6 +105,7 @@ const Footer = () => {
               </a>
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
+              {/* phone */}
               <svg
                 className="h-6 w-6 text-hIcon dark:text-hIconD"
                 width="24"
