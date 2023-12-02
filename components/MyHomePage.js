@@ -18,7 +18,7 @@ const MyHomePage = () => {
         items-center justify-center bg-[url('/images/home/sun3_1280-847.jpg')] bg-cover bg-center bg-no-repeat"
       >
         <div className="flex h-full flex-col items-center justify-center px-3 text-center align-middle">
-          <h1 className="h-auto items-center  justify-center font-serif text-[50px] font-extrabold leading-normal text-hTextD md:text-[90px]">
+          <h1 className="h-auto items-center  justify-center font-serif text-[40px] font-extrabold leading-normal text-hTextD md:text-[90px]">
             Підніміться над бурею, і ви знайдете сонце{" "}
           </h1>
           <h2 className="inline-block font-sans text-[25px] font-bold uppercase tracking-normal text-red-500">
@@ -31,7 +31,7 @@ const MyHomePage = () => {
         justify-center bg-[url('/images/home/karpaty-morning1_960-640.jpg')] bg-cover bg-center bg-no-repeat text-center"
       >
         <div className="flex h-full flex-col items-center justify-center px-3 align-middle ">
-          <h1 className="text-[50px] md:text-[90px] h-auto  items-center justify-center font-sans font-extrabold leading-normal text-hTextD">
+          <h1 className="h-auto items-center justify-center  font-sans text-[40px] font-extrabold leading-normal text-hTextD md:text-[90px]">
             Тримай своє обличчя до сонця, і ти ніколи не побачиш тіней
           </h1>
           <h2 className="inline-block font-sans text-[25px] font-bold uppercase tracking-normal text-red-500">
