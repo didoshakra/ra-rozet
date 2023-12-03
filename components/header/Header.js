@@ -13,6 +13,10 @@ export default function Header() {
         <DrawerSwitche />
         <HeaderLogo />
       </div>
+      {/*рядок меню */}
+      {/* <div className=" flex items-center justify-center">
+        <HeaderMenu />
+      </div> */}
       <div className=" flex items-center justify-end">
         {/*рядок меню */}
         <HeaderMenu />

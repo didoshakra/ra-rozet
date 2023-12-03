@@ -69,7 +69,7 @@ const HeaderSetingDroopMenu = () => {
     // <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
     <div
       ref={ref_HeaderSetingDroopMenu}
-      className="relative m-0 items-center p-0"
+      className="relative m-0 items-center p-0 md:hidden"
     >
       {/* іконка seting*/}
       {/* <div className="headerSetingDroopMenu__icon" onClick={setingMenuToggle}> */}

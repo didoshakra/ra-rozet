@@ -8,7 +8,7 @@ export default function DrawerSwitcher({ thrme }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   return (
-    <div className="relative flex justify-start">
+    <div className="relative flex justify-start ">
       <button
         className="flex items-center justify-center rounded-full p-1 hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD md:p-2"
         onClick={(e) => setDrawerOpen(!drawerOpen)}

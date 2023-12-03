@@ -10,10 +10,7 @@ import Categories from "@/components/product/Categories";
 export default function LayoutWithSidebar() {
   const goods_quantity = 12345;
   return (
-    // <section className="bg-red-100 px-8 pb-8 pt-6">
-    // <section className="bg-white px-8 pb-8 pt-6">
-    <section className=" pb-8 pt-6 lg:px-8">
-      {/* <div className="mx-auto max-w-[1440px] bg-white"> */}
+    <section className=" border border-2 pb-8 pt-6 lg:px-8">
       <div className="mx-auto max-w-[1440px]">
         {/*  */}
         <div className="flex flex-col justify-between md:flex-row md:gap-3">
