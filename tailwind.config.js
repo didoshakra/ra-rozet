@@ -296,7 +296,10 @@ module.exports = {
         paperHdBoxShadowD: "2px 2px 2px rgba(23,25,25,0.9)",
 
         //-- card/Картки – це поверхні, які відображають вміст і дії(кнопка) на одну тему.
-        cardBg: "rgba(187,190,190,0.5)",
+        cardBorder: "rgba(187,190,190,0.5)",
+        cardBorderD: "rgba(187,190,190,0.5)",
+        cardBg: "#fff",
+        cardBgD: "rgb(223, 222, 222)",
         cardBoxShadow: "2px 2px 2px rgba(0, 0, 0, 0.6)",
       },
       width: {

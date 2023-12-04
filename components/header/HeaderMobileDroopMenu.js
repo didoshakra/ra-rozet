@@ -19,7 +19,7 @@ const HeaderMobileDroopMenu = () => {
     const handleOutSideClick = (event) => {
       if (!ref_HeaderMobileDroopMenu.current?.contains(event.target)) {
         // alert("Outside Clicked.");
-        console.log("Outside Clicked. ");
+        // console.log("Outside Clicked. ");
         setMobileMenuOpen(false);
       }
     };

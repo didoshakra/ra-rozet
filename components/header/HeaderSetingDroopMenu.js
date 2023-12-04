@@ -39,7 +39,7 @@ const HeaderSetingDroopMenu = () => {
     const handleOutSideClick = (event) => {
       if (!ref_HeaderSetingDroopMenu.current?.contains(event.target)) {
         // alert("Outside Clicked.");
-        console.log("Outside Clicked. ");
+        // console.log("Outside Clicked. ");
         setSetingMenuOpen(false);
         setUserMenuOpen(false);
       }

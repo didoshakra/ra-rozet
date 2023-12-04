@@ -150,6 +150,7 @@ const Footer = () => {
       <div className="flex w-full flex-row items-center justify-center pt-10">
         <div className="flex flex-row items-center justify-center">
           Copyright © {new Date().getFullYear()}
+          {/* Серце*/}
           <svg
             className="h-6 w-6 text-errorMsg dark:text-errorMsgD"
             width="24"

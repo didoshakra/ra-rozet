@@ -20,7 +20,7 @@ const UserSwitcher = () => {
     const handleOutSideClick = (event) => {
       if (!ref_UserSwitcher.current?.contains(event.target)) {
         // alert("Outside Clicked.");
-        console.log("Outside Clicked. ");
+        // console.log("Outside Clicked. ");
         setUserMenuOpen(false);
       }
     };
