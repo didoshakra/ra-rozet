@@ -9,8 +9,7 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { useTheme } from "next-themes";
-import UserMenuDroop from "./UserMenuDroop";
-import HeaderThemesDroopMenu from "./HeaderThemesDroopMenu";
+import UserSwitcherDroop from "./UserMenuDroop";
 import avatar from "@/public/avatar/2.jpg";
 
 const HeaderSetingDroopMenu = () => {
@@ -19,7 +18,6 @@ const HeaderSetingDroopMenu = () => {
 
   const [setingMenuOpen, setSetingMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [themesDroopMenuOpen, setThemesDroopMenuOpen] = useState(false);
 
   //   console.log("profile=", profile);
   const userMenuOpenToggle = () => {
@@ -68,15 +66,17 @@ const HeaderSetingDroopMenu = () => {
   };
 
   return (
+    // <div ref={wRef_HeaderSetingDroopMenu} className="relative m-0 p-0">
     <div
       ref={ref_HeaderSetingDroopMenu}
       className="relative m-0 items-center p-0 md:hidden"
     >
+      {/* іконка seting*/}
+      {/* <div className="headerSetingDroopMenu__icon" onClick={setingMenuToggle}> */}
       <button
         className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
         onClick={setingMenuToggle}
       >
-        {/* іконка seting*/}
         <svg
           className="h-8 w-8 text-hIcon dark:text-hIconD"
           width="24"
@@ -101,13 +101,75 @@ const HeaderSetingDroopMenu = () => {
           setingMenuOpen ? "absolute" : "hidden"
         } right-0 z-10 m-0 p-0`}
       >
+        {/* <ul className="headerSetingDroopMenu__dropdown"> */}
         <ul
+          //top-12  inline-block w-[350px] float-left- розміщує елемент зліва чи справа від контейнера, дозволяючи тексту та вбудованим елементам обтікати його.
+          //   className={`${
+          //     setingMenuOpen ? "absolute" : "hidden"
+          //   } left-[-100px] m-0 w-[150px] rounded-lg  border border-hMenuBorder bg-hMenuBg p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD`}
           className={`m-0 w-[150px] rounded-lg  border border-hMenuBorder bg-hMenuBg p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD`}
         >
-          <li className="flex w-full list-none items-center  p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov  active:text-errorMsg dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD">
-            <HeaderThemesDroopMenu />
+          <li
+            //   className="headerSetingDroopMenu__dropdown__item"
+            //   className="flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
+            className="flex list-none items-center  p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov  active:text-errorMsg dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
+            onClick={themeMenuToggle}
+            //   onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
+          >
+            {/* <FontAwesomeIcon icon={themeTypeLight ? faSun : faMoon} /> */}
+            <p
+              title="Тема"
+              // onClick={() =>
+              //   setTheme(resolvedTheme === "dark" ? "light" : "dark")
+              // }
+            >
+              {resolvedTheme === "dark" ? (
+                <svg
+                  className="h-8 w-8 text-hIconD dark:text-hIcon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                  <path d="M16.2 4a9.03 9.03 0 1 0 3.9 12a6.5 6.5 0 1 1 -3.9 -12" />
+                </svg>
+              ) : (
+                <svg
+                  className="h-8 w-8 text-hIconD dark:text-hIcon"
+                  width="24"
+                  height="24"
+                  viewBox="0 0 24 24"
+                  strokeWidth="2"
+                  stroke="currentColor"
+                  fill="none"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  {" "}
+                  <path stroke="none" d="M0 0h24v24H0z" />{" "}
+                  <circle cx="12" cy="12" r="3" />{" "}
+                  <line x1="12" y1="5" x2="12" y2="3" />{" "}
+                  <line x1="17" y1="7" x2="18.4" y2="5.6" />{" "}
+                  <line x1="19" y1="12" x2="21" y2="12" />{" "}
+                  <line x1="17" y1="17" x2="18.4" y2="18.4" />{" "}
+                  <line x1="12" y1="19" x2="12" y2="21" />{" "}
+                  <line x1="7" y1="17" x2="5.6" y2="18.4" />{" "}
+                  <line x1="6" y1="12" x2="4" y2="12" />{" "}
+                  <line x1="7" y1="7" x2="5.6" y2="5.6" />
+                </svg>
+              )}
+            </p>
+            <p>Теми</p>
           </li>
           <li
+            //   className="headerSetingDroopMenu__dropdown__item"
+            //   className="relative flex items-center space-x-1 bg-hMenuBg p-1 px-2 text-sm font-normal text-hMenuText dark:bg-hMenuBgD dark:text-hMenuTextD"
             className="flex list-none items-center  p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov  dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
             onClick={() => setUserMenuOpen(!userMenuOpen)}
           >
@@ -122,6 +184,12 @@ const HeaderSetingDroopMenu = () => {
                   className="rounded-full border"
                 />
               ) : (
+                //   <Image
+                //     className="h-8 w-8 rounded-full border bg-[url(/avatar/2.jpg)] bg-cover"
+                //     width={40}
+                //     height={40}
+                //     alt="avatar"
+                //   />
                 <svg
                   className="h-8 w-8 text-hIconD dark:text-hIcon"
                   fill="none"
@@ -141,7 +209,7 @@ const HeaderSetingDroopMenu = () => {
           </li>
           {/* Випадаюче меню User */}
           {userMenuOpen && (
-            <UserMenuDroop
+            <UserSwitcherDroop
               userMenuOpen={userMenuOpen}
               setUserMenuOpen={setUserMenuOpen}
             />

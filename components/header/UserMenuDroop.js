@@ -1,7 +1,7 @@
 //UserMenuDroop.js
 //Саме випадаюче меню мови
 
-// import { useContext, useRef, useEffect } from "react"
+import { useContext, useRef, useEffect } from "react"
 // import { ComponentContext } from "../../context/ComponentContext"
 // import { useSession, signIn, signOut } from "next-auth"
 
@@ -10,16 +10,36 @@ const UserMenuDroop = ({ setUserMenuOpen }) => {
   //   const { state } = useContext(ComponentContext)
   //    const [session] = useSession()
 
+  //*************Для клацання поза обєктом
+  const ref_UserMenuDroop = useRef(null);
+
+  useEffect(() => {
+    const handleOutSideClick = (event) => {
+      if (!ref_UserMenuDroop.current?.contains(event.target)) {
+        // alert("Outside Clicked.");
+        // console.log("Outside Clicked. ");
+        // setSetingMenuOpen(false);
+        setUserMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
+  }, [ref_UserMenuDroop]);
+
   const loginToggle = (e) => {
     // setLangMenuOpen(!langMenuOpen)
     e.preventDefault();
     // signIn();
-     setUserMenuOpen(false);
+    setUserMenuOpen(false);
   };
   const registrationToggle = (e) => {
     e.preventDefault();
     //  signOut()
-     setUserMenuOpen(false);
+    setUserMenuOpen(false);
   };
 
   const handleSignin = () => {
@@ -27,7 +47,7 @@ const UserMenuDroop = ({ setUserMenuOpen }) => {
   };
 
   return (
-    <div className="absolute right-0 z-10 m-0 p-0">
+    <div ref={ref_UserMenuDroop} className="absolute right-0 z-10 m-0 p-0">
       <ul className="rounded-lg border border-hMenuBorder bg-hMenuBg  p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD">
         <li
           className="flex list-none flex-nowrap  items-center p-1 text-sm font-normal text-hMenuText  hover:bg-hMenuBgHov  hover:text-hMenuTextHov dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
