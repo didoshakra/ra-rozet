@@ -1,5 +1,6 @@
-import Product from "@/app/(shop)/components/Product";
-import { getAllProducts } from "@/app/(shop)/data/data";
+import Product from "@/app/(shop)/product/Product";
+import { getAllProducts } from "@/app/(shop)/product/data/data";
+
 export const metadata = {
   title: "Продукти",
   description: "Продукти харчування",

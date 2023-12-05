@@ -1,7 +1,7 @@
 import LayoutWithSidebar from "@/components/rozet/LayoutWithSidebar";
 // import HomePage from "@/components/HomePage";
 import StHomePage from "@/components/mstan/StHomePage";
-import ProductsVeg from "@/app/(shop)/components/ProductsVeg";
+import ProductsVeg from "@/app/(shop)/product/ProductsVeg";
 // import Promotions from "@/components/mstan/Promotions";
 
 export default function Home() {

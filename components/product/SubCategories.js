@@ -1,6 +1,6 @@
 "use server";
 import SubCategory from "./SubCategory";
-import { getAllSubCategories } from "@/app/product/dataCategories";
+import { getAllSubCategories } from "@/app/(shop)/product/data/dataCategories";
 
 export default async function SubCategories() {
   const mSubCategories = await getAllSubCategories();

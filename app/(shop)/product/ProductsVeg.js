@@ -1,14 +1,14 @@
 //Під шаблон ProductVegefoogs
-import { getAllProducts } from "@/app/(shop)/data/data";
+import { getAllProducts } from "@/app/(shop)/product/data/data";
 import Link from "next/link";
-import ItemImage from "@/app/(shop)/_images/ItemImage";
+import ItemImage from "@/components/_images/ItemImage";
 
 function ProductVeg({ item }) {
   console.log("************Product.js/P/item=", item);
   return (
     <Link
-      //   href={`/product/${item.id}`}
       href={`/product/${item.id}`}
+      //   href={`(shop)/product/${item.id}`}
       className="group flex h-96 flex-col rounded border-2 border-cardBorder  transition-transform  duration-200 ease-out hover:scale-105 dark:border-cardBorderD"
       //   className="h-96 flex flex-col rounded border-2"
     >

@@ -1,11 +1,12 @@
 //Ecomerc
 import Link from "next/link";
-import ProductImage from "../_images/ItemImage";
+import ProductImage from "../../../components/_images/ItemImage";
 
 export default function Product({ product }) {
   //   console.log("************Product.js/product=", product)
   return (
     <Link
+    //   href={`/(shop)/product/${product.id}`}
       href={`/product/${product.id}`}
       className="group flex h-96 flex-col rounded border p-5 transition-transform duration-200 ease-out hover:scale-105"
     >

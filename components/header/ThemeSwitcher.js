@@ -24,6 +24,7 @@ const ThemeSwitcher = () => {
       title="тема"
     >
       {resolvedTheme === "dark" ? (
+        // місяць
         <svg
           className="h-8 w-8 text-hIcon dark:text-hIconD "
           width="24"
@@ -48,7 +49,7 @@ const ThemeSwitcher = () => {
           <line x1="7" y1="7" x2="5.6" y2="5.6" />
         </svg>
       ) : (
-        // <SunIcon className="h-8 w-8 text-hMenuTextDark" />
+        // сонце
         <svg
           className="h-8 w-8 text-hIcon dark:text-hIconD "
           width="24"

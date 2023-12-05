@@ -1,14 +1,14 @@
-// import ProductImage from "@/components/product/ProductImage";
-import ItemImage from "@/app/(shop)/_images/ItemImage";
+// Для визначення і візуалізації одного продукту
+import ItemImage from "@/components/_images/ItemImage";
 import { notFound } from "next/navigation";
-import { getProductById } from "@/app/(shop)/data/data";
+import { getProductById } from "@/app/(shop)/product/data/data";
 //Фотки мають бути w254*h266
 
 // export function generateMetadata({ params }) {
-//   const id = params.name
+//   const id = params.name;
 //   return {
 //     title: product.title,
-//   }
+//   };
 // }
 
 export default async function ProductPage({ params }) {

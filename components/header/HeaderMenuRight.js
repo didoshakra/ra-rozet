@@ -2,6 +2,7 @@
 //Викликає меню(з іконоками) :UserSwitcher/ThemeSwitcher/LocaleSwitcher
 
 import ThemeSwitcher from "./ThemeSwitcher"
+import HeaderThemesDroopMenu from "./HeaderThemesDroopMenu";
 import UserSwitcher from "./UserSwitcher";
 import HeaderSetingDroopMenu from "./HeaderSetingDroopMenu";
 
@@ -16,7 +17,8 @@ const HeaderMenuRight = () => {
         {/* User */}
         <UserSwitcher />
         {/* тема */}
-        <ThemeSwitcher />
+        {/* <ThemeSwitcher /> */}
+        <HeaderThemesDroopMenu />
       </div>
       {/* Випадаюче меню Seting(мобільне) */}
       <div className="headerMenuRight__mobile">
