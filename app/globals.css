@@ -10,7 +10,7 @@
     --color-theme3Bg: #e9d92d;
 
     /* //-- Загальні */
-    --color-bodyBg: #fff;
+    --color-bodyBg: #f1f7ed;
     --color-bodyBgD: #414545;
     --color-bodyText: #060214;
     --color-bodyTextD: #fff;
@@ -28,6 +28,7 @@
     --color-IconHBgD: #414545;
     --color-IconHBgHov: #c9dfa7;
     --color-IconHBgHovD: #e8efd3;
+    
     /* //--- iconT /Table,Form,Card, */
     --color-iconT: #f64532;
     --color-iconTD: #f64532;
@@ -43,9 +44,10 @@
     --color-hTapeTextBgHovD: #171919;
 
     /* //-- head -------------------------------------------- */
-    --color-hBg: #e7f4e0;
+    --color-hBg: #e3fad6;
     --color-hBgD: #171919;
-    --color-hBgHov: #c9dfa7 --color-hBgHovD: #c9dfa7;
+    --color-hBgHov: #c9dfa7;
+    --color-hBgHovD: #c9dfa7;
     --color-hText: #6b8e23;
     --color-hTextD: #6b8e23;
     --color-hTextHov: red;

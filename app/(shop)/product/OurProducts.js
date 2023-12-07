@@ -68,7 +68,7 @@ function ProductVeg({ item }) {
         <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-[#82ae46]">
           <svg
             //  Серце
-            className=" text-IconT dark:text-IconTD h-6 w-6"
+            className="h-6 w-6 text-red-500"
             width="24"
             height="24"
             viewBox="0 0 24 24"
