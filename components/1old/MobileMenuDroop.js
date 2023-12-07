@@ -1,12 +1,12 @@
 //MobileMenuDroop.js //https://coursehunter.net/course/reactjs-s-nulya-do-profi
 //Випадаюче меню(Мобіле)
-"use client"
-import { useContext, useRef, useEffect } from "react"
-import Link from "next/link"
+"use client";
+import { useContext, useRef, useEffect } from "react";
+import Link from "next/link";
 // import { ComponentContext } from "../../context/ComponentContext"
 
-const MobileMenuDroop = ({menu,mobileMenuOpen, mobileMenuToggle}) => {
-  console.log("MobileMenuDroop/mobileMenuOpen= ",mobileMenuOpen);
+const MobileMenuDroop = ({ menu, mobileMenuOpen, mobileMenuToggle }) => {
+  console.log("MobileMenuDroop/mobileMenuOpen= ", mobileMenuOpen);
 
   //*** Для клацання поза обєктом ***/
   //Добавити в контрольований об'єкт-(ref={wRef})- (<ul ref={wRef}... )
@@ -66,7 +66,7 @@ const MobileMenuDroop = ({menu,mobileMenuOpen, mobileMenuToggle}) => {
       return (
         // <li className="mobileMenuDroop__dropdown__item" key={index}>
         <li
-          className="flex list-none flex-nowrap  items-center p-1 text-sm font-normal text-hMenuText  hover:bg-hMenuBgHov  hover:text-hMenuTextHov dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
+          className="text-menuText hover:bg-menuBgHov hover:text-menuTextHov  dark:text-menuTextD dark:hover:bg-menuBgHovD dark:hover:text-menuTextHovD flex list-none  flex-nowrap  items-center p-1 text-sm font-normal"
           key={index}
         >
           <Link href={`${item.link}`}>{item.a}</Link>
@@ -88,7 +88,7 @@ const MobileMenuDroop = ({menu,mobileMenuOpen, mobileMenuToggle}) => {
       {/* <ul className="mobileMenuDroop__dropdown" ref={wRef_MobileMenuDroop}> */}
       <ul
         ref={wRef_MobileMenuDroop}
-        className=" rounded-lg border border-hMenuBorder  bg-hMenuBg p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD"
+        className=" border-menuBorder bg-menuBg dark:border-menuBorderD  dark:bg-menuBgD rounded-lg border p-1 drop-shadow-md"
       >
         {renderMenu()}
       </ul>
@@ -96,4 +96,4 @@ const MobileMenuDroop = ({menu,mobileMenuOpen, mobileMenuToggle}) => {
   );
 };
 
-export default MobileMenuDroop
+export default MobileMenuDroop;

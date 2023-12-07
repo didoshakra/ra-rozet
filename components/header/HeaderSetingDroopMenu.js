@@ -102,13 +102,13 @@ const HeaderSetingDroopMenu = () => {
         } right-0 z-10 m-0 p-0`}
       >
         <ul
-          className={`m-0 w-[150px] rounded-lg  border border-hMenuBorder bg-hMenuBg p-1 drop-shadow-md dark:border-hMenuBorderD dark:bg-hMenuBgD`}
+          className={`border-menuBorder bg-menuBg dark:border-menuBorderD  dark:bg-menuBgD m-0 w-[150px] rounded-lg border p-1 drop-shadow-md`}
         >
-          <li className="flex w-full list-none items-center  p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov  active:text-errorMsg dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD">
+          <li className="text-menuText hover:bg-menuBgHov hover:text-menuTextHov dark:text-menuTextD  dark:hover:bg-menuBgHovD dark:hover:text-menuTextHovD flex w-full list-none  items-center  p-1 text-sm font-normal">
             <HeaderThemesDroopMenu />
           </li>
           <li
-            className="flex list-none items-center  p-1 text-sm font-normal text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov  dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
+            className="text-menuText hover:bg-menuBgHov hover:text-menuTextHov  dark:text-menuTextD dark:hover:bg-menuBgHovD dark:hover:text-menuTextHovD flex list-none  items-center  p-1 text-sm font-normal"
             onClick={() => setUserMenuOpen(!userMenuOpen)}
           >
             {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}

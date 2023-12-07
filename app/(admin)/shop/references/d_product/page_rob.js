@@ -42,7 +42,7 @@ export default async function DProducts() {
   ];
   return (
     <>
-      <h1 className="dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
+      <h1 className="dark:text-hTextD text-center text-4xl font-bold text-hText">
         DProducts
       </h1>
       <DProductTable columns={columns} rows={resData} />

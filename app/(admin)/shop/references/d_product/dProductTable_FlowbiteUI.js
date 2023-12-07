@@ -168,11 +168,11 @@ export default function DProductTable({
   return (
     <div className="p-4">
       {typeof title !== "undefined" && (
-        <div className="dark:text-hMenuTextDark mb-2 rounded-3xl border border-neutral-500  bg-stone-300  text-center text-hMenuText  dark:bg-gray-800">
+        <div className="mb-2 rounded-3xl border border-neutral-500 bg-stone-300 text-center text-hText dark:bg-gray-800  dark:text-hTextD">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           FlowbiteUI / Table pagination
         </h3> */}
-          <h1 className=" dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
+          <h1 className="text-center text-4xl font-bold text-hText dark:text-hText">
             {title}
           </h1>
         </div>

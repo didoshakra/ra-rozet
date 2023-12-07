@@ -91,8 +91,8 @@ export default function DroopFifterForm({
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className="flex justify-between space-x-3 text-center font-semibold uppercase">
           <button
-            className="mx-2 flex items-center rounded-full border border-gray-400 px-1 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-            //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+            className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD mx-2 flex items-center rounded-full border border-gray-400 px-1"
+            //   className="rounded-full hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD"
             //   onClick={() => handleEdit()}
             type="submit"
             title="Добавте значення"
@@ -119,7 +119,7 @@ export default function DroopFifterForm({
             {/* <label className="px-1">({filterDataRow.accessor})</label> */}
           </header>
           <button
-            className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+            className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD rounded-full border border-gray-400"
             onClick={(e) => setIsDropdownFilterForm(false)}
             title="Вийти без збереження"
           >
@@ -179,7 +179,7 @@ export default function DroopFifterForm({
               <div className=" text-center">фільтр1</div>
               <input
                 //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-                className=" w-full block  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+                className=" block w-full  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
                 id="filterFirst"
                 required
                 type="text"
@@ -242,7 +242,7 @@ export default function DroopFifterForm({
               <div className=" text-center">фільтр2 </div>
               <input
                 //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-                className="w-full items-center  block rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+                className="block w-full  items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
                 type="text"
                 name="filterLast"
                 value={state.filterLast}

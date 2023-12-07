@@ -53,7 +53,7 @@ export default async function DBrands() {
   ];
   return (
     <>
-      <h1 className="dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
+      <h1 className="text-center text-4xl font-bold text-hText dark:text-hTextD">
         DBrands
       </h1>
       {/* <ul>

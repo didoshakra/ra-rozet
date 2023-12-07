@@ -3,7 +3,7 @@
 
 import ThemeSwitcher from "./ThemeSwitcher"
 import HeaderThemesDroopMenu from "./HeaderThemesDroopMenu";
-import UserSwitcher from "./UserSwitcher";
+import UserSwitcher from "./UserSwitcher.js";
 import HeaderSetingDroopMenu from "./HeaderSetingDroopMenu";
 
 

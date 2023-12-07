@@ -4,12 +4,12 @@ import Link from "next/link";
 import ItemImage from "@/components/_images/ItemImage";
 
 function ProductVeg({ item }) {
-//   console.log("************Product.js/P/item=", item);
+  //   console.log("************Product.js/P/item=", item);
   return (
     <Link
       href={`/product/${item.id}`}
       //   href={`(shop)/product/${item.id}`}
-      className="group flex h-96 flex-col rounded border-2 border-cardBorder  transition-transform  duration-200 ease-out hover:scale-105 dark:border-cardBorderD"
+      className="border-cardBorder dark:border-cardBorderD group flex h-96 flex-col rounded  border-2  bg-white transition-transform duration-200 ease-out hover:scale-105"
       //   className="h-96 flex flex-col rounded border-2"
     >
       <div className="relative max-h-72 flex-1 ">
@@ -68,7 +68,7 @@ function ProductVeg({ item }) {
         <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-[#82ae46]">
           <svg
             //  Серце
-            className="h-6 w-6 text-errorMsg dark:text-errorMsgD"
+            className=" text-IconT dark:text-IconTD h-6 w-6"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -106,9 +106,9 @@ export default async function ProductsVeg() {
   const products = await getAllProducts();
   // console.log("Products.js/products=", products)
   return (
-    <section className="relative mx-auto flex max-w-7xl flex-col space-y-12 py-14 pb-5 ">
+    <section className="relative mx-auto flex max-w-7xl flex-col space-y-12 py-14 pb-5">
       <div className="flex flex-col space-y-12 py-14 pb-5">
-        <div className="text-center text-hMenuText">
+        <div className="text-center text-hText dark:text-hTextD">
           <span className="tex-lg mb-2 font-serif italic">Нові продукти</span>
           <h2 className="mb-4 text-4xl  font-bold">Наші продукти</h2>
           <p>
@@ -119,7 +119,7 @@ export default async function ProductsVeg() {
       </div>
       {/* card */}
       {/* <div className="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-flow-col sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"> */}
-      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {products.map((item) => (
           <ProductVeg key={item.id} item={item} />
         ))}

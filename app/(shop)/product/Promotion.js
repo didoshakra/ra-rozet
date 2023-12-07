@@ -9,7 +9,7 @@ function Promotion({ item }) {
     <Link
       href={`/product/${item.id}`}
       //   href={`(shop)/product/${item.id}`}
-      className="group flex h-96 flex-col rounded border-2 border-cardBorder  transition-transform  duration-200 ease-out hover:scale-105 dark:border-cardBorderD"
+      className="border-cardBorder dark:border-cardBorderD group flex h-96 flex-col rounded  border-2  transition-transform duration-200 ease-out hover:scale-105"
       //   className="h-96 flex flex-col rounded border-2"
     >
       <div className="relative max-h-72 flex-1 ">
@@ -68,7 +68,7 @@ function Promotion({ item }) {
         <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-[#82ae46]">
           <svg
             //  Серце
-            className="h-6 w-6 text-errorMsg dark:text-errorMsgD"
+            className="w-6text-IconT dark:text-IconTD dark:text-IconT dark:text-IconTDD h-6"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -108,7 +108,7 @@ export default async function Promotions() {
   return (
     <section className="relative mx-auto flex max-w-7xl flex-col space-y-12 py-14 pb-5 ">
       <div className="flex flex-col space-y-12 py-14 pb-5">
-        <div className="text-center text-hMenuText">
+        <div className="text-center  dark:text-hTextD">
           <span className="tex-lg mb-2 font-serif italic">
             Акційні продукти
           </span>

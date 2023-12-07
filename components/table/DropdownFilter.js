@@ -52,7 +52,7 @@ export default function DropdownFilter({
     >
       <div className="mb-1 flex justify-between">
         <button
-          className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
+          className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD rounded-full border border-gray-400 dark:border-gray-300"
           onClick={() => deleteFilterAll()}
           title="Очистити всі"
         >
@@ -95,7 +95,7 @@ export default function DropdownFilter({
           </svg> */}
         </button>
         <button
-          className="mx-2  flex  items-center rounded-lg border border-gray-400 px-1 text-center hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
+          className="hover:bg-iconTHovBgCol  dark:hover:bg-iconTHovBgColD  mx-2 flex items-center rounded-lg border border-gray-400 px-1 text-center dark:border-gray-300"
           onClick={() => applyFilters()}
           title="Застосувати фільтр"
         >
@@ -122,7 +122,7 @@ export default function DropdownFilter({
         </button>
 
         <button
-          className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:border-gray-300 dark:hover:bg-tabIconHovBgColD"
+          className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD rounded-full border border-gray-400 dark:border-gray-300"
           onClick={(e) => setIsDropdownFilter(false)}
           title="Вийти без збереження"
         >

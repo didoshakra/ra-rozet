@@ -1,5 +1,5 @@
 import React from "react";
-export const SearchIcon = (props) => (
+export const SearcIconH = (props) => (
   <svg
     aria-hidden="true"
     fill="none"

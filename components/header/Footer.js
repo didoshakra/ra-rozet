@@ -7,12 +7,12 @@ const Footer = () => {
       <div className="flex items-center justify-center p-1">
         <a
           href="#"
-          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hMenuBg dark:bg-hMenuBgD"
+          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hBg dark:bg-hBgD"
         >
           <div className="m-1 flex h-[30px] w-[30px] items-center justify-center rounded-full text-xl text-orange-600">
             <span className="flex items-center justify-center">
               <svg
-                className="h-10 w-10 text-hIcon dark:text-hIconD"
+                className="h-10 w-10 text-IconH dark:text-IconHD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -32,7 +32,7 @@ const Footer = () => {
       </div>
       <div className="flex w-full flex-col items-start justify-between pt-10 md:flex-row">
         <div className="relative flex flex-col items-start justify-start text-left">
-          <h2 className="flex flex-row items-center justify-center px-4 text-lg font-bold text-hMenuText dark:text-hMenuTextD">
+          <h2 className="flex flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hTextD">
             RAtest
           </h2>
           <ul className="flex items-center justify-between">
@@ -40,7 +40,7 @@ const Footer = () => {
               <a href="https://www.facebook.com/profile.php?id=100017742340573">
                 {/* Facebook */}
                 <svg
-                  className="h-6 w-6 text-hIcon dark:text-hIconD"
+                  className="h-6 w-6 text-IconH dark:text-IconHD"
                   viewBox="0 0 24 24"
                   fill="none"
                   stroke="currentColor"
@@ -57,13 +57,13 @@ const Footer = () => {
         </div>
 
         <div className="relative flex flex-col items-start justify-start py-2 text-left">
-          <h2 className="flex  flex-row items-center justify-center px-4 text-lg font-bold text-hMenuText dark:text-hMenuText">
+          <h2 className="flex  flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hText">
             Є запитання?
           </h2>
           <ul>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                className="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-IconH dark:text-IconHD"
                 fill="none"
                 viewBox="0 0 24 24"
                 stroke="currentColor"
@@ -86,7 +86,7 @@ const Footer = () => {
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               {/* phone */}
               <svg
-                className="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-IconH dark:text-IconHD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -107,7 +107,7 @@ const Footer = () => {
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               {/* phone */}
               <svg
-                className="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-IconH dark:text-IconHD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -127,7 +127,7 @@ const Footer = () => {
             </li>
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
-                className="h-6 w-6 text-hIcon dark:text-hIconD"
+                className="h-6 w-6 text-IconH dark:text-IconHD"
                 width="24"
                 height="24"
                 viewBox="0 0 24 24"
@@ -152,7 +152,7 @@ const Footer = () => {
           Copyright © {new Date().getFullYear()}
           {/* Серце*/}
           <svg
-            className="h-6 w-6 text-errorMsg dark:text-errorMsgD"
+            className="text-IconT dark:text-IconTD dark:text-IconT dark:text-IconTDD h-6 w-6"
             width="24"
             height="24"
             viewBox="0 0 24 24"

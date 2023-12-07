@@ -16,12 +16,12 @@ const MobileMenuIcon = () => {
     <div className="flex items-center  md:hidden">
       {/* іконка мобільного меню */}
       <button
-        className="z-0 flex items-center rounded-full hover:bg-hIconBgHov dark:bg-hIconBgHovD"
+        className="hover:bg-IconHBgHov dark:bg-IconHBgHovD z-0 flex items-center rounded-full"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         title="меню"
       >
         <svg
-          className="h-8 w-8 text-hIcon dark:text-hIconD"
+          className="text-IconH dark:text-IconHD h-8 w-8"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"

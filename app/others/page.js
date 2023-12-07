@@ -6,7 +6,7 @@ export const metadata = {
 export default function Grid() {
   return (
     <main className="container mx-auto mb-10">
-      <h1 className="dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
+      <h1 className="dark:text-hTextD text-center text-4xl font-bold text-hText">
         Others
       </h1>
     </main>

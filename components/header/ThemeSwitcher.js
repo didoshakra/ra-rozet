@@ -5,7 +5,7 @@ import { useTheme } from "next-themes";
 // import resolveCofig from "tailwindcss/resolveConfig"; //отримання змінних з tailwind.config
 
 const ThemeSwitcher = () => {
-    const { resolvedTheme, setTheme } = useTheme();
+  const { resolvedTheme, setTheme } = useTheme();
   //   const { theme } = resolveConfig(tailwindConfig); //отримання змінних з tailwind.config
   //   console.log("ThemeSwitche/theme.colors=", theme.colors);
 
@@ -19,14 +19,14 @@ const ThemeSwitcher = () => {
   return (
     <button
       type="button"
-      className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
+      className="hover:bg-IconHBgHov dark:hover:bg-IconHBgHovD flex items-center justify-center rounded-full p-2 transition-colors"
       onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
       title="тема"
     >
       {resolvedTheme === "dark" ? (
         // місяць
         <svg
-          className="h-8 w-8 text-hIcon dark:text-hIconD "
+          className="text-IconH dark:text-IconHD h-8 w-8 "
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -51,7 +51,7 @@ const ThemeSwitcher = () => {
       ) : (
         // сонце
         <svg
-          className="h-8 w-8 text-hIcon dark:text-hIconD "
+          className="text-IconH dark:text-IconHD h-8 w-8 "
           width="24"
           height="24"
           viewBox="0 0 24 24"

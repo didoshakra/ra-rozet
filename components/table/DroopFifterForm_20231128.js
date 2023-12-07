@@ -63,12 +63,12 @@ export default function DroopFifterForm({
   }
 
   return (
-    <div className=" w-full absolute z-10 rounded-lg border border-gray-400  bg-gray-300 p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-200">
+    <div className=" absolute z-10 w-full rounded-lg border border-gray-400  bg-gray-300 p-1 drop-shadow-md transition-transform duration-200 ease-out dark:border-gray-300 dark:bg-gray-200">
       <form className="space-x-1" onSubmit={handleSubmit}>
         <div className=" mb-2 flex justify-between space-x-3 text-center font-semibold uppercase">
           <button
-            className="mx-2 flex items-center rounded-full border border-gray-400 px-1 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
-            //   className="rounded-full hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+            className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD mx-2 flex items-center rounded-full border border-gray-400 px-1"
+            //   className="rounded-full hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD"
             //   onClick={() => handleEdit()}
             type="submit"
             title="Добавте значення"
@@ -97,7 +97,7 @@ export default function DroopFifterForm({
             {/* <label className="px-1">({filterDataRow.accessor})</label> */}
           </header>
           <button
-            className="rounded-full border border-gray-400 hover:bg-tabIconHovBgCol dark:hover:bg-tabIconHovBgColD"
+            className="hover:bg-iconTHovBgCol dark:hover:bg-iconTHovBgColD rounded-full border border-gray-400"
             onClick={(e) => setIsDropdownFilterForm(false)}
             title="Вийти без збереження"
           >
@@ -118,81 +118,81 @@ export default function DroopFifterForm({
         </div>{" "}
         {/* <div className=" flex max-w-xs space-x-1 overflow-auto md:max-w-md"> */}
         <div className=" flex space-x-1 overflow-auto ">
-         <label className="font-semibold text-gray-700">
-          <div className=" text-center"> &gt;&lt;</div> <select
-            // appearance-none-не показувати стрілку селе
-            className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            name="comparisonFirst"
-            onChange={handleChange}
-            value={state.comparisonFirst}
-            required
-          >
-            <option value=" "> </option>
-            <option value=">">&gt;</option>
-            <option value=">=">&gt;=</option>
-            <option value="==">=</option>
-            <option value="!=">!=</option>
-            <option value="<="> &lt;=</option>
-            <option value="<"> &lt;</option>
-          </select>
+          <label className="font-semibold text-gray-700">
+            <div className=" text-center"> &gt;&lt;</div>{" "}
+            <select
+              // appearance-none-не показувати стрілку селе
+              className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              name="comparisonFirst"
+              onChange={handleChange}
+              value={state.comparisonFirst}
+              required
+            >
+              <option value=" "> </option>
+              <option value=">">&gt;</option>
+              <option value=">=">&gt;=</option>
+              <option value="==">=</option>
+              <option value="!=">!=</option>
+              <option value="<="> &lt;=</option>
+              <option value="<"> &lt;</option>
+            </select>
           </label>
           {/*  */}
           <label className="font-semibold text-gray-700">
-          <div className=" text-center">фільтр1</div>
-          <input
-            //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-            className=" block  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
-            id="filterFirst"
-            required
-            type="text"
-            name="filterFirst"
-            value={state.filterFirst}
-            onChange={handleChange}
-          />
+            <div className=" text-center">фільтр1</div>
+            <input
+              //leading-tight=line-height: 1.25-(висотою лінії) елемента.
+              className=" block  items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+              id="filterFirst"
+              required
+              type="text"
+              name="filterFirst"
+              value={state.filterFirst}
+              onChange={handleChange}
+            />
           </label>
           {/*  */}
           <label className=" font-semibold text-gray-700">
-          <div className=" text-center">and</div>
-          <select
-            className=" block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            name="logical"
-            onChange={handleChange}
-            value={state.logical}
-          >
-            <option value=" "> </option>
-            <option value="||">or</option>
-            <option value="&&">and</option>
-          </select>
+            <div className=" text-center">and</div>
+            <select
+              className=" block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              name="logical"
+              onChange={handleChange}
+              value={state.logical}
+            >
+              <option value=" "> </option>
+              <option value="||">or</option>
+              <option value="&&">and</option>
+            </select>
           </label>
           {/*  */}
           <label className="font-semibold text-gray-700">
-          <div className=" text-center"> &gt;&lt;</div>
-          <select
-            className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            name="comparisonLast"
-            onChange={handleChange}
-            value={state.comparisonLast}
-          >
-            <option value=" "> </option>
-            <option value=">">&gt;</option>
-            <option value=">=">&gt;=</option>
-            <option value="==">=</option>
-            <option value="!=">!=</option>
-            <option value="<="> &lt;=</option>
-            <option value="<"> &lt;</option>
-          </select>
+            <div className=" text-center"> &gt;&lt;</div>
+            <select
+              className="block  appearance-none items-center rounded border border-gray-400 bg-gray-50 p-1  align-middle  leading-tight text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-400 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              name="comparisonLast"
+              onChange={handleChange}
+              value={state.comparisonLast}
+            >
+              <option value=" "> </option>
+              <option value=">">&gt;</option>
+              <option value=">=">&gt;=</option>
+              <option value="==">=</option>
+              <option value="!=">!=</option>
+              <option value="<="> &lt;=</option>
+              <option value="<"> &lt;</option>
+            </select>
           </label>
           <label className="font-semibold text-gray-700">
-          <div className=" text-center">фільтр2 </div>
-          <input
-            //leading-tight=line-height: 1.25-(висотою лінії) елемента.
-            className="  block  w-6items-center rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
-            type="text"
-            name="filterLast"
-            value={state.filterLast}
-            onChange={handleChange}
-          />
-
+            <div className=" text-center">фільтр2 </div>
+            <input
+              //leading-tight=line-height: 1.25-(висотою лінії) елемента.
+              className="  w-6items-center  block rounded border border-gray-400 bg-gray-50 p-1 align-middle leading-tight  text-gray-900 dark:border-gray-600 dark:bg-gray-400 dark:text-white"
+              type="text"
+              name="filterLast"
+              value={state.filterLast}
+              onChange={handleChange}
+            />
           </label>
           {inputError && <div style={{ color: "red" }}>{inputError}</div>}
         </div>

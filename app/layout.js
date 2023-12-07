@@ -17,13 +17,16 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en" className="light">
       {/* suppressHydrationWarning={true}//https://www.slingacademy.com/article/next-js-warning-extra-attributes-from-the-server/ */}
-      <body suppressHydrationWarning={true} className={inter.className}>
+      <body
+        suppressHydrationWarning={true}
+        className={`inter.className bg-bodyBg`}
+      >
         <Providers>
           <HeaderTape />
           <Header />
           {/* <main className="mx-auto max-h-1.5 min-h-screen max-w-7xl border-3 border-red-600"> */}
           {/* <main className=" mx-auto my-auto  border-3 border-red-600"> */}
-          <main className="p-1 mx-auto my-auto">{children}</main>
+          <main className="mx-auto my-auto p-1">{children}</main>
           {/* <main className="mx-auto min-h-screen max-w-7xl ">{children}</main> */}
           <Footer />
         </Providers>

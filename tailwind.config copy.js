@@ -31,7 +31,7 @@ module.exports = {
         bgD: "rgba(65,69,69,1)",
         errorMsg: "#f21e08",
         errorMsgD: "#f21e08",
-        bgEclipse: "rgba(0, 0, 0, 0.4)", //Затемнення екрану
+        eclipseBg: "rgba(0, 0, 0, 0.4)", //Затемнення екрану
 
         // *** drawer
         drawerDropMenuText: "#82FF46", //Текст випадаючого меню
@@ -65,14 +65,14 @@ module.exports = {
         hLogoTextHovD: "red",
 
         //--  headIcon --------------------------------------------
-        hIcon: "#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
-        hIconD: "#6B8E23", //"#9de160", //"#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
-        hIconHov: "red",
-        hIconHovD: "red",
-        hIconBg: "rgba(65,69,69,1)",
-        hIconBgD: "rgba(65,69,69,1)",
-        hIconBgHov: "#C9DFA7",
-        hIconBgHovD: "#E8EFD3",
+        IconH: "#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
+        IconHD: "#6B8E23", //"#9de160", //"#6B8E23", //1 "#82AE46", "rgba(23,25,25,1)",
+        IconHHov: "red",
+        IconHHovD: "red",
+        IconHBg: "rgba(65,69,69,1)",
+        IconHBgD: "rgba(65,69,69,1)",
+        IconHBgHov: "#C9DFA7",
+        IconHBgHovD: "#E8EFD3",
 
         //-- headMobile --------------------------------------------
         hMobileText: "#6B8E23", //"#82AE46",
@@ -87,24 +87,24 @@ module.exports = {
         hMobileIconD: "red",
 
         //-- headMenu / + Всі випадаючі з head меню ???
-        hMenuBorder: "#DCDCDC", //1  "#82AE46",
-        // hMenuBorderD: "#F4F4EB", //1  "#82AE46",
-        hMenuBorderD: "#6B8E23", //1  "#82AE46",
-        hMenuText: "#6B8E23", // "#82AE46",
-        hMenuTextD: "#6B8E23", //"#9de160", //"#95dd77","#9dd360", // //"#32cd32", //"#C9DFA7", //"#A5E189",
-        // hMenuTextD: "#fff", //1  "#82AE46",
-        hMenuTextHov: "#fff",
-        hMenuTextHovD: "#fff",
-        hMenuBg: "#E7F4E0",
-        hMenuBgD: "rgba(23,25,25,1)",
-        hMenuBgHov: "#82AE46",
-        hMenuBgHovD: "#82AE46",
-        hMenuAct: "#fff",
-        hMenuActD: "#fff",
-        hMenuActBg: "red",
-        hMenuActBgD: "red",
-        hMenuGorizBgHov: "#f64532",
-        hMenuGorizBgHovD: "#f64532",
+        menuBorder: "#DCDCDC", //1  "#82AE46",
+        // menuBorderD: "#F4F4EB", //1  "#82AE46",
+        menuBorderD: "#6B8E23", //1  "#82AE46",
+        menuText: "#6B8E23", // "#82AE46",
+        menuTextD: "#6B8E23", //"#9de160", //"#95dd77","#9dd360", // //"#32cd32", //"#C9DFA7", //"#A5E189",
+        // menuTextD: "#fff", //1  "#82AE46",
+        menuTextHov: "#fff",
+        menuTextHovD: "#fff",
+        menuBg: "#E7F4E0",
+        menuBgD: "rgba(23,25,25,1)",
+        menuBgHov: "#82AE46",
+        menuBgHovD: "#82AE46",
+        menuAct: "#fff",
+        menuActD: "#fff",
+        menuActBg: "red",
+        menuActBgD: "red",
+        menuGorizBgHov: "#f64532",
+        menuGorizBgHovD: "#f64532",
 
         //-- menuDroop /випадаючі меню (ше не викор)
         menuDropBorder: "#DCDCDC",
@@ -127,14 +127,14 @@ module.exports = {
         drawHTextHorD: "#fff", //Підменю
         drawHBg: "#3b6a3d", //
         drawHBgD: "#3b6a3d", //
-        drawHIcon: "#6B8E23", //Іконка шапки drawer
-        drawHIconD: "#6B8E23", //Іконка шапки drawer
-        drawHIconHov: "red", //Іконка шапки drawer
-        drawHIconHovD: "red", //Іконка шапки drawer
-        drawHMenuBg: "#F4F4EB", //Підменю
-        drawHMenuBgD: "#F4F4EB", //Підменю
-        drawHMenuBgHov: "#A5E189", //Підменю
-        drawHMenuBgHovD: "#A5E189", //Підменю
+        drawIconH: "#6B8E23", //Іконка шапки drawer
+        drawIconHD: "#6B8E23", //Іконка шапки drawer
+        drawIconHHov: "red", //Іконка шапки drawer
+        drawIconHHovD: "red", //Іконка шапки drawer
+        drawmenuBg: "#F4F4EB", //Підменю
+        drawmenuBgD: "#F4F4EB", //Підменю
+        drawmenuBgHov: "#A5E189", //Підменю
+        drawmenuBgHovD: "#A5E189", //Підменю
         //
         drawDropMenuText: "#6B8E23", //Текст випадаючого меню
         drawDropMenuTextD: "#6B8E23", //Текст випадаючого меню
@@ -172,19 +172,18 @@ module.exports = {
         tabHTextD: "#FFFF",
         tabHBg: "#f8f8f8;", //agGrid-шапка
         tabHBgD: "#222628", //agGrid head "rgba(23,25,25,1)","#68686e",
-        tabIcon: "#f64532",
-        tabIconD: "#f64532",
-        tabIconHov: "#6B8E23", //Поки не використав
-        tabIconHovD: "#6B8E23", //Поки не використав
-        tabIconBorder: "#E7F4E0", // "#f64532",
-        tabIconBorderD: "#E7F4E0", // "#f64532",
-        tabIconBgHov: "#E7F4E0",
-        tabIconBgHovD: "#E7F4E0",
-        tableIconBgHovD: "#E7F4E0",
-        tabIcon1: "black",
-        tabIcon1D: "black",
-        tabIcon2: "#f64532",
-        tabIcon2D: "#f64532",
+        iconT: "#f64532",
+        iconTD: "#f64532",
+        iconTHov: "#6B8E23", //Поки не використав
+        iconTHovD: "#6B8E23", //Поки не використав
+        iconTBorder: "#E7F4E0", // "#f64532",
+        iconTBorderD: "#E7F4E0", // "#f64532",
+        iconTBgHov: "#E7F4E0",
+
+        iconT1: "black",
+        iconT1D: "black",
+        iconT2: "#f64532",
+        iconT2D: "#f64532",
         //-- table (th/tr/нижній підсумок) ------------------------------------------
         tabThBorder: "#babfc7", //ag_Grid border(шапка)
         tabThBorderD: "#dde2eb", //ag_Grid border-secondery)(між рядками)
@@ -212,8 +211,8 @@ module.exports = {
         tabTrBgSelColD: "#6B8E23", //
         tabTrBgSelHovCol: "#C9DFA7", //
         tabTrBgSelHovColD: "#82AE46", //
-        tabIconHovBgCol: "#82AE46", //Іконки
-        tabIconHovBgColD: "#fff", //
+        iconTHovBgCol: "#82AE46", //Іконки
+        iconTHovBgColD: "#fff", //
 
         //-- form---------------------------------------------
         formTitle: "green", //"#6B8E23", //1"#82AE46",

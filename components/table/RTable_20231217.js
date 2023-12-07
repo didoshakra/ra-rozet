@@ -26,8 +26,12 @@
 //  - інфа: які рядки зараз відображені на сторінці і рядків всього
 // 20231111 // вибір шрифтіф таблиці (T)
 // 20231114 // Видалив з таблиці select ( тепер видідення  цілим рядком)
-// 20231120 // Добавив фільтри по заданих полях:DropdownFilter.js+DroopFifterForm.js
-//--------------------------------------------------------------------
+// 20231117 // Щвидкий пошук по всіх полях(одне значення,пошуковий рядок)/Відновлення даних при стиранні у рядку/ Працює разом з сортуванням
+// 20231120 // Добавив вікна фільтрів по заданих полях:DropdownFilter.js+DroopFifterForm.js
+// 20231127 // Фільтрування по багатьох полях/Відновлення БД до фільтрування/ При фівльтруванні для порівняння дані перетворюються у ті типи, які задані в initialСolumns.type
+// 20231128 // Вирівнювання даних в стовбцях згідно даних (initialСolumns.align)/по замовчуванню згідно типів даних (initialСolumns.type: numeric+boll=right/ date=center/ решта=left)/Якщо не заданий тип, то =left
+//          // ВІдмітити(зняти) всі/
+//--------------------------------------------------------------------------------------------------------------------
 
 //*** Типи даних ******* */(string,number,boolean,date-це об'єкт,але треба вказувати)
 // Для кращого відображення і фільтрування потрібно вказувати такі
@@ -37,7 +41,7 @@
 import { useState, useMemo, useEffect } from "react";
 import TableFooter from "./TableFooter";
 import useTable from "./useTable";
-import DropdownFilterMenu from "./DropdownFilter";
+import DropdownFilter from "./DropdownFilter";
 
 export default function DProductTable({
   initialData, //початкові дані (з БД) - обов'язково
@@ -49,12 +53,14 @@ export default function DProductTable({
   p_filtered, //(true/false)Фільтр по всіх полях-не обов'язково
 }) {
   const [selectedRows, setSelectedRows] = useState([]);
+  const [selectedAllRows, setSelectedAllRows] = useState(false);
   const [sortField, setSortField] = useState(""); //Поле(колонка) по якій сортується
   const [order, setOrder] = useState("asc"); //Сортування в яку сторону(верх/вниз)
   const [rowsPerPage, setRowsPerPage] = useState(10); //К-сть рядків на сторінку
   const [tableFontSize, setTableFontSize] = useState("sm"); //Шрифти таблиці(font-size )
   const [lengthSearhValue, setLengthSearhValue] = useState(0); //Попереднє значення рядка пошуку(Для відкату пошуку)
   const [beforSeachData, setBeforSeachData] = useState([]); //Зберігається БД перед пошуком (Для відкату пошуку)
+  const [beforFilterData, setBeforFilterData] = useState([]); //Зберігається БД перед фільтруванням (Для відкату фільтрування)
   const [isDropdownFilter, setIsDropdownFilter] = useState(false); //Зберігається перед селектом
   const [filteredIcon, setFilteredIcon] = useState("none"); //Заповнення іконки фільтру(лійки)("none- не фільтрувалось/"carentColor- фільтрувалось )
 
@@ -121,7 +127,8 @@ export default function DProductTable({
         tempData._nrow = nR;
         tempData.name = data.label;
         tempData.accessor = data.accessor;
-        tempData.type = data.type;
+        if (data.type != undefined) tempData.type = data.type;
+        else tempData.type = "string";
         tempData.comparisonFirst = "";
         tempData.filterFirst = "";
         tempData.logical = "";
@@ -132,6 +139,7 @@ export default function DProductTable({
     });
     return resData;
   }, [initialСolumns]); //Змінюється тільки при зміні 2-го аргумента
+
   const [filterData, setFilterData] = useState(preparedFilterData); //Фільтер для всіх полів
   //   console.log("FRtable.js/preparedFilterData= ", preparedFilterData);
 
@@ -249,11 +257,24 @@ export default function DProductTable({
     }
   };
 
+  //--- Вибір/Selected (всі)
+  const onSelectAll = () => {
+    let selectData = [...workData]; //Копія робочого масиву обєктів
+    const temp = selectData.map((data, idx) => {
+      if (selectedAllRows) data._selected = false;
+      else data._selected = true;
+      setWorkData(selectData);
+    });
+    //
+    setSelectedAllRows(!selectedAllRows);
+    setSelectedRows([]);
+  };
+
   //== Фільтр множинний */
   //--- Формує (true/false) для стилю шоб показувати іконку фільтру біля назви в шапці, якщо є заданий фільтр по цьому полю
   const clasThFilter = (accessor) => {
-    let tempData = [...filterData]; //Копія робочого масиву обєктів
-    const targetObj = tempData.find((obj) => obj.accessor === accessor); //Шукажмо запис
+    let tempFilterData = [...filterData]; //Копія робочого масиву обєктів
+    const targetObj = tempFilterData.find((obj) => obj.accessor === accessor); //Шукажмо запис
     //
     if (targetObj && targetObj.filterFirst.length > 0) {
       return true;
@@ -262,6 +283,7 @@ export default function DProductTable({
 
   //--- Apply/Застосувати //Визначає масив даних, які відповідають фільтрам по всіх полях (filterData)
   const applyFilters = () => {
+    //--- Додаткові ф-ції
     //Як реалізувати оператор змінної в JavaScript? // https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
     //--- Об'єкт(набір змінних), що імітує оператори
     const operators = {
@@ -279,197 +301,211 @@ export default function DProductTable({
       if (check(x, y)) {
         return true;
       } else {
-        console.log("ignore");
         return false;
       }
     }
-    //--- Ф-ція перетворення типів у відповідності до заданих типиві таблиці
-    const valToType = (value, type) => {
+    //--- Ф-ція перетворення типів у відповідності до заданих типиві таблиці і у нижній регістр
+    const valToType = (value, type = "string") => {
       if (type == "number") return parseFloat(value);
       if (type == "date") return Date.parse(value);
       return String(value).toLowerCase(); //переводимо значення поля у нижній регістр
     };
-    //---------------------------------------------------------
+
+    //--- Початок фільтруівання
     setIsDropdownFilter(false); //Закриваєм випадаюче вікно фільтрів
-    console.log("RTable.js.js/applyFilters/filterData=", filterData);
-    setBeforSeachData(workData); //Для відкату
+    // console.log("RTable.js.js/applyFilters/filterData=", filterData);
+    if (filteredIcon === "none") {
+      setBeforFilterData(workData); //Для відкату
+    }
     //
-    const rows = [...workData];
-    console.log("RTable.js.js/applyFilters/rows=", rows);
+    const tempWorkData = [...workData];
+    // console.log("RTable.js.js/applyFilters/workData=", workData);
     const nowData = [];
     //*** Цикл по рядках
-    const attributes = Object.keys(rows[0]); //Це рядок заголовку(масив)
-    console.log("RTable.js.js/ApplyFilters/for1/attributes=", attributes);
-    let tempData = [...filterData]; //Копія робочого масиву обєктів
-    for (const current of rows) {
+    // const attributes = Object.keys(tempWorkData[0]); //Це рядок заголовку(масив)
+    // console.log("RTable.js.js/ApplyFilters/attributes=", attributes);
+    let tempFilterData = [...filterData]; //Копія робочого масиву обєктів
+    // console.log("RTable.js.js/ApplyFilters/tempFilterData=", tempFilterData);
+    for (const current of tempWorkData) {
       //   console.log("RTable.js.js/ApplyFilters/for1/currentRow=", current);
+      //++++ Принцип виходу з атрибуту(for2) при невідповідностях
       //Цикл по колонках
-      for (const attribute of attributes) {
+      let rowFilterted = false;
+      for (const rowColumn of tempFilterData) {
+        const attribute = rowColumn.accessor;
         // console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
-        // Чи задане поле в
-        const targetObj = tempData.find((obj) => obj.accessor === attribute); //Шукажмо запис по _nrow=nRow
-        // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
-        if (targetObj && targetObj.filterFirst.length > 0) {
-          //   console.log(
-          //     "RTable.js.js/ApplyFilters/for2/targetObj.comparisonFirst: ",
-          //     targetObj.comparisonFirst + " /targetObj.filterFirst: ",
-          //     targetObj.filterFirst + " /targetObj.logical: ",
-          //     targetObj.logical + " /targetObj.comparisonLast:",
-          //     targetObj.comparisonLast + " /targetObj.filterLast=",
-          //     targetObj.filterLast,
-          //   );
+        // break;
 
-          //
-          let compareFirst = false;
-          let compareLast = false;
+        // Чи є не пустий фільтр по цьоиу полю в масиві фільтрів
+        const targetObj = tempFilterData.find(
+          (obj) => obj.accessor === attribute,
+        );
+
+        //===============================
+        if (targetObj && targetObj.filterFirst.length > 0) {
+          //   console.log("RTable.js.js/ApplyFilters/for2/attribute=", attribute);
+          const filterRow = `${targetObj.comparisonFirst}/${targetObj.filterFirst}/${targetObj.logical}/${targetObj.comparisonLast}/${targetObj.filterLast}`;
+          //   console.log("RTable.js.js/ApplyFilters/for2/targetObj: ", targetObj);
+          //   console.log("RTable.js.js/ApplyFilters/for2/filterRow: ", filterRow);
+
+          //--- Задаєм змінну типу поля
+          const valueType =
+            targetObj.type === undefined ? "string" : targetObj.type; //Тип змінної, якщо не заданий то "string"
+          //--- Перетворюємо у робочі змінні у вказаний тип і у нижній регістр
+          const valueData = valToType(current[attribute], valueType);
+          const filterFirst = valToType(targetObj.filterFirst, valueType);
+          const filterLast = valToType(targetObj.filterLast, valueType);
           //   console.log(
-          //     "RTable.js.js/ApplyFilters/typeof/current[attribute]=",
-          //     typeof current[attribute],
-          //   );
-          const valueData = valToType(current[attribute], targetObj.type);
-          const filterFirst = valToType(targetObj.filterFirst, targetObj.type);
-          //   console.log(
-          //     "RTable.js.js/ApplyFilters/for2/filterFirst=",
-          //     filterFirst,
+          //     "RTable.js.js/ApplyFilters/filterFirst=",
+          //     filterFirst + " /valueData=",
+          //     valueData,
           //   );
           //   console.log(
           //     "RTable.js.js/ApplyFilters/typeof/type_filterFirst=",
-          //     typeof filterFirst,
-          //   );
-          //   console.log(
-          //     "RTable.js.js/ApplyFilters/typeof/valueData=",
+          //     typeof filterFirst + "/type-valueData=",
           //     typeof valueData,
           //   );
+
           //https://stackoverflow.com/questions/66267093/how-to-implement-a-variable-operator-in-javascript
           //doCompare-ф-ція що повертає результат порівняння 2-х змінних де третя є самим оператор порівняння("><=...")
-
           //filterFirst
-          const compare = doCompare(
-            valueData,
-            // targetObj.filterFirst,
-            filterFirst,
-            targetObj.comparisonFirst,
-          );
-          if (compare) {
-            compareFirst = true;
-            // console.log(
-            //   "RTable.js.js/applyFilters/targetObj.filterLast.length=",
-            //   targetObj.filterLast.length + "/targetObj.filterLast",
-            //   targetObj.filterLast,
-            // );
-          }
 
-          // Якщо нема filterLast і compareFirst = true
-          if (compareFirst && targetObj.filterLast.length == 0) {
-            console.log(
-              "RTable.js.js/applyFilters/compareFirst/current._nrow=",
-              current._nrow,
-            );
-            nowData.push(current); // Добавляємо текучий рядок в новий масив
-            break; //вихід з внутрішнього циклу
-          }
-
-          // Якщо є filterLast.length
-          if (targetObj.filterLast.length > 0) {
-            console.log(
-              "RTable.js.js/applyFilters/Last/current.skod=",
-              current.skod,
-            );
-            console.log(
-              "RTable.js.js/ApplyFilters/Last/targetObj.comparisonFirst: ",
-              targetObj.comparisonFirst + " /targetObj.filterFirst: ",
-              targetObj.filterFirst + " /targetObj.logical: ",
-              targetObj.logical + " /targetObj.comparisonLast:",
-              targetObj.comparisonLast + " /targetObj.filterLast=",
-              targetObj.filterLast,
-            );
-
-            const filterLast = valToType(targetObj.filterLast, targetObj.type);
-            //comparisonLast
-            const compare = doCompare(
+          //   doStuff(4, 2, ">")=true
+          let compareFirst = false;
+          if (valueType === "number" || valueType === "date") {
+            compareFirst = doCompare(
               valueData,
-              //   targetObj.filterLast,
-              filterLast,
-              targetObj.comparisonLast,
+              filterFirst,
+              targetObj.comparisonFirst,
             );
-            if (compare) {
-              compareLast = true;
+          } else compareFirst = valueData.includes(filterFirst.toLowerCase());
+          if (compareFirst) {
+            rowFilterted = true;
+            console.log(
+              "RTable.js.js/applyFilters/iFcompareFirst/filterRow: ",
+              filterRow + " /current._nRow:",
+              current._nRow,
+            );
+          }
 
-              console.log(
-                "RTable.js.js/applyFilters/IfCompareLast/CompareFirst: ",
-                compareFirst + " /CompareLast:",
-                compareLast,
+          //--- Якщо є filterLast.length
+          if (filterLast.length > 0) {
+            // console.log("RTable.js.js/applyFilters/Last/filterRow=", filterRow);
+
+            let compareLast = false;
+            if (valueType === "numeric" || valueType === "date") {
+              compareLast = doCompare(
+                valueData,
+                filterLast,
+                targetObj.comparisonLast,
               );
-              //Варіанти: (First = true  && Last = true)1-додаєм
-              //          (First = false && Last = true)2-ні
-              //          (First = true  || Last = true)3-додаєм
-              //          (First = false || Last = true)4-додаєм
+            } else compareLast = valueData.includes(filterLast.toLowerCase());
+            // console.log(
+            //   "RTable.js.js/applyFilters/compareLast=",
+            //   compareLast + " /valueType=",
+            //   valueType,
+            //   +" /valueData=",
+            //   valueData,
+            //   +" /filterLast=",
+            //   filterLast,
+            // );
+            if (compareLast) {
+              console.log(
+                "RTable.js.js/applyFilters/(compareLast)/current._nRow:",
+                current._nRow,
+              );
+
+              //Варіанти: (&&-> First &&Last)1-додаєм якщо обидва== true -> решта НІ
+              //          (||-> First|| Last)-додаєм, якщо хоч один = true -> а так як compareLast = true, то додаєм всі
+              //          (First = false || Last = true) 4-додаєм всі
+
+              // порівнюємо тільки compareFirst, бо compareLast = true
               if (targetObj.logical === "&&") {
-                //
-                if (compareFirst && compareLast) {
-                  nowData.push(current); // Добавляємо текучий рядок в новий масив
-                  break; //вихід з внутрішнього циклу
+                if (compareFirst) rowFilterted = true;
+                else {
+                  rowFilterted = false; //Має бути бо за For при rowFilterted = true; зробиться Push
+                  break; //(filterFirct=false && filterLast==true) Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
                 }
-              } else if (targetObj.logical === "||") {
-                nowData.push(current); // Добавляємо текучий рядок в новий масив
-                break; //вихід з внутрішнього циклу
-              }
-            } else if (compareFirst) {
-              console.log(
-                "RTable.js.js/applyFilters/ElseCompareLast/CompareFirst: ",
-                compareFirst + " /CompareLast:",
-                compareLast,
-              );
-              //Варіанти: (First = true  && Last = false)1-ні
-              //          (First = false && Last = false)2-ні
-              //          (First = true  || Last = false)3-додаєм
-              //          (First = false || Last = false)4-ні
-              if (targetObj.logical === "||") {
-                if (compareFirst || compareLast) {
-                  nowData.push(current); // Добавляємо текучий рядок в новий масив
-                  break; //вихід з внутрішнього циклу
-                }
-              }
+              } else rowFilterted = true; // Якщо не && то При || додаєм всі бо compareLast = true
             }
+            // !(compareLast)
+            else if (compareFirst && targetObj.logical === "||") {
+              console
+                .log
+                // "* RTable.js.js/ApplyFilters/!(compareLast)ElseiF(compareFirst &&/_nRow: ",
+                // current._nrow + "/ targetObj.logical",
+                // targetObj.logical,
+                ();
+              rowFilterted = true;
+              // Варіанти:(First = true  || Last = false)-додаєм
+              //          (First = false || Last = false)-ні
+              //          (First = true  && Last = false)-ні
+              //          (First = false && Last = false)-ні
+            } else {
+              //   console.log(
+              //     "* RTable.js.js/ApplyFilters/!(compareLast)elseIfElse(compareFirst &&/_nRow: ",
+              //     current._nrow,
+              //   );
+              rowFilterted = false; //Має бути бо за For при rowFilterted = true; зробиться Push
+              break; //Бо filterFirct=false && filterLast=false, отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
+            }
+          } else if (!compareFirst) {
+            rowFilterted = false; //Має бути бо за For при rowFilterted = true; зробиться Push
+            break; //filterFirct=false, а filterLast нема. Отже це поле випадає а значить і весь запис випадає, бо поля порівнюються як &&
           }
         }
-        //-- for2
+        //-- fEndor2
+        // console.log(
+        //   "RTable.js.js/ApplyFilters/Endfor2/_nRow: ",
+        //   current._nrow + " /attribute:",
+        //   attribute,
+        // );
       }
-      //--- for1
-      setWorkData(nowData);
-      setFilteredIcon("currentColor");
+      //--- Endfor1
+      //   console.log("RTable.js.js/ApplyFilters/Endfor1*/_nRow: ", current._nrow);
+      if (rowFilterted) {
+        nowData.push(current); // Добавляємо текучий рядок в новий масив
+        console.log(
+          "RTable.js.js/ApplyFilters/Endfor1/if(rowFilterted)***/_nRow: ",
+          current._nrow,
+        );
+      }
     }
+    console.log("RTable.js.js/ApplyFilters/Endfor1/");
+    setWorkData(nowData);
+    setFilteredIcon("currentColor"); //Колір хаповнення іконки фільтру
   };
 
   //--- Очищаємо фільтр/Відкат даних до фільтру/Закриваємо випадаюче вікно
   const deleteFilterAll = () => {
     console.log("RTable.js/deleteFilterAll/");
-    let tempData = [...filterData];
-    const temp = tempData.map((data, idx) => {
+    let tempFilterData = [...filterData];
+    const temp = tempFilterData.map((data) => {
       data.comparisonFirst = "";
       data.filterFirst = "";
       data.logical = "";
       data.comparisonLast = "";
       data.filterLast = "";
     });
-    setFilterData(tempData); //Перезаписуєм масив фільтрів
+    setFilterData(tempFilterData); //Перезаписуєм масив фільтрів
     setWorkData(beforSeachData); //Відкат даних до фільтру
     setIsDropdownFilter(false); //Закриваємо випадаюче вікно
     setFilteredIcon("none"); //Іконка
+    setWorkData(beforFilterData); //Відновлюємо робочу БД до фільтрування
   };
   //----------------------------------------------------
 
   return (
     //align-middle-текст по вертикалі посередині
-    <div className={`${styleTableText} align-middle `}>
+    <div className={`${styleTableText} px-1 align-middle `}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="dark:text-hMenuTextDark rounded-3xl border border-neutral-500 bg-tabThBgCol text-hMenuText  dark:bg-tabThBgColD">
+        <div className="dark:text-hTextDark rounded-3xl border border-neutral-500 bg-tabThBgCol text-hText  dark:bg-tabThBgColD">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           RTable.js / Table pagination
         </h3> */}
           <h1
-            className={`${styleTitleText} dark:text-hMenuTextDark text-center font-bold text-hMenuText`}
+            className={`${styleTitleText} dark:text-hTextD text-center font-bold text-hText`}
           >
             {title}
           </h1>
@@ -478,11 +514,127 @@ export default function DProductTable({
 
       {/* Надбудова таблиці з елементами управління (пошук+...) */}
       {/* <div className="mb flex border-3 border-green-300 p-1 dark:bg-gray-900"> */}
+      {/* <div className="my-1 flex flex-wrap items-center justify-start"> */}
       <div className="my-1 flex flex-wrap items-center justify-start">
         {/*  */}
-        {/*Пошук/фільтр (рядок пощуку по всіх полях) */}
+
+        {/* Блок:селект/фільтер/шрифт */}
+        <div className="flex flex-wrap items-center justify-start">
+          {/*Інформація про вибрані рядки  */}
+          {/* {typeof p_selected !== "undefined" && p_selected && ( */}
+          <button
+            className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+            onClick={onSelectAll}
+            title="Вибрати всі"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 24 24"
+              strokeWidth="1.5"
+              stroke="currentColor"
+              className="h-5 w-5 text-red-500"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                d="M4.5 12.75l6 6 9-13.5"
+              />
+            </svg>
+
+            <p title="Відмічено">
+              : {selectedAllRows ? workData.length : selectedRows.length}
+            </p>
+          </button>
+
+          {/* Фільтр: Інфа відфільтровані/ вся БД  */}
+          {/* {typeof p_searchAllRows !== "undefined" && p_searchAllRows && ( */}
+          {typeof (p_filtered !== "undefined") && p_filtered && (
+            <div>
+              <button
+                //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+                className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
+                onClick={() => setIsDropdownFilter(!isDropdownFilter)}
+              >
+                {/* Лійка */}
+                <svg
+                  // className="h-4 w-4 text-gray-500 dark:text-red-500"
+                  className="h-4 w-4 text-red-500"
+                  viewBox="0 0 24 24"
+                  fill={filteredIcon}
+                  // fill="none"
+                  // fill="currentColor"
+                  stroke="currentColor"
+                  // stroke="red"
+                  strokeWidth="2"
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                >
+                  <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
+                </svg>
+
+                <p title="Відфільтровано">: {workData.length}</p>
+                <p title="Вся БД">/ {initialData.length}</p>
+              </button>
+
+              {/* Dropdown menu */}
+              {isDropdownFilter && (
+                <DropdownFilter
+                  filterData={filterData}
+                  setFilterData={setFilterData}
+                  setIsDropdownFilter={setIsDropdownFilter}
+                  styleTableText={styleTableText}
+                  initialСolumns={initialСolumns}
+                  applyFilters={applyFilters}
+                  deleteFilterAll={deleteFilterAll}
+                />
+              )}
+            </div>
+          )}
+
+          {/* Вибір шрифта */}
+          <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50  p-1  dark:bg-gray-700">
+            <svg
+              className="h-5 w-5 text-red-500"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+            >
+              {" "}
+              <polyline points="4 7 4 4 20 4 20 7" />{" "}
+              <line x1="9" y1="20" x2="15" y2="20" />{" "}
+              <line x1="12" y1="4" x2="12" y2="20" />
+            </svg>
+            {/* <p>Шрифт:</p> */}
+            <p>:</p>
+            <select
+              className="mx-1 block w-full  items-center border-gray-300 bg-gray-50 align-middle  text-gray-900 hover:cursor-pointer focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              defaultValue={tableFontSize}
+              onChange={(e) => setTableFontSize(e.target.value)}
+              //   id="page-size"
+              title="Величина шрифту"
+            >
+              <option value={tableFontSize} disabled>
+                {tableFontSize}
+              </option>
+              <option value="xs">xs</option>
+              <option value="sm">sm</option>
+              <option value="base">base</option>
+              <option value="lg">lg</option>
+              {/* <option value="xs">дрібний</option>
+              <option value="sm">середній</option>
+              <option value="base">базовий</option>
+              <option value="lg">великий</option> */}
+            </select>
+          </div>
+        </div>
+
+        {/*Пошук швидкий/фільтр (рядок пощуку по всіх полях) */}
         {typeof p_searchAllRows !== "undefined" && p_searchAllRows && (
-          <div className="relative ml-1 items-center ">
+          <div className="relative ml-1 w-full items-center md:w-80">
             <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center  pl-3">
               {/* Лупа */}
               <svg
@@ -509,121 +661,15 @@ export default function DProductTable({
               //   onChange={(e) =>p_filterededp_searchAllRows onChangeSearch(e)} //Для Enter
               onChange={(e) => seachAllFilds(e)} //Пошук
               type="text"
-              className="block w-80 items-center rounded-lg border border-gray-300 bg-gray-50 p-1 pl-10 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
+              className="block w-full items-center rounded-lg border border-gray-300 bg-gray-50 p-1 pl-10 text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
             />
           </div>
         )}
-
-        {/*Фільтр/Інфа про відфільтровані р і всю БД  */}
-        {/* {typeof p_searchAllRows !== "undefined" && p_searchAllRows && ( */}
-        {typeof (p_filtered !== "undefined") && p_filtered && (
-          <div>
-            <button
-              //   className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-              className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700"
-              onClick={() => setIsDropdownFilter(!isDropdownFilter)}
-            >
-              {/* Лійка */}
-              <svg
-                // className="h-4 w-4 text-gray-500 dark:text-red-500"
-                className="h-4 w-4 text-red-500"
-                viewBox="0 0 24 24"
-                fill={filteredIcon}
-                // fill="none"
-                // fill="currentColor"
-                stroke="currentColor"
-                // stroke="red"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                <polygon points="22 3 2 3 10 12.46 10 19 14 21 14 12.46 22 3" />
-              </svg>
-
-              <p title="Відфільтровано">: {workData.length}</p>
-              <p title="Вся БД">/ {initialData.length}</p>
-            </button>
-
-            {/* Dropdown menu */}
-            {isDropdownFilter && (
-              <DropdownFilterMenu
-                filterData={filterData}
-                setFilterData={setFilterData}
-                setIsDropdownFilter={setIsDropdownFilter}
-                styleTableText={styleTableText}
-                initialСolumns={initialСolumns}
-                applyFilters={applyFilters}
-                deleteFilterAll={deleteFilterAll}
-              />
-            )}
-          </div>
-        )}
-
-        {/*Інформація про вибрані рядки  */}
-        {/* {typeof p_selected !== "undefined" && p_selected && ( */}
-        <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50 p-1 dark:bg-gray-700">
-          <svg
-            xmlns="http://www.w3.org/2000/svg"
-            fill="none"
-            viewBox="0 0 24 24"
-            strokeWidth="1.5"
-            stroke="currentColor"
-            className="h-5 w-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="M4.5 12.75l6 6 9-13.5"
-            />
-          </svg>
-
-          <p title="Відмічено">: {selectedRows.length}</p>
-        </div>
-        {/* )} */}
-
-        {/* Вибір шрифта */}
-        <div className="ml-1 flex items-center rounded-lg border border-gray-300 bg-gray-50  p-1  dark:bg-gray-700">
-          <svg
-            className="h-5 w-5"
-            viewBox="0 0 24 24"
-            fill="none"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <polyline points="4 7 4 4 20 4 20 7" />{" "}
-            <line x1="9" y1="20" x2="15" y2="20" />{" "}
-            <line x1="12" y1="4" x2="12" y2="20" />
-          </svg>
-          {/* <p>Шрифт:</p> */}
-          <p>:</p>
-          <select
-            className="mx-1 block  w-full items-center border-gray-300 bg-gray-50  align-middle text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-600 dark:bg-gray-700 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
-            defaultValue={tableFontSize}
-            onChange={(e) => setTableFontSize(e.target.value)}
-            //   id="page-size"
-            title="Величина шрифту"
-          >
-            <option value={tableFontSize} disabled>
-              {tableFontSize}
-            </option>
-            {/* <option value="xs">xs</option>
-            <option value="sm">sm</option>
-            <option value="base">base</option>
-            <option value="lg">lg</option> */}
-            <option value="xs">дрібний</option>
-            <option value="sm">середній</option>
-            <option value="base">базовий</option>
-            <option value="lg">великий</option>
-          </select>
-        </div>
       </div>
 
-      {/* *******  border-3 border-green-300  Обгортка(Wraper)таблиці (для проокрутки і...) */}
+      {/* Обгортка(Wraper)таблиці (для проокрутки і...)   border-3 border-green-300 */}
       <div
-        className=" max-h-[--sH] w-full overflow-auto border border-neutral-500  text-center text-gray-500 dark:text-gray-400"
+        className=" max-h-[--sH] w-full overflow-auto border border-neutral-500 text-center  text-gray-500 dark:text-gray-400 "
         style={{ "--sH": "calc(100vh - 250px)" }} //Створення style для h-
       >
         {/*border-collapse- обєднання границь ячейок "> */}
@@ -727,12 +773,24 @@ export default function DProductTable({
                 onClick={(e) => selectRows(e)}
               >
                 {/* перебір полів */}
-                {initialСolumns.map(({ accessor, type }) => {
+                {initialСolumns.map(({ accessor, type = "", align = "" }) => {
                   const tData = accessor === "index" ? rowIndex : row[accessor];
                   //   console.log("RTable.js/tbody/Сolumns.map/type=", type);
 
-                  const clasTextCenter =
-                    type == "number"
+                  //   const clasTextAlign =
+                  //     type == "number"
+                  //       ? "text-right"
+                  //       : type == "date"
+                  //       ? "text-center"
+                  //       : "text-left";
+                  const clasTextAlign =
+                    align == "right"
+                      ? "text-right"
+                      : align == "center"
+                      ? "text-center"
+                      : align == "left"
+                      ? "text-left"
+                      : type == "number"
                       ? "text-right"
                       : type == "date"
                       ? "text-center"
@@ -742,7 +800,7 @@ export default function DProductTable({
                     <td
                       id={row._nrow}
                       key={accessor}
-                      className={`${styleTableText} ${clasTextCenter} text-tabTrTexCol dark:text-tabTrTexColD`}
+                      className={`${styleTableText} ${clasTextAlign} text-tabTrTexCol dark:text-tabTrTexColD`}
                     >
                       {tData}
                     </td>

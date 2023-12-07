@@ -500,12 +500,12 @@ export default function DProductTable({
     <div className={`${styleTableText} px-1 align-middle `}>
       {/* title- Заголовок вікна таблиці */}
       {typeof title !== "undefined" && (
-        <div className="dark:text-hMenuTextDark rounded-3xl border border-neutral-500 bg-tabThBgCol text-hMenuText  dark:bg-tabThBgColD">
+        <div className="dark:text-hTextDark rounded-3xl border border-neutral-500 bg-tabThBgCol text-hText  dark:bg-tabThBgColD">
           {/* <h3 className=" px-4 text-left font-sans text-sm text-red-400 ">
           RTable.js / Table pagination
         </h3> */}
           <h1
-            className={`${styleTitleText} dark:text-hMenuTextDark text-center font-bold text-hMenuText`}
+            className={`${styleTitleText} dark:text-hTextD text-center font-bold text-hText`}
           >
             {title}
           </h1>

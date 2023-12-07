@@ -2,15 +2,15 @@
 "use client";
 
 import Link from "next/link";
-import {headMenu} from "./dataMenu"
+import { headMenu } from "./dataMenu";
 
 const HeaderMenu = () => {
-    // console.log("HeaderMenu/headMenu= ", headMenu);
+  // console.log("HeaderMenu/headMenu= ", headMenu);
   const renderMenu = () => {
     return headMenu.map((item, index) => {
       return (
         <li
-          className="items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-hMenuText hover:underline dark:text-hMenuTextD"
+          className="dark:text-hTextDhover:bg-hBgHov items-center whitespace-nowrap pr-1 font-sans text-lg font-bold text-hText hover:text-hTextHov hover:underline dark:bg-hBgD dark:hover:bg-hBgHovD hover:bg-hBgHov dark:hover:text-hTextHovD"
           key={index}
         >
           <Link href={item.link}>{item.a}</Link>

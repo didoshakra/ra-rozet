@@ -15,11 +15,11 @@ export default function DProductTable({ rows }) {
   ];
   return (
     <div className="p-4">
-      <div className="dark:text-hMenuTextDark rounded-3xl border border-neutral-500 bg-stone-300  text-center text-hMenuText  dark:bg-gray-800">
-        <h3 className=" dark:text-hMenuTextDark text-center text-lg font-bold text-hMenuText">
+      <div className="rounded-3xl border border-neutral-500 bg-stone-300 text-center  text-hText dark:bg-gray-800  dark:text-hTextD">
+        <h3 className=" dark:text-hTextD text-center text-lg font-bold text-hText">
           PrelineUI
         </h3>
-        <h1 className=" dark:text-hMenuTextDark text-center text-4xl font-bold text-hMenuText">
+        <h1 className=" dark:text-hTextD text-center text-4xl font-bold text-hText">
           DProducts
         </h1>
         hhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhhh

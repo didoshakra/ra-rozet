@@ -208,7 +208,7 @@ export const PRODUCTS_ROMOTION = [
   {
     id: 11,
     title: "Вино 'Мускат 0,75л'",
-    image: "/images/mstan/promotions/11jpg",
+    image: "/images/mstan/promotions/11.jpg",
     price: 20.0,
     discontProc: 10,
   },
