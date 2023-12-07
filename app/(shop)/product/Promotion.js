@@ -1,10 +1,10 @@
-//Під шаблон ProductVegefoogs
-import { getAllProducts } from "@/app/(shop)/product/data/data";
+//Під шаблон Promotionefoogs
+import { getAllProductsPromotion } from "@/app/(shop)/product/data/data";
 import Link from "next/link";
 import ItemImage from "@/components/_images/ItemImage";
 
-function ProductVeg({ item }) {
-  console.log("************Product.js/P/item=", item);
+function Promotion({ item }) {
+//   console.log("************Product.js/P/item=", item);
   return (
     <Link
       href={`/product/${item.id}`}
@@ -102,26 +102,25 @@ function ProductVeg({ item }) {
   );
 }
 
-export default async function ProductsVeg() {
-  const products = await getAllProducts();
+export default async function Promotions() {
+  const products = await getAllProductsPromotion();
   // console.log("Products.js/products=", products)
   return (
     <section className="relative mx-auto flex max-w-7xl flex-col space-y-12 py-14 pb-5 ">
       <div className="flex flex-col space-y-12 py-14 pb-5">
         <div className="text-center text-hMenuText">
-          <span className="tex-lg mb-2 font-serif italic">Нові продукти</span>
-          <h2 className="mb-4 text-4xl  font-bold">Наші продукти</h2>
-          <p>
-            Наші продукти жавжди свіжі і якісні. Ви отримажте масу задоводення
-            від їх споживання
-          </p>
+          <span className="tex-lg mb-2 font-serif italic">
+            Акційні продукти
+          </span>
+          <h2 className="mb-4 text-4xl  font-bold">Акції</h2>
+          <p>Завжди великі знижки на необхідні продукти</p>
         </div>
       </div>
       {/* card */}
       {/* <div className="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-flow-col sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"> */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
         {products.map((item) => (
-          <ProductVeg key={item.id} item={item} />
+          <Promotion key={item.id} item={item} />
         ))}
       </div>
     </section>

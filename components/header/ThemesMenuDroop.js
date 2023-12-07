@@ -1,6 +1,6 @@
 //ThemesMenuDroop.js
 //Саме випадаюче меню вибору палітри тем
-
+ 
 import { changeTheme } from "@/utils/helper";
 
 const ThemesMenuDroop = ({ setSetingThemesMenuOpen }) => {
@@ -49,7 +49,7 @@ const ThemesMenuDroop = ({ setSetingThemesMenuOpen }) => {
         <div>
           <button
             className="bg-buttons text-typography m-2 px-8 py-1 text-hMenuText hover:bg-hMenuBgHov  hover:text-hMenuTextHov dark:text-hMenuTextD dark:hover:bg-hMenuBgHovD dark:hover:text-hMenuTextHovD"
-         
+
             onClick={togleThemeDefault}
           >
             Default

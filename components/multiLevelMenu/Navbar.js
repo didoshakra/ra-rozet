@@ -10,7 +10,7 @@ export default function Navbar({ multilevelMenu, title = "", setDrawerOpen }) {
       >
         {title}
       </div>
-      <ul className="gap-3 bg-drawerDropMenuBg pl-2 font-bold text-[#3e77aa] underline  dark:bg-headMenuBgDark">
+      <ul className="dark:bg-drawDropMenuBgD gap-3 bg-drawDropMenuBgdrawDropMenuBgD pl-2 font-bold text-[#3e77aa]  underline">
         {/* <ul className=" gap-3 bg-green-400 pl-2 font-bold text-cyan-600  underline"> */}
         {/* {multilevelMenu.map((menu, key = menu.id) => { */}
         {multilevelMenu.map((menu, index) => {

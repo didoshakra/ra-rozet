@@ -196,17 +196,17 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
   return (
     <div
       //Зправа
-      //   className={`fixed right-0 top-0 z-20 flex h-full w-[35vw] flex-col overflow-y-scroll  bg-drawerDropMenuBg dark:bg-headMenuBgDark ${
+      //   className={`fixed right-0 top-0 z-20 flex h-full w-[35vw] flex-col overflow-y-scroll  bg-drawDropMenuBg dark:bg-headMenuBgDark ${
       //     drawerOpen ? "translate-x-0" : "translate-x-full"
       //   } duration-300 ease-in-out `}
       //Зліва
-      className={`fixed -left-[85vw] top-0 z-20 flex h-full w-[85vw] flex-col overflow-y-scroll  bg-drawDropMenuBg dark:bg-hMenuBgD ${
+      className={`fixed -left-[85vw] top-0 z-20 flex h-full w-[85vw] flex-col overflow-y-scroll  bg-drawDropMenuBg dark:bg-drawDropMenuBgD ${
         drawerOpen ? "translate-x-full" : "translate-x-0"
       } duration-500 ease-in-out `}
     >
       {/* <div className="w-full/5 fixed inset-0 z-20 flex max-h-[600px] max-w-[300px] flex-col overflow-y-scroll bg-drawerDropMenuBg transition-transform duration-200 ease-out dark:bg-hMenuBgD"> */}
       {/* Шапка */}
-      <div className="flex h-20 items-center justify-between gap-1 bg-drawHBg">
+      <div className="bg-drawHBg flex h-20 items-center justify-between gap-1">
         <div className="flex items-center justify-between gap-2 pl-1  ">
           <Link href="/">
             <Image
@@ -226,7 +226,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
             //   fontSize: 30,
             //   fontStyle: "italic",
             // }}
-            className="justify-begin  flex items-center px-4 text-2xl font-bold italic  text-drawDropMenuText md:text-2xl"
+            className="justify-begin  text-drawDropMenuText flex items-center px-4 text-2xl font-bold  italic md:text-2xl"
             title="RAMAG"
           >
             RAecom
@@ -253,13 +253,13 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
         </div>
       </div>
       {/* --- Список меню ----------------------------------------- */}
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="bg-drawDropHr h-1 min-w-full" />
       <Navbar
         multilevelMenu={menuBig}
         title={"Багаторівнневе пробне меню"}
         setDrawerOpen={setDrawerOpen}
       />
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="bg-drawDropHr h-1 min-w-full" />
       <Navbar
         multilevelMenu={menuAdmin}
         title={"Адмін"}
@@ -267,13 +267,13 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
       />
       {/* ----------------------------------------------------------- */}
       {/* Divider/Роздільник */}
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="bg-drawDropHr h-1 min-w-full" />
       <Navbar
         multilevelMenu={menuDocuments}
         title={"Документи"}
         setDrawerOpen={setDrawerOpen}
       />
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="bg-drawDropHr h-1 min-w-full" />
       {/* ----------------------------------------------------------- */}
       <SocialMenuUl title={"Контакти"} />
       {/* <SocialMenuMap title={"Контакти"} menu={footerList} /> */}

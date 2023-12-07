@@ -10,6 +10,23 @@ export async function getProductById(id) {
   });
   return await promise;
 }
+export async function getAllProductsPromotion() {
+  const promise = new Promise((res) =>
+    setTimeout(() => res(PRODUCTS_ROMOTION), 1500),
+  );
+  return await promise;
+}
+
+export async function getProductPromotionById(id) {
+  const a = parseFloat(id);
+  const promise = new Promise((res) => {
+    setTimeout(
+      () => res(PRODUCTS_ROMOTION.find((x) => x.id === parseFloat(id))),
+      1500,
+    );
+  });
+  return await promise;
+}
 
 export const PRODUCTS = [
   {
@@ -114,121 +131,124 @@ export const PRODUCTS = [
     price: 20.0,
     discontProc: 0,
   },
+]
+
+export const PRODUCTS_ROMOTION = [
   //   mStan
   {
-    id: 13,
+    id: 1,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/1.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 14,
+    id: 2,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/2.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 15,
+    id: 3,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/3.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 16,
+    id: 4,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/4.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 17,
+    id: 5,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/5.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 18,
+    id: 6,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/6.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 19,
+    id: 7,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/7.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 20,
+    id: 8,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/8.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 21,
+    id: 9,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/9.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 22,
+    id: 10,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/10.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 23,
+    id: 11,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/11jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 24,
+    id: 12,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/12.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 25,
+    id: 13,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/13.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 26,
+    id: 14,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/14.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 27,
+    id: 15,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/15.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 28,
+    id: 16,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/16.jpg",
     price: 20.0,
     discontProc: 10,
   },
   {
-    id: 29,
+    id: 17,
     title: "Вино 'Мускат 0,75л'",
     image: "/images/mstan/promotions/17.jpg",
     price: 20.0,

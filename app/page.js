@@ -1,7 +1,8 @@
 import LayoutWithSidebar from "@/components/rozet/LayoutWithSidebar";
 // import HomePage from "@/components/HomePage";
 import StHomePage from "@/components/mstan/StHomePage";
-import ProductsVeg from "@/app/(shop)/product/ProductsVeg";
+import OurProducts from "@/app/(shop)/product/OurProducts";
+import Promotion from "@/app/(shop)/product/Promotion";
 // import Promotions from "@/components/mstan/Promotions";
 
 export default function Home() {
@@ -10,7 +11,8 @@ export default function Home() {
     <main className="m-0 mx-auto my-auto p-0">
       {/* <LayoutWithSidebar /> */}
       <StHomePage />
-      <ProductsVeg />
+      <OurProducts />
+      <Promotion />
       {/* <Promotions /> */}
     </main>
   );
