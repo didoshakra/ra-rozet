@@ -26,7 +26,7 @@ export default function RootLayout({ children }) {
           <Header />
           {/* <main className="mx-auto max-h-1.5 min-h-screen max-w-7xl border-3 border-red-600"> */}
           {/* <main className=" mx-auto my-auto  border-3 border-red-600"> */}
-          <main className="max-w-7xl mx-auto container my-auto p-0">
+          <main className="max-w-7xl mx-auto container my-auto p-1">
             {children}
           </main>
           {/* <main className="mx-auto min-h-screen max-w-7xl ">{children}</main> */}
