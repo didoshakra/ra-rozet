@@ -7,7 +7,7 @@ import Promotion from "@/app/(shop)/product/Promotion";
 
 export default function Home() {
   return (
-    <main className="mx-auto mt-48 min-h-screen w-screen px-1">
+    <main className="mx-auto mt-5 min-h-screen w-screen px-1">
       {/* <LayoutWithSidebar /> */}
       <StHomePage />
       {/* <OurProducts /> */}

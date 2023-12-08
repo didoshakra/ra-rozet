@@ -11,7 +11,7 @@ const StHomePage = () => {
 
   return (
     // <section className="home-slider-section">
-    <section className="relative h-[300px]  md:h-[500px] border border-2 border-red-500">
+    <section className="relative h-[300px] md:h-[500px]">
       {/* елемент слайдеру */}
       <div
         className="absolute bottom-0 left-0 h-full w-full animate-[slideHome_5s_linear_infinite_alternate]
