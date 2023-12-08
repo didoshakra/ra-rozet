@@ -73,12 +73,12 @@ const HeaderSetingDroopMenu = () => {
       className="relative m-0 items-center p-0 md:hidden"
     >
       <button
-        className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hIconBgHov dark:hover:bg-hIconBgHovD"
+        className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
         onClick={setingMenuToggle}
       >
         {/* іконка seting*/}
         <svg
-          className="h-8 w-8 text-hIcon dark:text-hIconD"
+          className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hTextD dark:hover:text-hTextHovD"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -102,13 +102,13 @@ const HeaderSetingDroopMenu = () => {
         } right-0 z-10 m-0 p-0`}
       >
         <ul
-          className={`border-menuBorder bg-menuBg dark:border-menuBorderD  dark:bg-menuBgD m-0 w-[150px] rounded-lg border p-1 drop-shadow-md`}
+          className={`m-0 w-[150px] rounded-lg  border border-hBorder bg-hBg p-1 text-base font-medium drop-shadow-md dark:border-hBorderD dark:bg-hBgD`}
         >
-          <li className="text-menuText hover:bg-menuBgHov hover:text-menuTextHov dark:text-menuTextD  dark:hover:bg-menuBgHovD dark:hover:text-menuTextHovD flex w-full list-none  items-center  p-1 text-sm font-normal">
+          <li className="flex w-full list-none items-center  p-1  text-hText hover:bg-hBgHov  hover:text-hTextHov  dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD">
             <HeaderThemesDroopMenu />
           </li>
           <li
-            className="text-menuText hover:bg-menuBgHov hover:text-menuTextHov  dark:text-menuTextD dark:hover:bg-menuBgHovD dark:hover:text-menuTextHovD flex list-none  items-center  p-1 text-sm font-normal"
+            className="text` flex list-none  items-center p-1 font-normal text-hText hover:bg-hBgHov  hover:text-hTextHov  dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
             onClick={() => setUserMenuOpen(!userMenuOpen)}
           >
             {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
@@ -123,7 +123,7 @@ const HeaderSetingDroopMenu = () => {
                 />
               ) : (
                 <svg
-                  className="h-8 w-8 text-hIconD dark:text-hIcon"
+                  className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hTextD dark:hover:text-hTextHovD"
                   fill="none"
                   viewBox="0 0 24 24"
                   stroke="currentColor"

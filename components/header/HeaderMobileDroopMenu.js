@@ -35,7 +35,7 @@ const HeaderMobileDroopMenu = () => {
     return headMenu.map((item, index) => {
       return (
         <li
-          className="dark:text-menuTextD flex list-none  flex-nowrap items-center p-1 text-sm font-normal  text-menuText  hover:bg-menuBgHov hover:text-menuTextHov dark:hover:bg-menuBgHovD dark:hover:text-menuTextHovD"
+          className="flex list-none flex-nowrap  items-center p-1 text-sm font-normal text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
           key={index}
           onClick={() => setMobileMenuOpen(false)}
         >
@@ -51,13 +51,13 @@ const HeaderMobileDroopMenu = () => {
       className="relative m-0 items-center p-0  md:hidden"
     >
       <button
-        className="hover:bg-IconHBgHov dark:hover:bg-IconHBgHovD flex items-center justify-center rounded-full pl-1 transition-colors"
+        className="flex items-center justify-center rounded-full pl-1 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
         onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
         title="меню"
       >
         {/* іконка мобільного меню */}
         <svg
-          className="text-IconH dark:text-IconHD h-8 w-8"
+          className="h-8 w-8  hover:text-hTextHov text-hText dark:text-hTextD dark:hover:text-hTextHovD"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -84,7 +84,7 @@ const HeaderMobileDroopMenu = () => {
       >
         <ul
           //   ref={ref_HeaderMobileDroopMenu}
-          className=" rounded-lg border border-menuBorder  bg-menuBg p-1 drop-shadow-md dark:border-menuBorderD dark:bg-menuBgD"
+          className=" rounded-lg border border-menuBorder  bg-hBg p-1 drop-shadow-md dark:border-menuBorderD dark:bg-hBgD"
         >
           {renderMenu()}
         </ul>

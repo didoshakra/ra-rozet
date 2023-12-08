@@ -1,7 +1,6 @@
 //HeaderMenuRight  /Верхнє меню
 //Викликає меню(з іконоками) :UserSwitcher/ThemeSwitcher/LocaleSwitcher
 
-import ThemeSwitcher from "./ThemeSwitcher"
 import HeaderThemesDroopMenu from "./HeaderThemesDroopMenu";
 import UserSwitcher from "./UserSwitcher.js";
 import HeaderSetingDroopMenu from "./HeaderSetingDroopMenu";

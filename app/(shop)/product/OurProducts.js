@@ -106,19 +106,19 @@ export default async function ProductsVeg() {
   const products = await getAllProducts();
   // console.log("Products.js/products=", products)
   return (
-    <section className="relative mx-auto flex max-w-7xl flex-col space-y-12 py-14 pb-5">
-      <div className="flex flex-col space-y-12 py-14 pb-5">
-        <div className="text-center text-hText dark:text-hTextD">
-          <span className="tex-lg mb-2 font-serif italic">Нові продукти</span>
-          <h2 className="mb-4 text-4xl  font-bold">Наші продукти</h2>
-          <p>
-            Наші продукти жавжди свіжі і якісні. Ви отримажте масу задоводення
-            від їх споживання
-          </p>
-        </div>
-      </div>
-      {/* card */}
-      {/* <div className="grid grid-cols-1 gap-y-10 gap-x-6 md:grid-flow-col sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8"> */}
+    // <section className="relative mx-auto flex max-w-7xl flex-col space-y-2 py-14 pb-5">
+    // <section className="relative mx-auto flex max-w-7xl flex-col space-y-2 py-14 pb-5">
+    <section className="flex flex-col space-y-3 px-2 pb-5 pt-5 text-center text-hText dark:text-hTextD">
+      {/* <div className="flex flex-col space-y-12 py-14 pb-5 text-center text-hText dark:text-hTextD"> */}
+      {/* <div className="text-center text-hText dark:text-hTextD"> */}
+      <hi className="tex-lg  font-serif italic">Нові продукти</hi>
+      <h2 className="text-4xl  font-bold">Наші продукти</h2>
+      <p>
+        Наші продукти жавжди свіжі і якісні. Ви отримажте масу задоводення від
+        їх споживання
+      </p>
+      {/* </div> */}
+      {/* </div> */}
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
         {products.map((item) => (
           <ProductVeg key={item.id} item={item} />
