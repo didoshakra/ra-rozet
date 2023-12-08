@@ -10,7 +10,7 @@ export default function Home() {
     <main className="border border-2 px-0 ">
     {/* <main className="m-0 mx-0 my-auto p-0"> */}
       {/* <LayoutWithSidebar /> */}
-      <StHomePage />
+      {/* <StHomePage /> */}
       {/* <OurProducts /> */}
       {/* <Promotion /> */}
     </main>
