@@ -54,7 +54,7 @@ const HeaderTape = () => {
       </div>
       {/* <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span> */}
       <span className="px-1 text-sm">
-        Проба Next.js 13-4/Tailwindcss/PostgreSQL
+       Next.js 13-4/Tailwindcss/PostgreSQL
       </span>
     </div>
   );
