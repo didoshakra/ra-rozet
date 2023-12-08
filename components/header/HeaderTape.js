@@ -6,9 +6,9 @@ const HeaderTape = () => {
 
   return (
     <div className="h-18 mx-auto my-auto mt-1 flex w-full flex-col justify-start overflow-hidden bg-hTapeBg px-2 text-sm text-hTapeText dark:bg-hTapeBgD dark:text-hTapeTextD md:h-6 md:flex-row md:justify-between ">
-      <div className="flex flex-col justify-start md:flex-row md:justify-between ">
+      <div className="flex justify-between ">
         <a
-          className="flex items-center justify-start px-1 text-sm"
+          className="flex items-center justify-start space-x-1 "
           href="tel:+380508580704"
         >
           {/* <IconPhone width={iconSize} height={iconSize} colorFill="white" /> */}
@@ -31,11 +31,9 @@ const HeaderTape = () => {
           +38(050-0000000)
         </a>
         <a
-          className="flex items-center justify-start px-1 text-sm"
+          className="flex items-center justify-start space-x-1 text-sm"
           href="tel:+380687832306"
         >
-          {/* <IconPhone width={iconSize} height={iconSize} colorFill="white" /> */}
-          {/* phone */}
           <svg
             className="h-4 w-4 text-hTapeText dark:text-hTapeTextD"
             width="24"
@@ -53,11 +51,11 @@ const HeaderTape = () => {
           </svg>
           +38(068-0000000)
         </a>
-        <span className="items-center px-1 text-sm ">
-          Tailwindcss/PostgreSQL/multiLevelMenu/RTable
-        </span>
       </div>
-      <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span>
+      {/* <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span> */}
+      <span className="px-1 text-sm">
+        Проба Next.js 13-4/Tailwindcss/PostgreSQL
+      </span>
     </div>
   );
 };
