@@ -3,19 +3,21 @@ import { getAllProducts } from "@/app/(shop)/product/data/data";
 import Link from "next/link";
 import ItemImage from "@/components/_images/ItemImage";
 
+//***  На dark не треба переключати коліри тексту !!!   */
+
 function ProductVeg({ item }) {
   //   console.log("************Product.js/P/item=", item);
   return (
     <Link
       href={`/product/${item.id}`}
       //   href={`(shop)/product/${item.id}`}
-      className="border-cardBorder dark:border-cardBorderD group flex h-96 flex-col rounded  border-2  bg-white transition-transform duration-200 ease-out hover:scale-105"
+      className="border-hBorder group flex h-96 flex-col rounded  border-2  bg-white transition-transform duration-200 ease-out hover:scale-105"
       //   className="h-96 flex flex-col rounded border-2"
     >
       <div className="relative max-h-72 flex-1 ">
         <>
           {item.discontProc > 0 && (
-            <div className="absolute left-0 top-0 z-10 inline bg-[#82ae46] text-base text-white">
+            <div className="absolute left-0 top-0 z-10 inline bg-hTapeBg text-base text-white">
               {item.discontProc}%
             </div>
           )}
@@ -30,7 +32,7 @@ function ProductVeg({ item }) {
 
       {/* рядок іконок */}
       <div className="mt-2 flex items-center justify-center gap-3">
-        <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-[#82ae46]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-hBg hover:bg-hBgHov">
           <svg
             //   Menu
             className="h-6 w-6 text-red-500"
@@ -46,7 +48,7 @@ function ProductVeg({ item }) {
             />
           </svg>
         </div>
-        <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-[#82ae46]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-hBg hover:bg-hBgHov">
           <svg
             // Cart/Візочок
             className="h-6 w-6 text-red-500"
@@ -65,7 +67,7 @@ function ProductVeg({ item }) {
             <path d="M3 3h2l2 12a3 3 0 0 0 3 2h7a3 3 0 0 0 3 -2l1 -7h-15.2" />
           </svg>
         </div>
-        <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-[#82ae46]">
+        <div className="flex h-10 w-10 items-center justify-center rounded-3xl bg-hBg hover:bg-hBgHov">
           <svg
             //  Серце
             className="h-6 w-6 text-red-500"
@@ -86,16 +88,16 @@ function ProductVeg({ item }) {
       </div>
       <div className="mb-1 mt-4 flex items-center justify-center gap-10 px-1 font-semibold">
         {item.discontProc > 0 && (
-          <p className="justify-center text-center text-base text-[#82ae46] line-through">
+          <p className="justify-center text-center text-base text-hText line-through">
             {(item.price - (item.price * item.discontProc) / 100).toFixed(2)}
           </p>
         )}
-        <p className="justify-center text-center text-base font-bold text-[#82ae46]">
+        <p className="justify-center text-center text-base font-bold text-hText">
           ₴{item.price.toFixed(2)}
         </p>
       </div>
       {/*line-clamp-2: Для затиску тексту до певної кількості рядків. */}
-      <p className="line-clamp-2 px-4 text-xs italic text-gray-600">
+      <p className="line-clamp-2 px-4 text-xs italic text-hTexr">
         {item.description}
       </p>
     </Link>
@@ -106,7 +108,8 @@ export default async function ProductsVeg() {
   const products = await getAllProducts();
   // console.log("Products.js/products=", products)
   return (
-    <section className="flex flex-col space-y-3 px-2 pb-5 pt-5 text-center text-hText dark:text-hTextD">
+
+    <section className="flex flex-col space-y-3 px-2 pb-5 pt-5 text-center text-hText">
       <hi className="tex-lg  font-serif italic">Нові продукти</hi>
       <h2 className="text-4xl  font-bold">Наші продукти</h2>
       <p>

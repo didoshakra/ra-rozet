@@ -73,12 +73,12 @@ const HeaderSetingDroopMenu = () => {
       className="relative m-0 items-center p-0 md:hidden"
     >
       <button
-        className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+        className="flex items-center justify-center rounded-full p-1 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHov"
         onClick={setingMenuToggle}
       >
         {/* іконка seting*/}
         <svg
-          className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hTextD dark:hover:text-hTextHovD"
+          className="h-8 w-8  text-hText hover:text-hTextHov dark:text-hText dark:hover:text-hTextHov"
           width="24"
           height="24"
           viewBox="0 0 24 24"
@@ -95,7 +95,7 @@ const HeaderSetingDroopMenu = () => {
         </svg>
       </button>
 
-      {/* список головного меню */}
+      {/* Випадаюче меню Seting */}
       <div
         className={`${
           setingMenuOpen ? "absolute" : "hidden"
@@ -104,11 +104,11 @@ const HeaderSetingDroopMenu = () => {
         <ul
           className={`m-0 w-[150px] rounded-lg  border border-hBorder bg-hBg p-1 text-base font-medium drop-shadow-md dark:border-hBorderD dark:bg-hBgD`}
         >
-          <li className="flex w-full list-none items-center  p-1  text-hText hover:bg-hBgHov  hover:text-hTextHov  dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD">
+          <li className="dark:text-hTex flex w-full list-none  items-center text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHov dark:hover:text-hTextHov">
             <HeaderThemesDroopMenu />
           </li>
           <li
-            className="text` flex list-none  items-center p-1 font-normal text-hText hover:bg-hBgHov  hover:text-hTextHov  dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            className="px-2 dark:text-hTex flex w-full list-none items-center  space-x-2 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHov dark:hover:text-hTextHov"
             onClick={() => setUserMenuOpen(!userMenuOpen)}
           >
             {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}

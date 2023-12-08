@@ -157,6 +157,9 @@ module.exports = {
         tabTrBgSelColD: "var(--color-tabTrBgSelColD)", // "#6B8E23", //
         tabTrBgSelHovCol: "var(--color-tabTrBgSelHovCol)", //"#C9DFA7", //
         tabTrBgSelHovColD: "var(--color-tabTrBgSelHovColD)", //"#82AE46", //
+
+        // // Card - картинка колір
+        // cardBg: "var(--color-hBgD)",
       },
 
       width: {

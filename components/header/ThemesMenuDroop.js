@@ -1,27 +1,56 @@
 //ThemesMenuDroop.js
 //Саме випадаюче меню вибору палітри тем
 
+import { useContext, useRef, useEffect } from "react";
 import { changeTheme } from "@/utils/helper";
 
-const ThemesMenuDroop = ({ setSetingThemesMenuOpen }) => {
+const ThemesMenuDroop = ({
+  setSetingThemesMenuOpen,
+  setThemesMenuOpen,
+}) => {
+  //   //*************Для клацання поза обєктом
+  const ref_ThemesMenuDroop = useRef(null);
+
+  useEffect(() => {
+    const handleOutSideClick = (event) => {
+      if (!ref_ThemesMenuDroop.current?.contains(event.target)) {
+        // alert("Outside Clicked.");
+        // console.log("Outside Clicked. ");
+        // setSetingMenuOpen(false);
+        setSetingThemesMenuOpen(false);
+        setThemesMenuOpen(false);
+      }
+    };
+
+    window.addEventListener("mousedown", handleOutSideClick);
+
+    return () => {
+      window.removeEventListener("mousedown", handleOutSideClick);
+    };
+  }, [ref_ThemesMenuDroop]);
+
   const togleThemeDefault = (e) => {
     changeTheme("");
     setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
   };
   const togleTheme1 = (e) => {
     changeTheme("theme1");
     setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
   };
   const togleTheme2 = (e) => {
     changeTheme("theme2");
     setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
   };
   const togleTheme3 = (e) => {
     changeTheme("theme3");
     setSetingThemesMenuOpen(false);
+    setThemesMenuOpen(false);
   };
   return (
-    <div className="absolute right-0 z-10 m-0 p-0">
+    <div ref={ref_ThemesMenuDroop} className="absolute right-0 z-10 m-0 p-0">
       <div className="grid place-items-center rounded-lg border border-hBorder bg-hBg drop-shadow-md dark:border-hBorderD dark:bg-hBgD">
         <div>
           <button

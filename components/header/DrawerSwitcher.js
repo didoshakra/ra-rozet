@@ -10,11 +10,11 @@ export default function DrawerSwitcher({ thrme }) {
   return (
     <div className="relative flex justify-start ">
       <button
-        className="flex items-center justify-center rounded-full p-1 hover:bg-hBgHov dark:hover:bg-hBgHovD md:p-2"
+        className="flex items-center justify-center rounded-full p-1 hover:bg-hBgHov dark:hover:bg-hBgHov md:p-2"
         onClick={(e) => setDrawerOpen(!drawerOpen)}
       >
         <svg
-          className="h-8 w-8 text-hText hover:text-hTextHov dark:text-hTextD dark:hover:text-hTextHovD"
+          className="h-8 w-8 text-hText hover:text-hTextHov dark:text-hText dark:hover:text-hTextHov"
           width="24"
           height="24"
           viewBox="0 0 24 24"

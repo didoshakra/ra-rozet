@@ -3,46 +3,24 @@ html[data-theme="theme3"] {
 
   /* //-- Загальні */
   --color-bodyBg: #f8f5ea;
-  --color-bodyBgD: #414545;
   --color-bodyText: #060214;
-  --color-bodyTextD: #fff;
 
   /* //-- headTape -------------------------------------------- */
   --color-hTapeBg: #f6cb31;
-  --color-hTapeBgD: #000;
   --color-hTapeText: #fff;
-  --color-hTapeTextD: #6b8e23;
 
   /* //-- head -------------------------------------------- */
   --color-hBg: #f7eecf;
-  --color-hBgD: #171919;
   --color-hBgHov: #f6e4a3;
-  --color-hBgHovD: #171919;
   --color-hText: #a28519;
-  --color-hTextD: #6b8e23;
   --color-hTextHov: #7e6b25;
-  --color-hTextHovD: red;
-  /* --color-hTextImg: #fff;
-  --color-hTextImg1: red; */
+
   --color-hBorder: #f6e4a3;
-  --color-hBorderD: #dcdcdc;
 
-  /* //-- headMenu / + Всі випадаючі з head меню ??? */
-  /* --color-menuBg: #dbe7e5;
-  --color-menuBgD: #171919 --color-menuBgHov: #82ae46;
-  --color-menuBgHovD: #82ae46;
-  --color-menuBorder: #dcdcdc;
-  --color-menuBorderD: #6b8e23;
-  --color-menuText: #6b8e23;
-  --color-menuTextD: #6b8e23;
-  --color-menuTextHov: #fff;
-  --color-menuTextHovD: #fff;
-  --color-menuTextAct: red;
-  --color-menuTextActD: red; */
-
-  /*  //-- drawer -------------------------------------------- */
+   /*  //-- drawer -------------------------------------------- */
   --color-drawDropMenuBg: #f8e7aa;
   --color-drawDropMenuBgD: #e7f4e0;
   --color-drawDropHr: #eed784;
   --color-drawDropHrD: #6b8e23;
+
 }

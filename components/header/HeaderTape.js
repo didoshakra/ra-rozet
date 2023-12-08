@@ -5,8 +5,8 @@ const HeaderTape = () => {
   const iconSize = "13";
 
   return (
-    <div className="h-18 mx-auto my-auto mt-1 flex w-full flex-col justify-start overflow-hidden bg-hTapeBg px-2 text-sm text-hTapeText dark:bg-hTapeBgD dark:text-hTapeTextD md:h-6 md:flex-row md:justify-between ">
-      <div className="flex justify-between ">
+    <div className="h-18 mx-auto my-auto mt-1 flex w-full flex-col justify-start  overflow-hidden bg-hTapeBg px-2 text-sm text-hTapeText dark:bg-hTapeBgD dark:text-hText md:h-6 md:flex-row md:justify-between ">
+      <div className="flex justify-between space-x-1">
         <a
           className="flex items-center justify-start space-x-1 "
           href="tel:+380508580704"
@@ -14,7 +14,7 @@ const HeaderTape = () => {
           {/* <IconPhone width={iconSize} height={iconSize} colorFill="white" /> */}
           {/* phone */}
           <svg
-            className="h-4 w-4 text-hTapeText dark:text-hTapeTextD"
+            className="h-4 w-4 text-hTapeText dark:text-hText"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -35,7 +35,7 @@ const HeaderTape = () => {
           href="tel:+380687832306"
         >
           <svg
-            className="h-4 w-4 text-hTapeText dark:text-hTapeTextD"
+            className="h-4 w-4 text-hTapeText dark:text-hText"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -53,9 +53,7 @@ const HeaderTape = () => {
         </a>
       </div>
       {/* <span className="px-1 text-sm">ПРОБА Next.js 13-4/27-11-2023</span> */}
-      <span className="px-1 text-sm">
-       Next.js 13-4/Tailwindcss/PostgreSQL
-      </span>
+      <span className="px-1 text-sm">Next.js 13-4/Tailwindcss/PostgreSQL</span>
     </div>
   );
 };

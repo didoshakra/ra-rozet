@@ -21,7 +21,7 @@ const HeaderLogo = () => {
         />
       </Link>
       <Link href="/">
-        <div className="flex items-center justify-start px-1 text-xl font-bold italic text-hText hover:text-hTextHov hover:bg-hBgHov dark:text-hTextD dark:hover:text-hTextHovD dark:hover:bg-hBgHovD md:px-2 md:text-2xl">
+        <div className="flex items-center justify-start px-1 text-xl font-bold italic text-hText hover:text-hTextHov hover:bg-hBgHov dark:text-hText dark:hover:text-hTextHov dark:hover:bg-hBgHov md:px-2 md:text-2xl">
           RAtest
         </div>
       </Link>

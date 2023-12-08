@@ -49,7 +49,7 @@ const UserSwitcher = () => {
     <div ref={ref_UserSwitcher} className="relative list-none">
       {/* іконка зміни користувача */}
       <button
-        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
+        className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHov"
         title="профіль"
         onClick={userMenuOpenToggle}
       >
@@ -63,7 +63,7 @@ const UserSwitcher = () => {
           />
         ) : (
           <svg
-            className="h-8 w-8 text-hText dark:text-hTextD"
+            className="h-8 w-8 text-hText dark:text-hText"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"

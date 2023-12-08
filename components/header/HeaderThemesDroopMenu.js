@@ -13,7 +13,7 @@ import ThemesMenuDroop from "./ThemesMenuDroop";
 
 const HeaderThemesDroopMenu = () => {
   const { resolvedTheme, setTheme } = useTheme();
-  const [profile, setprofile] = useState("admin");
+//   const [profile, setprofile] = useState("admin");
 
   const [themesMenuOpen, setThemesMenuOpen] = useState(false); //Для випадання верхнього меню
   const [setingThemesMenuOpen, setSetingThemesMenuOpen] = useState(false); //Для випадання меню вибору теми
@@ -31,7 +31,7 @@ const HeaderThemesDroopMenu = () => {
 //     // dispatch({ type: "PROFILE", payload: newUser }); //Змінюємо state.user
 //   };
 
-  //*************Для клацання поза обєктом
+//   *************Для клацання поза обєктом
   const ref_HeaderThemesDroopMenu = useRef(null);
 
   useEffect(() => {
@@ -52,10 +52,10 @@ const HeaderThemesDroopMenu = () => {
   }, [ref_HeaderThemesDroopMenu]);
 
   //випадаюче меню Налаштувань
-  const setingMenuToggle = () => {
+  const setSetingThemesMenuToggle = () => {
     setThemesMenuOpen(!themesMenuOpen);
     setSetingThemesMenuOpen(false); //Закриваєм меню
-    // console.log("setingMenuToggle/themesMenuOpen=", themesMenuOpen);
+    // console.log("setSetingThemesMenuToggle/themesMenuOpen=", themesMenuOpen);
   };
   //Зміна в newTheme Context
   const themeMenuToggle = () => {
@@ -65,22 +65,21 @@ const HeaderThemesDroopMenu = () => {
   };
 
   return (
-    // <div ref={wRef_HeaderThemesDroopMenu} className="relative m-0 p-0">
     <div
       ref={ref_HeaderThemesDroopMenu}
       className="relative  list-none text-base font-medium"
     >
       {/* іконка seting*/}
-      {/* <div className="HeaderThemesDroopMenu__icon" onClick={setingMenuToggle}> */}
-      <button className="flex items-center" onClick={setingMenuToggle}>
+      {/* <div className="HeaderThemesDroopMenu__icon" onClick={setSetingThemesMenuToggle}> */}
+      <button className="flex items-center" onClick={setSetingThemesMenuToggle}>
         <p
-          className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHovD"
-          onClick={setingMenuToggle}
+          className="flex items-center justify-center rounded-full p-2 transition-colors hover:bg-hBgHov dark:hover:bg-hBgHov"
+          onClick={setSetingThemesMenuToggle}
         >
           {resolvedTheme === "dark" ? (
             // місяць
             <svg
-              className="h-8 w-8  dark:text-hTextD dark:hover:text-hTextHovD"
+              className="h-8 w-8  dark:text-hText dark:hover:text-hTextHov"
               width="24"
               height="24"
               viewBox="0 0 24 24"
@@ -132,6 +131,7 @@ const HeaderThemesDroopMenu = () => {
       >
         {/* <ul className="HeaderThemesDroopMenu__dropdown"> */}
         <ul
+          //   ref={ref_HeaderThemesDroopMenu}
           //top-12  inline-block w-[350px] float-left- розміщує елемент зліва чи справа від контейнера, дозволяючи тексту та вбудованим елементам обтікати його.
           //   className={`${
           //     themesMenuOpen ? "absolute" : "hidden"
@@ -139,7 +139,8 @@ const HeaderThemesDroopMenu = () => {
           className={`m-0 w-[180px] rounded-lg  border border-hBorder bg-hBg p-1 drop-shadow-md dark:border-hBorderD dark:bg-hBgD`}
         >
           <li
-            className="active:text-hTextAct dark:active:text-hTextAct group flex flex-nowrap list-none items-center space-x-1 p-1 text-hText hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            // ref={ref_HeaderThemesDroopMenu}
+            className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-hBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHovD"
             onClick={themeMenuToggle}
             //   onClick={() => setTheme(resolvedTheme === "dark" ? "light" : "dark")}
           >
@@ -153,7 +154,7 @@ const HeaderThemesDroopMenu = () => {
               {resolvedTheme === "dark" ? (
                 <svg
                   // group-hover - при наведенні на (group) буде змінюватись */
-                  className="h-8 w-8  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
+                  className="h-8 w-8  dark:hover:text-hTextHov dark:group-hover:text-hTextHov"
                   width="24"
                   height="24"
                   viewBox="0 0 24 24"
@@ -197,14 +198,15 @@ const HeaderThemesDroopMenu = () => {
             <p>Темна/світла</p>
           </li>
           <li
-            className="group flex list-none items-center space-x-1 p-1 text-hText  hover:bg-hBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD "
+            //   ref={ref_HeaderThemesDroopMenu}
+            className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-hBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-hBgHov dark:hover:text-hTextHovD"
             onClick={() => setSetingThemesMenuOpen(!setingThemesMenuOpen)}
           >
             {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
             {/* іконка валів/малювати */}
             <p>
               <svg
-                className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hTextD dark:group-hover:text-hTextHov"
+                className="h-8 w-8 text-hText group-hover:text-hTextHov dark:text-hText dark:group-hover:text-hTextHov"
                 // class="h-8 w-8 text-red-500"
                 width="24"
                 height="24"
@@ -243,13 +245,14 @@ const HeaderThemesDroopMenu = () => {
             </p>
             <p>Теми</p>
           </li>
-          {/* Випадаюче меню Теми */}
-          {setingThemesMenuOpen && (
-            <ThemesMenuDroop
-              setSetingThemesMenuOpen={setSetingThemesMenuOpen}
-            />
-          )}
         </ul>
+        {/* Випадаюче меню Теми */}
+        {setingThemesMenuOpen && (
+          <ThemesMenuDroop
+            setSetingThemesMenuOpen={setSetingThemesMenuOpen}
+            setThemesMenuOpen={setThemesMenuOpen}
+          />
+        )}
       </div>
     </div>
   );
