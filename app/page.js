@@ -8,7 +8,7 @@ import Promotion from "@/app/(shop)/product/Promotion";
 export default function Home() {
   return (
     <main className="mx-auto px-1 mt-48 min-h-screen max-w-7xl">
-      {/* <LayoutWithSidebar /> */}
+      <LayoutWithSidebar />
       {/* <StHomePage /> */}
       {/* <OurProducts /> */}
       {/* <Promotion /> */}
