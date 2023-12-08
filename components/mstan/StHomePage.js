@@ -15,7 +15,7 @@ const StHomePage = () => {
       {/* елемент слайдеру */}
       <div
         className="absolute bottom-0 left-0 h-full w-full animate-[slideHome_5s_linear_infinite_alternate]
-        items-center justify-center bg-[url('/images/mstan/Stan2-in-1600-720.jpg')] bg-cover bg-center"
+        items-center justify-center bg-[url('/images/mstan/Stan2-in-1600-720.jpg')] bg-cover bg-center bg-no-repeat text-center"
       >
         <div className="flex h-full w-full flex-col items-center justify-center px-3 text-center align-middle">
           <h1 className="items-center justify-center font-serif text-[30px] font-extrabold leading-normal text-hTextImg md:text-[70px]">
