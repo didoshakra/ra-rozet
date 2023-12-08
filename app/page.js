@@ -11,7 +11,7 @@ export default function Home() {
     {/* <main className="m-0 mx-0 my-auto p-0"> */}
       {/* <LayoutWithSidebar /> */}
       <StHomePage />
-      <OurProducts />
+      {/* <OurProducts /> */}
       {/* <Promotion /> */}
     </main>
   );
