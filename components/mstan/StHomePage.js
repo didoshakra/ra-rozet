@@ -11,17 +11,17 @@ const StHomePage = () => {
 
   return (
     // <section className="home-slider-section">
-    <section className="h-[300px] md:h-[500px] relative">
+    <section className="relative h-[300px] w-screen md:h-[500px] border border-2 border-red-500">
       {/* елемент слайдеру */}
       <div
         className="absolute bottom-0 left-0 h-full w-full animate-[slideHome_5s_linear_infinite_alternate]
-        items-center justify-center bg-[url('/images/mstan/Stan2-in-1600-720.jpg')] bg-cover bg-center bg-no-repeat"
+        items-center justify-center bg-[url('/images/mstan/Stan2-in-1600-720.jpg')] bg-cover bg-center"
       >
-        <div className="flex h-full flex-col items-center justify-center px-3 text-center align-middle">
-          <h1 className="h-auto items-center justify-center font-serif text-[30px] font-extrabold leading-normal text-hTextImg md:text-[70px]">
+        <div className="flex h-full w-full flex-col items-center justify-center px-3 text-center align-middle">
+          <h1 className="items-center justify-center font-serif text-[30px] font-extrabold leading-normal text-hTextImg md:text-[70px]">
             Купуйте у нас і у Вас завжди буде хороший настрій
           </h1>
-          <h2 className="inline-block font-sans text-[25px] font-bold uppercase tracking-normal text-hTextImg1">
+          <h2 className="inline-block font-sans text-[10px] font-bold uppercase tracking-normal text-hTextImg1 md:text-[25px]">
             Колектив магазину
           </h2>
         </div>
@@ -34,7 +34,7 @@ const StHomePage = () => {
           <h1 className="h-auto items-center justify-center  font-sans text-[30px] font-extrabold leading-normal text-hTextImg md:text-[70px]">
             Завжди свіжі і якісні продукти для Вас і вашої родини
           </h1>
-          <h2 className="inline-block font-sans text-[25px] font-bold uppercase tracking-normal text-hTextImg1">
+          <h2 className="inline-block font-sans text-[10px] font-bold uppercase tracking-normal text-hTextImg1 md:text-[25px]">
             Це не тільки реклама
           </h2>
         </div>

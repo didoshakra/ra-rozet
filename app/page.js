@@ -7,8 +7,8 @@ import Promotion from "@/app/(shop)/product/Promotion";
 
 export default function Home() {
   return (
-    // <main className="  mx-auto border border-2 px-0 xl:px-8">
-    <main className=" container m-0 mx-auto my-auto p-0">
+    <main className="border border-2 px-0 ">
+    {/* <main className="m-0 mx-0 my-auto p-0"> */}
       {/* <LayoutWithSidebar /> */}
       <StHomePage />
       <OurProducts />
