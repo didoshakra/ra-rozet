@@ -11,27 +11,32 @@ import { useTheme } from "next-themes";
 // import UserSwitcherDroop from "./UserMenuDroop";
 import ThemesMenuDroop from "./ThemesMenuDroop";
 
-const HeaderThemesDroopMenu = () => {
+const HeaderThemesDroopMenu = ({ setSetingMenuOpen }) => {
+//   console.log(
+//     "setSetingThemesMenuToggle/setSetingMenuOpen=",
+//     setSetingMenuOpen,
+//   );
+
   const { resolvedTheme, setTheme } = useTheme();
-//   const [profile, setprofile] = useState("admin");
+  //   const [profile, setprofile] = useState("admin");
 
   const [themesMenuOpen, setThemesMenuOpen] = useState(false); //Для випадання верхнього меню
   const [setingThemesMenuOpen, setSetingThemesMenuOpen] = useState(false); //Для випадання меню вибору теми
 
   //   console.log("profile=", profile);
-//   const setingThemesMenuOpenToggle = () => {
-//     setSetingThemesMenuOpen(!setingThemesMenuOpen);
-//     let newUser = "admin";
-//     if (profile === "admin") {
-//       newUser = "user";
-//     }
-//     setprofile(newUser);
-//     // console.log("userSwitcher.js/newUser=", newUser)
-//     console.log("profile=", profile);
-//     // dispatch({ type: "PROFILE", payload: newUser }); //Змінюємо state.user
-//   };
+  //   const setingThemesMenuOpenToggle = () => {
+  //     setSetingThemesMenuOpen(!setingThemesMenuOpen);
+  //     let newUser = "admin";
+  //     if (profile === "admin") {
+  //       newUser = "user";
+  //     }
+  //     setprofile(newUser);
+  //     // console.log("userSwitcher.js/newUser=", newUser)
+  //     console.log("profile=", profile);
+  //     // dispatch({ type: "PROFILE", payload: newUser }); //Змінюємо state.user
+  //   };
 
-//   *************Для клацання поза обєктом
+  //   *************Для клацання поза обєктом
   const ref_HeaderThemesDroopMenu = useRef(null);
 
   useEffect(() => {
@@ -41,6 +46,7 @@ const HeaderThemesDroopMenu = () => {
         // console.log("Outside Clicked. ");
         setThemesMenuOpen(false);
         setSetingThemesMenuOpen(false);
+        // if (setSetingMenuOpen) setSetingMenuOpen(false);
       }
     };
 
@@ -62,6 +68,7 @@ const HeaderThemesDroopMenu = () => {
     setTheme(resolvedTheme === "dark" ? "light" : "dark");
     setSetingThemesMenuOpen(false);
     setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
   };
 
   return (
@@ -249,8 +256,9 @@ const HeaderThemesDroopMenu = () => {
         {/* Випадаюче меню Теми */}
         {setingThemesMenuOpen && (
           <ThemesMenuDroop
-            setSetingThemesMenuOpen={setSetingThemesMenuOpen}
-            setThemesMenuOpen={setThemesMenuOpen}
+            setSetingMenuOpen={setSetingMenuOpen} //0-й рівень
+            setThemesMenuOpen={setThemesMenuOpen} //1-й рівень
+            setSetingThemesMenuOpen={setSetingThemesMenuOpen} //1-й рівень
           />
         )}
       </div>

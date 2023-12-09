@@ -5,7 +5,7 @@ import { useContext, useRef, useEffect } from "react";
 // import { ComponentContext } from "../../context/ComponentContext"
 // import { useSession, signIn, signOut } from "next-auth"
 
-const UserMenuDroop = ({ setUserMenuOpen }) => {
+const UserMenuDroop = ({ setUserMenuOpen, setSetingMenuOpen }) => {
   //   const { state } = useContext(ComponentContext)
   //    const [session] = useSession()
 
@@ -34,15 +34,21 @@ const UserMenuDroop = ({ setUserMenuOpen }) => {
     e.preventDefault();
     // signIn();
     setUserMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
+
   };
   const registrationToggle = (e) => {
     e.preventDefault();
     //  signOut()
     setUserMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
+
   };
 
   const handleSignin = () => {
     console.log("UserMenuDroop.js/handleSignin");
+      setUserMenuOpen(false);
+      if (setSetingMenuOpen) setSetingMenuOpen(false);
   };
 
   return (

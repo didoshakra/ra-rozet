@@ -5,8 +5,9 @@ import { useContext, useRef, useEffect } from "react";
 import { changeTheme } from "@/utils/helper";
 
 const ThemesMenuDroop = ({
-  setSetingThemesMenuOpen,
-  setThemesMenuOpen,
+  setSetingMenuOpen, //0-рівень
+  setThemesMenuOpen, //1-рівень
+  setSetingThemesMenuOpen, //2-рівень
 }) => {
   //   //*************Для клацання поза обєктом
   const ref_ThemesMenuDroop = useRef(null);
@@ -33,21 +34,25 @@ const ThemesMenuDroop = ({
     changeTheme("");
     setSetingThemesMenuOpen(false);
     setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
   };
   const togleTheme1 = (e) => {
     changeTheme("theme1");
     setSetingThemesMenuOpen(false);
     setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
   };
   const togleTheme2 = (e) => {
     changeTheme("theme2");
     setSetingThemesMenuOpen(false);
     setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
   };
   const togleTheme3 = (e) => {
     changeTheme("theme3");
     setSetingThemesMenuOpen(false);
     setThemesMenuOpen(false);
+    if (setSetingMenuOpen) setSetingMenuOpen(false);
   };
   return (
     <div ref={ref_ThemesMenuDroop} className="absolute right-0 z-10 m-0 p-0">

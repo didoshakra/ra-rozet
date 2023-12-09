@@ -19,7 +19,8 @@ const HeaderSetingDroopMenu = () => {
 
   const [setingMenuOpen, setSetingMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
-  const [themesDroopMenuOpen, setThemesDroopMenuOpen] = useState(false);
+  //   const [themesDroopMenuOpen, setThemesDroopMenuOpen] = useState(false);
+  console.log("sHeaderSetingDroopMenu/setingMenuOpen=", setingMenuOpen);
 
   //   console.log("profile=", profile);
   const userMenuOpenToggle = () => {
@@ -42,7 +43,7 @@ const HeaderSetingDroopMenu = () => {
       if (!ref_HeaderSetingDroopMenu.current?.contains(event.target)) {
         // alert("Outside Clicked.");
         // console.log("Outside Clicked. ");
-        setSetingMenuOpen(false);
+        // setSetingMenuOpen(false);
         setUserMenuOpen(false);
       }
     };
@@ -60,12 +61,12 @@ const HeaderSetingDroopMenu = () => {
     setUserMenuOpen(false); //Закриваєм меню
     // console.log("setingMenuToggle/setingMenuOpen=", setingMenuOpen);
   };
-  //Зміна в newTheme Context
-  const themeMenuToggle = () => {
-    setTheme(resolvedTheme === "dark" ? "light" : "dark");
-    setUserMenuOpen(false);
-    setSetingMenuOpen(false);
-  };
+//   //Зміна в newTheme Context
+//   const themeMenuToggle = () => {
+//     setTheme(resolvedTheme === "dark" ? "light" : "dark");
+//     setUserMenuOpen(false);
+//     setSetingMenuOpen(false);
+//   };
 
   return (
     <div
@@ -105,10 +106,10 @@ const HeaderSetingDroopMenu = () => {
           className={`m-0 w-[150px] rounded-lg  border border-hBorder bg-hBg p-1 text-base font-medium drop-shadow-md dark:border-hBorderD dark:bg-hBgD`}
         >
           <li className="dark:text-hTex flex w-full list-none  items-center text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHov dark:hover:text-hTextHov">
-            <HeaderThemesDroopMenu />
+            <HeaderThemesDroopMenu setSetingMenuOpen={setSetingMenuOpen} />
           </li>
           <li
-            className="px-2 dark:text-hTex flex w-full list-none items-center  space-x-2 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHov dark:hover:text-hTextHov"
+            className="dark:text-hTex flex w-full list-none items-center space-x-2  px-2 text-hText  hover:bg-hBgHov  hover:text-hTextHov dark:hover:bg-hBgHov dark:hover:text-hTextHov"
             onClick={() => setUserMenuOpen(!userMenuOpen)}
           >
             {/* // Від цього об'єкту li відраховуються відступи в випадаючих меню мов  */}
@@ -142,6 +143,7 @@ const HeaderSetingDroopMenu = () => {
           {/* Випадаюче меню User */}
           {userMenuOpen && (
             <UserMenuDroop
+              setSetingMenuOpen={setSetingMenuOpen}
               userMenuOpen={userMenuOpen}
               setUserMenuOpen={setUserMenuOpen}
             />
