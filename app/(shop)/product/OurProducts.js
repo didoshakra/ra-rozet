@@ -108,10 +108,9 @@ export default async function ProductsVeg() {
   const products = await getAllProducts();
   // console.log("Products.js/products=", products)
   return (
-
     <section className="flex flex-col space-y-3 px-2 pb-5 pt-5 text-center text-hText">
-      <hi className="tex-lg  font-serif italic">Нові продукти</hi>
-      <h2 className="text-4xl  font-bold">Наші продукти</h2>
+      <h1 className="tex-lg  font-serif italic">Нові продукти</h1>
+      <h2 className="text-4xl  font-bold ">Наші продукти</h2>
       <p>
         Наші продукти жавжди свіжі і якісні. Ви отримажте масу задоводення від
         їх споживання

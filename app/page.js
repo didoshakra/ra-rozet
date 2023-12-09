@@ -11,7 +11,7 @@ export default function Home() {
       {/* <LayoutWithSidebar /> */}
       <StHomePage />
       <OurProducts />
-      {/* <Promotion /> */}
+      <Promotion />
     </main>
   );
 }
