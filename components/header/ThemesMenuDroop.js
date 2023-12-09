@@ -9,6 +9,11 @@ const ThemesMenuDroop = ({
   setThemesMenuOpen, //1-рівень
   setSetingThemesMenuOpen, //2-рівень
 }) => {
+    // console.log(
+    //   "ThemesMenuDroop/document.querySelector(html)?.=",
+    //   document.querySelector("html".data-theme)
+    // );
+
   //   //*************Для клацання поза обєктом
   const ref_ThemesMenuDroop = useRef(null);
 
@@ -59,25 +64,25 @@ const ThemesMenuDroop = ({
       <div className="grid place-items-center rounded-lg border border-hBorder bg-hBg drop-shadow-md dark:border-hBorderD dark:bg-hBgD">
         <div>
           <button
-            className="w-full bg-themeDefBg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            className="w-full bg-themeDefBg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHov"
             onClick={togleThemeDefault}
           >
             Основна
           </button>
           <button
-            className="w-full bg-theme1Bg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            className="w-full bg-theme1Bg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHov"
             onClick={togleTheme1}
           >
             Тема 1
           </button>
           <button
-            className="text-typography w-full bg-theme2Bg  py-1 text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            className="text-typography w-full bg-theme2Bg  py-1 text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHov"
             onClick={togleTheme2}
           >
             Тема 2
           </button>
           <button
-            className="w-full bg-theme3Bg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHovD"
+            className="w-full bg-theme3Bg  py-1 text-base text-hText hover:bg-hBgHov  hover:text-hTextHov dark:text-hTextD dark:hover:bg-hBgHovD dark:hover:text-hTextHov"
             onClick={togleTheme3}
           >
             Тема 3

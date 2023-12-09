@@ -12,19 +12,19 @@ import {
 export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
   const SocialMenuUl = ({ title = "" }) => (
     <div className=" text-base font-bold">
-      <p className="pl-2 text-sm  font-bold italic  text-hText dark:text-hTextD">
+      <p className="pl-2 text-sm  font-bold italic  text-hText dark:text-hText">
         {title}
       </p>
       {/* <li> */}
       <a
-        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
+        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHov"
         href="https://www.facebook.com/profile.php?id=100004339204236"
         title="Facebook"
       >
         {/* Facebook */}
         <svg
           className="h-6 w-6  dark:hover:text-hTextHovD dark:group-hover:text-hTextHovD"
-          //   className="h-6 w-6 text-hText dark:text-hTextD"
+          //   className="h-6 w-6 text-hText dark:text-hText"
           viewBox="0 0 24 24"
           fill="none"
           stroke="currentColor"
@@ -39,7 +39,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
         <p>Facebook</p>
       </a>
       <a
-        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
+        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
         href="https://github.com/didoshakra?tab=repositories"
         title="IconGitHub"
       >
@@ -59,7 +59,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
         <p>GitHub</p>
       </a>
       <a
-        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
+        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
         href="https://twitter.com/home?lang=uk"
         title="Twitter"
       >
@@ -79,7 +79,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
         <p>Twitter</p>
       </a>
       <a
-        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hTextD dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
+        className="active:text-hTextAct dark:active:text-hTextAct group flex list-none flex-nowrap items-center space-x-1 p-1 text-hText hover:bg-drawDropMenuBgHov hover:text-hTextHov dark:text-hText dark:hover:bg-drawDropMenuBgHovD dark:hover:text-hTextHovD"
         href="https://www.facebook.com/profile.php?id=100017742340573"
         title="Instagram"
       >
@@ -111,7 +111,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
       //     drawerOpen ? "translate-x-0" : "translate-x-full"
       //   } duration-300 ease-in-out `}
       //Виїжджає Зліва
-      className={`md:w-[30vw] fixed -left-[100vw] top-50 z-20 flex h-full w-[100vw] flex-col overflow-y-scroll bg-drawDropMenuBg  dark:bg-drawDropMenuBgD md:-left-[30vw] ${
+      className={`top-50 fixed -left-[100vw] z-20 flex h-full w-[100vw] flex-col overflow-y-scroll bg-drawDropMenuBg dark:bg-drawDropMenuBgD  md:-left-[30vw] md:w-[30vw] ${
         drawerOpen ? "translate-x-full" : "translate-x-0"
       } duration-500 ease-in-out `}
     >
@@ -130,7 +130,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
           </Link>
           <Link
             href="/"
-            className="justify-begin  flex items-center px-4 text-2xl font-bold italic text-hText  dark:text-hTextD md:text-2xl"
+            className="justify-begin  flex items-center px-4 text-2xl font-bold italic text-hText  dark:text-hText md:text-2xl"
             title="RAMAG"
           >
             RAecom
@@ -139,7 +139,7 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
         <div onClick={(e) => setDrawerOpen(false)} className="pr-2">
           {/* <IconCancel */}
           <svg
-            className="h-6 w-6 text-hText dark:text-hTextD"
+            className="h-6 w-6 text-hText dark:text-hText"
             width="24"
             height="24"
             viewBox="0 0 24 24"
@@ -157,13 +157,13 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
         </div>
       </div>
       {/* --- Список меню ----------------------------------------- */}
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="h-0.5 min-w-full bg-drawDropHr" />
       <Navbar
         multilevelMenu={menuBig}
         title={"Багаторівнневе пробне меню"}
         setDrawerOpen={setDrawerOpen}
       />
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="h-0.5 min-w-full bg-drawDropHr" />
       <Navbar
         multilevelMenu={menuAdmin}
         title={"Адмін"}
@@ -171,13 +171,13 @@ export default function DrawerDroop({ drawerOpen, setDrawerOpen }) {
       />
       {/* ----------------------------------------------------------- */}
       {/* Divider/Роздільник */}
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="h-0.5 min-w-full bg-drawDropHr" />
       <Navbar
         multilevelMenu={menuDocuments}
         title={"Документи"}
         setDrawerOpen={setDrawerOpen}
       />
-      <hr className="h-1 min-w-full bg-drawDropHr" />
+      <hr className="h-0.5 min-w-full bg-drawDropHr" />
       {/* ----------------------------------------------------------- */}
       <SocialMenuUl title={"Контакти"} />
     </div>

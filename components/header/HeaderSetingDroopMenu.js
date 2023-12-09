@@ -20,7 +20,7 @@ const HeaderSetingDroopMenu = () => {
   const [setingMenuOpen, setSetingMenuOpen] = useState(false);
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   //   const [themesDroopMenuOpen, setThemesDroopMenuOpen] = useState(false);
-  console.log("sHeaderSetingDroopMenu/setingMenuOpen=", setingMenuOpen);
+//   console.log("sHeaderSetingDroopMenu/setingMenuOpen=", setingMenuOpen);
 
   //   console.log("profile=", profile);
   const userMenuOpenToggle = () => {

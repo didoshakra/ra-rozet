@@ -123,7 +123,7 @@ module.exports = {
 
         //Текст випадаючого меню
         drawDropMenuBg: "var(--color-drawDropMenuBg)", //"#E7F4E0", // "#F4F4EB",
-        drawDropMenuBgD: "var(--color-drawDropMenuBg)", //"#E7F4E0", // "#F4F4EB",
+        drawDropMenuBgD: "var(--color-drawDropMenuBgD)", //"#E7F4E0", // "#F4F4EB",
         drawDropHr: "var(--color-drawDropHr)", // Лінії розмежування
         drawDropHrD: "var(--color-drawDropHrD)", // Лінії розмежування
 

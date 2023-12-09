@@ -4,6 +4,7 @@
 
 @layer base {
   html {
+    /* Для меню вибору тем */
     --color-themeDefBg: #e7f4e0;
     --color-theme1Bg: #e2e0f4;
     --color-theme2Bg: #f4e0e9;
@@ -28,7 +29,7 @@
     --color-IconHBgD: #414545;
     --color-IconHBgHov: #c9dfa7;
     --color-IconHBgHovD: #e8efd3;
-    
+
     /* //--- iconT /Table,Form,Card, */
     --color-iconT: #f64532;
     --color-iconTD: #f64532;
@@ -50,15 +51,16 @@
     --color-hBgHovD: #c9dfa7;
     --color-hText: #6b8e23;
     --color-hTextD: #6b8e23;
-    --color-hTextHov: red;
-    --color-hTextHovD: red;
-    --color-hTextImg: #fff;
-    --color-hTextImg1: red;
+    --color-hTextHov: #354d05;
+    --color-hTextHovD: #354d05;
+    /* --color-hTextImg: #fff; */
+    --color-hTextImg: #b6f943;
+    --color-hTextImg1: #8fdf04;
     --color-hBorder: #dcdcdc;
     --color-hBorderD: #dcdcdc;
 
     /* //-- headMenu / + Всі випадаючі з head меню ??? */
-    --color-menuBg: #e7f4e0;
+    /* --color-menuBg: #e7f4e0;
     --color-menuBgD: #171919;
     --color-menuBgHov: #82ae46;
     --color-menuBgHovD: #82ae46;
@@ -69,13 +71,13 @@
     --color-menuTextHov: #fff;
     --color-menuTextHovD: #fff;
     --color-menuTextAct: red;
-    --color-menuTextActD: red;
+    --color-menuTextActD: red; */
 
     /*  //-- drawer -------------------------------------------- */
     --color-drawDropMenuBg: #e7f4e0;
-    --color-drawDropMenuBg: #e7f4e0;
+    --color-drawDropMenuBgD: #141313;
     --color-drawDropHr: #6b8e23;
-    --color-drawDropHrD: #6b8e23;
+    --color-drawDropHrD: #615f5f;
 
     /* //-- table (title/icons)-------------------------------------------- */
     --color-tabHTitle: #6b8e23;

@@ -15,7 +15,6 @@ const HeaderLogo = () => {
           src="/images/home/sun_man_hands-oval-ra-red-64-41.png"
           height={41} //Завжди Avto?
           width={64} //Чомусь має пріорітет
-          style={{ width: 64, height: 40 }} //Точні розміри-знімає попередження //If you use CSS to change the size of your image, also include the styles 'width: "auto"' or 'height: "auto"' to maintain the aspect ratio
           //   fill
           alt="Logo"
         />

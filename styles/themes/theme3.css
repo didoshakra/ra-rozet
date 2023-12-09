@@ -14,13 +14,12 @@ html[data-theme="theme3"] {
   --color-hBgHov: #f6e4a3;
   --color-hText: #a28519;
   --color-hTextHov: #7e6b25;
-
+  --color-hTextImg: #f3dc8c;
+  --color-hTextImg1: #f5d357;
   --color-hBorder: #f6e4a3;
 
    /*  //-- drawer -------------------------------------------- */
   --color-drawDropMenuBg: #f8e7aa;
-  --color-drawDropMenuBgD: #e7f4e0;
   --color-drawDropHr: #eed784;
-  --color-drawDropHrD: #6b8e23;
 
 }

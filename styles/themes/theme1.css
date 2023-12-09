@@ -1,5 +1,5 @@
 html[data-theme="theme1"] {
-  /* --color-hBg: #eeedf6; */
+  /* --color-hBg: #dddaf8; */
 
   /* //-- Загальні */
   --color-bodyBg: #eeeef9;
@@ -14,8 +14,8 @@ html[data-theme="theme1"] {
   --color-hBgHov: #c4c0e3;
   --color-hText: #5a45f7;
   --color-hTextHov: #4830fc;
-  --color-hTextImg: #fff;
-  --color-hTextImg1: red;
+  --color-hTextImg: #d5d0f6;
+  --color-hTextImg1: #7c6bf7;
   --color-hBorder: #c4c0e3;
 
   /*  //-- drawer -------------------------------------------- */

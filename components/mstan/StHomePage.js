@@ -18,6 +18,7 @@ const StHomePage = () => {
         items-center justify-center bg-[url('/images/mstan/Stan2-in-1600-720.jpg')] bg-cover bg-center bg-no-repeat text-center"
       >
         <div className="flex h-full w-full flex-col items-center justify-center px-3 text-center align-middle">
+          {/* <h1 className="items-center justify-center font-serif text-[30px] font-extrabold leading-normal text-hTextImg md:text-[70px]"> */}
           <h1 className="items-center justify-center font-serif text-[30px] font-extrabold leading-normal text-hTextImg md:text-[70px]">
             Купуйте у нас і у Вас завжди буде хороший настрій
           </h1>
