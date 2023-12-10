@@ -1,4 +1,5 @@
 // @/src/hooks/useTable.js
+//Визначає slice-масив записів для текучої сторінки і к-сть сторінок: range
 "use client";
 import { useState, useEffect } from "react";
 
