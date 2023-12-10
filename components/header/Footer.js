@@ -3,31 +3,27 @@
 
 const Footer = () => {
   return (
-    <section className="mx-auto max-w-full">
-      <div className="flex items-center justify-center p-1">
+    <section className="mx-auto max-w-full bg-bodyBg dark:bg-bodyBgD">
+      <div className=" flex items-center justify-center p-1">
         <a
           href="#"
-          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hBg dark:bg-hBgD"
+          className=" flex h-[60px] w-[60px]  items-center justify-center  rounded-full border-0 border-current bg-hBg  hover:bg-hBgHov dark:bg-hBgD dark:hover:bg-hBgHovD"
         >
-          <div className="m-1 flex h-[30px] w-[30px] items-center justify-center rounded-full text-xl text-orange-600">
-            <span className="flex items-center justify-center">
-              <svg
-                className="h-10 w-10 text-IconH dark:text-IconHD"
-                width="24"
-                height="24"
-                viewBox="0 0 24 24"
-                strokeWidth="2"
-                stroke="currentColor"
-                fill="none"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              >
-                {" "}
-                <path stroke="none" d="M0 0h24v24H0z" />{" "}
-                <polyline points="6 15 12 9 18 15" />
-              </svg>
-            </span>
-          </div>
+          <svg
+            className="h-10 w-10 text-IconH dark:text-IconHD"
+            width="24"
+            height="24"
+            viewBox="0 0 24 24"
+            strokeWidth="2"
+            stroke="currentColor"
+            fill="none"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          >
+            {" "}
+            <path stroke="none" d="M0 0h24v24H0z" />{" "}
+            <polyline points="6 15 12 9 18 15" />
+          </svg>
         </a>
       </div>
       <div className="flex w-full flex-col items-start justify-between pt-10 md:flex-row">
@@ -60,7 +56,7 @@ const Footer = () => {
           <h2 className="flex  flex-row items-center justify-center px-4 text-lg font-bold text-hText dark:text-hText">
             Є запитання?
           </h2>
-          <ul>
+          <ul className="text-hText dark:text-hText">
             <li className="flex  flex-row items-center justify-start px-4 text-sm">
               <svg
                 className="h-6 w-6 text-IconH dark:text-IconHD"
@@ -147,26 +143,24 @@ const Footer = () => {
           </ul>
         </div>
       </div>
-      <div className="flex w-full flex-row items-center justify-center pt-10">
-        <div className="flex flex-row items-center justify-center">
-          Copyright © {new Date().getFullYear()}/202-12-08
-          {/* Серце*/}
-          <svg
-            className="text-IconT dark:text-IconTD dark:text-IconT dark:text-IconTDD h-6 w-6"
-            width="24"
-            height="24"
-            viewBox="0 0 24 24"
-            strokeWidth="2"
-            stroke="currentColor"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          >
-            {" "}
-            <path stroke="none" d="M0 0h24v24H0z" />{" "}
-            <path d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7" />
-          </svg>
-        </div>
+      <div className="flex w-full flex-row items-center justify-center pt-10 text-hText dark:text-hText">
+        Copyright © {new Date().getFullYear()}-{new Date().getMonth()}-
+        {/* Серце*/}
+        <svg
+          className="h-6 w-6 text-iconT dark:text-iconTD"
+          width="24"
+          height="24"
+          viewBox="0 0 24 24"
+          strokeWidth="2"
+          stroke="currentColor"
+          fill="none"
+          strokeLinecap="round"
+          strokeLinejoin="round"
+        >
+          {" "}
+          <path stroke="none" d="M0 0h24v24H0z" />{" "}
+          <path d="M12 20l-7 -7a4 4 0 0 1 6.5 -6a.9 .9 0 0 0 1 0a4 4 0 0 1 6.5 6l-7 7" />
+        </svg>
       </div>
     </section>
   );
